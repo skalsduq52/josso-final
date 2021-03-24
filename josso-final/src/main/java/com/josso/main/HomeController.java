@@ -33,4 +33,6 @@ public class HomeController {
 	}
 	// 최민재 첫 커밋
 	// 안태민 두 번째 커밋
+	// 홍수맹 두 커밋
+	
 }
