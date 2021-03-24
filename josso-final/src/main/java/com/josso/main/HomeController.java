@@ -33,7 +33,6 @@ public class HomeController {
 	}
 	// 최민재 첫 커밋
 	// ㅋㅋㅋ 충돌방어
+	// 충돌~ 쾅!
 	// 홍수맹 두 커밋
-	
-	
 }
