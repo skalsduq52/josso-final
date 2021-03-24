@@ -31,5 +31,6 @@ public class HomeController {
 		model.addAttribute("serverTime", formattedDate );
 		return "home";
 	}
+	// 최민재 첫 커밋
 	
 }
