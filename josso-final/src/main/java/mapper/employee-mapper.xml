@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mtbatsi.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Employee">
+	<resultMap id="resultEmployee" type="Employee">
+		<id property="employeeNumber" column="EMPLOYEE_NUMBER"/>
+		<result property="employeePassword" column="EMPLOYEE_PASSWORD"/>
+		<result property="employeeName" column="EMPLOYEE_NAME"/>
+		<result property="departmentCode" column="DEPARTMENT_CODE"/>
+		<result property="rankCode" column="RANK_CODE"/>
+		<result property="positionCode" column="POSITION_CODE"/>
+		<result property="roleCode" column="ROLE_CODE"/>
+		<result property="employeeEmail" column="EMPLOYEE_EMAIL"/>
+		<result property="employeePhone" column="EMPLOYEE_PHONE"/>
+		<result property="employeeAddress" column="EMPLOYEE_ADDRESS"/>
+		<result property="employeeBirth" column="EMPLOYEE_BIRTH"/>
+		<result property="employeeHireDate" column="EMPLOYEE_HIREDATE"/>
+		<result property="employeeExtensionNumber" column="EMPLOYEE_EXTENSIONNUMBER"/>
+		<result property="employeePicture" column="EMPLOYEE_PICTURE"/>
+		<result property="employeeRegistrationDate" column="EMPLOYEE_REGISTRATIONDATE"/>
+		<result property="employeeLoginDate" column="EMPLOYEE_LOGINDATE"/>
+	</resultMap>
+	
+	<!-- EMPLOYEE table의 모든 데이터 select -->
+	<select id="selectEmployeeAll" resultMap="resultEmployee">
+		SELECT * FROM EMPLOYEE
+	</select>
+	
+	<!-- EMPLOYEE 하나만 가져오는 select -->
+	<select id="selectEmployee" parameterType="String" resultMap="resultEmployee">
+		SELECT * FROM EMPLOYEE WHERE EMPLOYEE_NUMBER = #{employeeNumber}
+	</select>
+	
+	<!-- 사원번호 중복 검사 -->
+	<select id="checkEmployeeNumber" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM EMPLOYEE WHERE EMPLOYEE_NUMBER = #{employeeNumber}
+	</select>
+	
+	<!-- 이메일 중복 검사 -->
+	<select id="checkEmployeeEmail" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM EMPLOYEE WHERE EMPLOYEE_EMAIL = #{employeeEmail}
+	</select>
+	
+	<!-- insert Employee -->
+	<insert id="insertEmployee" parameterType="Employee" statementType="PREPARED">
+		INSERT INTO EMPLOYEE(EMPLOYEE_NUMBER, EMPLOYEE_NAME, EMPLOYEE_PASSWORD, EMPLOYEE_BIRTH, 
+							EMPLOYEE_PHONE, EMPLOYEE_ADDRESS,EMPLOYEE_PICTURE,EMPLOYEE_EMAIL,EMPLOYEE_HIREDATE,
+							DEPARTMENT_CODE, RANK_CODE,POSITION_CODE, EMPLOYEE_EXTENSIONNUMBER, EMPLOYEE_REGISTRATIONDATE,
+							EMPLOYEE_LOGINDATE,ROLE_CODE )
+			 VALUES(#{employeeNumber}, #{employeeName}, #{employeePassword}, #{employeeBirth},
+					 #{employeePhone}, #{employeeAddress}, #{employeePicture}, #{employeeEmail}, #{employeeHireDate},
+					 #{departmentCode}, #{rankCode}, #{positionCode}, #{employeeExtensionNumber},  #{employeeRegistrationDate}, #{employeeLoginDate},#{roleCode})
+	</insert>
+	
+	<!-- update Employee -->
+	<update id="updateEmployee">
+		UPDATE EMPLOYEE SET
+			EMPLOYEE_PASSWORD = #{employeePassword},
+			EMPLOYEE_NAME = #{employeeName},
+			DEPARTMENT_CODE = #{departmentCode},
+			RANK_CODE = #{rankCode},
+			POSITION_CODE = #{positionCode},
+			ROLE_CODE = #{roleCode},
+			EMPLOYEE_EMAIL = #{employeeEmail},
+			EMPLOYEE_PHONE = #{employeePhone},
+			EMPLOYEE_ADDRESS = #{employeeAddress},
+			EMPLOYEE_BIRTH = #{employeeBirth},
+			EMPLOYEE_HIREDATE = #{employeeHireDate},
+			EMPLOYEE_EXTENSIONNUMBER = #{employeeExtensionNumber},
+			EMPLOYEE_PICTURE = #{employeePicture},
+			EMPLOYEE_REGISTRATIONDATE = #{employeeRegistrationDate},
+			EMPLOYEE_LOGINDATE = #{employeeLoginDate},
+		WHERE EMPLOYEE_NUMBER = #{employeeNumber}
+	</update>
+	
+	<!-- delete Employee -->
+	<delete id="deleteEmployee" parameterType="Employee">
+		DELETE FROM EMPLOYEE WHERE EMPLOYEE_NUMBER = #{employeeNumber}
+	</delete>
+	
+	<!-- 로그인 -->
+	<select id="login" parameterType="String" resultType="Employee">
+		SELECT * FROM EMPLOYEE EMPLOYEE_NUMBER = #{employeeNumber}
+	</select>
+	
+	<!-- 로그인 접속일자 수정 -->
+	<update id="updateLogDate" parameterType="String">
+		UPDATE EMPLOYEE SET employeeLogDate=now() WHERE EMPLOYEE_NUMBER = #{employeeNumber}
+	</update>
+</mapper>
+
