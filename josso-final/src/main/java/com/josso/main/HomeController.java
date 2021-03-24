@@ -38,6 +38,5 @@ public class HomeController {
 	// 김재윤 첫 커밋 
 	// 왜 또 안되는거야....
 	// 이제 좀 되자
-=======
->>>>>>> branch 'main' of https://github.com/skalsduq52/josso-final.git
+	// 슨생님 오심
 }
