@@ -32,5 +32,5 @@ public class HomeController {
 		return "home";
 	}
 	// 최민재 첫 커밋
-	
+	// 안태민 두 번째 커밋
 }
