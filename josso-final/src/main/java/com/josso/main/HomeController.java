@@ -26,5 +26,4 @@ public class HomeController {
 		return "home";
 	}
 	// 걍 다삭제함 -나민엽-
-	
 }
