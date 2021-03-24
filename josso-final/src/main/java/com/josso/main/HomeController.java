@@ -25,10 +25,6 @@ public class HomeController {
 		model.addAttribute("serverTime", formattedDate );
 		return "home";
 	}
-	// 최민재 첫 커밋
-	// ㅋㅋㅋ 충돌방어
-	// 충돌~ 쾅!
-	// 홍수맹 두 커밋
-	// 김재윤 첫 커밋 
-	// 왜 또 안되는거야....
+	// 걍 다삭제함 -나민엽-
+	
 }
