@@ -261,7 +261,7 @@
                                 <label class="form-check-label" for="inlineCheckbox2">
                                     <a href="" class="report_kind">질의&응답</a>
                                 </label>
-                            </div>
+                            </div> 
                         </li>
                     </ul>
                 </div>
@@ -274,7 +274,7 @@
         </div>
         <div class="nav_content">
             <p style="margin: 12px 17px; font-style: italic; ">회사 공지사항입니다.<br>
-               수시로 필독해주시고 궁금사항은 질의, 의무사항은 신속히 처리해주시기 바랍니다.<br>
+               수시로 확인하시어 필독해주시고 궁금사항은 질의, 의무사항은 신속히 처리해주시기 바랍니다.<br>
             </p>
         </div>
     </nav>
