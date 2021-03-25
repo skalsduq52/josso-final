@@ -6,17 +6,24 @@ import org.springframework.web.servlet.ModelAndView;
 
 public class StaffController {  
 	
+	// 조직도
 	@RequestMapping(value="staff/organization", method=RequestMethod.GET)
 	public ModelAndView organization() {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("staff/StaffOrganization");
+		mv.setViewName("staff/staffOrganization");
 		return mv;
 	}
 	
-	@RequestMapping(value="staff/address", method=RequestMethod.GET)
-	public ModelAndView StaffAddress() {
+	/* ------------------------------------------------------------------- */
+	
+	// 주소록
+	@RequestMapping(value="staff/address/list", method=RequestMethod.GET)
+	public ModelAndView StaffAddressList() {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("staff/StaffAddress");
+		mv.setViewName("staff/staffAddress");
 		return mv;
 	}
+	
+
+	
 }
