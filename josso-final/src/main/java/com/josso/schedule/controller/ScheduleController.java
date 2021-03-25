@@ -8,21 +8,21 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class ScheduleController {
 	
-	@RequestMapping(value="scheduleList.do", method=RequestMethod.GET)
+	@RequestMapping(value="scheduleList", method=RequestMethod.GET)
 	public ModelAndView scheduleList() {
 		
 		ModelAndView mv = new ModelAndView();
 		
-		mv.setViewName("/schedule/scheduleList");
+		mv.setViewName("schedule/scheduleList");
 		return mv;
 	}
 	
-	@RequestMapping(value="scheduleWrite.do", method=RequestMethod.GET)
+	@RequestMapping(value="scheduleWrite", method=RequestMethod.GET)
 	public ModelAndView scheduleWrite() {
 		
 		ModelAndView mv = new ModelAndView();
 		
-		mv.setViewName("/schedule/scheduleWrite");
+		mv.setViewName("schedule/scheduleWrite");
 		return mv;
 	}
 }
