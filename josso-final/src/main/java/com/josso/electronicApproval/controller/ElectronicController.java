@@ -12,7 +12,7 @@ public class ElectronicController {
 	@RequestMapping(value="elecApprovalMain", method=RequestMethod.GET)
 	public ModelAndView approvalMain() {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("electronicApproval/electronicApprovalMain");
+		mv.setViewName("/electronicApproval/electronicApprovalMain");
 		return mv;
 	}
 }
