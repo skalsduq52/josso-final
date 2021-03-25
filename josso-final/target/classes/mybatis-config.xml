@@ -8,25 +8,11 @@
 
 	<typeAliases> <!-- Class 별칭을 선언하여 모든 경로를 적어주지 않아도 된다. -->
 		<typeAlias type="com.josso.electronicApproval.vo.ElectronicApproval" alias="electronicApproval" />
-		<typeAlias type="com.josso.board.vo.Email" alias="board" />
-		<typeAlias type="com.josso.email.vo.Email" alias="email" />
-		<typeAlias type="com.josso.employee.vo.Employee" alias="employee" />
-		<typeAlias type="com.josso.reserve.vo.Reserve" alias="reserve" />
-		<typeAlias type="com.josso.schedule.vo.Schedule" alias="schedule" />
-		<typeAlias type="com.josso.staff.vo.Staff" alias="staff" />
-		<typeAlias type="com.josso.businessReport.vo.Staff" alias="report" />
 	</typeAliases>
 	
 	<!-- 사용하고자 하는 mapper를 등록한다.--> 
 	<mappers> 
-		<mapper resource="mapper/electronic-mapper.xml" />
-		<mapper resource="mapper/board-mapper.xml" />
-		<mapper resource="mapper/email-mapper.xml" />
-		<mapper resource="mapper/employee-mapper.xml" />
-		<mapper resource="mapper/reserve-mapper.xml" />
-		<mapper resource="mapper/schedule-mapper.xml" />
-		<mapper resource="mapper/staff-mapper.xml" />
-		<mapper resource="mapper/report-mapper.xml" />
+		<mapper resource="mapper/electronicApproval-mapper.xml" />
 		
 	</mappers>
 	
