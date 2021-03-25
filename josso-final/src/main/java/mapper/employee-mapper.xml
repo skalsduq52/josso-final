@@ -81,7 +81,7 @@
 	
 	<!-- 로그인 -->
 	<select id="login" parameterType="String" resultType="Employee">
-		SELECT * FROM EMPLOYEE EMPLOYEE_NUMBER = #{employeeNumber}
+		SELECT * FROM EMPLOYEE WHERE EMPLOYEE_NUMBER = #{employeeNumber}
 	</select>
 	
 	<!-- 로그인 접속일자 수정 -->
