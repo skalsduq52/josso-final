@@ -4,7 +4,7 @@
 	<html>
 		<head>
 		<link rel="stylesheet" href="/css/common.css" type="text/css">
-		<link rel="stylesheet" href="/css/scheduleWrite.css" type="text/css">
+		<link rel="stylesheet" href="/css/schedule/scheduleWrite.css" type="text/css">
 		<title>josso</title>
 		<!-- 외부 글꼴 적용 시 링크 -->
 		<link rel="preconnect" href="https://fonts.gstatic.com">

@@ -1,0 +1,9 @@
+@charset "UTF-8";
+.content_top{
+    padding: 44px 35px;
+    
+}
+.content_top h1{
+    font-size: 20px;
+    font-weight: bold;
+}
