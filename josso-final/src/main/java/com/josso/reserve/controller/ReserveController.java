@@ -7,16 +7,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class ReserveController {
 
-	@RequestMapping(value="reserveHome.do", method=RequestMethod.GET)
-	public String reserveHome() {
-		
-		return "reserve/reserveHome";
+	@RequestMapping(value="reserve", method=RequestMethod.GET)
+	public String reserveMain() {
+		return "reserve/reserveMain";
 		
 	}
 	
-	@RequestMapping(value="reserveRoom.do", method=RequestMethod.GET)
+	@RequestMapping(value="reserve/room", method=RequestMethod.GET)
 	public String reserveRoom() {
 		return "reserve/reserveRoom";
 		
 	}
+	
+	@RequestMapping(value="reserve/car", method=RequestMethod.GET)
+	public String reserveCar() {
+		return "reserve/reserveCar";
+		
+	}
+	
+	
 }
