@@ -100,52 +100,15 @@
                 </ul>
             </div>
         </header>
+        <!-- aside 삽입  -->
         <aside class="border-right">
-            <div>
-                <section>
-                    <div class="title">
-                        <span class="icon"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></span>
-                            전자결재
-                    </div>
-                </section>
-                <section>
-                    <div class="title_button">
-                        <button type="button" class="btn btn-info btn-sm btn-block">새 결재 진행</button>
-                    </div>
-                </section>
-                <section>
-                    <div class="side_title">
-                        <ul>
-                            <li>
-                                <span class="hover_title"><i class="fas fa-sort-down fa-rotate-270" style="color:gray;"></i>
-                                    결재 대기 문서
-                                </span>
-                            </li>
-                        </ul>
-                        <ul>
-                            <li>
-                                <span class="hover_title"><i class="fas fa-sort-down fa-rotate-270" style="color:gray"></i>
-                                    내가 기안한 문서
-                                </span>
-                            </li>
-                        </ul>
-                        <ul>
-                            <li>
-                                <span class="hover_title"><i class="fas fa-sort-down fa-rotate-270" style="color:gray"></i>
-                                    결재 수신 문서
-                                </span>
-                            </li>
-                        </ul>
-                    </div>
-                </section>
-            </div>
+            <%@ include file="../electronicApproval/part/aside.jsp"%>
         </aside>
         <nav class="border-bottom">
             <div class="content_top">
                 <h1>휴가신청서</h1>
             </div>
         </nav>
-        
         <main>
             <form>
             <div class="border" style="height: 95%; min-height: 1000px; margin: 10px 10px 10px 10px">

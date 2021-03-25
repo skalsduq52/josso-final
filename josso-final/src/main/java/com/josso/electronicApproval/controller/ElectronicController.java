@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class ElectronicController {
 
-	@RequestMapping(value="elecApprovalMain", method=RequestMethod.GET)
+	@RequestMapping(value="elecApproval", method=RequestMethod.GET)
 	public ModelAndView approvalMain() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/electronicApproval/electronicApprovalMain");
