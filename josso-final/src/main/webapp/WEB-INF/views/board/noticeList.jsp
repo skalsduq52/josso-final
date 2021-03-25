@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="../common.css" type="text/css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/hsm_common.css" type="text/css">
         <!-- 외부 글꼴 적용 시 링크 -->
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">

@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="../common.css" type="text/css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/hsm_common.css" type="text/css">
         <style>
             .nav_title{
                 float: left;
