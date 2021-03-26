@@ -142,5 +142,22 @@ $(function() {
 		$('[class^="hover_tag"] li>ul>li').css("background","white");
 		$(this).css("background","rgb(236,236,236)");
 		$('#document_name').text($(this).text());
-    }); 
+    });
+	
+	$('#modal_submit').click(function(){
+        if($('#drop1 tr').length != 2 || $('#drop2 tr').length != 2){
+            alert('결재정보를 확인해주세요!');
+        }else{
+            var middle = $('#drop1').children().children().next().children().next().next().text();
+            var last = $('#drop2').children().children().next().children().next().next().text();
+            $.ajax({
+            	type:"get",
+            	url : "/josso/elecApproval/signing",
+            	data : {
+            		"middle" : middle,
+            		"last" : last
+            	}
+            })
+        }
+      });
 });
