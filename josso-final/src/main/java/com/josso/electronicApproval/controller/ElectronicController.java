@@ -15,4 +15,27 @@ public class ElectronicController {
 		mv.setViewName("/electronicApproval/electronicApprovalMain");
 		return mv;
 	}
+	
+	@RequestMapping(value="elecApproval/waiting", method=RequestMethod.GET)
+	public ModelAndView approvalWaiting() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("/electronicApproval/waitingSign");
+		return mv;
+	}
+	
+	@RequestMapping(value="elecApproval/reception", method=RequestMethod.GET)
+	public ModelAndView approvalRecept() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("/electronicApproval/receptionSign");
+		return mv;
+	}
+	
+	@RequestMapping(value="elecApproval/my", method=RequestMethod.GET)
+	public ModelAndView approvalMy() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("/electronicApproval/mySign");
+		return mv;
+	}
+	
+	
 }

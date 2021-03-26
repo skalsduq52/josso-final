@@ -4,28 +4,8 @@
 <html>
     <head>
 <link rel="stylesheet" type="text/css"  href="${pageContext.request.contextPath}/resources/css/common.css"></link>    
-        <style>
-            #board tbody tr:hover {
-                background: rgb(249, 249, 249);
-            }
-            #board tbody tr td {
-                height: 40px;
-            }
-            .nav_title{
-                float: left;
-                display: block;
-                width: 200px;
-                height: 55px;
-                padding: 54px 40px;
-                text-align: left;
-            }
-            #tdnum{
-                padding-left: 40px;
-            }
-            .side_title ul{
-                padding-left: 0px;
-            }
-        </style>
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/elecApproval/sign.css"></link>
         <title>josso</title>
          <!-- Icon -->
          <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
@@ -39,68 +19,20 @@
          <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
          <!-- Latest compiled JavaScript -->
          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        <script>
-            $(function(){
-                $('.hover_icon').click(function(){
-                    $('.hover_tag').slideToggle("slow")
-                });
-            });
-        </script>
+         <!-- modal,slide 스크립트 사용 -->
+         <script src="${pageContext.request.contextPath}/resources/js/modal.js"></script>
     </head>
     <body>
-        <header>
-            <div class="navigation">
-                <ul>
-                    <li>
-                        <a href="#">
-                        <span class="icon"><i class="fa fa-home" aria-hidden="true"></i></span>
-                        <span class="icon">홈</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                        <span class="icon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
-                        <span class="icon">메일</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                        <span class="icon"><i class="fas fa-list-ul fa-lg" aria-hidden="true"></i></span>
-                        <span class="icon">게시판</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                        <span class="icon"><i class="fas fa-calendar-alt fa-lg" aria-hidden="true"></i></span>
-                        <span class="icon">캘린더</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                        <span class="icon"><i class="fas fa-clock fa-lg" aria-hidden="true"></i></span>
-                        <span class="icon">예약</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                        <span class="icon"><i class="fas fa-clipboard fa-lg" aria-hidden="true"></i></span>
-                        <span class="icon">결재</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                        <span class="icon"><i class="fas fa-user-friends fa-lg" aria-hidden="true"></i></span>
-                        <span class="icon">조직도</span>
-                        </a>
-                    </li>
-                
-                </ul>
-            </div>
-        </header>
+        <!-- navigation 삽입 -->
+		<header>
+			<%@ include file="../electronicApproval/part/navigation.jsp"%>
+		</header>
+		
         <!-- aside 삽입  -->
         <aside class="border-right">
             <%@ include file="../electronicApproval/part/aside.jsp"%>
         </aside>
+        
         <nav class="border-bottom">
             <div class="content_top">
                 <h1>결재 대기 문서</h1>
@@ -163,6 +95,8 @@
             <div style="margin-left: 80%; padding-top: 10px;padding-bottom: 10px;">
                 <input type="text" name="??"><button>검색</button>
             </div>         
+            <!-- modal 삽입  -->
+	        <%@ include file="../electronicApproval/part/modal.jsp"%>
         </main>
         <footer class="border-top">
 

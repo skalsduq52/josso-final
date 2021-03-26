@@ -3,33 +3,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css"  href="${pageContext.request.contextPath}/resources/css/common.css"></link>
-<style>
-#board tbody tr:hover {
-	background: rgb(249, 249, 249);
-}
-
-#board tbody tr td {
-	height: 40px;
-}
-
-.nav_title {
-	float: left;
-	display: block;
-	width: 200px;
-	height: 55px;
-	padding: 15px 40px;
-	text-align: left;
-}
-
-#tdnum {
-	padding-left: 40px;
-}
-
-.side_title ul {
-	padding-left: 0px;
-}
-</style>
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/common.css"></link>
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/elecApproval/sign.css"></link>
 <title>josso</title>
 <!-- Icon -->
 <link rel="stylesheet"
@@ -49,47 +26,13 @@
 <!-- Latest compiled JavaScript -->
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script>
-	$(function() {
-		$('.hover_icon').click(function() {
-			$('.hover_tag').slideToggle("slow")
-		});
-	});
-</script>
+<!-- modal,slide 스크립트 사용 -->
+<script src="${pageContext.request.contextPath}/resources/js/modal.js"></script>
 </head>
 <body>
+	<!-- navigation 삽입 -->
 	<header>
-		<div class="navigation">
-			<ul>
-				<li><a href="home"> <span class="icon"><i
-							class="fa fa-home" aria-hidden="true"></i></span> <span class="icon">홈</span>
-				</a></li>
-				<li><a href="mail"> <span class="icon"><i
-							class="fa fa-envelope" aria-hidden="true"></i></span> <span class="icon">메일</span>
-				</a></li>
-				<li><a href="board"> <span class="icon"><i
-							class="fas fa-list-ul fa-lg" aria-hidden="true"></i></span> <span
-						class="icon">게시판</span>
-				</a></li>
-				<li><a href="calender"> <span class="icon"><i
-							class="fas fa-calendar-alt fa-lg" aria-hidden="true"></i></span> <span
-						class="icon">캘린더</span>
-				</a></li>
-				<li><a href="reservation"> <span class="icon"><i
-							class="fas fa-clock fa-lg" aria-hidden="true"></i></span> <span
-						class="icon">예약</span>
-				</a></li>
-				<li><a href="approval"> <span class="icon"><i
-							class="fas fa-clipboard fa-lg" aria-hidden="true"></i></span> <span
-						class="icon">결재</span>
-				</a></li>
-				<li><a href="organizationChart"> <span class="icon"><i
-							class="fas fa-user-friends fa-lg" aria-hidden="true"></i></span> <span
-						class="icon">조직도</span>
-				</a></li>
-
-			</ul>
-		</div>
+		<%@ include file="../electronicApproval/part/navigation.jsp"%>
 	</header>
 	<!-- aside 삽입 -->
 	<aside class="border-right">
@@ -198,6 +141,9 @@
 				</tbody>
 			</table>
 		</div>
+		<!-- modal 삽입  -->
+		<%@ include file="../electronicApproval/part/modal.jsp"%>
+
 	</main>
 	<footer class="border-top"></footer>
 </body>
