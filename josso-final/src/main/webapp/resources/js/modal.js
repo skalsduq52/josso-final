@@ -137,4 +137,10 @@ $(function() {
 			$('.hover_tag').slideToggle("slow")
 		});
 	});
+	
+	$('[class^="hover_tag"] li>ul>li').click(function(){
+		$('[class^="hover_tag"] li>ul>li').css("background","white");
+		$(this).css("background","rgb(236,236,236)");
+		$('#document_name').text($(this).text());
+    }); 
 });
