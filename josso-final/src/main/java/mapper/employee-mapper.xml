@@ -42,7 +42,7 @@
 		SELECT COUNT(*) FROM EMPLOYEE WHERE EMPLOYEE_EMAIL = #{employeeEmail}
 	</select>
 	
-	<!-- insert Employee -->
+	<!-- 사원 등록 -->
 	<insert id="insertEmployee" parameterType="Employee" statementType="PREPARED">
 		INSERT INTO EMPLOYEE(EMPLOYEE_NUMBER, EMPLOYEE_NAME, EMPLOYEE_PASSWORD, EMPLOYEE_BIRTH, 
 							EMPLOYEE_PHONE, EMPLOYEE_ADDRESS,EMPLOYEE_PICTURE,EMPLOYEE_EMAIL,EMPLOYEE_HIREDATE,
@@ -53,7 +53,7 @@
 					 #{departmentCode}, #{rankCode}, #{positionCode}, #{employeeExtensionNumber},  #{employeeRegistrationDate}, #{employeeLoginDate},#{roleCode})
 	</insert>
 	
-	<!-- update Employee -->
+	<!-- 사원정보 수정 -->
 	<update id="updateEmployee">
 		UPDATE EMPLOYEE SET
 			EMPLOYEE_PASSWORD = #{employeePassword},
@@ -74,7 +74,7 @@
 		WHERE EMPLOYEE_NUMBER = #{employeeNumber}
 	</update>
 	
-	<!-- delete Employee -->
+	<!-- 사원 삭제 -->
 	<delete id="deleteEmployee" parameterType="Employee">
 		DELETE FROM EMPLOYEE WHERE EMPLOYEE_NUMBER = #{employeeNumber}
 	</delete>
@@ -86,7 +86,7 @@
 	
 	<!-- 로그인 접속일자 수정 -->
 	<update id="updateLogDate" parameterType="String">
-		UPDATE EMPLOYEE SET employeeLogDate=now() WHERE EMPLOYEE_NUMBER = #{employeeNumber}
+		UPDATE EMPLOYEE SET employeeLogDate=SYSDATE WHERE EMPLOYEE_NUMBER = #{employeeNumber}
 	</update>
 </mapper>
 
