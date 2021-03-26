@@ -213,9 +213,6 @@
                             <i class="fas fa-sort-down fa-rotate-270" style="color:gray"></i>
                         </span>
                         <span class="hover_title">일정별 업무보고</span>
-                        <span class="write_img">
-                            <img src="../final_project/images/pencil.png">
-                        </span>
                     </div>
                     <div>
                         <ul class="hover_tag">
