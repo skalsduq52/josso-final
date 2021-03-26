@@ -29,7 +29,7 @@ public class EmployeeController {
 	//로그인 폼 이동
 		@RequestMapping(value= "employee/login/index", method=RequestMethod.GET)
 		public String index() throws Exception{
-//			System.out.println("loginform test");
+//			
 			
 			return "employee/login/index";
 		}
@@ -39,7 +39,7 @@ public class EmployeeController {
 		public String login(@ModelAttribute Employee employee, HttpSession session, HttpServletResponse response) throws Exception {
 			employee = employeeService.login(employee, response);
 			session.setAttribute("employee", response);
-			System.out.println("login test");
+			
 			
 			
 			return "employee/login/index";
