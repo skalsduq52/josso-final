@@ -26,7 +26,7 @@
 		<mapper resource="mapper/reserve-mapper.xml" />
 		<mapper resource="mapper/schedule-mapper.xml" />
 		<mapper resource="mapper/report-mapper.xml" />
-		
+	<!-- staffvo삭제 / 홍수명 -->	
 	</mappers>
-
+	
 </configuration>

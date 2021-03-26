@@ -236,9 +236,6 @@
                         <i class="fas fa-sort-down fa-rotate-270" style="color:gray"></i>
                     </span>
                     <span class="hover_title">게시판 목록</span>
-                    <span class="write_img">
-                        <img src="../final_project/images/pencil.png">
-                    </span>
                 </div>
                 <div>
                     <ul class="hover_tag">

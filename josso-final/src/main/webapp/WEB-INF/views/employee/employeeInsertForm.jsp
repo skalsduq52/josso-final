@@ -3,8 +3,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-    	<meta charset="UTF-8">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/hsm_common.css" type="text/css">
+        <link rel="stylesheet" href="../finalproject/common.css" type="text/css">
         <title>josso</title>
         <!-- 외부 글꼴 적용 시 링크 -->
         <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -35,93 +34,20 @@
             });
         </script>
 
-        <!--공통 CSS-->
         <style>
-            nav {
-                height: 130px;
+            #title{
+                padding: 15px 20px;
+                font-size: 20px;
             }
-            .nav_title{
-                float: left;
-                display: block;
-                width: 1000px;
-                height: 80px;
-                padding: 50px 30px;
-                text-align: left;
+            #main{
+                margin: 15px 15px;
             }
-
-            .nav_content {
-                float: left;
-                display:block;
-                margin-left: 20px;
-                width: 1100px;
-                height: 70px;
-                margin-top: 7px;
-                border-radius: 20px;
-                text-align: left;
-                background: cornsilk;
+            label{
+                width:65px;
             }
-
-            .report_kind {
-               color: gray;
-           }
-
-           .report_kind:hover {
-               text-decoration: none;
-           }
-
-           .hover_tag > li {
-               padding-bottom: 10px;
-               font-size: 14px;
-               color: gray;
-           }
-
-           .hover_tag {
-               padding-left: 45px;
-           }
         </style>
-
-        <!--공통 아닌 것들-->
-        <style>
-            #tdnum{
-                text-align: center;
-            }
-
-            #selectnum {
-                text-align: center;
-                padding-right: 125px;
-            }
-            .search {
-                height: 33px;
-            }
-
-            #board tbody tr td {
-                height: 40px;
-            }
-            
-            table {
-                min-width: 1000px;
-            }
-
-            #theme {
-                padding-left: 70px;
-            }
-
-            .bottom_area {
-                display: inline-block;
-                padding-top: 10px;
-                padding-bottom: 10px;
-            }
-            
-            #organization {
-                width: 95%;
-                min-width: 1200px;
-                padding-top: 70px;
-                padding-left: 50px;
-            }
-
-        </style>
-
     </head>
+    
     <body class="body">
         <header>
             <div class="navigation">
@@ -181,49 +107,102 @@
             <div>
                 <section>
                     <div class="title">
-                        <span class="icon"><i class="fas fa-user-friends fa-lg icon_" aria-hidden="true"></i>주소록</span>
+                        <span class="icon"><i class="fas fa-calendar-alt icon_" aria-hidden="true"></i>캘린더</span>
+                            
                     </div>
                 </section>
-    
-                <section>        
+                <section>
+                    <div class="title_button">
+                        <button type="button" class="btn btn-info btn-sm btn-block">일정등록</button>
+                    </div>
+                </section>
+                <section>
+                    
                     <div class="side_title">
                         <span class="hover_icon">
                             <i class="fas fa-sort-down fa-rotate-270" style="color:gray"></i>
                         </span>
-                        <span class="hover_title">임직원 정보</span>
+                        <span class="hover_title">내 캘린더</span>
+                        <span class="write_img">
+                            <img src="../images/글쓰기(연필).png">
+                        </span>
                     </div>
                     <div>
                         <ul class="hover_tag">
                             <li>
                                 <div class="form-check form-check-inline">
-                                    <label class="form-check-label" for="inlineCheckbox1">
-                                        <a href="" class="report_kind">조직도</a></label>
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" checked>
+                                    <label class="form-check-label" for="inlineCheckbox1">내 일정</label>
                                 </div>
                             </li>
                             <li>
                                 <div class="form-check form-check-inline">
-                                    <label class="form-check-label" for="inlineCheckbox2">
-                                        <a href="" class="report_kind">주소록</a>
-                                    </label>
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                                    <label class="form-check-label" for="inlineCheckbox1">내 일정</label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                                    <label class="form-check-label" for="inlineCheckbox1">내 일정</label>
                                 </div>
                             </li>
                         </ul>
                     </div>
                 </section>
-                
             </div>
         </aside>
-        <nav class="border-bottom" style="padding-bottom: 100px;">
-                <div class="nav_title">
-                    <h2 id="suggestion_title" style="font-weight: 600;">조직도</h2>
-                </div>
-                <br>
-                <div>
-                </div>
+        <nav class="border-bottom">
+            <!-- Navbar content -->
+            <div id="title"><p><b>사원 등록</b></p></div>
         </nav>
-        
-        <main class="border-top">
-            <img src="${pageContext.request.contextPath}/resources/images/organization.PNG" id="organization">
+         
+        <main>
+            <div id="main">
+            <form action="/josso/employeeInsert.do" method="post">
+                <b>기본정보</b><br>
+                <hr>
+                <label for="employeeNumber">사원번호</label>
+                <input type="text" name="employeeNumber" id="employeeNumber"/><br>
+                <label for="employeeName">이름</label>
+                <input type="text" name="employeeName" id="employeeName"/><br>
+                <label for="employeePassword">비밀번호</label>
+                <input type="password" name="employeePassword" id="employeePassword"/><br>
+                <label for="employeeBirth">생년월일</label>
+                <input type="text" name="employeeBirth" id="employeeBirth"/><br>
+                <label for="employeePhone">휴대폰</label>
+                <input type="text" name="employeePhone" id="employeePhone"/><br>
+                <label for="employeeAddress">주소</label>
+                <input type="text" name="employeeAddress" id="employeeAddress"/><br>
+                <label for="employeePicture">사진</label>
+                <input type="text" name="employeePicture" id="employeePicture"/><br>
+                <label for="employeeEmail">이메일</label>
+                <input type="email" name="employeeEmail" id="employeeEmail"/><br>
+                <label for="employeeHireDate">입사일</label>
+                <input type="text" name="employeeHireDate"id="employeeHireDate"/>
+                <hr><br>
+
+                <b>추가정보</b><br>
+                <hr>
+                <label for="departmentCode">부서명</label>
+                <input type="text" name="departmentCode" id="departmentCode"/><br>
+                <label for="rankCode">직급</label>
+                <input type="text" name="rankCode" id="rankCode"/><br>
+                <label for="positionCode">직책</label>
+                <input type="text" name="positionCode" id="positionCode"/><br>
+                <label for="employeeExtensionNumber">내선번호</label>
+                <input type="text" name="employeeExtensionNumber" id="employeeExtensionNumber"/><br>
+                <label for="employeeRegDate">가입일</label>
+                <input type="text" name="employeeRegistrationDate" id="employeeRegistrationDate"/><br>
+                <label for="employeeLogDate">로그인</label>
+                <input type="text" name="employeeLoginDate" id="employeeLoginDate"/><br>
+                <label for="roleCode">권한</label>
+                <input type="text" name="roleCode" id="roleCode"/><br>
+                <hr>
+                <input type="submit" value="등록">
+                   
+            </form>
+        </div>
         </main>
         <footer class="border-top">
 
