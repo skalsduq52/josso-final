@@ -10,7 +10,7 @@ public class StaffController {
 	@RequestMapping(value="staff/organization", method=RequestMethod.GET)
 	public ModelAndView organization() {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("staff/staffOrganization");
+		mv.setViewName("/staff/staffOrganization");
 		return mv;
 	}
 	
@@ -20,7 +20,7 @@ public class StaffController {
 	@RequestMapping(value="staff/address/list", method=RequestMethod.GET)
 	public ModelAndView StaffAddressList() {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("staff/staffAddress");
+		mv.setViewName("/staff/staffAddress");
 		return mv;
 	}
 	

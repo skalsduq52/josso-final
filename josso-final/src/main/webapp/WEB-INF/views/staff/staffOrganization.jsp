@@ -226,7 +226,7 @@
         </nav>
         
         <main class="border-top">
-            <img src="../final_project/images/organization.PNG" id="organization">
+            <img src="${pageContext.request.contextPath}/resources/images/organization.PNG" id="organization">
         </main>
         <footer class="border-top">
 
