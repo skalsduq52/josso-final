@@ -95,6 +95,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 			return null;
 		}else {
 			String employeePassword = employee.getEmployeePassword();
+			System.out.println("employee.getEmployeeNumber():"+employee.getEmployeeNumber());
 			employee = employeeDao.login(employee.getEmployeeNumber());
 			System.out.println(employee.getEmployeePassword());
 			// 비밀번호가 다를 경우

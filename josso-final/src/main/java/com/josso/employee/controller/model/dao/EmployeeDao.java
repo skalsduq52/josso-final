@@ -63,7 +63,9 @@ public class EmployeeDao {
 	}
 		
 	//로그인 검사
+	@Transactional
 	public Employee login(String employeeNumber) throws Exception{
+		System.out.println("employee.getEmployeeNumber() dao:"+employeeNumber);
 		return sqlSession.selectOne("Employee.login", employeeNumber);
 	}
 	//로그인 접속일자 변경
