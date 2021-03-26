@@ -37,5 +37,11 @@ public class ElectronicController {
 		return mv;
 	}
 	
+	@RequestMapping(value="elecApproval/signing", method=RequestMethod.GET)
+	public ModelAndView approvalSigning() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("/electronicApproval/signing");
+		return mv;
+	}
 	
 }

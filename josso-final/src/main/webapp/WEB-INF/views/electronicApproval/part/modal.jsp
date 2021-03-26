@@ -43,7 +43,7 @@
                                         </div>
                                     </div>    
                                     <ul class="hover_tag3">
-                                        <li><a href="#">휴가신청서</a></li>
+                                        <li>휴가신청서</li>
                                         <li>외근신청서</li>
                                         <li>휴직신청서</li>
                                     </ul>
@@ -104,7 +104,7 @@
                             <table>
                                 <tr>
                                     <td style="width: 100px;">제목</td>
-                                    <td>휴가신청서</td>
+                                    <td id="document_name"></td>
                                 </tr>
                                 <tr>
                                     <td style="padding-top: 10px;">보존연한</td>
@@ -186,7 +186,7 @@
                     
                     <!-- Modal footer -->
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-success" data-dismiss="modal" id="submit">등록</button>
+                      <button type="button" class="btn btn-success" id="modal_submit">등록</button>
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
                     </div>
                     
