@@ -13,7 +13,6 @@
 		<typeAlias type="com.josso.employee.vo.Employee" alias="Employee" />
 		<typeAlias type="com.josso.reserve.vo.Reserve" alias="reserve" />
 		<typeAlias type="com.josso.schedule.vo.Schedule" alias="schedule" />
-		<typeAlias type="com.josso.staff.vo.Staff" alias="staff" />
 		<typeAlias type="com.josso.businessReport.vo.BusinessReport" alias="report" />
 	</typeAliases>
 	
@@ -26,9 +25,8 @@
 		<mapper resource="mapper/employee-mapper.xml" />
 		<mapper resource="mapper/reserve-mapper.xml" />
 		<mapper resource="mapper/schedule-mapper.xml" />
-		<mapper resource="mapper/staff-mapper.xml" />
 		<mapper resource="mapper/report-mapper.xml" />
-		
+	<!-- staffvo삭제 / 홍수명 -->	
 	</mappers>
-
+	
 </configuration>
