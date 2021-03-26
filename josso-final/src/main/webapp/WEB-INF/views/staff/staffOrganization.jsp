@@ -197,13 +197,13 @@
                             <li>
                                 <div class="form-check form-check-inline">
                                     <label class="form-check-label" for="inlineCheckbox1">
-                                        <a href="" class="report_kind">조직도</a></label>
+                                        <a href="organization" class="report_kind">조직도</a></label>
                                 </div>
                             </li>
                             <li>
                                 <div class="form-check form-check-inline">
                                     <label class="form-check-label" for="inlineCheckbox2">
-                                        <a href="" class="report_kind">주소록</a>
+                                        <a href="address/list" class="report_kind">주소록</a>
                                     </label>
                                 </div>
                             </li>

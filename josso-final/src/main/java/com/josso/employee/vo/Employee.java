@@ -5,6 +5,7 @@ import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class Employee {
+	// 주석추가 - 홍수맹
 	   private static final long serialVersionUID = 1111L;
 	   private String employeeNumber;			// 사원번호
 	   private String employeePassword;			// 비밀번호
