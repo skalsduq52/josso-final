@@ -42,7 +42,7 @@ public class EmployeeController {
 			
 			
 			
-			return "employee/login/index";
+			return "main";
 		}
 	
 	@RequestMapping(value="employee/employeeList", method = RequestMethod.GET)
