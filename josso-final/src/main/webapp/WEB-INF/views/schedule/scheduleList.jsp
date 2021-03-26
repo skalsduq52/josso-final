@@ -216,7 +216,7 @@
             </div>
         </nav>
         
-        <main">
+        <main>
             <div>
                 <div id='calendar'></div>
             </div>

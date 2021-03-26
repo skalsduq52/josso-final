@@ -8,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class ScheduleController {
 	
-	@RequestMapping(value="scheduleList", method=RequestMethod.GET)
+	@RequestMapping(value="schedule", method=RequestMethod.GET)
 	public ModelAndView scheduleList() {
 		
 		ModelAndView mv = new ModelAndView();
@@ -17,7 +17,7 @@ public class ScheduleController {
 		return mv;
 	}
 	
-	@RequestMapping(value="scheduleWrite", method=RequestMethod.GET)
+	@RequestMapping(value="schedule/write", method=RequestMethod.GET)
 	public ModelAndView scheduleWrite() {
 		
 		ModelAndView mv = new ModelAndView();
