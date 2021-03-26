@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -187,13 +189,13 @@
                             <li>
                                 <div class="form-check form-check-inline">
                                     <label class="form-check-label" for="inlineCheckbox1">
-                                        <a href="" class="report_kind">조직도</a></label>
+                                        <a href="${pageContext.request.contextPath}/staff/organization" class="report_kind">조직도</a></label>
                                 </div>
                             </li>
                             <li>
                                 <div class="form-check form-check-inline">
                                     <label class="form-check-label" for="inlineCheckbox2">
-                                        <a href="" class="report_kind">주소록</a>
+                                        <a href="${pageContext.request.contextPath}/staff/address/list" class="report_kind">주소록</a>
                                     </label>
                                 </div>
                             </li>
@@ -227,44 +229,18 @@
                         </tr>
                     </thead>
                     <tbody>
+                    <c:forEach var="el" items="${employeeList}">
                         <tr>
-                            <td id="tdnum">대표이사</td>
-                            <td id="theme">안태민</td>
-                            <td>대표이사</td>
-                            <td>2001-03-18</td>
-                            <td>02-471-0001</td>
-                            <td>010-1111-1111</td>
-                            <td>atm0318@josso.co.kr</td>
-                            <td>1971-01-02</td>
+                            <td id="tdnum">${el.departmentCode }</td>
+                            <td id="theme">${el.employeeName }</td>
+                            <td>${el.rankCode }</td>
+                            <td><fmt:formatDate value="${el.employeeHireDate }" pattern="yy / MM / dd"></fmt:formatDate></td>
+                            <td>${el.employeeExtensionNumber }</td>
+                            <td>${el.employeePhone }</td>
+                            <td>${el.employeeEmail }</td>
+                            <td>${el.employeeBirth }</td>
                         </tr>
-                        <tr>
-                            <td id="tdnum">지원본부</td>
-                            <td id="theme">김재윤</td>
-                            <td>부장</td>
-                            <td>2001-03-18</td>
-                            <td>02-471-0001</td>
-                            <td>010-1111-1111</td>
-                            <td>atm0318@josso.co.kr</td>
-                            <td>1971-01-02</td>
-                        </tr>                        <tr>
-                            <td id="tdnum">개발본부</td>
-                            <td id="theme">최민재</td>
-                            <td>부장</td>
-                            <td>2001-03-18</td>
-                            <td>02-471-0001</td>
-                            <td>010-1111-1111</td>
-                            <td>atm0318@josso.co.kr</td>
-                            <td>1971-01-02</td>
-                        </tr>                        <tr>
-                            <td id="tdnum">영업본부</td>
-                            <td id="theme">김우영</td>
-                            <td>차장</td>
-                            <td>2001-03-18</td>
-                            <td>02-471-0001</td>
-                            <td>010-1111-1111</td>
-                            <td>atm0318@josso.co.kr</td>
-                            <td>1971-01-02</td>
-                        </tr>
+                    </c:forEach>    
                     </tbody>    
                 </table>
             </div>
