@@ -6,25 +6,25 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 public class Employee {
 	   private static final long serialVersionUID = 1111L;
-	   private String employeeNumber;
-	   private String employeePassword;
-	   private String employeeName;
-	   private String departmentCode;
-	   private String rankCode;
-	   private String positionCode;
-	   private String roleCode;
-	   private String employeeEmail;
-	   private String employeePhone;
-	   private String employeeAddress;
-	   private String employeeBirth;
-	   private String employeeExtensionNumber;
-	   private String employeePicture;
+	   private String employeeNumber;			// 사원번호
+	   private String employeePassword;			// 비밀번호
+	   private String employeeName;				// 사원이름
+	   private String departmentCode;			// 부서코드
+	   private String rankCode;					// 직급
+	   private String positionCode;				// 직책
+	   private String roleCode;					// 권한(1,2,3)
+	   private String employeeEmail;			// 이메일
+	   private String employeePhone;			// 휴대폰
+	   private String employeeAddress;			// 집주소
+	   private String employeeBirth;			// 생년월일
+	   private String employeeExtensionNumber;	// 내선번호
+	   private String employeePicture;			// 사진
 	   @DateTimeFormat(pattern="yyyy-MM-dd")
-	   private Date employeeHireDate;
+	   private Date employeeHireDate;			// 입사일
 	   @DateTimeFormat(pattern="yyyy-MM-dd")
-	   private Date employeeRegistrationDate;
+	   private Date employeeRegistrationDate;	// 관리자가 사원을 등록한 일자
 	   @DateTimeFormat(pattern="yyyy-MM-dd")
-	   private Date employeeLoginDate;
+	   private Date employeeLoginDate;			// 사원별 로그인 날짜
 	   
 	//기본 생성자   
 	public Employee() {
