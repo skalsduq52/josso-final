@@ -79,7 +79,7 @@
         <!--공통 아닌 것들-->
         <style>
             #tdnum{
-                text-align: center;
+            	padding-left : 60px
             }
 
             #selectnum {
@@ -99,7 +99,7 @@
             }
 
             #theme {
-                padding-left: 70px;
+                padding-left: 50px;
             }
 
             .bottom_area {
@@ -108,9 +108,49 @@
                 padding-bottom: 10px;
             }
             
+            #employeeName:hover {
+            	cursor:pointer;
+            	color:blue;
+            }
+            
+            #employeeName {
+            	color:slateblue;
+            }
+            
 
         </style>
+		
+		
+		<!-- 모달 아작스 -->
+		<script>
+		
+			$(function(){
 
+                $('#employeeName').click(function(){
+                    var employeeNumber = '2001001';
+                    console.log('employeeNumber : ' + employeeNumber);
+                    
+                    $.ajax({
+    					type : "POST",
+    					url : "detail",
+    					dataType : "json",
+    					data : {
+    						"employeeNumber" : employeeNumber,
+    					},
+    					success : function(data) {
+    						$('#addressDetail').modal();
+    						console.log('데이터 들어옴');
+    						console.log('이름 : ' + data.name)
+    					},
+    					error : function(request, status, error) {
+    						alert("에러발생. 관리자에 문의하세요.");
+    					}
+    				})
+                });
+                
+                
+			})
+		</script>
     </head>
     <body class="body">
         <header>
@@ -218,27 +258,30 @@
                 <table style="width: 100%;" id="board">
                     <thead>
                         <tr class="border-bottom" style="height: 40px;">
-                            <th id="tdnum" style="width: 10%;">부서</th>
-                            <th id="theme" style="width: 12%">이름</th>
-                            <th style="width: 8%">직급</th>
-                            <th style="width: 10%">입사일</th>
+                            <th id="tdnum" style="width: 8%;">부서</th>
+                            <th id="theme" style="width: 10%; ">이름</th>
+                            <th style="width: 6%">직급</th>
+                            <th style="width: 8%">직책</th>
+                            <th style="width: 8%">사원번호</th>
+                            <th style="width: 8%">입사일</th>
                             <th style="width: 10%">Tel</th>
                             <th style="width: 10%">Phone</th>
-                            <th style="width: 17%">E-mail</th>
-                            <th style="width: 8%">생년월일</th>
+                            <th style="width: 15%">E-mail</th>
                         </tr>
                     </thead>
                     <tbody>
                     <c:forEach var="el" items="${employeeList}">
                         <tr>
+                        
                             <td id="tdnum">${el.departmentCode }</td>
-                            <td id="theme">${el.employeeName }</td>
+                            <td id="theme"><span id="employeeName">${el.employeeName }</span></td>
                             <td>${el.rankCode }</td>
+                            <td>${el.positionCode }</td>
+                            <td id="employeeNumber">${el.employeeNumber }</td>
                             <td><fmt:formatDate value="${el.employeeHireDate }" pattern="yy / MM / dd"></fmt:formatDate></td>
                             <td>${el.employeeExtensionNumber }</td>
                             <td>${el.employeePhone }</td>
                             <td>${el.employeeEmail }</td>
-                            <td>${el.employeeBirth }</td>
                         </tr>
                     </c:forEach>    
                     </tbody>    
@@ -266,6 +309,33 @@
                 <button class="btn btn-success" style="height: 38px; margin-bottom: 5px;">검색</button>
             </div>         
             
+            
+	<!-- 모달(팝업창) -->
+	<div class="modal fade modal-dialog modal-lg" id="addressDetail">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	
+	      <!-- Modal Header -->
+	      <div class="modal-header">
+	        <h4 class="modal-title">제목</h4>
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	      </div>
+	
+	      <!-- Modal body -->
+	      <div class="modal-body">
+	        	내용<br>
+	        	<p id="name"></p>
+	        	<p id="number"></p>
+	      </div>
+	
+	      <!-- Modal footer -->
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+	      </div>
+	
+	    </div>
+	  </div>
+	</div>
         </main>
         <footer class="border-top">
 	수정했읍니다.!
