@@ -111,6 +111,7 @@
             #employeeName:hover {
             	cursor:pointer;
             	color:blue;
+            	font-weight:bold;
             }
             
             #employeeName {
@@ -125,16 +126,18 @@
             }
             
             .modal-title {
+            	padding-left:10px;
             	font-size:2em;
             	font-weight:bold;
             }
             
             #modal-body {
             	padding-top:10px;
-            	padding-left:5px;
+            	padding-left:8px;
             	font-size:1.1em;
-            	font-weight:500;
+            	font-weight:550;
             }
+            
             
 
         </style>
@@ -158,16 +161,20 @@
     					},
     					success : function(data) {
 						$('#addressDetail').modal();
-    						console.log('데이터 들어옴');
-    						console.log('이름 : ' + JSON.stringify(data));
+    						
+						// 콘솔
+						console.log('데이터 들어옴');
+    					console.log('이름 : ' + JSON.stringify(data));
+    					
 						$('.modal-title').html(data.name);
-						$('#picture').html('사진영역 : ' + data.picture);
+						
+						$('#picture').html(data.picture);
 						$('#number').html('사원번호 : ' + data.number);
-						$('#rank').html('직급: ' + data.rank);
+						$('#rank').html('직급 : ' + data.rank);
 						$('#position').html('직책 : ' + data.position);
-						$('#email').html('이메일 : ' + data.email);
-						$('#tel').html('내선번호 : ' + data.tel);
-						$('#phone').html('휴대폰 : ' + data.phone);
+						$('#email').html('E-mail : ' + data.email);
+						$('#tel').html('Tel : ' + data.tel);
+						$('#phone').html('Phone : ' + data.phone);
 						$('#hiredate').html('입사일자 : ' + data.hiredate);
     					},
     					error : function(request, status, error) {
@@ -352,15 +359,16 @@
 	      <!-- Modal body -->
 	      <div id="modal-body">
 	      <div class="modal-body">
+	      
 	        	<div id="picture"></div><br>
-	        	<p id="number"></p>
+	        	<p id="number" ></p>
 	        	<p id="rank"></p>
 	        	<p id="position"></p>
 	        	<p id="email"></p>
 	        	<p id="tel"></p>
 	        	<p id="phone"></p>
 	        	<p id="hiredate"></p>
-	        	
+	       
 	      </div>
 	      </div>
 	
