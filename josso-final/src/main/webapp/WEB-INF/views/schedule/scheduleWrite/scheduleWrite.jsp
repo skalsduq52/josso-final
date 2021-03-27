@@ -27,7 +27,7 @@
 	                                        </div>
 	                                    </div> -->
 									<div class="date_ipt">
-										<span> <img src="../images/달력이미지.png"> <input
+										<span> <img src="${pageContext.request.contextPath}/resources/images/달력이미지.png"> <input
 											type="text" class="start_date" data-provide="datepicker"
 											value=""> <!-- <input type="text" class="time_date dropdown-toggle" value=""> -->
 											<select>
@@ -78,7 +78,7 @@
 												<option value="">23:00</option>
 												<option value="">23:30</option>
 										</select>
-										</span> ~ <span> <img src="../images/달력이미지.png"> <input
+										</span> ~ <span> <img src="${pageContext.request.contextPath}/resources/images/달력이미지.png"> <input
 											type="text" class="end_date" data-provide="datepicker"
 											value=""> <!-- <input type="text" class="time_date" value=""> -->
 											<select>
@@ -143,7 +143,7 @@
 									class="badge badge-pill badge-secondary">안태민</span> <span
 									class="badge badge-pill badge-secondary">안태민</span> <span
 									class="btn_wrap" data-toggle="modal" data-target="#exampleModal">
-										<span><img src="../images/플러스이미지.png"></span> <span>참석자
+										<span><img src="${pageContext.request.contextPath}/resources/images/플러스이미지.png"></span> <span>참석자
 											선택</span>
 								</span></td>
 							</tr>

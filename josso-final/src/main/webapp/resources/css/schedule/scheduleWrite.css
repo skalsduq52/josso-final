@@ -34,8 +34,8 @@
 				}
 				
 				.date_ipt>span>input {
-					width: 24.5%;
-					min-width: 200px;
+					width: 10%;
+					min-width: 115px;
 					display: inline-block;
 					padding-left: 25px;
 				}

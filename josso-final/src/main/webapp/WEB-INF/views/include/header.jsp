@@ -4,7 +4,7 @@
     <div class="navigation">
         <ul>
             <li>
-                <a href="main">
+                <a href="/josso/main">
                 <span class="icon"><i class="fa fa-home" aria-hidden="true"></i></span>
                 <span class="icon">홈</span>
                 </a>
@@ -16,38 +16,38 @@
                 </a>
             </li>
             <li>
-                <a href="schedule">
+                <a href="/josso/schedule">
                 <span class="icon"><i class="fas fa-calendar-alt fa-lg" aria-hidden="true"></i></span>
                 <span class="icon">캘린더</span>
                 </a>
             </li>
             <li>
-                <a href="elecApproval">
+                <a href="/josso/elecApproval">
                 <span class="icon"><i class="fas fa-clipboard fa-lg" aria-hidden="true"></i></span>
                 <span class="icon">결재</span>
                 </a>
             </li>
             <li>
-                <a href="report/weekly/list">
+                <a href="/josso/report/weekly/list">
                 <span class="icon"><i class="fa fa-paste" aria-hidden="true"></i></span>
                 <span class="icon">보고</span>
                 </a>
             </li>
             <li>
-                <a href="board/notice/list">
+                <a href="/josso/board/notice/list">
                 <span class="icon"><i class="fas fa-list-ul fa-lg" aria-hidden="true"></i></span>
                 <span class="icon">게시판</span>
                 </a>
             </li>
             <li>
-                <a href="reserve">
+                <a href="/josso/reserve">
                 <span class="icon"><i class="fas fa-clock fa-lg" aria-hidden="true"></i></span>
                 <span class="icon">예약</span>
                 </a>
             </li>
             
             <li>
-                <a href="staff/organization">
+                <a href="/josso/staff/organization">
                 <span class="icon"><i class="fas fa-user-friends fa-lg" aria-hidden="true"></i></span>
                 <span class="icon">조직도</span>
                 </a>
