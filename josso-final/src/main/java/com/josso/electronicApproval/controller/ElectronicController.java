@@ -43,14 +43,12 @@ public class ElectronicController {
 										@RequestParam(name = "middlename") String middleName,
 										@RequestParam(name = "last") String last,
 										@RequestParam(name = "lastname") String lastName) {
-		System.out.println("직급 : "+middle);
-		System.out.println("이름 : "+middleName);
-		System.out.println("직급 : "+last);
-		System.out.println("이름 : "+lastName);
 		ModelAndView mv = new ModelAndView();
-//		mv.addObject("middle",middle);
-//		mv.addObject("last",last);
-//		mv.setViewName("/electronicApproval/signing");
+		mv.addObject("middle",middle);
+		mv.addObject("middleName",middleName);
+		mv.addObject("last",last);
+		mv.addObject("lastName",lastName);
+		mv.setViewName("/electronicApproval/signing");
 		return mv;
 	}
 	

@@ -86,12 +86,12 @@
 												<td rowspan="4"
 													style="height: 130px; background-color: rgb(226, 226, 226);">승<br>인
 												</td>
-												<td style="height: 15px; width: 100px;" align="center">팀장</td>
-												<td style="height: 15px; width: 100px;" align="center">대표이사</td>
+												<td style="height: 15px; width: 100px;" align="center">${middle}</td>
+												<td style="height: 15px; width: 100px;" align="center">${last}</td>
 											</tr>
 											<tr>
-												<td rowspan="2" align="center">나민엽</td>
-												<td rowspan="2" align="center">안태민</td>
+												<td rowspan="2" align="center">${middleName}</td>
+												<td rowspan="2" align="center">${lastName}</td>
 											</tr>
 											<tr></tr>
 											<tr>

@@ -157,7 +157,7 @@ $(function() {
             newForm.setAttribute('charset', 'UTF-8');
             newForm.name = 'newForm';
             newForm.method = 'post';
-            newForm.action = 'elecApproval/signing';
+            newForm.action = '/josso/elecApproval/signing';
             newForm.name = 'newForm';
             
             var input1 = document.createElement('input');
@@ -185,9 +185,9 @@ $(function() {
             
             document.body.appendChild(newForm);
             newForm.submit();
-            
-//            window.location.href="/josso/elecApproval/signing?middle="+middle+"&last="+last;
         	
         }
       });
+	
+	
 });
