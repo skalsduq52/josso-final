@@ -1,6 +1,5 @@
 $(function(){
-    $('.side_title').click(function(){
-        // $('.hover_tag').slideToggle("slow,linear,callback");
+	$('.side_title').click(function(){
         var submenu = $('.hover_tag>li');
         if(submenu.is(":visible")){
             submenu.slideUp();

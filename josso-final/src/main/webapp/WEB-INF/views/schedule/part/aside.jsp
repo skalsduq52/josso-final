@@ -11,7 +11,7 @@
 		</section>
 		<section>
 			<div class="title_button">
-				<button type="button" class="btn btn-info btn-sm btn-block">일정등록</button>
+				<button type="button" onclick="location.href='/josso/schedule/write'" class="btn btn-info btn-sm btn-block">일정등록</button>
 			</div>
 		</section>
 		<section>
@@ -20,7 +20,7 @@
 				<span class="hover_icon"> <i
 					class="fas fa-sort-down fa-rotate-270" style="color: gray"></i>
 				</span> <span class="hover_title">내 캘린더</span> <span class="write_img">
-					<img src="../images/글쓰기(연필).png">
+					<img src="${pageContext.request.contextPath}/resources/images/글쓰기(연필).png">
 				</span>
 			</div>
 			<div>

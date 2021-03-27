@@ -7,7 +7,6 @@
 <meta charset="UTF-8">
 	<title><tiles:getAsString name="title" /></title>  
 		<link rel="stylesheet" type="text/css"  href="${pageContext.request.contextPath}/resources/css/common.css"></link>
-		<link rel="stylesheet" type="text/css"  href="${pageContext.request.contextPath}/resources/css/schedule/scheduleWrite.css"></link>
 		<link rel="stylesheet" type="text/css"  href="${pageContext.request.contextPath}/resources/css/schedule/scheduleList.css"></link>
         <!-- 외부 글꼴 적용 시 링크 -->
         <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -28,18 +27,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/main.min.css">
         <!-- fullcalendar js -->
         <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/main.min.js"></script>
-		<!-- 부트스트랩 datepicker css -->
-		<link rel="stylesheet"
-			href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"
-			integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw=="
-			crossorigin="anonymous" />
-		<!-- 부트스트랩 datepicker js -->
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"
-			integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ=="
-			crossorigin="anonymous">
-		</script>
 		<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
-        <script src="${pageContext.request.contextPath}/resources/js/schedule/scheduleWrite.js"></script>
         <script src="${pageContext.request.contextPath}/resources/js/schedule/scheduleList.js"></script>
 </head>
 <body class="body">

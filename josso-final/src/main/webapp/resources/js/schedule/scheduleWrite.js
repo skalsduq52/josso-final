@@ -1,13 +1,4 @@
 $(function() {
-	$('.side_title').click(function() {
-		// $('.hover_tag').slideToggle("slow,linear,callback");
-		var submenu = $('.hover_tag>li');
-		if (submenu.is(":visible")) {
-			submenu.slideUp();
-		} else {
-			submenu.slideDown();
-		}
-	});
 	$('.hover_team1').click(function() {
 		var submenu = $('.modal_mb1');
 		if (submenu.is(":visible")) {
