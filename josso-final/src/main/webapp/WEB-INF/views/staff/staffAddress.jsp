@@ -138,9 +138,10 @@
     						"employeeNumber" : employeeNumber,
     					},
     					success : function(data) {
-    						$('#addressDetail').modal();
+						$('#addressDetail').modal();
     						console.log('데이터 들어옴');
-    						console.log('이름 : ' + data.name)
+    						console.log('이름 : ' + JSON.stringify(data));
+						$('#name').text(data.name);
     					},
     					error : function(request, status, error) {
     						alert("에러발생. 관리자에 문의하세요.");
