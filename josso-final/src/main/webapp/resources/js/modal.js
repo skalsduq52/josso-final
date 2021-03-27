@@ -137,4 +137,57 @@ $(function() {
 			$('.hover_tag').slideToggle("slow")
 		});
 	});
+	
+	$('[class^="hover_tag"] li>ul>li').click(function(){
+		$('[class^="hover_tag"] li>ul>li').css("background","white");
+		$(this).css("background","rgb(236,236,236)");
+		$('#document_name').text($(this).text());
+    });
+	
+	$('#modal_submit').click(function(){
+        if($('#drop1 tr').length != 2 || $('#drop2 tr').length != 2){
+            alert('결재정보를 확인해주세요!');
+        }else{
+        	var middle = $('#drop1').children().children().next().children().next().html();
+            var middlename = $('#drop1').children().children().next().children().next().next().text();
+            var last = $('#drop2').children().children().next().children().next().html();
+            var lastname = $('#drop2').children().children().next().children().next().next().text();
+            
+            var newForm = document.createElement('form');
+            newForm.setAttribute('charset', 'UTF-8');
+            newForm.name = 'newForm';
+            newForm.method = 'post';
+            newForm.action = 'elecApproval/signing';
+            newForm.name = 'newForm';
+            
+            var input1 = document.createElement('input');
+            var input2 = document.createElement('input');
+            var input3 = document.createElement('input');
+            var input4 = document.createElement('input');
+            
+            input1.setAttribute("type","hidden");
+            input1.setAttribute("name","middle");
+            input1.setAttribute("value",middle);
+            input2.setAttribute("type","hidden");
+            input2.setAttribute("name","middlename");
+            input2.setAttribute("value",middlename);
+            input3.setAttribute("type","hidden");
+            input3.setAttribute("name","last");
+            input3.setAttribute("value",last);
+            input4.setAttribute("type","hidden");
+            input4.setAttribute("name","lastname");
+            input4.setAttribute("value",lastname);
+            
+            newForm.appendChild(input1);
+            newForm.appendChild(input2);
+            newForm.appendChild(input3);
+            newForm.appendChild(input4);
+            
+            document.body.appendChild(newForm);
+            newForm.submit();
+            
+//            window.location.href="/josso/elecApproval/signing?middle="+middle+"&last="+last;
+        	
+        }
+      });
 });

@@ -26,6 +26,7 @@ public class Employee {
 	   private Date employeeRegistrationDate;	// 관리자가 사원을 등록한 일자
 	   @DateTimeFormat(pattern="yyyy-MM-dd")
 	   private Date employeeLoginDate;			// 사원별 로그인 날짜
+	   private int employeeAnnualLeave;			// 연차휴가
 	   
 	//기본 생성자   
 	public Employee() {
@@ -33,10 +34,12 @@ public class Employee {
 	}
 	
 	//전체필드 생성자
+	
+	
 	public Employee(String employeeNumber, String employeePassword, String employeeName, String departmentCode,
 			String rankCode, String positionCode, String roleCode, String employeeEmail, String employeePhone,
 			String employeeAddress, String employeeBirth, String employeeExtensionNumber, String employeePicture,
-			Date employeeHireDate, Date employeeRegistrationDate, Date employeeLoginDate) {
+			Date employeeHireDate, Date employeeRegistrationDate, Date employeeLoginDate, int employeeAnnualLeave) {
 		super();
 		this.employeeNumber = employeeNumber;
 		this.employeePassword = employeePassword;
@@ -54,28 +57,13 @@ public class Employee {
 		this.employeeHireDate = employeeHireDate;
 		this.employeeRegistrationDate = employeeRegistrationDate;
 		this.employeeLoginDate = employeeLoginDate;
+		this.employeeAnnualLeave = employeeAnnualLeave;
 	}
-
-	//주소록용 생성자
-	public Employee(String employeeNumber, String employeeName, String departmentCode, String rankCode,
-			String positionCode, String employeeEmail, String employeePhone, String employeeExtensionNumber,
-			String employeePicture, Date employeeHireDate) {
-		super();
-		this.employeeNumber = employeeNumber;
-		this.employeeName = employeeName;
-		this.departmentCode = departmentCode;
-		this.rankCode = rankCode;
-		this.positionCode = positionCode;
-		this.employeeEmail = employeeEmail;
-		this.employeePhone = employeePhone;
-		this.employeeExtensionNumber = employeeExtensionNumber;
-		this.employeePicture = employeePicture;
-		this.employeeHireDate = employeeHireDate;
-	}
-
+	
 	public String getEmployeeNumber() {
 		return employeeNumber;
 	}
+
 	public void setEmployeeNumber(String employeeNumber) {
 		this.employeeNumber = employeeNumber;
 	}
@@ -157,19 +145,31 @@ public class Employee {
 	public void setEmployeeHireDate(Date employeeHireDate) {
 		this.employeeHireDate = employeeHireDate;
 	}
-	
+		
 	public Date getEmployeeRegistrationDate() {
 		return employeeRegistrationDate;
 	}
-	public void setEmployeeRegDate(Date employeeRegistrationDate) {
+
+	public void setEmployeeRegistrationDate(Date employeeRegistrationDate) {
 		this.employeeRegistrationDate = employeeRegistrationDate;
 	}
+
 	public Date getEmployeeLoginDate() {
 		return employeeLoginDate;
 	}
-	public void setEmployeeLogDate(Date employeeLoginDate) {
+
+	public void setEmployeeLoginDate(Date employeeLoginDate) {
 		this.employeeLoginDate = employeeLoginDate;
 	}
+
+	public int getEmployeeAnnualLeave() {
+		return employeeAnnualLeave;
+	}
+
+	public void setEmployeeAnnualLeave(int employeeAnnualLeave) {
+		this.employeeAnnualLeave = employeeAnnualLeave;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}

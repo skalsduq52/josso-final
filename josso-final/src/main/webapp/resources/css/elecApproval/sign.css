@@ -47,3 +47,7 @@ a:hover {
 .side_title ul {
 	padding-left: 0px;
 }
+
+.hover_tag li>ul>li {
+	cursor:pointer;
+}
