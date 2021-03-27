@@ -106,7 +106,7 @@
 							</tr>
 						</table>
 						<div>
-							<input type="text" style="width: 80%;">
+							<input type="text" style="width: 80%;" id="searchName">
 							<!-- <img style="width: 30px; padding-bottom: 3px;" src="../search.png"> -->
 						</div>
 						<div class="border"
@@ -124,17 +124,17 @@
 									<tr class="dataRow" draggable="true">
 										<td>인사본부</td>
 										<td>과장</td>
-										<td id="gd">나민엽</td>
+										<td id="gd">안태민</td>
 									</tr>
 									<tr class="dataRow" draggable="true">
 										<td>인사본부</td>
 										<td>팀장</td>
-										<td>나민엽</td>
+										<td>김창렬</td>
 									</tr>
 									<tr class="dataRow" draggable="true">
 										<td>인사본부</td>
 										<td>주임</td>
-										<td>나민엽</td>
+										<td>포그바</td>
 									</tr>
 									<tr class="dataRow" draggable="true">
 										<td>인사본부</td>

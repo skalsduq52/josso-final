@@ -189,5 +189,22 @@ $(function() {
         }
       });
 	
+	$('#searchName').keyup(function() {
+		var name = $('#searchName').val();
+		$.ajax({
+			url : "/josso/elecApproval/serachName",
+			data : {"employeeName" : name},
+			method : "post",
+			dataType : "json",
+			success : function(rdata) {
+				$(rdata).each(function() {
+					alert(this.dCode);
+				});
+			}
+		});	
+	});			
+	
+	
+	
 	
 });

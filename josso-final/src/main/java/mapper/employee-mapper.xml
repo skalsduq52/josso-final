@@ -88,5 +88,10 @@
 	<update id="updateLogDate" parameterType="String">
 		UPDATE EMPLOYEE SET EMPLOYEE_LOGINDATE=SYSDATE WHERE EMPLOYEE_NUMBER = #{employeeNumber}
 	</update>
+	
+	<!-- 사원 이름으로 검색 / 나민엽 사용 -->
+	<select id="serachEmpName" parameterType="String" resultMap="resultEmployee">
+		SELECT * FROM EMPLOYEE WHERE EMPLOYEE_NAME LIKE  '%' || #{employeeName} || '%'
+	</select>
 </mapper>
 
