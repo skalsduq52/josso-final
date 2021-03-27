@@ -18,7 +18,7 @@ public class MainController {
 	private static final Logger logger = LoggerFactory.getLogger(MainController.class);
 	
 	@RequestMapping(value="main", method=RequestMethod.GET)
-	public ModelAndView scheduleList() {
+	public ModelAndView mainPage() {
 		
 		ModelAndView mv = new ModelAndView();
 		

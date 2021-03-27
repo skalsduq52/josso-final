@@ -13,7 +13,7 @@ public class ScheduleController {
 		
 		ModelAndView mv = new ModelAndView();
 		
-		mv.setViewName("schedule/scheduleList");
+		mv.setViewName("schedule.scheduleList");
 		return mv;
 	}
 	
@@ -22,7 +22,7 @@ public class ScheduleController {
 		
 		ModelAndView mv = new ModelAndView();
 		
-		mv.setViewName("schedule/scheduleWrite");
+		mv.setViewName("schedule.scheduleWrite");
 		return mv;
 	}
 }
