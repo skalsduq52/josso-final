@@ -117,6 +117,25 @@
             	color:slateblue;
             }
             
+            #picture {
+            	border:solid 1px lightgray;
+            	width : 200px;
+            	height : 250px;
+            	
+            }
+            
+            .modal-title {
+            	font-size:2em;
+            	font-weight:bold;
+            }
+            
+            #modal-body {
+            	padding-top:10px;
+            	padding-left:5px;
+            	font-size:1.1em;
+            	font-weight:500;
+            }
+            
 
         </style>
 		
@@ -141,7 +160,15 @@
 						$('#addressDetail').modal();
     						console.log('데이터 들어옴');
     						console.log('이름 : ' + JSON.stringify(data));
-						$('#name').text(data.name);
+						$('.modal-title').html(data.name);
+						$('#picture').html('사진영역 : ' + data.picture);
+						$('#number').html('사원번호 : ' + data.number);
+						$('#rank').html('직급: ' + data.rank);
+						$('#position').html('직책 : ' + data.position);
+						$('#email').html('이메일 : ' + data.email);
+						$('#tel').html('내선번호 : ' + data.tel);
+						$('#phone').html('휴대폰 : ' + data.phone);
+						$('#hiredate').html('입사일자 : ' + data.hiredate);
     					},
     					error : function(request, status, error) {
     						alert("에러발생. 관리자에 문의하세요.");
@@ -264,7 +291,7 @@
                             <th style="width: 6%">직급</th>
                             <th style="width: 8%">직책</th>
                             <th style="width: 8%">사원번호</th>
-                            <th style="width: 8%">입사일</th>
+                            <th style="width: 8%">입사일자</th>
                             <th style="width: 10%">Tel</th>
                             <th style="width: 10%">Phone</th>
                             <th style="width: 15%">E-mail</th>
@@ -312,21 +339,29 @@
             
             
 	<!-- 모달(팝업창) -->
-	<div class="modal fade modal-dialog modal-lg" id="addressDetail">
-	  <div class="modal-dialog">
+	<div class="modal fade" id="addressDetail">
+	  <div class="modal-dialog modal-dialog-centerd modal-md">
 	    <div class="modal-content">
 	
 	      <!-- Modal Header -->
 	      <div class="modal-header">
-	        <h4 class="modal-title">제목</h4>
+	        <h4 class="modal-title"></h4>
 	        <button type="button" class="close" data-dismiss="modal">&times;</button>
 	      </div>
-	
+		
 	      <!-- Modal body -->
+	      <div id="modal-body">
 	      <div class="modal-body">
-	        	내용<br>
-	        	<p id="name"></p>
+	        	<div id="picture"></div><br>
 	        	<p id="number"></p>
+	        	<p id="rank"></p>
+	        	<p id="position"></p>
+	        	<p id="email"></p>
+	        	<p id="tel"></p>
+	        	<p id="phone"></p>
+	        	<p id="hiredate"></p>
+	        	
+	      </div>
 	      </div>
 	
 	      <!-- Modal footer -->
