@@ -87,6 +87,7 @@ public class ElectronicController {
 				 empArray.add(em);
 			}
 			 sendJson.put("list", empArray);
+			 response.setContentType("application/json; charset=utf-8");
 			 PrintWriter out = response.getWriter();
 			 System.out.println(sendJson.toJSONString());
 			 out.println(sendJson.toJSONString());
