@@ -94,7 +94,7 @@
 				<div class="border"
 					style="width: 56%; float: right; margin: 10px 10px 10px 10px; height: 400px; min-width: 428px;">
 					<div class="sign_info">상세정보</div>
-					<div style="width: 100%; padding-left: 10px; padding-top: 10px;">
+					<div style="width: 100%; padding-left: 10px; padding-top: 10px;" id="dragtop">
 						<table>
 							<tr>
 								<td style="width: 100px;">제목</td>
@@ -121,31 +121,6 @@
 									</tr>
 								</thead>
 								<tbody id="droppObj3">
-									<tr class="dataRow" draggable="true">
-										<td>인사본부</td>
-										<td>과장</td>
-										<td id="gd">안태민</td>
-									</tr>
-									<tr class="dataRow" draggable="true">
-										<td>인사본부</td>
-										<td>팀장</td>
-										<td>김창렬</td>
-									</tr>
-									<tr class="dataRow" draggable="true">
-										<td>인사본부</td>
-										<td>주임</td>
-										<td>포그바</td>
-									</tr>
-									<tr class="dataRow" draggable="true">
-										<td>인사본부</td>
-										<td>주임</td>
-										<td>나민엽</td>
-									</tr>
-									<tr class="dataRow" draggable="true">
-										<td>인사본부</td>
-										<td>주임</td>
-										<td>나민엽</td>
-									</tr>
 								</tbody>
 							</table>
 						</div>
