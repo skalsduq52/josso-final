@@ -120,8 +120,8 @@
             
             #picture {
             	border:solid 1px lightgray;
-            	width : 200px;
-            	height : 250px;
+            	width : 250px;
+            	border-radius:50%
             	
             }
             
@@ -134,10 +134,14 @@
             #modal-body {
             	padding-top:10px;
             	padding-left:8px;
-            	font-size:1.1em;
-            	font-weight:550;
             }
             
+                        
+            .modaltd {
+            	width:10%;
+            }
+            
+           
             
 
         </style>
@@ -168,14 +172,14 @@
     					
 						$('.modal-title').html(data.name);
 						
-						$('#picture').html(data.picture);
-						$('#number').html('사원번호 : ' + data.number);
-						$('#rank').html('직급 : ' + data.rank);
-						$('#position').html('직책 : ' + data.position);
-						$('#email').html('E-mail : ' + data.email);
-						$('#tel').html('Tel : ' + data.tel);
-						$('#phone').html('Phone : ' + data.phone);
-						$('#hiredate').html('입사일자 : ' + data.hiredate);
+						//$('#picture').html(data.picture);
+						$('#number').html(data.number);
+						$('#rank').html(data.rank);
+						$('#position').html(data.position);
+						$('#email').html(data.email);
+						$('#tel').html(data.tel);
+						$('#phone').html(data.phone);
+						$('#hiredate').html(data.hiredate);
     					},
     					error : function(request, status, error) {
     						alert("에러발생. 관리자에 문의하세요.");
@@ -307,7 +311,6 @@
                     <tbody>
                     <c:forEach var="el" items="${employeeList}">
                         <tr>
-                        
                             <td id="tdnum">${el.departmentCode }</td>
                             <td id="theme"><span id="employeeName">${el.employeeName }</span></td>
                             <td>${el.rankCode }</td>
@@ -359,15 +362,57 @@
 	      <!-- Modal body -->
 	      <div id="modal-body">
 	      <div class="modal-body">
-	      
-	        	<div id="picture"></div><br>
-	        	<p id="number" ></p>
-	        	<p id="rank"></p>
-	        	<p id="position"></p>
-	        	<p id="email"></p>
-	        	<p id="tel"></p>
-	        	<p id="phone"></p>
-	        	<p id="hiredate"></p>
+	      		<table class="modal-table">
+	      			<tr>
+			        	<td colspan="2">
+			        		<div id="picture">
+			        		 <img src="${pageContext.request.contextPath}/resources/images/test_banana.PNG" id="picture">
+			        		</div><br>
+			        	</td>
+	      			</tr>
+	      			
+	      			<tr id="modaltr">
+	      				<td class="modaltd">사원번호 : </td>
+	      				<td id="number"><br>
+			        	</td>
+	      			</tr>
+	      			
+	      			<tr id="modaltr">
+	      				<td class="modaltd">직     급 : </td>
+	      				<td class="modaltd2" id="rank"><br>
+			        	</td>
+	      			</tr>
+	      				      			
+	      			<tr id="modaltr">
+	      				<td class="modaltd">직     책 : </td>
+	      				<td class="modaltd2" id="position">
+			        	</td>
+	      			</tr>
+	      				      			
+	      			<tr id="modaltr">
+	      				<td class="modaltd">E-mail : </td>
+	      				<td class="modaltd2" id="email">
+			        	</td>
+	      			</tr>
+	      				      			
+	      			<tr id="modaltr">
+	      				<td class="modaltd">Tel : </td>
+	      				<td class="modaltd2" id="tel">
+			        	</td>
+	      			</tr>
+	      				      			
+	      			<tr id="modaltr">
+	      				<td class="modaltd">Phone : </td>
+	      				<td class="modaltd2" id="phone">
+			        	</td>
+	      			</tr>
+	      				      			
+	      			<tr id="modaltr">
+	      				<td class="modaltd" >입사일자 : </td>
+	      				<td class="modaltd2" id="hiredate">
+			        	</td>
+	      			</tr>
+	        	</table>
 	       
 	      </div>
 	      </div>
