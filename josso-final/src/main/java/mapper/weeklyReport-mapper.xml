@@ -4,7 +4,6 @@
 
 <mapper namespace="weeklyReport">
 	<resultMap id="weeklyReport" type="weeklyReport">
-		
 		<id property="reportNumber" column="REPORT_NUM"/>
 		<result property="reportTitle" column="REPORT_TITLE"/>
 		<result property="writer" column="WRITER"/>
@@ -22,6 +21,13 @@
 		<result property="nextProject" column="NEXT_PROJECT"/>
 		<result property="nextEtc" column="NEXT_ETC"/>
 	</resultMap>
+	
+	<!-- 조지자 
+	<insert></insert>
+	<select></select>
+	<update></update>
+	<delete></delete>
+	 -->
 
 </mapper>
 
