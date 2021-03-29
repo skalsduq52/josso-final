@@ -47,12 +47,13 @@ $(function() {
 			submenu.slideDown();
 		}
 	});
-
-	$('.dataRow').on({
-		'dragstart' : function(e) {
-			e.originalEvent.dataTransfer.setData('text', $(this).html());
-		},
+	$('#dragtop').on('dragstart','.dataRoww',function(e){
+		console.log(e);
+		e.originalEvent.dataTransfer.setData('text', $(this).html());
+		var data = e.originalEvent.dataTransfer.getData('text');
+		console.log(data);
 	});
+
 
 	$('#droppObj')
 			.on(
@@ -150,8 +151,10 @@ $(function() {
         }else{
         	var middle = $('#drop1').children().children().next().children().next().html();
             var middlename = $('#drop1').children().children().next().children().next().next().text();
+            var middlenum = $('#drop1').children().children().next().children().next().next().next().val();
             var last = $('#drop2').children().children().next().children().next().html();
             var lastname = $('#drop2').children().children().next().children().next().next().text();
+            var lastnum = $('#drop2').children().children().next().children().next().next().next().val();
             
             var newForm = document.createElement('form');
             newForm.setAttribute('charset', 'UTF-8');
@@ -164,6 +167,8 @@ $(function() {
             var input2 = document.createElement('input');
             var input3 = document.createElement('input');
             var input4 = document.createElement('input');
+            var input5 = document.createElement('input');
+            var input6 = document.createElement('input');
             
             input1.setAttribute("type","hidden");
             input1.setAttribute("name","middle");
@@ -177,11 +182,20 @@ $(function() {
             input4.setAttribute("type","hidden");
             input4.setAttribute("name","lastname");
             input4.setAttribute("value",lastname);
+            input5.setAttribute("type","hidden");
+            input5.setAttribute("name","middlenum");
+            input5.setAttribute("value",middlenum);
+            input6.setAttribute("type","hidden");
+            input6.setAttribute("name","lastnum");
+            input6.setAttribute("value",lastnum);
+            
             
             newForm.appendChild(input1);
             newForm.appendChild(input2);
             newForm.appendChild(input3);
             newForm.appendChild(input4);
+            newForm.appendChild(input5);
+            newForm.appendChild(input6);
             
             document.body.appendChild(newForm);
             newForm.submit();
@@ -190,6 +204,8 @@ $(function() {
       });
 	
 	$('#searchName').keyup(function() {
+		var middlename = $('#drop1').children().children().next().children().next().next().next().html();
+		console.log(middlename);
 		var name = $('#searchName').val();
 		$.ajax({
 			url : "/josso/elecApproval/serachName",
@@ -197,14 +213,21 @@ $(function() {
 			method : "post",
 			dataType : "json",
 			success : function(rdata) {
-				$(rdata).each(function() {
-					alert(this.dCode);
-				});
+				var listStr = JSON.stringify(rdata);
+				var data = JSON.parse(listStr);
+				$('#droppObj3').html('');
+				var area = $('#droppObj3').html();
+				for(var i in data.list){
+					area +="<tr class='dataRoww' draggable='true'>"
+						+"<td>"+data.list[i].dCode+"</td>"
+						+"<td>"+data.list[i].rCode+"</td>"
+						+"<td>"+data.list[i].name+"</td>"
+						+"<input type='hidden' name='employeeNumber' value='"+data.list[i].empNo+"'></tr>" 
+				}
+				$('#droppObj3').html(area);
 			}
 		});	
 	});			
-	
-	
 	
 	
 });

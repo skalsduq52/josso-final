@@ -38,7 +38,7 @@ public class EmployeeController {
 		@RequestMapping(value="login.do", method=RequestMethod.POST )
 		public String login(@ModelAttribute Employee employee, HttpSession session, HttpServletResponse response) throws Exception {
 			employee = employeeService.login(employee, response);
-			session.setAttribute("employee", response);
+			session.setAttribute("employee", employee);
 			
 			
 			

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,25 +58,27 @@
 						<tbody>
 							<tr style="width: 800px; height: 200px;">
 								<td align="center" colspan="2"><h1>휴가신청서</h1></td>
+								<input type="hidden" name="documentForm" value="F1">
 							</tr>
 							<tr>
 								<td>
 									<table border="1" style="width: 300px;">
 										<tr>
 											<td style="width: 100px;" id="td_back">문서번호</td>
-											<td>1</td>
+											<td></td>
 										</tr>
 										<tr>
 											<td id="td_back">소속</td>
-											<td>인사</td>
+											<td>${employee.departmentCode}</td>
 										</tr>
 										<tr>
 											<td id="td_back">기안자</td>
-											<td>나민엽</td>
+											<td>${employee.employeeName}</td>
+											<input type="hidden" name="drafter" value="${employee.employeeNumber}">
 										</tr>
 										<tr>
 											<td id="td_back">작성일자</td>
-											<td>2021-03-18</td>
+											<td><fmt:formatDate value="${date}" pattern="yyyy-MM-dd"/></td>
 										</tr>
 									</table>
 								</td>
@@ -91,7 +94,9 @@
 											</tr>
 											<tr>
 												<td rowspan="2" align="center">${middleName}</td>
+												<input type="hidden" name="middle" value="${middlenum}">
 												<td rowspan="2" align="center">${lastName}</td>
+												<input type="hidden" name="last" value="${lastnum}">
 											</tr>
 											<tr></tr>
 											<tr>
@@ -106,10 +111,10 @@
 												<td rowspan="4"
 													style="height: 130px; background-color: rgb(226, 226, 226);">신<br>청
 												</td>
-												<td style="height: 15px; width: 100px;" align="center">주임</td>
+												<td style="height: 15px; width: 100px;" align="center">${employee.rankCode}</td>
 											</tr>
 											<tr>
-												<td rowspan="2" align="center">홍수명</td>
+												<td rowspan="2" align="center">${employee.employeeName}</td>
 											</tr>
 											<tr></tr>
 											<tr>
@@ -127,7 +132,7 @@
 						<tr>
 							<td align="center" style="height: 40px; width: 150px;"
 								id="td_back">문서제목</td>
-							<td style="width: 850px;"><input type="text"
+							<td style="width: 850px;"><input type="text" name="documentName"
 								placeholder="연,반차,대체,경조/이름/신청일자 " style="width: 100%;"></td>
 						</tr>
 					</table>
@@ -145,8 +150,8 @@
 						<tr>
 							<td align="center" style="height: 40px; width: 150px;"
 								id="td_back">기간 및 일시</td>
-							<td style="width: 850px;"><input type="date">~<input
-								type="date">&nbsp;신청일수 : <input type="text" readonly
+							<td style="width: 850px;"><input type="date" name="startDate">~<input
+								type="date" name="endDate">&nbsp;신청일수 : <input type="text" readonly
 								value="1" style="width: 150px;"></td>
 						</tr>
 						<tr>

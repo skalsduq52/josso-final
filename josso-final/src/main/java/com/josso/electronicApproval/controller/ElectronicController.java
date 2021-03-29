@@ -1,6 +1,7 @@
 package com.josso.electronicApproval.controller;
 
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -55,13 +56,19 @@ public class ElectronicController {
 	@RequestMapping(value="elecApproval/signing", method=RequestMethod.POST)
 	public ModelAndView approvalSigning(@RequestParam(name = "middle") String middle,
 										@RequestParam(name = "middlename") String middleName,
+										@RequestParam(name = "middlenum") String middleNum,
 										@RequestParam(name = "last") String last,
-										@RequestParam(name = "lastname") String lastName) {
+										@RequestParam(name = "lastname") String lastName,
+										@RequestParam(name = "lastnum") String lastNum){
 		ModelAndView mv = new ModelAndView();
+		Date date = new Date(System.currentTimeMillis());
 		mv.addObject("middle",middle);
 		mv.addObject("middleName",middleName);
+		mv.addObject("middlenum",middleNum);
 		mv.addObject("last",last);
 		mv.addObject("lastName",lastName);
+		mv.addObject("lastnum",lastNum);
+		mv.addObject("date",date);
 		mv.setViewName("/electronicApproval/signing");
 		return mv;
 	}
@@ -84,6 +91,7 @@ public class ElectronicController {
 				 em.put("dCode", employee.getDepartmentCode());
 				 em.put("rCode", employee.getRankCode());
 				 em.put("name", employee.getEmployeeName());
+				 em.put("empNo", employee.getEmployeeNumber());
 				 empArray.add(em);
 			}
 			 sendJson.put("list", empArray);
