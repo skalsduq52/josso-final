@@ -16,9 +16,17 @@ public class ReportController {
 		return mv;
 	}
 	
-	// 주간업무보고(작성)
+	// 주간업무보고(작성 페이지)
 	@RequestMapping(value="report/weekly/write", method=RequestMethod.GET)
 	public ModelAndView weeklyWrite() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("businessReport/weeklyWrite");
+		return mv;
+	}
+	
+	// 주간업무보고(글등록)
+	@RequestMapping(value="report/weekly/register", method=RequestMethod.GET)
+	public ModelAndView weeklyRegister() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("businessReport/weeklyWrite");
 		return mv;
