@@ -40,7 +40,7 @@
         <!--공통 CSS-->
         <style>
             nav {
-                height: 200px;
+                height: 130px;
             }
             .nav_title{
                 float: left;
@@ -106,6 +106,7 @@
                 display: inline-block;
                 padding-top: 10px;
                 padding-bottom: 10px;
+                padding-right: 50px;
             }
             
             #employeeName:hover {
@@ -157,9 +158,14 @@
 		
 			$(function(){
 
-                $('#employeeName').click(function(){
-                    var employeeNumber = '2001001';
-                    console.log('employeeNumber : ' + employeeNumber);
+                $('.employeeName').click(function(){
+                    // var employeeNumber = '2001001';
+                    // 못읽어옴
+                    //var employeeNumber = $('.employeeNumber').text();
+                    //console.log('employeeNumber : ' + employeeNumber);
+                    var employeeNumber = $(this).parent().parent().children('.employeeNumber').text();
+                    console.log(employeeNumber);
+                    
                     
                     $.ajax({
     					type : "POST",
@@ -177,7 +183,7 @@
     					
 						$('.modal-title').html(data.name);
 						
-						//$('#picture').html(data.picture);
+						// $('#picture').html(data.picture);
 						$('#number').html(data.number);
 						$('#rank').html(data.rank);
 						$('#position').html(data.position);
@@ -298,7 +304,8 @@
         </nav>
         
         <main>
-            <div class="border-top border-bottom">
+		
+		<div class="border-top border-bottom">
                 <table style="width: 100%;" id="board">
                     <thead>
                         <tr class="border-bottom" style="height: 40px;">
@@ -317,10 +324,10 @@
                     <c:forEach var="el" items="${employeeList}">
                         <tr>
                             <td id="tdnum">${el.departmentCode }</td>
-                            <td id="theme"><span id="employeeName">${el.employeeName }</span></td>
+                            <td id="theme"><span class="employeeName" id="employeeName">${el.employeeName }</span></td>
                             <td>${el.rankCode }</td>
                             <td>${el.positionCode }</td>
-                            <td id="employeeNumber">${el.employeeNumber }</td>
+                            <td class="employeeNumber">${el.employeeNumber }</td>
                             <td><fmt:formatDate value="${el.employeeHireDate }" pattern="yy / MM / dd"></fmt:formatDate></td>
                             <td>${el.employeeExtensionNumber }</td>
                             <td>${el.employeePhone }</td>
