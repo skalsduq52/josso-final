@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.josso.electronicApproval.controller.model.dao.electronicApprovalDAO;
+import com.josso.electronicApproval.vo.ElectronicApproval;
 import com.josso.employee.vo.Employee;
 
 @Controller
@@ -102,6 +103,14 @@ public class ElectronicController {
 			 out.flush();
 			 out.close();
 		}
+	}
+	
+	@RequestMapping(value="elecApproval/insert", method=RequestMethod.POST)
+	public ModelAndView insertApp(ElectronicApproval ep, ModelAndView mv) throws Exception {
+		System.out.println(ep);
+		ed.insertApp(ep);
+		mv.setViewName("redirect:/elecApproval");
+		return mv;
 	}
 	
 }
