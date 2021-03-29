@@ -18,7 +18,7 @@ public class ScheduleDao {
 	
 	public int scheduleRegister(Schedule schedule) throws Exception{
 		
-		int result = sqlSession.insert("Schedule.scheduleRegister", schedule);
+		int result = sqlSession.insert("Schedule.insertSchedule", schedule);
 		
 		return result;
 	}

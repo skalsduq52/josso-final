@@ -6,6 +6,6 @@ import com.josso.schedule.vo.Schedule;
 
 public interface ScheduleService {
 
-	public int scheduleRegister(Schedule schedule) throws Exception;
+	public int insertSchedule(Schedule schedule) throws Exception;
 	
 }

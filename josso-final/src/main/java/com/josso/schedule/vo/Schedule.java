@@ -29,6 +29,18 @@ public class Schedule {
 		this.scheduleEndTime = scheduleEndTime;
 	}
 
+	public Schedule(String scheduleNumber, String scheduleTitle, String schedulePlace, String scheduleContent,
+			Date scheduleStartDate, Date scheduleStartTime, Date scheduleEndDate, Date scheduleEndTime) {
+		this.scheduleNumber = scheduleNumber;
+		this.scheduleTitle = scheduleTitle;
+		this.schedulePlace = schedulePlace;
+		this.scheduleContent = scheduleContent;
+		this.scheduleStartDate = scheduleStartDate;
+		this.scheduleStartTime = scheduleStartTime;
+		this.scheduleEndDate = scheduleEndDate;
+		this.scheduleEndTime = scheduleEndTime;
+	}
+
 	public String getScheduleNumber() {
 		return scheduleNumber;
 	}

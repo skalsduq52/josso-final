@@ -8,7 +8,7 @@
 		</nav>
 		<main>
 			<div>
-				<form action="/schedule/register" method="post">
+				<form action="/josso/schedule/register" method="post">
 					<table class="form_type">
 						<tbody>
 							<tr>
@@ -136,16 +136,13 @@
 	
 							<tr>
 								<th>참석자</th>
-								<td><span class="badge badge-pill badge-secondary">안태민</span>
-									<span class="badge badge-pill badge-secondary">안태민</span> <span
-									class="badge badge-pill badge-secondary">안태민</span> <span
-									class="badge badge-pill badge-secondary">안태민</span> <span
-									class="badge badge-pill badge-secondary">안태민</span> <span
-									class="badge badge-pill badge-secondary">안태민</span> <span
-									class="btn_wrap" data-toggle="modal" data-target="#exampleModal">
-										<span><img src="${pageContext.request.contextPath}/resources/images/플러스이미지.png"></span> <span>참석자
-											선택</span>
-								</span></td>
+								<td>
+									<span class="badge badge-pill badge-secondary" name="Attendee">안태민</span>
+									<span class="btn_wrap" data-toggle="modal" data-target="#exampleModal">
+										<span><img src="${pageContext.request.contextPath}/resources/images/플러스이미지.png"></span>
+										<span>참석자 선택</span>
+									</span>
+								</td>
 							</tr>
 	
 							<tr>

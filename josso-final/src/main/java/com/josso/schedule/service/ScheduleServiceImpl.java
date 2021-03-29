@@ -13,7 +13,7 @@ public class ScheduleServiceImpl implements ScheduleService{
 	ScheduleDao sd;
 	
 	@Override
-	public int scheduleRegister(Schedule schedule) throws Exception {
+	public int insertSchedule(Schedule schedule) throws Exception {
 
 		int result = sd.scheduleRegister(schedule);
 		

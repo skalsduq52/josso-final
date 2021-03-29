@@ -12,7 +12,7 @@
 		<typeAlias type="com.josso.email.vo.Email" alias="email" />
 		<typeAlias type="com.josso.employee.vo.Employee" alias="Employee" />
 		<typeAlias type="com.josso.reserve.vo.Reserve" alias="reserve" />
-		<typeAlias type="com.josso.schedule.vo.Schedule" alias="schedule" />
+		<typeAlias type="com.josso.schedule.vo.Schedule" alias="Schedule" />
 		<typeAlias type="com.josso.businessReport.vo.BusinessReport" alias="report" />
 	</typeAliases>
 	

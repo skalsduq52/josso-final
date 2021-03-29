@@ -16,7 +16,7 @@
 	</resultMap>
 	
 	<!-- Schedule 등록(register) -->
-	<insert id="scheduleRegister" parameterType="Schedule">
+	<insert id="insertSchedule" parameterType="Schedule">
 		INSERT INTO SCHEDULE(SCHEDULE_TITLE, SCHEDULE_PLACE,
 		SCHEDULE_CONTENT) VALUES(#{scheduleTitle}, #{schedulePlace},
 		 #{scheduleContent})
