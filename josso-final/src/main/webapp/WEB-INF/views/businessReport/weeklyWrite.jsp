@@ -135,7 +135,15 @@
             textarea:focus {
                 outline: none;
             }
-
+		
+		
+			.write_area {
+                width: 100%;
+                height: 200px;
+                border: none;
+                padding : 15px 15px;
+                resize: none;
+            }
 
 
         </style>
@@ -246,7 +254,7 @@
             </div>
         </nav>
         <main>
-            <form>
+            <form action="register" method="POST">
             <div class="border-top">
                 <table style="width: 97%;" id="board">
                     <thead>
@@ -260,9 +268,9 @@
                         <tr style="height: 60px;">
                             <th class="left_td"></th>
                             <th class="report_date">
-                                <input type="date">　∼　<input type="date"></th><br>
+                                <input type="date" name="thisWeekDate1">　∼　<input type="date" name="thisWeekDate2"></th><br>
                             <th class="report_date">
-                                <input type="date">　∼　<input type="date"></th><br>
+                                <input type="date" name="nextWeekDate1">　∼　<input type="date" name="nextWeekDate2"></th><br>
                         </tr>
                         <tr>
                             <th class="left_td">고객(사) 미팅</th>
@@ -294,7 +302,7 @@
             <div style="padding-top: 50px; padding-right: 50px; float:right" class="text-center">
                 <input class="btn btn-info btn-lg" type="submit" value="등록하기">
                 <input class="btn btn-secondary btn-lg" onclick="history.back()" type="submit" value="취소">
-            </span>
+            </div>
             </div>
            </form>        
         </main>

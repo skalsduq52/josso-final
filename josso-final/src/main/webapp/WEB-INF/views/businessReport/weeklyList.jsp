@@ -312,7 +312,7 @@
             </div>
 
             <div class="bottom_area" style="float:left; padding-left: 20px;">
-                <button class="btn btn-info">작성하기</button>
+                <button class="btn btn-info"><a href="write" style="color:white">작성하기</a></button>
             </div>
             
             <div class="bottom_area" style="float:right;">
