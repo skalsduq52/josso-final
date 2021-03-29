@@ -5,10 +5,10 @@ import java.util.Date;
 public class WeeklyReport {
 	
 	// 필드부
-	private int reportSeq;				// 게시글 번호
+	private int reportNumber;				// 게시글 번호
 	private String reportTitle;			// 제목
 	private String writer;				// 작성자
-	private Date WriteTime;				// 작성시간
+	private Date writeTime;				// 작성시간
 	
 	private Date thisStart;				// 이번 주 시작날짜
 	private Date thisEnd;				// 이번 주 종료날짜
@@ -27,14 +27,13 @@ public class WeeklyReport {
 	// 생성자
 	public WeeklyReport() {}
 
-	
 	// 메소드
 	public int getReportSeq() {
-		return reportSeq;
+		return reportNumber;
 	}
 	
 	public void setReportSeq(int reportSeq) {
-		this.reportSeq = reportSeq;
+		this.reportNumber = reportSeq;
 	}
 	
 	public String getReportTitle() {
@@ -54,11 +53,11 @@ public class WeeklyReport {
 	}
 	
 	public Date getWriteTime() {
-		return WriteTime;
+		return writeTime;
 	}
 	
 	public void setWriteTime(Date writeTime) {
-		WriteTime = writeTime;
+		this.writeTime = writeTime;
 	}
 	
 	public Date getThisStart() {
@@ -156,6 +155,7 @@ public class WeeklyReport {
 	public void setNextEtc(String nextEtc) {
 		this.nextEtc = nextEtc;
 	}
+	
 	
 	
 }

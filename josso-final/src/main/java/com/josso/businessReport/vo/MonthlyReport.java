@@ -5,10 +5,10 @@ import java.util.Date;
 public class MonthlyReport {
 	
 	// 필드부
-	private int reportSeq;				// 게시글 번호
+	private int reportNumber;				// 게시글 번호
 	private String reportTitle;			// 제목
 	private String writer;				// 작성자
-	private Date WriteTime;				// 작성시간
+	private Date writeTime;				// 작성시간
 	
 	private Date thisMonth;				// 이번 달
 	private String thisMeeting;			// 이번 주 미팅
@@ -25,15 +25,14 @@ public class MonthlyReport {
 	// 생성자
 	public MonthlyReport() {}
 
-
 	
 	// 메소드
 	public int getReportSeq() {
-		return reportSeq;
+		return reportNumber;
 	}
 	
 	public void setReportSeq(int reportSeq) {
-		this.reportSeq = reportSeq;
+		this.reportNumber = reportSeq;
 	}
 	
 	public String getReportTitle() {
@@ -53,11 +52,11 @@ public class MonthlyReport {
 	}
 	
 	public Date getWriteTime() {
-		return WriteTime;
+		return writeTime;
 	}
 	
 	public void setWriteTime(Date writeTime) {
-		WriteTime = writeTime;
+		this.writeTime = writeTime;
 	}
 	
 	public Date getThisMonth() {
