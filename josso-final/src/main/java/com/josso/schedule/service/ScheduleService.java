@@ -2,7 +2,10 @@ package com.josso.schedule.service;
 
 import org.springframework.stereotype.Service;
 
-@Service
-public class ScheduleService {
+import com.josso.schedule.vo.Schedule;
 
+public interface ScheduleService {
+
+	public int scheduleRegister(Schedule schedule) throws Exception;
+	
 }
