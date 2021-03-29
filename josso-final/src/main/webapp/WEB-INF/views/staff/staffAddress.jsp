@@ -138,7 +138,12 @@
             
                         
             .modaltd {
-            	width:10%;
+            	width:8%;
+            	text-align:right;
+            }
+            
+            .modaltd2 {
+            	padding-left:2%
             }
             
            
@@ -372,43 +377,43 @@
 	      			</tr>
 	      			
 	      			<tr id="modaltr">
-	      				<td class="modaltd">사원번호 : </td>
-	      				<td id="number"><br>
+	      				<td class="modaltd">사원번호 &nbsp;&nbsp;&nbsp;: </td>
+	      				<td class="modaltd2" id="number"><br>
 			        	</td>
 	      			</tr>
 	      			
 	      			<tr id="modaltr">
-	      				<td class="modaltd">직     급 : </td>
+	      				<td class="modaltd">직     급 &nbsp;&nbsp;&nbsp;: </td>
 	      				<td class="modaltd2" id="rank"><br>
 			        	</td>
 	      			</tr>
 	      				      			
 	      			<tr id="modaltr">
-	      				<td class="modaltd">직     책 : </td>
+	      				<td class="modaltd">직     책 &nbsp;&nbsp;&nbsp;: </td>
 	      				<td class="modaltd2" id="position">
 			        	</td>
 	      			</tr>
 	      				      			
 	      			<tr id="modaltr">
-	      				<td class="modaltd">E-mail : </td>
+	      				<td class="modaltd">E-mail &nbsp;&nbsp;&nbsp;: </td>
 	      				<td class="modaltd2" id="email">
 			        	</td>
 	      			</tr>
 	      				      			
 	      			<tr id="modaltr">
-	      				<td class="modaltd">Tel : </td>
+	      				<td class="modaltd">Tel &nbsp;&nbsp;&nbsp;: </td>
 	      				<td class="modaltd2" id="tel">
 			        	</td>
 	      			</tr>
 	      				      			
 	      			<tr id="modaltr">
-	      				<td class="modaltd">Phone : </td>
+	      				<td class="modaltd">Phone &nbsp;&nbsp;&nbsp;: </td>
 	      				<td class="modaltd2" id="phone">
 			        	</td>
 	      			</tr>
 	      				      			
 	      			<tr id="modaltr">
-	      				<td class="modaltd" >입사일자 : </td>
+	      				<td class="modaltd" >입사일자 &nbsp;&nbsp;&nbsp;: </td>
 	      				<td class="modaltd2" id="hiredate">
 			        	</td>
 	      			</tr>

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.josso.employee.controller.model.service.EmployeeService;
@@ -53,9 +54,11 @@ public class StaffController {
 	@ResponseBody
 	@RequestMapping(value="staff/address/detail", method=RequestMethod.POST, produces = "text/plain; charset=UTF-8")
 	public String addressDetail(@RequestParam("employeeNumber") String employeeNumber, HttpServletResponse response) throws Exception {
-		// 들어오는 신호
+		
+		// AJAX정상실행 테스트
 		System.out.println("아작스들어옴");
-		// 들어온 데이터 확인
+		
+		// Input 데이터 확인
 		System.out.println("employeeNumber : " + employeeNumber);
 		
 		// response 인코딩 설정
@@ -64,15 +67,20 @@ public class StaffController {
 		// employee에 select한 데이터 담아주기
 		Employee result = employeeService.selectEmployee(employeeNumber);
 		
+		// JSON전송객체 생성
 		JSONObject job = new JSONObject();
 		
 		System.out.println(result.getEmployeeName());
 
-
+		// 고용일자(Date를 String으로 변환)
 		SimpleDateFormat format = new SimpleDateFormat("yy / MM / dd");
 		String hiredate = format.format(result.getEmployeeHireDate());
 		
+		// 첨부파일(사진)
+		// MultipartFile picture = result.getEmployeePicture();
+		// picture.transferTo(new File("사진이 저장되어있는 경로" + picture.getOriginalFilename()));
 		
+		// 데이터타입 바꿔주고 나면 value값 picture로 바꿔주기
 		job.put("picture", result.getEmployeePicture());
 		job.put("name", result.getEmployeeName());
 		job.put("number", result.getEmployeeNumber());
@@ -83,7 +91,6 @@ public class StaffController {
 		job.put("phone", result.getEmployeePhone());
 		job.put("hiredate", hiredate);
 		
-		System.out.println(hiredate);
 		
 		
 		return job.toJSONString();
