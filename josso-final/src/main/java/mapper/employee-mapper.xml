@@ -93,5 +93,10 @@
 	<select id="serachEmpName" parameterType="String" resultMap="resultEmployee">
 		SELECT * FROM EMPLOYEE WHERE EMPLOYEE_NAME LIKE  '%' || #{employeeName} || '%'
 	</select>
+	
+	<!-- 사원번호 찾기 -->
+	<select id="findEmployeeNumber" parameterType="String" resultType="String">
+		SELECT EMPLOYEE_NUMBER FROM EMPLOYEE WHERE EMPLOYEE_EMAIL= #{employeeEmail}
+	</select>
 </mapper>
 

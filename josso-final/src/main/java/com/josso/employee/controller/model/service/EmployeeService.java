@@ -25,4 +25,8 @@ public interface EmployeeService {
 		public int deleteEmployee(Employee employee) throws Exception;
 		
 		public Employee login(Employee employee, HttpServletResponse response) throws Exception;
+		
+		public void logout(HttpServletResponse response) throws Exception;
+		
+		public String findEmployeeNumber(HttpServletResponse response, String employeeEmail) throws Exception;
 }

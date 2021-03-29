@@ -204,8 +204,10 @@ form:after {
 }
 
 </style>
-<script>
-
+<script type="text/javascript">
+	function goFindEmployeeNumber(){
+		location.href = "./findEmployeeNumber"
+	}
 </script>
 </head>
 <body>
@@ -213,6 +215,7 @@ form:after {
   <section id="content">
     <form action="/josso/login.do" method="post">
       <h1>Josso</h1>
+      
       <div>
         <input type="text" placeholder="사원번호를 입력하세요." required="" id="employeeNumber" name="employeeNumber"/>
       </div>
@@ -221,7 +224,8 @@ form:after {
       </div>
       <div>
         <input type="submit" value="Log in" />
-        <a href="#">Lost your password?</a>
+        <a href="#">비밀번호 찾기</a>
+        <a href="javascript:goFindEmployeeNumber()">사원번호 찾기</a>
         
       </div>
     </form>

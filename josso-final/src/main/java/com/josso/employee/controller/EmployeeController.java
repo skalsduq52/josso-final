@@ -27,23 +27,27 @@ public class EmployeeController {
 	@Autowired
 	EmployeeService employeeService;
 	//로그인 폼 이동
-		@RequestMapping(value= "employee/login/index", method=RequestMethod.GET)
-		public String index() throws Exception{
-//			
-			
-			return "employee/login/index";
-		}
-		
-		//로그인
-		@RequestMapping(value="login.do", method=RequestMethod.POST )
-		public String login(@ModelAttribute Employee employee, HttpSession session, HttpServletResponse response) throws Exception {
-			employee = employeeService.login(employee, response);
-			session.setAttribute("employee", employee);
-			
-			
-			
-			return "main";
-		}
+	@RequestMapping(value= "employee/login/index", method=RequestMethod.GET)
+	public String index() throws Exception{
+		return "employee/login/index";
+	}
+	
+	//로그인
+	@RequestMapping(value="login.do", method=RequestMethod.POST )
+	public String login(@ModelAttribute Employee employee, HttpSession session, HttpServletResponse response) throws Exception {
+		employee = employeeService.login(employee, response);
+		session.setAttribute("employee", employee);
+		//로그인후 메인으로	
+		return "main";
+	}
+	
+	// 로그아웃- 세션 종료
+	@RequestMapping(value="logout.do", method=RequestMethod.GET)
+	public void logout(HttpSession session, HttpServletResponse response) throws Exception{
+		session.invalidate();
+		employeeService.logout(response);
+	}
+	
 	
 	@RequestMapping(value="employee/employeeList", method = RequestMethod.GET)
 	public ModelAndView employeeListService(ModelAndView modelAndView)throws Exception{
@@ -118,16 +122,17 @@ public class EmployeeController {
 		employeeService.checkEmployeeEmail(employeeEmail, response);
 	}
 	
-	
-	
-	
-	
-	
-	
-	@RequestMapping(value="loginInfo.do, method=Request.GET")
-	public Employee longinInfo(HttpSession session) throws Exception{
-		Employee employee = (Employee) session.getAttribute("employee");
-		return employee;
+	// 사원번호 찾기 폼 이동
+	@RequestMapping(value= "employee/login/findEmployeeNumber", method=RequestMethod.GET)
+	public String findEmployeeNumber() throws Exception{
+		return "employee/login/findEmployeeNumber";
+	}
+	// 사원번호 찾기
+	@RequestMapping(value="findEmployeeNumber.do", method=RequestMethod.POST)
+	public String findEmployeeNumber(HttpServletResponse response, @RequestParam(value="employeeEmail", required=false) String employeeEmail, Model model) throws Exception{
+		model.addAttribute("employeeNumber",employeeService.findEmployeeNumber(response, employeeEmail));
+		System.out.println(employeeEmail);
+		return "/employee/login/findEmployeeNumber";
 	}
 }
 	

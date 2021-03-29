@@ -73,4 +73,9 @@ public class EmployeeDao {
 	public int updateLogDate(String employeeNumber) throws Exception{
 		return sqlSession.update("Employee.updateLogDate", employeeNumber);
 	}
+	
+	// 사원번호 찾기
+	public String findEmployeeNumber(String employeeEmail) throws Exception{
+		return sqlSession.selectOne("Employee.findEmployeeNumber", employeeEmail);
+	}
 }
