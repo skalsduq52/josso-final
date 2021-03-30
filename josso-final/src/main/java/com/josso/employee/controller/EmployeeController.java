@@ -135,6 +135,12 @@ public class EmployeeController {
 		return "/employee/login/findEmployeeNumber";
 	}
 	
+	// 사원번호 찾기 폼 이동
+		@RequestMapping(value= "employee/login/findEmployeePassword", method=RequestMethod.GET)
+		public String findEmployeePassword() throws Exception{
+			return "employee/login/findEmployeePassword";
+		}
+	
 	
 }
 	

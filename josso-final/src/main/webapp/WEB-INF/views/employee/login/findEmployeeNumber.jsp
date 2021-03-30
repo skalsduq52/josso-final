@@ -172,7 +172,7 @@ form:after {
   -ms-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
-  background: #eae7e7 url(../img/email-envelope-mail.png) no-repeat ;
+  background: #eae7e7 url(../img/email-envelope-mail_29.png) no-repeat ;
   border: 1px solid #c8c8c8;
   color: #777;
   font: 13px Helvetica, Arial, sans-serif;
