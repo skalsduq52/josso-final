@@ -129,11 +129,13 @@ public class EmployeeController {
 	}
 	// 사원번호 찾기
 	@RequestMapping(value="findEmployeeNumber.do", method=RequestMethod.POST)
-	public String findEmployeeNumber(HttpServletResponse response, @RequestParam(value="employeeEmail", required=false) String employeeEmail, Model model) throws Exception{
-		model.addAttribute("employeeNumber",employeeService.findEmployeeNumber(response, employeeEmail));
+	public String findEmployeeNumber(@RequestParam("employeeEmail") String employeeEmail, Model model,HttpServletResponse response) throws Exception{
+		model.addAttribute("employeeNumber", employeeService.findEmployeeNumber(response, employeeEmail));
 		System.out.println(employeeEmail);
 		return "/employee/login/findEmployeeNumber";
 	}
+	
+	
 }
 	
 

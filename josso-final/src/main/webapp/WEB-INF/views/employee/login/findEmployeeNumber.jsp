@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -277,6 +278,7 @@ form:after {
 }
 
 </style>
+
 </head>
 <body>
 <div class="container">
@@ -284,8 +286,8 @@ form:after {
     <form action="/josso/findEmployeeNumber.do" method="post">
       <h1>Josso</h1>
       <div>
-        <input type="email" placeholder="이메일을 입력하세요" required="" id="findEmployeeNumber" />
-      </div>
+        <input type="email" placeholder="이메일을 입력하세요" required="" name="employeeEmail" id="employeeEmail" />
+	  </div>
       
       <div>
         <input type="submit" value="find" />
