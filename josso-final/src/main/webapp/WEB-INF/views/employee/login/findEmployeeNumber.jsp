@@ -172,7 +172,7 @@ form:after {
   -ms-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
-  background: #eae7e7 url(../img/email-envelope-mail_29.png) no-repeat ;
+  background: #eae7e7 url(/josso/resources/images/email-envelope_gray_28.png) no-repeat ;
   border: 1px solid #c8c8c8;
   color: #777;
   font: 13px Helvetica, Arial, sans-serif;
@@ -190,7 +190,7 @@ form:after {
   border: 1px solid #ed1c24;
   outline: none;
 }
-#empolyeeNumber { background-position: 5px 10px !important }
+#employeeEmail { background-position: 10px 10px !important }
 
 
 #content form input[type="submit"] {
