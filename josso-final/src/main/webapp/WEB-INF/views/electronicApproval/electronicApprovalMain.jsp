@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -89,25 +92,31 @@
 						<th style="padding-left: 40px; width: 15%;">기안일</th>
 						<th style="width: 20%">결재양식</th>
 						<th style="width: 35%">제목</th>
-						<th style="width: 15%">첨부</th>
+						<th style="width: 15%">기안자</th>
 						<th style="width: 10%">결재상태</th>
 					</tr>
 				</thead>
 				<tbody>
+				<c:if test="${mySign[0] != null}">
+					<c:forEach var="mylist" items="${mySign}">
+						<tr>
+							<td id="tdnum"><fmt:formatDate value="${mylist.registerDate}" pattern="yyyy-MM-dd"/></td>
+							<c:if test="${mylist.documentForm == 'F1'}">
+								<td>휴가신청서</td>
+							</c:if>
+							<td><a href="elecApproval/signdetail?num=${mylist.documentNo}">${mylist.documentName}</a></td>
+							<td>${emp.employeeName}/${emp.rankCode}/${emp.departmentCode}</td>
+							<c:if test="${mylist.lastAccept == 0}">
+								<td>진행중</td>
+							</c:if>
+						</tr>
+					</c:forEach>
+				</c:if>	
+				<c:if test="${mySign[0] == null}">	
 					<tr>
-						<td id="tdnum">2021-03-17</td>
-						<td>휴가신청서</td>
-						<td>휴gd</td>
-						<td>1</td>
-						<td>대기중</td>
+						<th colspan="5" id="tdnum"  style="text-align: center;height:3000px;">기안한 문서가 없습니다.</th>
 					</tr>
-					<tr>
-						<td id="tdnum">2021-03-17</td>
-						<td>휴가신청서</td>
-						<td>휴가청의 건</td>
-						<td>1</td>
-						<td>대기중</td>
-					</tr>
+				</c:if>
 				</tbody>
 			</table>
 			<h4

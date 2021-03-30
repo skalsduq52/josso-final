@@ -5,6 +5,7 @@ import java.util.Date;
 public class ElectronicApproval {
 
 	private int documentNo;
+	private int rowNum;
 	private String documentForm;
 	private String documentName;
 	private Date registerDate;
@@ -21,10 +22,11 @@ public class ElectronicApproval {
 	
 	public ElectronicApproval() {}
 
-	public ElectronicApproval(int documentNo, String documentForm, String documentName, Date registerDate,
+	public ElectronicApproval(int documentNo, int rowNum, String documentForm, String documentName, Date registerDate,
 			String startDate, String endDate, String drafter, String drafterAccept, String middle, String middleAccept,
 			String last, String lastAccept, String attachedFile, String holyType) {
 		this.documentNo = documentNo;
+		this.rowNum = rowNum;
 		this.documentForm = documentForm;
 		this.documentName = documentName;
 		this.registerDate = registerDate;
@@ -152,13 +154,21 @@ public class ElectronicApproval {
 		this.holyType = holyType;
 	}
 
-	@Override
-	public String toString() {
-		return "ElectronicApproval [documentNo=" + documentNo + ", documentForm=" + documentForm + ", documentName="
-				+ documentName + ", registerDate=" + registerDate + ", startDate=" + startDate + ", endDate=" + endDate
-				+ ", drafter=" + drafter + ", drafterAccept=" + drafterAccept + ", middle=" + middle + ", middleAccept="
-				+ middleAccept + ", last=" + last + ", lastAccept=" + lastAccept + ", attachedFile=" + attachedFile
-				+ ", holyType=" + holyType + "]";
+	public int getRowNum() {
+		return rowNum;
 	}
 
+	public void setRowNum(int rowNum) {
+		this.rowNum = rowNum;
+	}
+
+	@Override
+	public String toString() {
+		return "ElectronicApproval [documentNo=" + documentNo + ", rowNum=" + rowNum + ", documentForm=" + documentForm
+				+ ", documentName=" + documentName + ", registerDate=" + registerDate + ", startDate=" + startDate
+				+ ", endDate=" + endDate + ", drafter=" + drafter + ", drafterAccept=" + drafterAccept + ", middle="
+				+ middle + ", middleAccept=" + middleAccept + ", last=" + last + ", lastAccept=" + lastAccept
+				+ ", attachedFile=" + attachedFile + ", holyType=" + holyType + "]";
+	}
+	
 }

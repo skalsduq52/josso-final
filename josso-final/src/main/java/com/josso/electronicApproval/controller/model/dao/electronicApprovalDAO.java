@@ -1,5 +1,6 @@
 package com.josso.electronicApproval.controller.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -28,5 +29,14 @@ public class electronicApprovalDAO {
 		return result;
 	}
 	
+	public List<ElectronicApproval> selectLastMy(String empNo) throws Exception {
+		List<ElectronicApproval> ml = sqlSession.selectList("ElectronicApproval.selectLastMy", empNo);
+		return ml;
+	}
+	
+	public ElectronicApproval selectElecApp(String num) throws Exception {
+		ElectronicApproval ep = sqlSession.selectOne("ElectronicApproval.selectDetail", num);
+		return ep;
+	}
 	
 }

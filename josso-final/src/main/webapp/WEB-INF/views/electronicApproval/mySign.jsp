@@ -60,7 +60,7 @@
 						<th style="padding-left: 40px; width: 15%;">기안일</th>
 						<th style="width: 20%">결재양식</th>
 						<th style="width: 35%">제목</th>
-						<th style="width: 15%">첨부</th>
+						<th style="width: 15%">기안자</th>
 						<th style="width: 10%">결재상태</th>
 					</tr>
 				</thead>
@@ -69,21 +69,7 @@
 						<td id="tdnum">2021-03-17</td>
 						<td>휴가신청서</td>
 						<td>휴가신청의 건</td>
-						<td>1</td>
-						<td>대기중</td>
-					</tr>
-					<tr>
-						<td id="tdnum">2021-03-17</td>
-						<td>휴가신청서</td>
-						<td>휴가신청의 건</td>
-						<td>1</td>
-						<td>대기중</td>
-					</tr>
-					<tr>
-						<td id="tdnum">2021-03-17</td>
-						<td>휴가신청서</td>
-						<td>휴가신청의 건</td>
-						<td>1</td>
+						<td>나민엽/사원/인사</td>
 						<td>대기중</td>
 					</tr>
 				</tbody>

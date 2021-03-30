@@ -2,9 +2,11 @@ package com.josso.electronicApproval.controller;
 
 import java.io.PrintWriter;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -27,8 +29,12 @@ public class ElectronicController {
 	electronicApprovalDAO ed;
 
 	@RequestMapping(value="elecApproval", method=RequestMethod.GET)
-	public ModelAndView approvalMain() {
-		ModelAndView mv = new ModelAndView();
+	public ModelAndView approvalMain(ElectronicApproval ep, ModelAndView mv, HttpSession session) throws Exception {
+		Employee emp = (Employee) session.getAttribute("employee");
+		String empNo = emp.getEmployeeNumber();
+		List<ElectronicApproval> mySign = ed.selectLastMy(empNo);
+		mv.addObject("mySign", mySign);
+		mv.addObject("emp",emp);
 		mv.setViewName("/electronicApproval/electronicApprovalMain");
 		return mv;
 	}
@@ -110,6 +116,15 @@ public class ElectronicController {
 		System.out.println(ep);
 		ed.insertApp(ep);
 		mv.setViewName("redirect:/elecApproval");
+		return mv;
+	}
+	
+	@RequestMapping(value="elecApproval/signdetail", method=RequestMethod.GET)
+	public ModelAndView detailSign(@RequestParam(name = "num") String num, ModelAndView mv) throws Exception {
+		ElectronicApproval ep = ed.selectElecApp(num);
+		System.out.println(ep);
+		mv.addObject("elecApp", ep);
+		mv.setViewName("/electronicApproval/signdetail");
 		return mv;
 	}
 	
