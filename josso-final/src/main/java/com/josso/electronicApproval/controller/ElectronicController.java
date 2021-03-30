@@ -27,7 +27,7 @@ public class ElectronicController {
 	
 	@Autowired
 	electronicApprovalDAO ed;
-
+	
 	@RequestMapping(value="elecApproval", method=RequestMethod.GET)
 	public ModelAndView approvalMain(ElectronicApproval ep, ModelAndView mv, HttpSession session) throws Exception {
 		Employee emp = (Employee) session.getAttribute("employee");
@@ -122,9 +122,14 @@ public class ElectronicController {
 	@RequestMapping(value="elecApproval/signdetail", method=RequestMethod.GET)
 	public ModelAndView detailSign(@RequestParam(name = "num") String num, ModelAndView mv) throws Exception {
 		ElectronicApproval ep = ed.selectElecApp(num);
-		System.out.println(ep);
+		Employee drafter = ed.selectEmpOne(ep.getDrafter());
+		Employee middle = ed.selectEmpOne(ep.getMiddle());
+		Employee last = ed.selectEmpOne(ep.getLast());
 		mv.addObject("elecApp", ep);
-		mv.setViewName("/electronicApproval/signdetail");
+		mv.addObject("drafter", drafter);
+		mv.addObject("middle", middle);
+		mv.addObject("last", last);
+		mv.setViewName("/electronicApproval/signDetail");
 		return mv;
 	}
 	

@@ -1,6 +1,5 @@
 package com.josso.electronicApproval.controller.model.dao;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -18,13 +17,19 @@ public class electronicApprovalDAO {
 	
 	public electronicApprovalDAO() {};
 	
+	
+	// 결재창 검색 ajax용
 	public List<Employee> selectEmpAll(Employee emp) throws Exception {
 		List<Employee> empList = sqlSession.selectList("Employee.serachEmpName",emp);
 		return empList;
 	}
 	
+	public Employee selectEmpOne(String num) throws Exception {
+		Employee emp = sqlSession.selectOne("Employee.selectEmployee",num);
+		return emp;
+	}
+	
 	public int insertApp(ElectronicApproval ep) throws Exception {
-		System.out.println("dao 출몰");
 		int result = sqlSession.insert("ElectronicApproval.insertElecApp",ep);
 		return result;
 	}
