@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.web.servlet.ModelAndView;
+
 import com.josso.employee.vo.Employee;
 
 
@@ -25,4 +27,8 @@ public interface EmployeeService {
 		public int deleteEmployee(Employee employee) throws Exception;
 		
 		public Employee login(Employee employee, HttpServletResponse response) throws Exception;
+		
+		public void logout(HttpServletResponse response) throws Exception;
+		
+		public String findEmployeeNumber(HttpServletResponse response, String employeeEmail) throws Exception;
 }

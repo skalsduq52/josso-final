@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="monthlyReport">
+	<resultMap id="monthlyReport" type="monthlyReport">
+		<id property="reportNumber" column="REPORT_NUM" />
+		<result property="reportTitle" column="REPORT_TITLE" /> 
+		<result property="writer" column="WRITER" /> 
+		<result property="writeTime" column="WRITE_TIME" /> 
+		<result property="thisMonth" column="THIS_MONTH" /> 
+		<result property="thisMeeting" column="THIS_MEETING" /> 
+		<result property="thisConference" column="THIS_CONFERENCE" /> 
+		<result property="thisProject" column="THIS_PROJECT" /> 
+		<result property="thisEtc" column="THIS_ETC" /> 
+		<result property="nextMonth" column="NEXT_MONTH" /> 
+		<result property="nextMeeting" column="NEXT_MEETING" /> 
+		<result property="nextConference" column="NEXT_CONFERENCE" /> 
+		<result property="nextProject" column="NEXT_PROJECT" /> 
+		<result property="nextEtc" column="NEXT_ETC" /> 
+	</resultMap>
+</mapper>

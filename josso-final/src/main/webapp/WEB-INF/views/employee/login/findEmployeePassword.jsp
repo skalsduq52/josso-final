@@ -1,10 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Login page</title>
-
+<title>find employeePassword</title>
+<link rel="stylesheet" type="text/css" href="style.css" />
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 <style>
     html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -116,10 +119,44 @@ form:after {
   background: linear-gradient(right,  rgba(126,126,126,1) 0%,rgba(255,255,255,1) 100%);
     left: 0;
 }
-
+/* #content:after,
+#content:before {
+  background: #f9f9f9;
+  background: -moz-linear-gradient(top,  rgba(248,248,248,1) 0%, rgba(249,249,249,1) 100%);
+  background: -webkit-linear-gradient(top,  rgba(248,248,248,1) 0%,rgba(249,249,249,1) 100%);
+  background: -o-linear-gradient(top,  rgba(248,248,248,1) 0%,rgba(249,249,249,1) 100%);
+  background: -ms-linear-gradient(top,  rgba(248,248,248,1) 0%,rgba(249,249,249,1) 100%);
+  background: linear-gradient(top,  rgba(248,248,248,1) 0%,rgba(249,249,249,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8f8f8', endColorstr='#f9f9f9',GradientType=0 );
+  border: 1px solid #c4c6ca;
+  content: "";
+  display: block;
+  height: 100%;
+  left: -1px;
+  position: absolute;
+  width: 100%;
+} */
+/* #content:after {
+  -webkit-transform: rotate(2deg);
+  -moz-transform: rotate(2deg);
+  -ms-transform: rotate(2deg);
+  -o-transform: rotate(2deg);
+  transform: rotate(2deg);
+  top: 0;
+  z-index: -1;
+} */
+/* #content:before {
+  -webkit-transform: rotate(-3deg);
+  -moz-transform: rotate(-3deg);
+  -ms-transform: rotate(-3deg);
+  -o-transform: rotate(-3deg);
+  transform: rotate(-3deg);
+  top: 0;
+  z-index: -2;
+} */
 #content form { margin: 0 20px; position: relative }
-#content form input[type="text"],
-#content form input[type="password"] {
+#content form input[type="text"]
+{
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   -ms-border-radius: 3px;
@@ -135,7 +172,7 @@ form:after {
   -ms-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
-  background: #eae7e7 url(https://cssdeck.com/uploads/media/items/8/8bcLQqF.png) no-repeat;
+  background: #eae7e7 url(https://cssdeck.com/uploads/media/items/8/8bcLQqF.png) no-repeat ;
   border: 1px solid #c8c8c8;
   color: #777;
   font: 13px Helvetica, Arial, sans-serif;
@@ -143,8 +180,7 @@ form:after {
   padding: 15px 10px 15px 40px;
   width: 80%;
 }
-#content form input[type="text"]:focus,
-#content form input[type="password"]:focus {
+#content form input[type="text"]:focus{
   -webkit-box-shadow: 0 0 2px #ed1c24 inset;
   -moz-box-shadow: 0 0 2px #ed1c24 inset;
   -ms-box-shadow: 0 0 2px #ed1c24 inset;
@@ -155,10 +191,10 @@ form:after {
   outline: none;
 }
 #employeeNumber { background-position: 10px 10px !important }
-#employeePassword { background-position: 10px -53px !important }
+
 
 #content form input[type="submit"] {
-  background: rgb(254,231,154);
+  background: rgb(254, 182, 154);
   background: -moz-linear-gradient(top,  rgba(254,231,154,1) 0%, rgba(254,193,81,1) 100%);
   background: -webkit-linear-gradient(top,  rgba(254,231,154,1) 0%,rgba(254,193,81,1) 100%);
   background: -o-linear-gradient(top,  rgba(254,231,154,1) 0%,rgba(254,193,81,1) 100%);
@@ -178,7 +214,45 @@ form:after {
   border: 1px solid #D69E31;
   color: #85592e;
   cursor: pointer;
-  float: left;
+  
+  font: bold 15px Helvetica, Arial, sans-serif;
+  height: 35px;
+  margin: px 0 35px 15px;
+  position: relative;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+  width: 120px;
+}
+#content form input[type="submit"]:hover {
+  background: rgb(254,193,81);
+  background: -moz-linear-gradient(top,  rgba(254,193,81,1) 0%, rgba(254,231,154,1) 100%);
+  background: -webkit-linear-gradient(top,  rgba(254,193,81,1) 0%,rgba(254,231,154,1) 100%);
+  background: -o-linear-gradient(top,  rgba(254,193,81,1) 0%,rgba(254,231,154,1) 100%);
+  background: -ms-linear-gradient(top,  rgba(254,193,81,1) 0%,rgba(254,231,154,1) 100%);
+  background: linear-gradient(top,  rgba(254,193,81,1) 0%,rgba(254,231,154,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fec151', endColorstr='#fee79a',GradientType=0 );
+}
+#content form input[type="button"] {
+  background: rgb(254, 182, 154);
+  background: -moz-linear-gradient(top,  rgba(254,231,154,1) 0%, rgba(254,193,81,1) 100%);
+  background: -webkit-linear-gradient(top,  rgba(254,231,154,1) 0%,rgba(254,193,81,1) 100%);
+  background: -o-linear-gradient(top,  rgba(254,231,154,1) 0%,rgba(254,193,81,1) 100%);
+  background: -ms-linear-gradient(top,  rgba(254,231,154,1) 0%,rgba(254,193,81,1) 100%);
+  background: linear-gradient(top,  rgba(254,231,154,1) 0%,rgba(254,193,81,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fee79a', endColorstr='#fec151',GradientType=0 );
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  -ms-border-radius: 30px;
+  -o-border-radius: 30px;
+  border-radius: 30px;
+  -webkit-box-shadow: 0 1px 0 rgba(255,255,255,0.8) inset;
+  -moz-box-shadow: 0 1px 0 rgba(255,255,255,0.8) inset;
+  -ms-box-shadow: 0 1px 0 rgba(255,255,255,0.8) inset;
+  -o-box-shadow: 0 1px 0 rgba(255,255,255,0.8) inset;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.8) inset;
+  border: 1px solid #D69E31;
+  color: #85592e;
+  cursor: pointer;
+  
   font: bold 15px Helvetica, Arial, sans-serif;
   height: 35px;
   margin: 20px 0 35px 15px;
@@ -186,7 +260,7 @@ form:after {
   text-shadow: 0 1px 0 rgba(255,255,255,0.5);
   width: 120px;
 }
-#content form input[type="submit"]:hover {
+#content form input[type="button"]:hover {
   background: rgb(254,193,81);
   background: -moz-linear-gradient(top,  rgba(254,193,81,1) 0%, rgba(254,231,154,1) 100%);
   background: -webkit-linear-gradient(top,  rgba(254,193,81,1) 0%,rgba(254,231,154,1) 100%);
@@ -204,37 +278,26 @@ form:after {
 }
 
 </style>
-<script type="text/javascript">
-	function goFindEmployeeNumber(){
-		location.href = "./findEmployeeNumber"
-	}
-	
-	function goFindEmployeePassword(){
-		location.href = "./findEmployeePassword"
-	}
-</script>
+
 </head>
 <body>
 <div class="container">
   <section id="content">
-    <form action="/josso/login.do" method="post">
+    <form action="/josso/findEmployeePassword.do" method="post">
       <h1>Josso</h1>
+      <div>
+        <input type="text" placeholder="사원번호를 입력하세요" required="" name="employeeNumber" id="employeeNumber" />
+	  </div>
       
       <div>
-        <input type="text" placeholder="사원번호를 입력하세요." required="" id="employeeNumber" name="employeeNumber"/>
-      </div>
-      <div>
-        <input type="password" placeholder="비밀번호를 입력하세요" required="" id="employeePassword" name="employeePassword"/>
-      </div>
-      <div>
-        <input type="submit" value="Log in" />
-        <a href="javascript:goFindEmployeePassword()">비밀번호 찾기</a>
-        <a href="javascript:goFindEmployeeNumber()">사원번호 찾기</a>
+        <input type="submit" value="find" />
+        <input type="button" value="cancel" onclick="history.go(-1);"/>
+        
         
       </div>
-    </form>
+    </form><!-- form -->
     
-  </section>
-</div>
+  </section><!-- content -->
+</div><!-- container -->
 </body>
 </html>

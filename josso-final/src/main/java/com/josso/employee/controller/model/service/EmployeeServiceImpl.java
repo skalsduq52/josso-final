@@ -3,10 +3,12 @@ package com.josso.employee.controller.model.service;
 import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.josso.employee.controller.model.dao.EmployeeDao;
 import com.josso.employee.vo.Employee;
@@ -68,19 +70,22 @@ public class EmployeeServiceImpl implements EmployeeService{
 //		}
 		
 	}
+	
+	// 사원정보 수정
 	@Override
 	public int updateEmployee(Employee employee) throws Exception{
 		int cnt = employeeDao.updateEmployee(employee);
 		return cnt;
-		
 	}
+	
+	// 사원삭제
 	@Override
 	public int deleteEmployee(Employee employee) throws Exception{
 		int cnt = employeeDao.deleteEmployee(employee);
 		return cnt;
-		
 	}
 	
+	//로그인
 	@Override
 	public Employee login(Employee employee, HttpServletResponse response) throws Exception{
 		response.setContentType("text/html;charset=utf-8");
@@ -112,7 +117,45 @@ public class EmployeeServiceImpl implements EmployeeService{
 			}
 		}
 	}
+	// 로그아웃
+	@Override
+	public void logout(HttpServletResponse response) throws Exception{
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.println("<script>");
+		out.println("location.href=document.referrer;");
+		out.println("</script>");
+		out.close();
+	}
 	
+	// 사원번호 찾기
+	@Override
+	public String findEmployeeNumber(HttpServletResponse response, String employeeEmail) throws Exception{
+		
+		
+		
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		String employeeNumber = employeeDao.findEmployeeNumber(employeeEmail);
+		
+		
+		
+		if(employeeNumber == null) {
+			out.println("<script>");
+			out.println("alert('가입된 사원번호가 없습니다.');");
+			out.println("history.go(-1);");
+			out.println("</script>");
+			out.close();
+			return null;
+		}else {
+			out.println("<script>");
+			out.println("alert('사원번호는 ("+employeeNumber+") 입니다.'); location.href='/josso/employee/login/index'; ");
+			
+			out.println("</script>");
+			out.close();
+			return employeeNumber;
+		}
+	} 
 	
 
 }

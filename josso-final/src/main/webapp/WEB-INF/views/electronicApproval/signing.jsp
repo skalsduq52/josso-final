@@ -50,7 +50,7 @@
 
 	<!-- main -->
 	<main>
-		<form>
+		<form action="/josso/elecApproval/insert" method="post">
 			<div class="border"
 				style="height: 95%; min-height: 1000px; margin: 10px 10px 10px 10px">
 				<div style="height: 300px; padding-left: 15px;">
@@ -142,7 +142,8 @@
 						<tr>
 							<td align="center" style="height: 40px; width: 150px;"
 								id="td_back">휴가종류</td>
-							<td style="width: 850px;"><select style="width: 150px;">
+							<td style="width: 850px;">
+							<select style="width: 150px;" name="holyType">
 									<option value="연차" selected="selected">연차</option>
 									<option value="포상">포상</option>
 							</select></td>
@@ -178,7 +179,7 @@
 					</table>
 				</div>
 				<div style="padding-top: 150px; margin-left: 15px;">
-					<button>결재요청</button>
+					<input type="submit" value="결재요청" />
 					<button>취소</button>
 				</div>
 		</form>

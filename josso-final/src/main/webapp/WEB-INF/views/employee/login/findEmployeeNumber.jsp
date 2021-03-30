@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -171,7 +172,7 @@ form:after {
   -ms-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
-  background: #eae7e7 url(../img/email-envelope-mail.png) no-repeat ;
+  background: #eae7e7 url(../img/email-envelope-mail_29.png) no-repeat ;
   border: 1px solid #c8c8c8;
   color: #777;
   font: 13px Helvetica, Arial, sans-serif;
@@ -216,12 +217,50 @@ form:after {
   
   font: bold 15px Helvetica, Arial, sans-serif;
   height: 35px;
-  margin: 20px 0 35px 15px;
+  margin: px 0 35px 15px;
   position: relative;
   text-shadow: 0 1px 0 rgba(255,255,255,0.5);
   width: 120px;
 }
 #content form input[type="submit"]:hover {
+  background: rgb(254,193,81);
+  background: -moz-linear-gradient(top,  rgba(254,193,81,1) 0%, rgba(254,231,154,1) 100%);
+  background: -webkit-linear-gradient(top,  rgba(254,193,81,1) 0%,rgba(254,231,154,1) 100%);
+  background: -o-linear-gradient(top,  rgba(254,193,81,1) 0%,rgba(254,231,154,1) 100%);
+  background: -ms-linear-gradient(top,  rgba(254,193,81,1) 0%,rgba(254,231,154,1) 100%);
+  background: linear-gradient(top,  rgba(254,193,81,1) 0%,rgba(254,231,154,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fec151', endColorstr='#fee79a',GradientType=0 );
+}
+#content form input[type="button"] {
+  background: rgb(254, 182, 154);
+  background: -moz-linear-gradient(top,  rgba(254,231,154,1) 0%, rgba(254,193,81,1) 100%);
+  background: -webkit-linear-gradient(top,  rgba(254,231,154,1) 0%,rgba(254,193,81,1) 100%);
+  background: -o-linear-gradient(top,  rgba(254,231,154,1) 0%,rgba(254,193,81,1) 100%);
+  background: -ms-linear-gradient(top,  rgba(254,231,154,1) 0%,rgba(254,193,81,1) 100%);
+  background: linear-gradient(top,  rgba(254,231,154,1) 0%,rgba(254,193,81,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fee79a', endColorstr='#fec151',GradientType=0 );
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  -ms-border-radius: 30px;
+  -o-border-radius: 30px;
+  border-radius: 30px;
+  -webkit-box-shadow: 0 1px 0 rgba(255,255,255,0.8) inset;
+  -moz-box-shadow: 0 1px 0 rgba(255,255,255,0.8) inset;
+  -ms-box-shadow: 0 1px 0 rgba(255,255,255,0.8) inset;
+  -o-box-shadow: 0 1px 0 rgba(255,255,255,0.8) inset;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.8) inset;
+  border: 1px solid #D69E31;
+  color: #85592e;
+  cursor: pointer;
+  
+  font: bold 15px Helvetica, Arial, sans-serif;
+  height: 35px;
+  margin: 20px 0 35px 15px;
+  position: relative;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+  width: 120px;
+}
+#content form input[type="button"]:hover {
   background: rgb(254,193,81);
   background: -moz-linear-gradient(top,  rgba(254,193,81,1) 0%, rgba(254,231,154,1) 100%);
   background: -webkit-linear-gradient(top,  rgba(254,193,81,1) 0%,rgba(254,231,154,1) 100%);
@@ -239,6 +278,7 @@ form:after {
 }
 
 </style>
+
 </head>
 <body>
 <div class="container">
@@ -246,11 +286,12 @@ form:after {
     <form action="/josso/findEmployeeNumber.do" method="post">
       <h1>Josso</h1>
       <div>
-        <input type="email" placeholder="이메일을 입력하세요" required="" id="empolyeeNumber" />
-      </div>
+        <input type="email" placeholder="이메일을 입력하세요" required="" name="employeeEmail" id="employeeEmail" />
+	  </div>
       
       <div>
-        <input type="submit" value="send" />
+        <input type="submit" value="find" />
+        <input type="button" value="cancel" onclick="history.go(-1);"/>
         
         
       </div>

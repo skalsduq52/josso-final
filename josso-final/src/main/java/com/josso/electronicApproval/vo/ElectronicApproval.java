@@ -8,20 +8,22 @@ public class ElectronicApproval {
 	private String documentForm;
 	private String documentName;
 	private Date registerDate;
-	private Date startDate;
-	private Date endDate;
+	private String startDate;
+	private String endDate;
 	private String drafter;
 	private String drafterAccept;
 	private String middle;
 	private String middleAccept;
 	private String last;
 	private String lastAccept;
+	private String attachedFile;
+	private String holyType;
 	
 	public ElectronicApproval() {}
 
 	public ElectronicApproval(int documentNo, String documentForm, String documentName, Date registerDate,
-			Date startDate, Date endDate, String drafter, String drafterAccept, String middle, String middleAccept,
-			String last, String lastAccept) {
+			String startDate, String endDate, String drafter, String drafterAccept, String middle, String middleAccept,
+			String last, String lastAccept, String attachedFile, String holyType) {
 		this.documentNo = documentNo;
 		this.documentForm = documentForm;
 		this.documentName = documentName;
@@ -34,6 +36,8 @@ public class ElectronicApproval {
 		this.middleAccept = middleAccept;
 		this.last = last;
 		this.lastAccept = lastAccept;
+		this.attachedFile = attachedFile;
+		this.holyType = holyType;
 	}
 
 	public int getDocumentNo() {
@@ -68,19 +72,19 @@ public class ElectronicApproval {
 		this.registerDate = registerDate;
 	}
 
-	public Date getStartDate() {
+	public String getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(Date startDate) {
+	public void setStartDate(String startDate) {
 		this.startDate = startDate;
 	}
 
-	public Date getEndDate() {
+	public String getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(Date endDate) {
+	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
 
@@ -131,17 +135,30 @@ public class ElectronicApproval {
 	public void setLastAccept(String lastAccept) {
 		this.lastAccept = lastAccept;
 	}
+	
+	public String getAttachedFile() {
+		return attachedFile;
+	}
+
+	public void setAttachedFile(String attachedFile) {
+		this.attachedFile = attachedFile;
+	}
+
+	public String getHolyType() {
+		return holyType;
+	}
+
+	public void setHolyType(String holyType) {
+		this.holyType = holyType;
+	}
 
 	@Override
 	public String toString() {
 		return "ElectronicApproval [documentNo=" + documentNo + ", documentForm=" + documentForm + ", documentName="
 				+ documentName + ", registerDate=" + registerDate + ", startDate=" + startDate + ", endDate=" + endDate
 				+ ", drafter=" + drafter + ", drafterAccept=" + drafterAccept + ", middle=" + middle + ", middleAccept="
-				+ middleAccept + ", last=" + last + ", lastAccept=" + lastAccept + "]";
+				+ middleAccept + ", last=" + last + ", lastAccept=" + lastAccept + ", attachedFile=" + attachedFile
+				+ ", holyType=" + holyType + "]";
 	}
-	
-	
-	
-	
 
 }

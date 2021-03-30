@@ -7,13 +7,14 @@
 	</settings>
 
 	<typeAliases> <!-- Class 별칭을 선언하여 모든 경로를 적어주지 않아도 된다. -->
-		<typeAlias type="com.josso.electronicApproval.vo.ElectronicApproval" alias="electronicApproval" />
+		<typeAlias type="com.josso.electronicApproval.vo.ElectronicApproval" alias="ElectronicApproval" />
 		<typeAlias type="com.josso.board.vo.Board" alias="board" />
 		<typeAlias type="com.josso.email.vo.Email" alias="email" />
 		<typeAlias type="com.josso.employee.vo.Employee" alias="Employee" />
 		<typeAlias type="com.josso.reserve.vo.Reserve" alias="reserve" />
 		<typeAlias type="com.josso.schedule.vo.Schedule" alias="Schedule" />
-		<typeAlias type="com.josso.businessReport.vo.BusinessReport" alias="report" />
+		<typeAlias type="com.josso.businessReport.vo.WeeklyReport" alias="weeklyReport" />
+		<typeAlias type="com.josso.businessReport.vo.MonthlyReport" alias="monthlyReport" />
 	</typeAliases>
 	
 	
@@ -25,7 +26,8 @@
 		<mapper resource="mapper/employee-mapper.xml" />
 		<mapper resource="mapper/reserve-mapper.xml" />
 		<mapper resource="mapper/schedule-mapper.xml" />
-		<mapper resource="mapper/report-mapper.xml" />
+		<mapper resource="mapper/weeklyReport-mapper.xml" />
+		<mapper resource="mapper/monthlyReport-mapper.xml" />
 	<!-- staffvo삭제 / 홍수명 -->	
 	</mappers>
 	

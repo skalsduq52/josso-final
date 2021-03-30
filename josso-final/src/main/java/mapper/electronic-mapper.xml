@@ -1,5 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="electronicApproval">
+<mapper namespace="ElectronicApproval">
+<resultMap id="ElectronicApproval" type="ElectronicApproval">
+		<id property="documentNo" column="DOCUMENT_NO"/>
+		<result property="documentForm" column="DOCUMENT_FORM"/>
+		<result property="documentName" column="DOCUMENT_NAME"/>
+		<result property="registerDate" column="REGISTER_DATE"/>
+		<result property="startDate" column="START_DATE"/>
+		<result property="endDate" column="END_DATE"/>
+		<result property="drafter" column="DRAFTER"/>
+		<result property="drafterAccept" column="DRAFTER_ACCEPT"/>
+		<result property="middle" column="MIDDLE"/>
+		<result property="middleAccept" column="MIDDLE_ACCEPT"/>
+		<result property="last" column="LAST"/>
+		<result property="lastAccept" column="LAST_ACCEPT"/>
+		<result property="attachedFile" column="ATTACHED_FILE"/>
+		<result property="holyType" column="HOLY_TYPE"/>
+	</resultMap>
+	
+	<!-- 결재 정보 등록 -->
+	<insert id="insertElecApp" parameterType="ElectronicApproval">
+		INSERT INTO ELECTRONIC_APPROVAL VALUES(APPROVAL_NUM_SEQ.NEXTVAL,#{documentForm},#{documentName},SYSDATE,#{startDate},
+		#{endDate},#{drafter},DEFAULT,#{middle},DEFAULT,#{last},DEFAULT,NULL,#{holyType})
+	</insert>
+	
+	<!-- <select>
+		SELECT ROWNUM,EA.* FROM (SELECT * FROM ELECTRONIC_APPROVAL ORDER BY REGISTER_DATE DESC)EA WHERE ROWNUM BETWEEN 1 AND 3;
+	</select> -->
+	
 </mapper>
