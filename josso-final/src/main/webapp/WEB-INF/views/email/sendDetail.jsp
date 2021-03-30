@@ -105,7 +105,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="/exam/email/accept/list?id=111@naver.com">
+                        <a href="${pageContext.request.contextPath}/email/accept/list?id=111@naver.com">
                         <span class="icon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
                         <span class="icon">메일</span>
                         </a>
@@ -154,7 +154,7 @@
                 </section>
                 <section>
                     <div class="title_button">
-                        <button type="button" class="btn btn-info btn-sm btn-block"><a class="a" href="/exam/email/write/open"> 메일쓰기</a></button>
+                        <button type="button" class="btn btn-info btn-sm btn-block"><a class="a" href="${pageContext.request.contextPath}/email/write/open"> 메일쓰기</a></button>
                     </div>
                 </section>
                 <section>
@@ -172,19 +172,19 @@
                         <ul class="hover_tag">
                             <li>
                                 <div class="form-check form-check-inline">
-                                    <label class="form-check-label" for="inlineCheckbox1"><a href="/exam/email/accept/list?id=111@naver.com">받은 메일함</a></label>
+                                    <label class="form-check-label" for="inlineCheckbox1"><a href="${pageContext.request.contextPath}/email/accept/list?id=111@naver.com">받은 메일함</a></label>
                                 </div>
                             </li>
                             <li>
                                 <div class="form-check form-check-inline">
                                     
-                                    <label class="form-check-label" for="inlineCheckbox1"><a href="/exam/email/send/list?id=111@naver.com"> 보낸 메일함</a></label>
+                                    <label class="form-check-label" for="inlineCheckbox1"><a href="${pageContext.request.contextPath}/email/send/list?id=111@naver.com"> 보낸 메일함</a></label>
                                 </div>
                             </li>
                             <li>
                                 <div class="form-check form-check-inline">
                                     
-                                    <label class="form-check-label" for="inlineCheckbox1"><a href="/exam/email/wastebasket/list?id=111@naver.com"> 휴지통</a></label>
+                                    <label class="form-check-label" for="inlineCheckbox1"><a href="${pageContext.request.contextPath}/email/wastebasket/list?id=111@naver.com"> 휴지통</a></label>
                                 </div>
                             </li>
                         </ul>
@@ -216,15 +216,15 @@
                 </div>
                 <div class="row">
                     <div class="col nav-menu">
-                        	<a href="/exam/email/accept/reply?num=${sendDetail.emailNumber}"><input type="submit" class="btn btn-outline-info float-left" value="답장"></a>
+                        	<a href="${pageContext.request.contextPath}/email/accept/reply?num=${sendDetail.emailNumber}"><input type="submit" class="btn btn-outline-info float-left" value="답장"></a>
 	                        	<c:if test="${sendDetail.emailRead eq 'NO'}">
-		                        <a href="/exam/email/accept/read?num=${sendDetail.emailNumber}"><input type="submit" class="btn btn-outline-info float-left" value="읽음"></a>
+		                        <a href="${pageContext.request.contextPath}/email/accept/read?num=${sendDetail.emailNumber}"><input type="submit" class="btn btn-outline-info float-left" value="읽음"></a>
 		                        </c:if>
 		                        <c:if test="${sendDetail.emailRead eq 'YES'}">
-		                        <a href="/exam/email/accept/read?num=${sendDetail.emailNumber}"><input type="submit" class="btn btn-outline-info float-left" value="안읽음"></a>
+		                        <a href="${pageContext.request.contextPath}/email/accept/read?num=${sendDetail.emailNumber}"><input type="submit" class="btn btn-outline-info float-left" value="안읽음"></a>
 		                        </c:if>
-	                        <a href="/exam/email/send/delivery?num=${sendDetail.emailNumber}"><input type="submit" class="btn btn-outline-info float-left" value="전달"></a>
-	                        <a href="/exam/email/send/wastebasket?num=${sendDetail.emailNumber}"><input type="submit" class="btn btn-outline-info float-left" value="휴지통"></a>
+	                        <a href="${pageContext.request.contextPath}/email/send/delivery?num=${sendDetail.emailNumber}"><input type="submit" class="btn btn-outline-info float-left" value="전달"></a>
+	                        <a href="${pageContext.request.contextPath}/email/send/wastebasket?num=${sendDetail.emailNumber}"><input type="submit" class="btn btn-outline-info float-left" value="휴지통"></a>
                     </div>
                     <div class="col"></div>
                     <div class="col"></div>

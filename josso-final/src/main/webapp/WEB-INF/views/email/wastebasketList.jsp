@@ -131,7 +131,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="/exam/email/accept/list?id=111@naver.com">
+                        <a href="${pageContext.request.contextPath}/email/accept/list?id=111@naver.com">
                         <span class="icon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
                         <span class="icon">메일</span>
                         </a>
@@ -180,7 +180,7 @@
                 </section>
                 <section>
                     <div class="title_button">
-                        <button type="button" class="btn btn-info btn-sm btn-block"><a href="/exam/email/write/open"> 메일쓰기</a></button>
+                        <button type="button" class="btn btn-info btn-sm btn-block"><a href="${pageContext.request.contextPath}/email/write/open"> 메일쓰기</a></button>
                     </div>
                 </section>
                 <section>
@@ -198,19 +198,19 @@
                         <ul class="hover_tag">
                             <li>
                                 <div class="form-check form-check-inline">
-                                    <label class="form-check-label" for="inlineCheckbox1"><a href="/exam/email/accept/list?id=111@naver.com">받은 메일함</a></label>
+                                    <label class="form-check-label" for="inlineCheckbox1"><a href="${pageContext.request.contextPath}/email/accept/list?id=111@naver.com">받은 메일함</a></label>
                                 </div>
                             </li>
                             <li>
                                 <div class="form-check form-check-inline">
                                     
-                                    <label class="form-check-label" for="inlineCheckbox1"><a href="/exam/email/send/list?id=111@naver.com"> 보낸 메일함</a></label>
+                                    <label class="form-check-label" for="inlineCheckbox1"><a href="${pageContext.request.contextPath}/email/send/list?id=111@naver.com"> 보낸 메일함</a></label>
                                 </div>
                             </li>
                             <li>
                                 <div class="form-check form-check-inline">
                                     
-                                    <label class="form-check-label" for="inlineCheckbox1"><a href="/exam/email/wastebasket/list?id=111@naver.com"> 휴지통</a></label>
+                                    <label class="form-check-label" for="inlineCheckbox1"><a href="${pageContext.request.contextPath}/email/wastebasket/list?id=111@naver.com"> 휴지통</a></label>
                                 </div>
                             </li>
                         </ul>
@@ -254,8 +254,8 @@
                 
                 <div class="row">
                     <div class="col nav-menu">
-                        <a href="/exam/email/wastebasket/restoration"><input type="submit" class="btn btn-outline-info float-left" value="복구"></a>  
-                        <a href="/exam/email/wastebasket/delete"><input type="submit" class="btn btn-outline-info float-left" value="삭제"></a>
+                        <a href="${pageContext.request.contextPath}/email/wastebasket/restoration"><input type="submit" class="btn btn-outline-info float-left" value="복구"></a>  
+                        <a href="${pageContext.request.contextPath}/email/wastebasket/delete"><input type="submit" class="btn btn-outline-info float-left" value="삭제"></a>
                     </div>
                     <div class="col"></div>
                     <div class="col"></div>
@@ -286,7 +286,7 @@
 								<tr>
 	                                <td><input type="checkbox" name="check"></td>
 	                                <td>${n.emailSend}</td>
-	                                <td><a href="/exam/email/wastebasket/detail?num=${n.emailNumber}">${n.emailTitle}</a></td>
+	                                <td><a href="${pageContext.request.contextPath}/email/wastebasket/detail?num=${n.emailNumber}">${n.emailTitle}</a></td>
 	                                <td><fmt:formatDate value="${n.regDate}" pattern="yy-MM-dd [E] a hh:mm:ss"></fmt:formatDate></td>
 	                            </tr>
 							</c:forEach>

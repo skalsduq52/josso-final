@@ -25,7 +25,7 @@ public class EmailController{
 	// 메일 메인페이지(완성)
 	@RequestMapping(value = "email.do", method = RequestMethod.GET)
 	public String email() throws Exception{
-		return "final/acceptList";
+		return "email/acceptList";
 	}
 	// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@받은 메일함@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	// 받은메일함 목록 보여주기(완성)
@@ -34,7 +34,7 @@ public class EmailController{
 		List<Email> acceptList = emailService.AcceptList(id);
 				
 		modelAndView.addObject("acceptList",acceptList);
-		modelAndView.setViewName("final/acceptList");
+		modelAndView.setViewName("email/acceptList");
 		
 		return modelAndView;
 	}
@@ -54,7 +54,7 @@ public class EmailController{
 		Email acceptDetail = emailService.AcceptDetail(num);
 		
 		modelAndView.addObject("acceptDetail",acceptDetail);
-		modelAndView.setViewName("final/acceptDetail");
+		modelAndView.setViewName("email/acceptDetail");
 		
 		return modelAndView;
 	}
@@ -65,14 +65,14 @@ public class EmailController{
 		Email acceptReply = emailService.AcceptReply(num);
 		
 		modelAndView.addObject("acceptReply",acceptReply);
-		modelAndView.setViewName("final/acceptReply");
+		modelAndView.setViewName("email/acceptReply");
 		return modelAndView;
 	}
 	
 	// 받은메일함 - 답장보내기버튼 클릭
 	@RequestMapping(value = "email/accept/replySend", method = RequestMethod.GET)
 	public String acceptReplySend() throws Exception{
-		return "final/acceptList";
+		return "email/acceptList";
 	}
 	
 	// 받은메일함 - 자세히 보기 - 전달버튼 클릭시
@@ -81,7 +81,7 @@ public class EmailController{
 		Email acceptDelivery = emailService.AcceptDelivery(num);
 		
 		modelAndView.addObject("acceptDelivery",acceptDelivery);
-		modelAndView.setViewName("final/acceptDelivery");
+		modelAndView.setViewName("email/acceptDelivery");
 		
 		return modelAndView;
 	}
@@ -89,7 +89,7 @@ public class EmailController{
 	// 받은메일함 - 자세히보기 - 전달보내기
 	@RequestMapping(value = "email/accept/deliverySend", method = RequestMethod.GET)
 	public String acceptDeliverySend() throws Exception{
-		return "final/acceptList";
+		return "email/acceptList";
 	}
 	
 	// 받은메일함 - 휴지통버튼 클릭
@@ -98,7 +98,7 @@ public class EmailController{
 		Email acceptWastebasket = emailService.AcceptWastebasket(num);
 		
 		modelAndView.addObject("acceptWastebasket",acceptWastebasket);
-		modelAndView.setViewName("final/acceptList");
+		modelAndView.setViewName("email/acceptList");
 		return modelAndView;
 	}
 	
@@ -108,7 +108,7 @@ public class EmailController{
 		int acceptRead = emailService.AcceptRead(num);
 		
 		modelAndView.addObject("acceptRead",acceptRead);
-		modelAndView.setViewName("final/acceptList");
+		modelAndView.setViewName("email/acceptList");
 		return modelAndView;
 	}
 //	@RequestMapping(value = "email/accept/read", method = RequestMethod.POST)
@@ -133,7 +133,7 @@ public class EmailController{
 	public ModelAndView sentList(@RequestParam("id") String id, ModelAndView modelAndView) throws Exception{
 		List<Email> sendList = emailService.SendList(id);
 		modelAndView.addObject("sendList",sendList);
-		modelAndView.setViewName("final/sendList");
+		modelAndView.setViewName("email/sendList");
 		
 		return modelAndView;
 	}
@@ -144,7 +144,7 @@ public class EmailController{
 		Email sendDetail = emailService.AcceptDetail(num);
 		
 		modelAndView.addObject("sendDetail",sendDetail);
-		modelAndView.setViewName("final/sendDetail");
+		modelAndView.setViewName("email/sendDetail");
 		
 		return modelAndView;
 	}
@@ -155,7 +155,7 @@ public class EmailController{
 		Email sendDelivery = emailService.AcceptDelivery(num);
 		
 		modelAndView.addObject("sendDelivery",sendDelivery);
-		modelAndView.setViewName("final/sendDelivery");
+		modelAndView.setViewName("email/sendDelivery");
 		
 		return modelAndView;
 	}
@@ -166,14 +166,14 @@ public class EmailController{
 		int sendWastebasket = emailService.SendWastebasket(num);
 		
 		modelAndView.addObject("sendWastebasket",sendWastebasket);
-		modelAndView.setViewName("final/sendList");
+		modelAndView.setViewName("email/sendList");
 		return modelAndView;
 	}
 		
 	// 보낸메일함 - 전달보내기
 	@RequestMapping(value = "email/send/deliverySend", method = RequestMethod.GET)
 	public String sendDeliverySend() throws Exception{
-		return "final/sendtList";
+		return "email/sendtList";
 	}
 	
 	
@@ -187,7 +187,7 @@ public class EmailController{
 	public ModelAndView wastebasketList(@RequestParam("id") String id, ModelAndView modelAndView) throws Exception{
 		List<Email> wastebasketList = emailService.WastebasketList(id);
 		modelAndView.addObject("wastebasketList",wastebasketList);
-		modelAndView.setViewName("final/wastebasketList");
+		modelAndView.setViewName("email/wastebasketList");
 		return modelAndView;
 	}
 	
@@ -197,7 +197,7 @@ public class EmailController{
 		Email wastebasketDetail = emailService.WastebasketDetail(num);
 		
 		modelAndView.addObject("wastebasketDetail",wastebasketDetail);
-		modelAndView.setViewName("final/wastebasketDetail");
+		modelAndView.setViewName("email/wastebasketDetail");
 		
 		return modelAndView;
 	}
@@ -210,7 +210,7 @@ public class EmailController{
 		
 		int wastebasketRestoration = emailService.WastebasketRestoration(num);
 		modelAndView.addObject("wastebasketRestoration",wastebasketRestoration);
-		modelAndView.setViewName("final/wastebasketList");
+		modelAndView.setViewName("email/wastebasketList");
 		
 		return modelAndView;
 	}
@@ -220,7 +220,7 @@ public class EmailController{
 	public ModelAndView wastebasketDelete(int num, ModelAndView modelAndView) throws Exception{
 		
 		int wastebasketDelete = emailService.WastebasketDelete(num);
-		modelAndView.setViewName("final/wastebasketList");
+		modelAndView.setViewName("email/wastebasketList");
 		return modelAndView;
 	}
 	
@@ -229,7 +229,7 @@ public class EmailController{
 	// 새 메일쓰기
 	@RequestMapping(value = "email/write/open", method = RequestMethod.GET)
 	public String writeOpen() throws Exception{
-		return "final/emailWrite";
+		return "email/emailWrite";
 	}
 	
 	// 새 메일쓰기 - 보내기 버튼
@@ -239,7 +239,7 @@ public class EmailController{
 		System.out.println(modelAndView);
 		int writeSend = emailService.WriteSend(email);
 		
-		modelAndView.setViewName("final/acceptList");
+		modelAndView.setViewName("email/acceptList");
 		return modelAndView;
 	}
 
@@ -269,7 +269,7 @@ public class EmailController{
 //		System.out.println(map.get("id"));
 		
 		modelAndView.addObject("acceptList",acceptList);
-		modelAndView.setViewName("final/acceptList");
+		modelAndView.setViewName("email/acceptList");
 		
 		return modelAndView;
 	}

@@ -92,32 +92,7 @@
 					});
 				});
 			});
-     		 
-     		 
 			
-			/* function checkboxArr(){
-        	var checkArr = []; // 배열 초기화
-        	$("input[name='check']:checked").each(function(i)){
-        		checkArr.push($(this).val()); // 체크된것만 값을 뽑아서 배열에 푸쉬
-        	}
-        	
-        	$.ajax({
-        		url: 'email/accept/chRead',
-        		type: 'get',
-        		dataType: 'text',
-        		data:{
-        			valueArrTest: checkArr
-        		}
-        		
-        	});
-        	}
-		 */
-			
-			
-			
-			
-            
-     		 
 			
         </script>
         <style>
@@ -143,7 +118,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="/exam/email/accept/list?id=111@naver.com">
+                        <a href="${pageContext.request.contextPath}/email/accept/list?id=111@naver.com">
                         <span class="icon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
                         <span class="icon">메일</span>
                         </a>
@@ -192,7 +167,7 @@
                 </section>
                 <section>
                     <div class="title_button">
-                        <button type="button" class="btn btn-info btn-sm btn-block"><a href="/exam/email/write/open"> 메일쓰기</a></button>
+                        <button type="button" class="btn btn-info btn-sm btn-block"><a href="${pageContext.request.contextPath}/email/write/open"> 메일쓰기</a></button>
                     </div>
                 </section>
                 <section>
@@ -210,18 +185,18 @@
                         <ul class="hover_tag">
                             <li>
                                 <div class="form-check form-check-inline">
-                                    <label class="form-check-label" for="inlineCheckbox1"><a href="/exam/email/accept/list?id=111@naver.com">받은 메일함</a></label>
+                                    <label class="form-check-label" for="inlineCheckbox1"><a href="${pageContext.request.contextPath}/email/accept/list?id=111@naver.com">받은 메일함</a></label>
                                 </div>
                             </li>
                             <li>
                                 <div class="form-check form-check-inline">
-                                    <label class="form-check-label" for="inlineCheckbox1"><a href="/exam/email/send/list?id=111@naver.com"> 보낸 메일함</a></label>
+                                    <label class="form-check-label" for="inlineCheckbox1"><a href="${pageContext.request.contextPath}/email/send/list?id=111@naver.com"> 보낸 메일함</a></label>
                                 </div>
                             </li>
                             <li>
                                 <div class="form-check form-check-inline">
                                     
-                                    <label class="form-check-label" for="inlineCheckbox1"><a href="/exam/email/wastebasket/list?id=111@naver.com"> 휴지통</a></label>
+                                    <label class="form-check-label" for="inlineCheckbox1"><a href="${pageContext.request.contextPath}/email/wastebasket/list?id=111@naver.com"> 휴지통</a></label>
                                 </div>
                             </li>
                         </ul>
@@ -248,7 +223,7 @@
                     <div class="col"> </div>
                     <div class="col"></div>
                     <div class="col"><span>
-                    <form action="/exam/email/search" method="get">
+                    <form action="${pageContext.request.contextPath}/email/search" method="get">
                         <div class="input-group justify-content-right nav-search">
                             <input type="text" class="form-control" placeholder="Search" name="word" value="">
                             <div class="input-group-append">
@@ -261,10 +236,10 @@
                 
                 <div class="row">
                     <div class="col nav-menu">
-                        <a href="/exam/email/accept/reply"><input type="submit" class="btn btn-outline-info float-left" value="답장"></a>
-                        <a href="/exam/email/accept/ckRead"><input type="submit" class="btn btn-outline-info float-left" value="읽음"></a>
-                        <a href="/exam/email/accept/delivery"><input type="submit" class="btn btn-outline-info float-left" value="전달"></a> 
-                        <a href="/exam/email/accept/wastebasket"><input id="wastebasket" type="submit" class="btn btn-outline-info float-left" value="휴지통"></a>
+                        <a href="${pageContext.request.contextPath}/email/accept/reply"><input type="submit" class="btn btn-outline-info float-left" value="답장"></a>
+                        <a href="${pageContext.request.contextPath}/email/accept/ckRead"><input type="submit" class="btn btn-outline-info float-left" value="읽음"></a>
+                        <a href="${pageContext.request.contextPath}/email/accept/delivery"><input type="submit" class="btn btn-outline-info float-left" value="전달"></a> 
+                        <a href="${pageContext.request.contextPath}/email/accept/wastebasket"><input id="wastebasket" type="submit" class="btn btn-outline-info float-left" value="휴지통"></a>
                     </div>
                     <div class="col"></div>
                     <div class="col"></div>
@@ -295,7 +270,7 @@
 								<tr>
 	                                <td><input type="checkbox" class="check" name="check" value="${n.emailNumber}"></td>
 	                                <td>${n.emailSend}</td>
-	                                <td><a href="/exam/email/accept/detail?num=${n.emailNumber}">${n.emailTitle}</a></td>
+	                                <td><a href="${pageContext.request.contextPath}/email/accept/detail?num=${n.emailNumber}">${n.emailTitle}</a></td>
 	                                <td><fmt:formatDate value="${n.regDate}" pattern="yy-MM-dd [E] a hh:mm:ss"></fmt:formatDate></td>
 	                                
 	                            </tr>
@@ -323,15 +298,15 @@
             <div>
 			  <ul>
 			    <c:if test="${pageMaker.prev}">
-			    	<li><a href="/exam/page${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
+			    	<li><a href="${pageContext.request.contextPath}/page${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
 			    </c:if> 
 			
 			    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
-			    	<li><a href="/exam/page${pageMaker.makeQuery(idx)}?id=111@naver.com">${idx}</a></li>
+			    	<li><a href="${pageContext.request.contextPath}/page${pageMaker.makeQuery(idx)}?id=111@naver.com">${idx}</a></li>
 			    </c:forEach>
 			
 			    <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-			    	<li><a href="/exam/page${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
+			    	<li><a href="${pageContext.request.contextPath}/page${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
 			    </c:if>
 			  </ul>
 			</div>
