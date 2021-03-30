@@ -259,17 +259,17 @@ public class EmailController{
 //	}
 	
 	@RequestMapping(value = "email/search", method = RequestMethod.GET)
-	public ModelAndView EmailSearch(String word, ModelAndView modelAndView,String id) throws Exception{
+	public ModelAndView EmailSearch(String word, ModelAndView modelAndView) throws Exception{
+		
 		List<Email> acceptList = emailService.EmailSearch(word);
+//		Map<String, String> map = new HashMap<String, String>();
+//		map.put("word", word);
+//		map.put("id", id);
+//		System.out.println(map.get("word"));
+//		System.out.println(map.get("id"));
 		
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("word", word);
-		map.put("id", id);
-		System.out.println(map.get("word"));
-		System.out.println(map.get("id"));
-		
-		//modelAndView.addObject("acceptList",acceptList);
-		//modelAndView.setViewName("final/acceptList");
+		modelAndView.addObject("acceptList",acceptList);
+		modelAndView.setViewName("final/acceptList");
 		
 		return modelAndView;
 	}
