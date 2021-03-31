@@ -261,26 +261,26 @@ public class EmailController{
 //		modelAndView.setViewName("final/acceptList");
 //		
 //		return modelAndView;
-//		
+//
 //	}
-	
+
 	@RequestMapping(value = "email/search", method = RequestMethod.GET)
 	public ModelAndView EmailSearch(String word, ModelAndView modelAndView) throws Exception{
-		
+
 		List<Email> acceptList = emailService.EmailSearch(word);
 //		Map<String, String> map = new HashMap<String, String>();
 //		map.put("word", word);
 //		map.put("id", id);
 //		System.out.println(map.get("word"));
 //		System.out.println(map.get("id"));
-		
+
 		modelAndView.addObject("acceptList",acceptList);
 		modelAndView.setViewName("email/acceptList");
-		
+
 		return modelAndView;
 	}
-	
-	
+
+
 	// 게시판 페이지 목록 조회
 //	@RequestMapping(value = "page", method = RequestMethod.GET)
 //	public String list(Model model, Criteria cri) throws Exception{

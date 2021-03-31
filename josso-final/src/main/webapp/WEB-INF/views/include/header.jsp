@@ -10,7 +10,7 @@
                 </a>
             </li>
             <li>
-                <a href="/josso/email/accept/list">
+                <a href="/josso/email/accept/list?id=${employee.employeeEmail}">
                 <span class="icon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
                 <span class="icon">메일</span>
                 </a>
