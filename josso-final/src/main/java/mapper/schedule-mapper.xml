@@ -13,15 +13,17 @@
 		<result property="scheduleStartTime" column="SCHEDULE_START_TIME"></result>
 		<result property="scheduleEndDate" column="SCHEDULE_END_DATE"></result>
 		<result property="scheduleEndTime" column="SCHEDULE_END_TIME"></result>
+		<result property="employeeNumber" column="EMPLOYEE_NUMBER"></result>
 	</resultMap>
 	
 	<!-- Schedule 등록(register) -->
 	<insert id="insertSchedule" parameterType="Schedule">
 		INSERT INTO SCHEDULE(SCHEDULE_TITLE, SCHEDULE_PLACE,
 		SCHEDULE_CONTENT, SCHEDULE_START_DATE, SCHEDULE_START_TIME,
-		SCHEDULE_END_DATE, SCHEDULE_END_TIME) VALUES(#{scheduleTitle},
+		SCHEDULE_END_DATE, SCHEDULE_END_TIME, EMPLOYEE_NUMBER) VALUES(#{scheduleTitle},
 		 #{schedulePlace}, #{scheduleContent}, #{scheduleStartDate},
-		 #{scheduleStartTime}, #{scheduleEndDate}, #{scheduleEndTime})
+		 #{scheduleStartTime}, #{scheduleEndDate}, #{scheduleEndTime},
+		 #{employeeNumber})
 	</insert>
 	<!-- Schedule 전체 조회 -->
 	<select id="selectSchedule" resultMap="resultSchedule">

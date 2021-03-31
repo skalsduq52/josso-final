@@ -3,6 +3,8 @@ package com.josso.schedule.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.josso.employee.vo.Employee;
 import com.josso.schedule.service.ScheduleService;
 import com.josso.schedule.vo.Schedule;
 
@@ -22,7 +25,7 @@ public class ScheduleController {
 	@Autowired
 	ScheduleService ss;
 	
-//	@ResponseBody
+	// schedule 화면
 	@RequestMapping(value="schedule", method=RequestMethod.GET)
 	public ModelAndView schedule() throws Exception {
 		
@@ -49,6 +52,7 @@ public class ScheduleController {
 		return mv;
 	}
 	
+	// ajax를 이용한 schedule 목록 출력
 	@ResponseBody
 	@RequestMapping(value="scheduleListAll", method=RequestMethod.POST, produces="text/plain;charset=UTF-8")
 	public String scheduleListAll() throws Exception{
@@ -80,12 +84,23 @@ public class ScheduleController {
 		
 		ModelAndView mv = new ModelAndView();
 		
+		
+		
 		mv.setViewName("schedule.scheduleWrite");
 		return mv;
 	}
 	
+	@RequestMapping(value="attendeeList", method=RequestMethod.POST)
+	public ModelAndView attendeeList() {
+		
+		ModelAndView mv = new ModelAndView();
+		
+		return mv;
+	}
+	
 	@RequestMapping(value="schedule/register", method=RequestMethod.POST)
-	public ModelAndView insertSchedule(Schedule schedule, ModelAndView mv) throws Exception {
+	public ModelAndView insertSchedule(Schedule schedule, HttpSession session,
+			ModelAndView mv) throws Exception {
 		
 		System.out.println(schedule.getScheduleTitle());
 		System.out.println(schedule.getScheduleContent());
@@ -94,6 +109,10 @@ public class ScheduleController {
 		System.out.println(schedule.getScheduleStartTime());
 		System.out.println(schedule.getScheduleEndDate());
 		System.out.println(schedule.getScheduleEndTime());
+		
+		Employee emp = (Employee) session.getAttribute("employee");
+
+		schedule.setEmployeeNumber(emp.getEmployeeNumber());
 		
 		String result = Integer.toString(ss.insertSchedule(schedule));
 		

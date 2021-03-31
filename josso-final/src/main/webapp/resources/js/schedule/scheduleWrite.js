@@ -1,11 +1,30 @@
 $(function() {
 	$('.hover_team1').click(function() {
 		var submenu = $('.modal_mb1');
+//		var department = $('.hover_team1')
 		if (submenu.is(":visible")) {
 			submenu.slideUp();
+//			닫힐 떄
 		} else {
 			submenu.slideDown();
+//			$.ajax({
+//				url: '/josso/attendeeList',
+//				type: 'POST',
+//			    data: {
+//			    	department
+//				}
+//				success: function(result) {
+//					console.log(result);
+//				},
+//				error : function(request, status, errorData){
+//					alert("error code : "+request.status + "\n"
+//						+ "message : "+request.responseText + "\n"
+//						+ "error : "+errorData);
+//				}
+//			});
+//			열릴 때
 		}
+		
 	});
 	$('.hover_team2').click(function() {
 		var submenu = $('.modal_mb2');
@@ -37,9 +56,9 @@ $(function() {
 			backdrop : false,
 			show : true
 		});
-		$('.modal-dialog').draggable({
-			handle : ".modal-header"
-		});
+//		$('.modal-dialog').draggable({
+//			handle : ".modal-header"
+//		});
 	});
 });
 //$(function() {

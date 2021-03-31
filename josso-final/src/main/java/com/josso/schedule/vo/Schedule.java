@@ -12,12 +12,16 @@ public class Schedule {
 	private String scheduleStartTime;	// 일정시작시간
 	private String scheduleEndDate;	// 일정종료날짜
 	private String scheduleEndTime;	// 일정종료시간
+	private String employeeNumber;	// 사원번호
 	
 	public Schedule() {}
 
+	
+
 	public Schedule(String scheduleNumber, String scheduleTitle, String schedulePlace, String scheduleContent,
 			String attendee, String scheduleStartDate, String scheduleStartTime, String scheduleEndDate,
-			String scheduleEndTime) {
+			String scheduleEndTime, String employeeNumber) {
+		super();
 		this.scheduleNumber = scheduleNumber;
 		this.scheduleTitle = scheduleTitle;
 		this.schedulePlace = schedulePlace;
@@ -27,6 +31,7 @@ public class Schedule {
 		this.scheduleStartTime = scheduleStartTime;
 		this.scheduleEndDate = scheduleEndDate;
 		this.scheduleEndTime = scheduleEndTime;
+		this.employeeNumber = employeeNumber;
 	}
 
 	public String getScheduleNumber() {
@@ -101,6 +106,12 @@ public class Schedule {
 		this.scheduleEndTime = scheduleEndTime;
 	}
 
-	
-	
+	public String getEmployeeNumber() {
+		return employeeNumber;
+	}
+
+	public void setEmployeeNumber(String employeeNumber) {
+		this.employeeNumber = employeeNumber;
+	}
+
 }

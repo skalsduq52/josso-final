@@ -182,34 +182,42 @@
 						</div>
 						<div class="modal-body">
 							<ul>
-								<li class="hover_team1"><a href="#"> <i
-										class="fas fa-sort-down fa-rotate-270" style="color: gray"></i>
-										영업팀
-								</a></li>
+								<li class="hover_team1">
+									<a href="#"> 
+										<i class="fas fa-sort-down fa-rotate-270" style="color: gray"></i>
+										운영팀
+									</a>
+								</li>
 								<ul class="modal_mb1">
 									<li>안태민</li>
 									<li>안태민</li>
 								</ul>
-								<li class="hover_team2"><a href="#"> <i
-										class="fas fa-sort-down fa-rotate-270" style="color: gray"></i>
-										지원팀
-								</a></li>
+								<li class="hover_team2">
+									<a href="#"> 
+										<i class="fas fa-sort-down fa-rotate-270" style="color: gray"></i>
+										개발팀
+									</a>
+								</li>
 								<ul class="modal_mb2">
 									<li>안태민</li>
 									<li>안태민</li>
 								</ul>
-								<li class="hover_team3"><a href="#"> <i
-										class="fas fa-sort-down fa-rotate-270" style="color: gray"></i>
-										개발팀
-								</a></li>
+								<li class="hover_team3">
+									<a href="#"> 
+										<i class="fas fa-sort-down fa-rotate-270" style="color: gray"></i>
+										영업팀
+									</a>
+								</li>
 								<ul class="modal_mb3">
 									<li>안태민</li>
 									<li>안태민</li>
 								</ul>
-								<li class="hover_team4"><a href="#"> <i
-										class="fas fa-sort-down fa-rotate-270" style="color: gray"></i>
-										운영팀
-								</a></li>
+								<li class="hover_team4">
+									<a href="#"> 
+										<i class="fas fa-sort-down fa-rotate-270" style="color: gray"></i>
+										지원팀
+									</a>
+								</li>
 								<ul class="modal_mb4">
 									<li>안태민</li>
 									<li>안태민</li>
