@@ -53,6 +53,11 @@
 		UPDATE EMAIL SET EMAIL_READ = CASE WHEN EMAIL_READ = 'YES' THEN 'NO' ELSE 'YES' END WHERE EMAIL_NUMBER = #{num}
 	</update>
 	
+	<!-- 메일 자세히보기(제목클릭) 할 경우 자동 읽음처리 -->
+	<!-- <update id="AutoRead" parameterType="Email">
+		UPDATE EMAIL SET EMAIL_READ = 'YES' WHERE EMAIL_NUMBER = #{num}
+	</update> -->
+	
 	<!-- 1. 메일함 - 자세히보기 - 휴지통 or 2. 휴지통 - 자세히보기 - 복구 버튼 클릭 -->
 	<update id="AcceptWastebasket" parameterType="Email">
 		UPDATE EMAIL SET EMAIL_WASTEBASKET = CASE WHEN EMAIL_WASTEBASKET = 'YES' THEN 'NO' ELSE 'YES' END WHERE EMAIL_NUMBER = #{num}

@@ -26,6 +26,9 @@ public interface EmailService {
 
 	// 받은메일함 - 자세히보기 - 읽음/안읽음
 	public int AcceptRead(int num) throws Exception;
+	
+	// 자세히보기(제목클릭) 할 경우 자동 읽음처리
+//	public int AutoRead(int num) throws Exception;
 
 	// 받은메일함 - 자세히보기 - 휴지통버튼
 	public Email AcceptWastebasket(int num) throws Exception;

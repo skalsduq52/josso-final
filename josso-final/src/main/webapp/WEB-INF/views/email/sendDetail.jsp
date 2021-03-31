@@ -218,10 +218,10 @@
                     <div class="col nav-menu">
                         	<a href="${pageContext.request.contextPath}/email/accept/reply?num=${sendDetail.emailNumber}"><input type="submit" class="btn btn-outline-info float-left" value="답장"></a>
 	                        	<c:if test="${sendDetail.emailRead eq 'NO'}">
-		                        <a href="${pageContext.request.contextPath}/email/accept/read?num=${sendDetail.emailNumber}"><input type="submit" class="btn btn-outline-info float-left" value="읽음"></a>
+		                        	<a href="${pageContext.request.contextPath}/email/accept/read?num=${sendDetail.emailNumber}"><input type="submit" class="btn btn-outline-info float-left" value="읽음"></a>
 		                        </c:if>
 		                        <c:if test="${sendDetail.emailRead eq 'YES'}">
-		                        <a href="${pageContext.request.contextPath}/email/accept/read?num=${sendDetail.emailNumber}"><input type="submit" class="btn btn-outline-info float-left" value="안읽음"></a>
+		                        	<a href="${pageContext.request.contextPath}/email/accept/read?num=${sendDetail.emailNumber}"><input type="submit" class="btn btn-outline-info float-left" value="안읽음"></a>
 		                        </c:if>
 	                        <a href="${pageContext.request.contextPath}/email/send/delivery?num=${sendDetail.emailNumber}"><input type="submit" class="btn btn-outline-info float-left" value="전달"></a>
 	                        <a href="${pageContext.request.contextPath}/email/send/wastebasket?num=${sendDetail.emailNumber}"><input type="submit" class="btn btn-outline-info float-left" value="휴지통"></a>

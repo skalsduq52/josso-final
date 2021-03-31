@@ -64,6 +64,12 @@ public class EmailServiceImpl implements EmailService{
 		return cnt;
 	}
 	
+	// 자세히보기(제목클릭) 할 경우 자동 읽음처리
+//	public int AutoRead(int num) throws Exception{
+//		int cnt = emailDao.AutoRead(num);
+//		return cnt;
+//	}
+	
 	// 받은메일함 - 자세히보기 - 휴지통버튼 클릭
 	public Email AcceptWastebasket(int num) throws Exception{
 		Email acceptWastebasket = emailDao.AcceptWastebasket(num);

@@ -53,6 +53,7 @@ public class EmailController{
 	// 받은메일함 - 자세히보기(완성)
 	@RequestMapping(value = "email/accept/detail", method = RequestMethod.GET)
 	public ModelAndView acceptDetail(int num, ModelAndView modelAndView) throws Exception{
+//		int cnt = emailService.AutoRead(num);
 		Email acceptDetail = emailService.AcceptDetail(num);
 		
 		modelAndView.addObject("acceptDetail",acceptDetail);
@@ -64,6 +65,7 @@ public class EmailController{
 	// 받은메일함 - 자세히보기 - 답장버튼 클릭(완성)
 	@RequestMapping(value = "email/accept/reply", method = RequestMethod.GET)
 	public ModelAndView acceptReply(int num, ModelAndView modelAndView) throws Exception{
+		
 		Email acceptReply = emailService.AcceptReply(num);
 		
 		modelAndView.addObject("acceptReply",acceptReply);
