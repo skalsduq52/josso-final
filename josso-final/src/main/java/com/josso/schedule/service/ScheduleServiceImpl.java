@@ -1,5 +1,7 @@
 package com.josso.schedule.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +13,14 @@ public class ScheduleServiceImpl implements ScheduleService{
 
 	@Autowired
 	ScheduleDao sd;
+	
+	@Override
+	public List<Schedule> selectScheduleAll() throws Exception{
+		
+		List<Schedule> scheduleList = sd.selectScheduleAll();
+		
+		return scheduleList;
+	}
 	
 	@Override
 	public int insertSchedule(Schedule schedule) throws Exception {

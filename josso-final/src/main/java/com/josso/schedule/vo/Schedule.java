@@ -8,33 +8,21 @@ public class Schedule {
 	private String schedulePlace;	// 일정장소
 	private String scheduleContent;	// 일정내용
 	private String Attendee;		// 참석자
-	private Date scheduleStartDate;	// 일정시작날짜
-	private Date scheduleStartTime;	// 일정시작시간
-	private Date scheduleEndDate;	// 일정종료날짜
-	private Date scheduleEndTime;	// 일정종료시간
+	private String scheduleStartDate;	// 일정시작날짜
+	private String scheduleStartTime;	// 일정시작시간
+	private String scheduleEndDate;	// 일정종료날짜
+	private String scheduleEndTime;	// 일정종료시간
 	
 	public Schedule() {}
 
 	public Schedule(String scheduleNumber, String scheduleTitle, String schedulePlace, String scheduleContent,
-			String attendee, Date scheduleStartDate, Date scheduleStartTime, Date scheduleEndDate,
-			Date scheduleEndTime) {
+			String attendee, String scheduleStartDate, String scheduleStartTime, String scheduleEndDate,
+			String scheduleEndTime) {
 		this.scheduleNumber = scheduleNumber;
 		this.scheduleTitle = scheduleTitle;
 		this.schedulePlace = schedulePlace;
 		this.scheduleContent = scheduleContent;
-		this.Attendee = attendee;
-		this.scheduleStartDate = scheduleStartDate;
-		this.scheduleStartTime = scheduleStartTime;
-		this.scheduleEndDate = scheduleEndDate;
-		this.scheduleEndTime = scheduleEndTime;
-	}
-
-	public Schedule(String scheduleNumber, String scheduleTitle, String schedulePlace, String scheduleContent,
-			Date scheduleStartDate, Date scheduleStartTime, Date scheduleEndDate, Date scheduleEndTime) {
-		this.scheduleNumber = scheduleNumber;
-		this.scheduleTitle = scheduleTitle;
-		this.schedulePlace = schedulePlace;
-		this.scheduleContent = scheduleContent;
+		Attendee = attendee;
 		this.scheduleStartDate = scheduleStartDate;
 		this.scheduleStartTime = scheduleStartTime;
 		this.scheduleEndDate = scheduleEndDate;
@@ -81,43 +69,38 @@ public class Schedule {
 		Attendee = attendee;
 	}
 
-	public Date getScheduleStartDate() {
+	public String getScheduleStartDate() {
 		return scheduleStartDate;
 	}
 
-	public void setScheduleStartDate(Date scheduleStartDate) {
+	public void setScheduleStartDate(String scheduleStartDate) {
 		this.scheduleStartDate = scheduleStartDate;
 	}
 
-	public Date getScheduleStartTime() {
+	public String getScheduleStartTime() {
 		return scheduleStartTime;
 	}
 
-	public void setScheduleStartTime(Date scheduleStartTime) {
+	public void setScheduleStartTime(String scheduleStartTime) {
 		this.scheduleStartTime = scheduleStartTime;
 	}
 
-	public Date getScheduleEndDate() {
+	public String getScheduleEndDate() {
 		return scheduleEndDate;
 	}
 
-	public void setScheduleEndDate(Date scheduleEndDate) {
+	public void setScheduleEndDate(String scheduleEndDate) {
 		this.scheduleEndDate = scheduleEndDate;
 	}
 
-	public Date getScheduleEndTime() {
+	public String getScheduleEndTime() {
 		return scheduleEndTime;
 	}
 
-	public void setScheduleEndTime(Date scheduleEndTime) {
+	public void setScheduleEndTime(String scheduleEndTime) {
 		this.scheduleEndTime = scheduleEndTime;
 	}
 
-	@Override
-	public String toString() {
-		return "Schedule [scheduleNumber=" + scheduleNumber + ", scheduleTitle=" + scheduleTitle + ", schedulePlace="
-				+ schedulePlace + ", scheduleContent=" + scheduleContent + ", Attendee=" + Attendee
-				+ ", scheduleStartDate=" + scheduleStartDate + ", scheduleStartTime=" + scheduleStartTime
-				+ ", scheduleEndDate=" + scheduleEndDate + ", scheduleEndTime=" + scheduleEndTime + "]";
-	}
+	
+	
 }

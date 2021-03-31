@@ -1,13 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 	<title><tiles:getAsString name="title" /></title>  
-		<link rel="stylesheet" type="text/css"  href="${pageContext.request.contextPath}/resources/css/common.css"></link>
-		<link rel="stylesheet" type="text/css"  href="${pageContext.request.contextPath}/resources/css/schedule/scheduleList.css"></link>
+		<link rel="stylesheet" type="text/css"  href="<c:url value="/resources/css/common.css"/>"></link>
+		<link rel="stylesheet" type="text/css"  href="<c:url value="/resources/css/schedule/scheduleList.css"/>"></link>
+		<link rel="stylesheet" type="text/css"  href="<c:url value="/resources/css/fullcalendar/main.min.css"/>"></link>
         <!-- 외부 글꼴 적용 시 링크 -->
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
@@ -25,10 +27,11 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <!-- fullcalendar css -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/main.min.css">
-        <!-- fullcalendar js -->
-        <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/main.min.js"></script>
-		<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
-        <script src="${pageContext.request.contextPath}/resources/js/schedule/scheduleList.js"></script>
+        <!-- js -->
+        <script src="<c:url value="/resources/js/schedule/scheduleList.js" />"></script>
+        <script src="<c:url value="/resources/js/fullcalendar/ko.js" />"></script>
+        <script src="<c:url value="/resources/js/fullcalendar/main.min.js" />"></script>
+        <script src="<c:url value="/resources/js/main.js" />"></script>
 </head>
 <body class="body">
 	<!-- header 부분 -->

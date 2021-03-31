@@ -8,7 +8,7 @@
 		</nav>
 		<main>
 			<div>
-				<form action="/josso/schedule/register" method="post">
+				<form action="${pageContext.request.contextPath}/schedule/register" method="post">
 					<table class="form_type">
 						<tbody>
 							<tr>
@@ -27,10 +27,10 @@
 	                                        </div>
 	                                    </div> -->
 									<div class="date_ipt">
-										<span> <img src="${pageContext.request.contextPath}/resources/images/달력이미지.png"> <input
-											type="text" class="start_date" name="scheduleStartDate" data-provide="datepicker"
-											value=""> <!-- <input type="text" class="time_date dropdown-toggle" value=""> -->
-											<select name="scheduleStartTime">
+										<span> <%-- <img src="${pageContext.request.contextPath}/resources/images/달력이미지.png">  --%>
+										<input type="date" class="start_date" name="scheduleStartDate" value=""> <!-- <input type="text" class="time_date dropdown-toggle" value=""> -->
+										<input type="time" name="scheduleStartTime">	
+											<!-- <select name="scheduleStartTime">
 												<option value="00:00">00:00</option>
 												<option value="00:30">00:30</option>
 												<option value="01:00">01:00</option>
@@ -77,11 +77,11 @@
 												<option value="22:30">22:30</option>
 												<option value="23:00">23:00</option>
 												<option value="23:30">23:30</option>
-										</select>
-										</span> ~ <span> <img src="${pageContext.request.contextPath}/resources/images/달력이미지.png"> <input
-											type="text" class="end_date" name="scheduleEndDate" data-provide="datepicker"
-											value=""> <!-- <input type="text" class="time_date" value=""> -->
-											<select name="scheduleEndTime">
+										</select> -->
+										</span> ~ <span> <%-- <img src="${pageContext.request.contextPath}/resources/images/달력이미지.png"> --%> 
+											<input type="date" class="start_date" name="scheduleEndDate" value=""> <!-- <input type="text" class="time_date dropdown-toggle" value=""> -->
+											<input type="time" name="scheduleEndTime">	 <!-- <input type="text" class="time_date" value=""> -->
+											<!-- <select name="scheduleEndTime">
 												<option value="00:00">00:00</option>
 												<option value="00:30">00:30</option>
 												<option value="01:00">01:00</option>
@@ -128,7 +128,7 @@
 												<option value="22:30">22:30</option>
 												<option value="23:00">23:00</option>
 												<option value="23:30">23:30</option>
-										</select>
+										</select> -->
 										</span>
 									</div>
 								</td>

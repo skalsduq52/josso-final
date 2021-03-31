@@ -1,5 +1,7 @@
 package com.josso.schedule.model.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -14,6 +16,13 @@ public class ScheduleDao {
 	
 	public ScheduleDao() {
 		// TODO Auto-generated constructor stub
+	}
+	
+	public List<Schedule> selectScheduleAll() throws Exception{
+		
+		List<Schedule> scheduleList = sqlSession.selectList("Schedule.selectSchedule");
+		
+		return scheduleList;
 	}
 	
 	public int scheduleRegister(Schedule schedule) throws Exception{
