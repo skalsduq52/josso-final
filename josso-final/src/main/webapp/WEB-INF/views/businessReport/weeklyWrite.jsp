@@ -268,29 +268,29 @@
                         <tr style="height: 60px;">
                             <th class="left_td"></th>
                             <th class="report_date">
-                                <input type="date" name="thisWeekDate1">　∼　<input type="date" name="thisWeekDate2"></th><br>
+                                <input type="date" name="thisStart" required>　∼　<input type="date" name="thisEnd" required></th><br>
                             <th class="report_date">
-                                <input type="date" name="nextWeekDate1">　∼　<input type="date" name="nextWeekDate2"></th><br>
+                                <input type="date" name="nextStart" required>　∼　<input type="date" name="nextEnd" required></th><br>
                         </tr>
                         <tr>
                             <th class="left_td">고객(사) 미팅</th>
-                            <td class="right_td1"><textarea class="write_area" type="text"></textarea></td>
-                            <td class="right_td2"><textarea class="write_area" type="text"></textarea></td>
+                            <td class="right_td1"><textarea class="write_area" name="thisMeeting"></textarea></td>
+                            <td class="right_td2"><textarea class="write_area" name="nextMeeting"></textarea></td>
                         </tr>
                         <tr >
                             <th class="left_td">회의 내용</th>
-                            <td class="right_td1"><textarea class="write_area" type="text"></textarea></td>
-                            <td class="right_td2"><textarea class="write_area" type="text"></textarea></td>
+                            <td class="right_td1"><textarea class="write_area" name="thisConference"></textarea></td>
+                            <td class="right_td2"><textarea class="write_area" name="nextConference"></textarea></td>
                         </tr>
                         <tr >
                             <th class="left_td">프로젝트</th>
-                            <td class="right_td1"><textarea class="write_area" type="text"></textarea></td>
-                            <td class="right_td2"><textarea class="write_area" type="text"></textarea></td>
+                            <td class="right_td1"><textarea class="write_area" name="thisProject"></textarea></td>
+                            <td class="right_td2"><textarea class="write_area" name="nextProject"></textarea></td>
                         </tr>
                         <tr id="write_content">
                             <th class="left_td">특이사항</th>
-                            <td class="right_td1"><textarea class="write_area" type="text"></textarea></td>
-                            <td class="right_td2"><textarea class="write_area" type="text"></textarea></td>
+                            <td class="right_td1"><textarea class="write_area" name="thisEtc"></textarea></td>
+                            <td class="right_td2"><textarea class="write_area" name="nextEtc"></textarea></td>
                         </tr>
                     </tbody>    
                 </table>

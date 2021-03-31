@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -98,6 +100,7 @@
 
             #theme {
                 padding-left: 70px;
+                font-weight:bold;
             }
 
             .bottom_area {
@@ -218,84 +221,27 @@
                 <table style="width: 100%;" id="board">
                     <thead>
                         <tr class="border-bottom" style="height: 40px;">
-                            <th id="tdnum" style="width: 10%;">번호</th>
-                            <th id="theme" style="width: 50%">제목</th>
-                            <th style="width: 15%">작성자</th>
-                            <th style="width: 15%">작성일</th>
-                            <th style="width: 10%">조회</th>
+                            <th id="tdnum" style="width: 7%;">번호</th>
+                            <th style="width: 3%;">부서</th>
+                            <th id="theme" style="width: 20%">제목</th>
+                            <th style="width: 5%">작성자</th>
+                            <th style="width: 5%">직급</th>
+                            <th style="width: 10%">작성일</th>
                         </tr>
                     </thead>
                     <tbody>
+                    	<c:forEach var="ws" items="${ws}" varStatus="status">
                         <tr>
-                            <td id="tdnum">10</td>
-                            <td id="theme">3월 3주차 주간 업무보고 드립니다!! 열심히 하겠습니다!</td>
-                            <td>안태민 대표이사</td>
-                            <td>2020-03-16</td>
-                            <td id="selectnum">121</td>
+                            <td id="tdnum">${ws.reportNumber}</td>
+                            <td>${ws.departmentCode}</td>
+                            <td id="theme"><a href="">${sendTitle[status.index]}</a></td>
+                            <td>${ws.employeeName }</td>
+                            <td>${ws.rankCode }</td>
+                            <td><fmt:formatDate value="${ws.writeTime }" pattern="yy년 MM월 dd일 / HH시 mm분"/></td>
+                            <!-- <td>${ws.writeTime }</td>  -->
                         </tr>
-                        <tr>
-                            <td id="tdnum">9</td>
-                            <td id="theme">3월 3주차 주간 업무보고</td>
-                            <td>신세경 대리</td>
-                            <td>2020-03-16</td>
-                            <td id="selectnum">989</td>
-                        </tr>
-                        <tr>
-                            <td id="tdnum">8</td>
-                            <td id="theme">3월 3주차 주간 업무보고</td>
-                            <td>배수지 주임</td>
-                            <td>2020-03-16</td>
-                            <td id="selectnum">971</td>
-                        </tr>
-                        <tr>
-                            <td id="tdnum">7</td>
-                            <td id="theme">March week '3' report</td>
-                            <td>포그바 대리</td>
-                            <td>2020-03-16</td>
-                            <td id="selectnum">1</td>
-                        </tr>
-                        <tr>
-                            <td id="tdnum">6</td>
-                            <td id="theme">3월 3주차 주간 업무보고</td>
-                            <td>최낙도 팀장</td>
-                            <td>2020-03-16</td>
-                            <td id="selectnum">1</td>
-                        </tr>
-                        <tr>
-                            <td id="tdnum">5</td>
-                            <td id="theme">3월 3주차 주간 업무보고</td>
-                            <td>김재윤 본부장</td>
-                            <td>2020-03-16</td>
-                            <td id="selectnum">1</td>
-                        </tr>
-                        <tr>
-                            <td id="tdnum">4</td>
-                            <td id="theme">3월 3주차 주간 업무보고</td>
-                            <td>나민엽 대리</td>
-                            <td>2020-03-16</td>
-                            <td id="selectnum">1</td>
-                        </tr>
-                        <tr>
-                            <td id="tdnum">3</td>
-                            <td id="theme">3월 3주차 주간 업무보고,</td>
-                            <td>김우영(외부인)</td>
-                            <td>2020-03-16</td>
-                            <td id="selectnum">1</td>
-                        </tr>
-                        <tr>
-                            <td id="tdnum">2</td>
-                            <td id="theme">3월 3주차 주간 업무보고</td>
-                            <td>최민재 본부장</td>
-                            <td>2020-03-16</td>
-                            <td id="selectnum">1</td>
-                        </tr>
-                        <tr>
-                            <td id="tdnum">1</td>
-                            <td id="theme">3월 3주차 주간 업무보고</td>
-                            <td>홍수명 팀장</td>
-                            <td>2020-03-16</td>
-                            <td id="selectnum">0</td>
-                        </tr>
+                    	</c:forEach>
+
                     </tbody>    
                 </table>
             </div>

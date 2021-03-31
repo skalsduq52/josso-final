@@ -20,15 +20,69 @@
 		<result property="nextConference" column="NEXT_CONFERENCE"/>
 		<result property="nextProject" column="NEXT_PROJECT"/>
 		<result property="nextEtc" column="NEXT_ETC"/>
+		<result property="employeeName" column="EMPLOYEE_NAME"/>
+		<result property="departmentCode" column="DEPARTMENT_CODE"/>
+		<result property="rankCode" column="RANK_CODE"/>
 	</resultMap>
 	
-	<!-- 조지자 
-	<insert></insert>
-	<select></select>
-	<update></update>
-	<delete></delete>
-	 -->
+	<!-- 주간업무보고 -->
+	
+	<!-- 모든 게시물 리스트 -->
+	<select id="selectList" resultMap="weeklyReport">
+		SELECT REPORT_WEEK.*, EMPLOYEE.EMPLOYEE_NAME, EMPLOYEE.DEPARTMENT_CODE, RANK_CODE FROM EMPLOYEE, REPORT_WEEK WHERE EMPLOYEE.EMPLOYEE_NUMBER = REPORT_WEEK.WRITER ORDER BY REPORT_NUM DESC
+	</select>
+	
+	<!-- 해당 게시물 디테일 페이지 -->
+	<select id="selectDetailPage" resultMap="weeklyReport" parameterType="String">
+		SELECT * FROM REPORT_WEEK WHERE REPORT_NUM = #{reportNumber}
+	</select>
+	
+	<!-- 검색(작성자, 제목으로 검색) -->
+	<select id="searchBy" resultMap="weeklyReport" parameterType="String">
+		SELECT * FROM REPORT_WEEK WHERE
+		<where>
+			<if test="writer != null">
+				WRITER LIKE '%' || #{writer} || '%' ORDER BY REPORT_NUM DESC
+			</if>
+			<if test="reportTitle != null">
+				REPORT_TITLE LIKE '%' || #{reportTitle} || '%' ORDER BY REPORT_NUM DESC
+			</if>
+		</where>
+	</select>
+	
+
+	<!-- 작성  -->
+	<insert id="reportWrite" parameterType="weeklyReport">
+		INSERT INTO REPORT_WEEK(REPORT_TITLE, WRITER, WRITE_TIME, THIS_START, THIS_END, THIS_MEETING, 
+								THIS_CONFERENCE, THIS_PROJECT, THIS_ETC, NEXT_START, NEXT_END, NEXT_MEETING, 
+								NEXT_CONFERENCE, NEXT_PROJECT, NEXT_ETC)
+								
+		VALUES (#{reportTitle}, #{writer}, SYSDATE, #{thisStart}, #{thisEnd}, #{thisMeeting}, #{thisConference}, #{thisProject}, #{thisEtc}, 
+			   #{nextStart}, #{nextEnd}, #{nextMeeting}, #{nextConference}, #{nextProject}, #{nextEtc})
+	</insert>
+	
+	<!-- 수정 -->
+	<update id="reportUpdate" parameterType="weeklyReport">
+		UPDATE REPORT_WEEK SET 
+			THIS_START = #{thisStart},
+			THIS_END = #{thisEnd},
+			THIS_MEETING = #{thisMeeting},
+			THIS_CONFERENCE = #{thisConfercence},
+			THIS_PROJECT = #{thisProject},
+			THIS_ETC = #{thisEtc},
+			NEXT_START = #{nextStart},
+			NEXT_END = #{nextEnd},
+			NEXT_MEETING = #{nextMeeting},
+			NEXT_CONFERENCE = #{nextConfercence},
+			NEXT_PROJECT = #{nextProject},
+			NEXT_ETC = #{nextEtc}
+		WHERE REPORT_NUM = #{reportNumber}
+	</update>
+	
+	<!-- 삭제 -->
+	<delete id="reportDelete" parameterType="weeklyReport">
+		DELETE FROM REPORT_WEEK WHERE REPORT_NUMBER = #{reportNumber}
+	</delete>
 
 </mapper>
 
-<!-- 수정 -->

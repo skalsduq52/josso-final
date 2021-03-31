@@ -25,14 +25,13 @@ public class MonthlyReport {
 	// 생성자
 	public MonthlyReport() {}
 
-	
 	// 메소드
-	public int getReportSeq() {
+	public int getReportNumber() {
 		return reportNumber;
 	}
 	
-	public void setReportSeq(int reportSeq) {
-		this.reportNumber = reportSeq;
+	public void setReportNumber(int reportNumber) {
+		this.reportNumber = reportNumber;
 	}
 	
 	public String getReportTitle() {
@@ -138,6 +137,7 @@ public class MonthlyReport {
 	public void setNextEtc(String nextEtc) {
 		this.nextEtc = nextEtc;
 	}
+
 
 	
 	

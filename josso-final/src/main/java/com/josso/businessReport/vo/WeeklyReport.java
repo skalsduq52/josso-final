@@ -5,7 +5,7 @@ import java.util.Date;
 public class WeeklyReport {
 	
 	// 필드부
-	private int reportNumber;				// 게시글 번호
+	private int reportNumber;			// 게시글 번호
 	private String reportTitle;			// 제목
 	private String writer;				// 작성자
 	private Date writeTime;				// 작성시간
@@ -24,16 +24,24 @@ public class WeeklyReport {
 	private String nextProject;			// 다음 주 프로젝트
 	private String nextEtc;				// 다음 주 기타사항
 	
+	
+	// 조인을 위해 추가한 것
+	private String employeeName;		// 사원이름
+	private String departmentCode;		// 부서
+	private String rankCode;			// 직위
+	
+
+
 	// 생성자
 	public WeeklyReport() {}
 
 	// 메소드
-	public int getReportSeq() {
+	public int getReportNumber() {
 		return reportNumber;
 	}
 	
-	public void setReportSeq(int reportSeq) {
-		this.reportNumber = reportSeq;
+	public void setReportNumber(int reportNumber) {
+		this.reportNumber = reportNumber;
 	}
 	
 	public String getReportTitle() {
@@ -157,5 +165,30 @@ public class WeeklyReport {
 	}
 	
 	
+	public String getEmployeeName() {
+		return employeeName;
+	}
+
+	public void setEmployeeName(String employeeName) {
+		this.employeeName = employeeName;
+	}
+	
+	public String getDepartmentCode() {
+		return departmentCode;
+	}
+	
+	public void setDepartmentCode(String departmentCode) {
+		this.departmentCode = departmentCode;
+	}
+	
+	public String getRankCode() {
+		return rankCode;
+	}
+	
+	public void setRankCode(String rankCode) {
+		this.rankCode = rankCode;
+	}
+	
+
 	
 }
