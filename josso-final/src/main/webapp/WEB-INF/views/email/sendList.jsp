@@ -191,7 +191,7 @@
                         </span>
                         <span class="hover_title">내 메일함</span>
                         <span class="write_img">
-                            <img src="../images/글쓰기(연필).png">
+                            <img src="${pageContext.request.contextPath}/resources/images/글쓰기(연필).png">
                         </span>
                     </div>
                     <div>
@@ -255,7 +255,7 @@
                 <div class="row">
                     <div class="col nav-menu">
                         <a href="${pageContext.request.contextPath}/email/send/delivery"><input type="submit" class="btn btn-outline-info float-left" value="전달"></a> 
-                        <a href="${pageContext.request.contextPath}/email/send/wastebasket"><input type="submit" class="btn btn-outline-info float-left" value="휴지통"></a>
+                        <a href="${pageContext.request.contextPath}/email/send/wastebasket"><input type="submit" class="btn btn-outline-info float-left" value="삭제"></a>
                     </div>
                     <div class="col"></div>
                     <div class="col"></div>

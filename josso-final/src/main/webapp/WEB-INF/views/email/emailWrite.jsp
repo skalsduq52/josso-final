@@ -163,7 +163,7 @@
                         </span>
                         <span class="hover_title">내 메일함</span>
                         <span class="write_img">
-                            <img src="../images/글쓰기(연필).png">
+                            <img src="${pageContext.request.contextPath}/resources/images/글쓰기(연필).png">
                         </span>
                     </div>
                     <div>

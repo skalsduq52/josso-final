@@ -165,7 +165,7 @@
                         </span>
                         <span class="hover_title">내 메일함</span>
                         <span class="write_img">
-                            <img src="../images/글쓰기(연필).png">
+                            <img src="${pageContext.request.contextPath}/resources/images/글쓰기(연필).png">
                         </span>
                     </div>
                     <div>
@@ -184,7 +184,7 @@
                             <li>
                                 <div class="form-check form-check-inline">
                                     
-                                    <label class="form-check-label" for="inlineCheckbox1"><a href="${pageContext.request.contextPath}/email/wastebasket/list?${employee.employeeEmail}"> 휴지통</a></label>
+                                    <label class="form-check-label" for="inlineCheckbox1"><a href="${pageContext.request.contextPath}/email/wastebasket/list?id=${employee.employeeEmail}"> 휴지통</a></label>
                                 </div>
                             </li>
                         </ul>
@@ -224,7 +224,7 @@
 		                        	<a href="${pageContext.request.contextPath}/email/accept/read?num=${sendDetail.emailNumber}"><input type="submit" class="btn btn-outline-info float-left" value="안읽음"></a>
 		                        </c:if>
 	                        <a href="${pageContext.request.contextPath}/email/send/delivery?num=${sendDetail.emailNumber}"><input type="submit" class="btn btn-outline-info float-left" value="전달"></a>
-	                        <a href="${pageContext.request.contextPath}/email/send/wastebasket?num=${sendDetail.emailNumber}"><input type="submit" class="btn btn-outline-info float-left" value="휴지통"></a>
+	                        <a href="${pageContext.request.contextPath}/email/send/wastebasket?num=${sendDetail.emailNumber}"><input type="submit" class="btn btn-outline-info float-left" value="삭제"></a>
                     </div>
                     <div class="col"></div>
                     <div class="col"></div>

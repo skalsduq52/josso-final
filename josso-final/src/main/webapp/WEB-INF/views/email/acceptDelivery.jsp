@@ -163,7 +163,7 @@
                         </span>
                         <span class="hover_title">내 메일함</span>
                         <span class="write_img">
-                            <img src="../images/글쓰기(연필).png">
+                            <img src="${pageContext.request.contextPath}/resources/images/글쓰기(연필).png">
                         </span>
                     </div>
                     <div>
@@ -230,7 +230,7 @@
                     <tr>
                         <td style="width: 120px;">보내는 사람 :</td>
                         <td colspan="2">
-                        <input type="hidden" value="${employee.employeeNumber}" >
+                        <input type="hidden" name="employeeNumber" value="${employee.employeeNumber}" >
                         <input type="email" readonly value="${employee.employeeEmail}" name="emailSend" class="form-control form-control-sm form-control-plaintext">
                         </td>
                     </tr>

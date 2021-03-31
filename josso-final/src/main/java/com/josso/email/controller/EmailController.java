@@ -1,8 +1,9 @@
 package com.josso.email.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,8 +31,9 @@ public class EmailController{
 	// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@받은 메일함@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	// 받은메일함 목록 보여주기(완성)
 	@RequestMapping(value = "email/accept/list", method = RequestMethod.GET)
-	public ModelAndView acceptList(String id, ModelAndView modelAndView) throws Exception{
+	public ModelAndView acceptList(String id, ModelAndView modelAndView, HttpServletRequest request) throws Exception{
 		
+		HttpSession session = request.getSession();
 		
 		List<Email> acceptList = emailService.AcceptList(id);
 				
