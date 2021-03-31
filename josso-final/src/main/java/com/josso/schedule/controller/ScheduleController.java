@@ -1,5 +1,6 @@
 package com.josso.schedule.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.json.simple.JSONArray;
@@ -21,31 +22,57 @@ public class ScheduleController {
 	@Autowired
 	ScheduleService ss;
 	
-	@ResponseBody
-	@RequestMapping(value="schedule", method=RequestMethod.GET, produces="text/plain;charset=UTF-8")
-	public ModelAndView scheduleList() throws Exception {
+//	@ResponseBody
+	@RequestMapping(value="schedule", method=RequestMethod.GET)
+	public ModelAndView schedule() throws Exception {
 		
-		List<Schedule> scheduleList = ss.selectScheduleAll();
-
-		JSONObject jObj = new JSONObject();
-		JSONArray jArr = new JSONArray();
+//		List<Schedule> scheduleList = ss.selectScheduleAll();
+//		ArrayList<Schedule> scheduleListArr = new ArrayList<Schedule>();
+//		JSONObject jObj = new JSONObject();
+//		JSONArray jArr = new JSONArray();
 		ModelAndView mv = new ModelAndView();
-		
-		for(Schedule sd : scheduleList) {
-			JSONObject jObj_ = new JSONObject();
-			jObj_.put("title", sd.getScheduleTitle());
-			jObj_.put("start", sd.getScheduleStartDate());
-			jObj_.put("end", sd.getScheduleEndDate());
-			jArr.add(jObj_);
-			System.out.println(jObj_);
-		}
-		System.out.println("array : "+jArr);
-		jObj.put("data", jArr);
-		System.out.println("array2 : "+jObj);
-		
-		mv.addObject("data", jArr);
+//		
+//		for(Schedule sd : scheduleList) {
+//			JSONObject jObj_ = new JSONObject();
+//			jObj_.put("title", sd.getScheduleTitle());
+//			jObj_.put("start", sd.getScheduleStartDate());
+//			jObj_.put("end", sd.getScheduleEndDate());
+//			jArr.add(jObj_);
+//			System.out.println(jObj_);
+//		}
+//		System.out.println("array : "+jArr);
+//		jObj.put("data", jArr);
+//		System.out.println("array2 : "+jObj);
+//		
+//		mv.addObject("data", jArr);
 		mv.setViewName("schedule.scheduleList");
 		return mv;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="scheduleListAll", method=RequestMethod.POST, produces="text/plain;charset=UTF-8")
+	public String scheduleListAll() throws Exception{
+		
+		List<Schedule> scheduleList = ss.selectScheduleAll();
+		ArrayList<Schedule> scheduleListArr = new ArrayList<Schedule>();
+		
+		for(int i = 0; i<scheduleList.size(); i++) {
+			Schedule sd = scheduleList.get(i);
+			scheduleListArr.add(sd);
+			System.out.println(sd);
+		}
+		
+		JSONArray jArr = new JSONArray();
+		for(Schedule sd : scheduleListArr) {
+			JSONObject jObj = new JSONObject();
+			jObj.put("title", sd.getScheduleTitle());
+			jObj.put("start", sd.getScheduleStartDate());
+			jObj.put("end", sd.getScheduleEndDate());
+			jArr.add(jObj);
+			System.out.println(jObj);
+		}
+		System.out.println(jArr);
+		return jArr.toJSONString();
 	}
 	
 	@RequestMapping(value="schedule/write", method=RequestMethod.GET)
