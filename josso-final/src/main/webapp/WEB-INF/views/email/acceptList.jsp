@@ -237,7 +237,13 @@
                 <div class="row">
                     <div class="col nav-menu">
                         <a href="${pageContext.request.contextPath}/email/accept/reply"><input type="submit" class="btn btn-outline-info float-left" value="답장"></a>
-                        <a href="${pageContext.request.contextPath}/email/accept/ckRead"><input type="submit" class="btn btn-outline-info float-left" value="읽음"></a>
+                        
+                       			<c:if test="${acceptDetail.emailRead eq 'NO'}">
+		                        	<a href="${pageContext.request.contextPath}/email/accept/read?num=${acceptDetail.emailNumber}"><input type="submit" class="btn btn-outline-info float-left" value="읽음"></a>
+		                        </c:if>
+		                        <c:if test="${acceptDetail.emailRead eq 'YES'}">
+		                        	<a href="${pageContext.request.contextPath}/email/accept/read?num=${acceptDetail.emailNumber}"><input type="submit" class="btn btn-outline-info float-left" value="안읽음"></a>
+		                        </c:if>
                         <a href="${pageContext.request.contextPath}/email/accept/delivery"><input type="submit" class="btn btn-outline-info float-left" value="전달"></a> 
                         <a href="${pageContext.request.contextPath}/email/accept/wastebasket"><input id="wastebasket" type="submit" class="btn btn-outline-info float-left" value="휴지통"></a>
                     </div>
