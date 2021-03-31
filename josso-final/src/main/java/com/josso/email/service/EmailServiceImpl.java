@@ -82,6 +82,12 @@ public class EmailServiceImpl implements EmailService{
 		return acceptDelivery;
 	}
 	
+	// 받은메일함 - 자세히보기 - 전달버튼 - 보내기버튼 클릭
+	public int SendDeliverySend(Email email) throws Exception{
+		int sendDeliverySend = emailDao.SendDeliverySend(email);
+		return sendDeliverySend;
+	}
+	
 	// 휴지통 - 자세히보기 
 	public Email WastebasketDetail(int num) throws Exception{
 		Email wastebasketDetail = emailDao.WastebasketDetail(num);

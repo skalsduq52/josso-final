@@ -31,6 +31,8 @@ public class EmailController{
 	// 받은메일함 목록 보여주기(완성)
 	@RequestMapping(value = "email/accept/list", method = RequestMethod.GET)
 	public ModelAndView acceptList(String id, ModelAndView modelAndView) throws Exception{
+		
+		
 		List<Email> acceptList = emailService.AcceptList(id);
 				
 		modelAndView.addObject("acceptList",acceptList);
@@ -170,11 +172,17 @@ public class EmailController{
 		return modelAndView;
 	}
 		
-	// 보낸메일함 - 전달보내기
+	// 보낸메일함 - 자세히보기 -전달버튼 - 전달보내기 버튼
 	@RequestMapping(value = "email/send/deliverySend", method = RequestMethod.GET)
-	public String sendDeliverySend() throws Exception{
-		return "email/sendtList";
+	public ModelAndView sendDeliverySend(Email email, ModelAndView modelAndView) throws Exception{
+		System.out.println(email);
+		
+		int sendDeliverySend = emailService.SendDeliverySend(email);
+		
+		modelAndView.setViewName("email/acceptList");
+		return modelAndView;
 	}
+	
 	
 	
 	
@@ -235,8 +243,6 @@ public class EmailController{
 	// 새 메일쓰기 - 보내기 버튼
 	@RequestMapping(value = "email/write/send", method = RequestMethod.GET)
 	public ModelAndView writeSend(Email email, ModelAndView modelAndView) throws Exception{
-		System.out.println(email);
-		System.out.println(modelAndView);
 		int writeSend = emailService.WriteSend(email);
 		
 		modelAndView.setViewName("email/acceptList");

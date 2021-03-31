@@ -42,6 +42,9 @@ public interface EmailService {
 	// 보낸메일함 - 자세히보기 - 휴지통버튼
 	public int SendWastebasket(int num) throws Exception;
 	
+	// 보낸메일함 - 자세히보기 - 전달버튼 - 보내기버튼
+	public int SendDeliverySend(Email email) throws Exception;
+	
 	// 새메일쓰기 - 보내기 버튼
 	public int WriteSend(Email email) throws Exception;
 	

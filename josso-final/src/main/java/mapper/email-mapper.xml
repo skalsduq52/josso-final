@@ -4,15 +4,17 @@
 <mapper namespace="Email">
 
 	<resultMap id="resultEmail" type="Email">
+		<id property="emailNumber" column="EMAIL_NUMBER"/>
+		<result property="employeeNumber" column="EMPLOYEE_NUMBER"/>
 		<result property="emailSend" column="EMAIL_SEND" />
 		<result property="emailAccept" column="EMAIL_ACCEPT" />
 		<result property="emailReference" column="EMAIL_REFERENCE" />
 		<result property="emailTitle" column="EMAIL_TITLE" />
 		<result property="emailContent" column="EMAIL_CONTENT" />
+		<result property="emailFile" column="EMAIL_FILE"/>
 		<result property="regDate" column="REGDATE" />
 		<result property="emailWastebasket" column="EMAIL_WASTEBASKET" />
 		<result property="emailRead" column="EMAIL_READ"/>
-		<result property="emailNumber" column="EMAIL_NUMBER"/>
 		<result property="emailPosition" column="EMAIL_POSITION"/>
 	</resultMap>
 
@@ -43,7 +45,7 @@
 	
 	<!-- 새메일쓰기 - 보내기버튼 -->
 	<insert id="WriteSend" parameterType="Email">
-		INSERT INTO EMAIL VALUES (#{emailSend}, #{emailAccept}, #{emailReference}, #{emailTitle}, #{emailContent}, SYSDATE, 'NO', 'NO', 15, DEFAULT)
+		INSERT INTO EMAIL VALUES (#{employeeNumber}, EMAIL_NUM_SEQ.NEXTVAL,#{emailSend}, #{emailAccept}, #{emailReference}, #{emailTitle}, #{emailContent},'',SYSDATE, 'NO', 'NO', DEFAULT)
 	</insert>
 	
 	<!-- 받은메일함 - 자세히보기 - 읽음/안읽음 처리 -->
@@ -67,7 +69,24 @@
 	</update>
 	
 	<!-- 페이징 ListPage -->
-	
+	<!-- <select id="ListPage" resultType="Email" parameterType="com.mvcproject.email.vo.Criteria">
+		SELECT EMAIL_NUMBER, 
+                EMAIL_TITLE,
+                EMAIL_SEND,
+                EMAIL_ACCEPT,
+                REGDATE
+    	FROM (
+                SELECT EMAIL_NUMBER, 
+                        EMAIL_TITLE, 
+                        EMAIL_SEND,
+                        EMAIL_ACCEPT,
+                        REGDATE,
+                        ROW_NUMBER() OVER(ORDER BY EMAIL_NUMBER DESC) AS RNUM 
+                FROM EMAIL 
+                            ) MP 
+		WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd} 
+		ORDER BY EMAIL_NUMBER DESC
+	</select> -->
 	
 	<!-- 게시물 총 갯수 -->
 	<select id="ListCount" resultType="int">
@@ -78,7 +97,7 @@
 	
 	<!-- 받은 메일함에서 검색기능 -->	
 	<select id="EmailSearch" parameterType="String" resultMap="resultEmail">
-		SELECT * FROM EMAIL WHERE EMAIL_TITLE LIKE '%' || #{word} ||'%' AND EMAIL_SEND = '111@naver.com'
+		SELECT * FROM EMAIL WHERE EMAIL_TITLE LIKE '%' || #{word} ||'%' AND EMAIL_SEND = #{num}
 	</select>
 	
 	

@@ -105,7 +105,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath}/email/accept/list?id=111@naver.com">
+                        <a href="${pageContext.request.contextPath}/email/accept/list?id=${employee.employeeEmail}">
                         <span class="icon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
                         <span class="icon">메일</span>
                         </a>
@@ -172,19 +172,19 @@
                         <ul class="hover_tag">
                             <li>
                                 <div class="form-check form-check-inline">
-                                    <label class="form-check-label" for="inlineCheckbox1"><a href="${pageContext.request.contextPath}/email/accept/list?id=111@naver.com">받은 메일함</a></label>
+                                    <label class="form-check-label" for="inlineCheckbox1"><a href="${pageContext.request.contextPath}/email/accept/list?id=${employee.employeeEmail}">받은 메일함</a></label>
                                 </div>
                             </li>
                             <li>
                                 <div class="form-check form-check-inline">
                                     
-                                    <label class="form-check-label" for="inlineCheckbox1"><a href="${pageContext.request.contextPath}/email/send/list?id=111@naver.com"> 보낸 메일함</a></label>
+                                    <label class="form-check-label" for="inlineCheckbox1"><a href="${pageContext.request.contextPath}/email/send/list?id=${employee.employeeEmail}"> 보낸 메일함</a></label>
                                 </div>
                             </li>
                             <li>
                                 <div class="form-check form-check-inline">
                                     
-                                    <label class="form-check-label" for="inlineCheckbox1"><a href="${pageContext.request.contextPath}/email/wastebasket/list?id=111@naver.com"> 휴지통</a></label>
+                                    <label class="form-check-label" for="inlineCheckbox1"><a href="${pageContext.request.contextPath}/email/wastebasket/list?id=${employee.employeeEmail}"> 휴지통</a></label>
                                 </div>
                             </li>
                         </ul>

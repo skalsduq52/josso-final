@@ -103,7 +103,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath}/email/accept/list?id=111@naver.com">
+                        <a href="${pageContext.request.contextPath}/email/accept/list?${employee.employeeEmail}">
                         <span class="icon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
                         <span class="icon">메일</span>
                         </a>
@@ -170,19 +170,19 @@
                         <ul class="hover_tag">
                             <li>
                                 <div class="form-check form-check-inline">
-                                    <label class="form-check-label" for="inlineCheckbox1"><a href="${pageContext.request.contextPath}/email/accept/list?id=111@naver.com">받은 메일함</a></label>
+                                    <label class="form-check-label" for="inlineCheckbox1"><a href="${pageContext.request.contextPath}/email/accept/list?id=${employee.employeeEmail}">받은 메일함</a></label>
                                 </div>
                             </li>
                             <li>
                                 <div class="form-check form-check-inline">
                                     
-                                    <label class="form-check-label" for="inlineCheckbox1"><a href="${pageContext.request.contextPath}/email/send/list?id=111@naver.com"> 보낸 메일함</a></label>
+                                    <label class="form-check-label" for="inlineCheckbox1"><a href="${pageContext.request.contextPath}/email/send/list?id=${employee.employeeEmail}"> 보낸 메일함</a></label>
                                 </div>
                             </li>
                             <li>
                                 <div class="form-check form-check-inline">
                                     
-                                    <label class="form-check-label" for="inlineCheckbox1"><a href="${pageContext.request.contextPath}/email/wastebasket/list?id=111@naver.com"> 휴지통</a></label>
+                                    <label class="form-check-label" for="inlineCheckbox1"><a href="${pageContext.request.contextPath}/email/wastebasket/list?id=${employee.employeeEmail}"> 휴지통</a></label>
                                 </div>
                             </li>
                         </ul>
@@ -190,6 +190,7 @@
                 </section>
             </div>
         </aside>
+        <form action="${pageContext.request.contextPath}/email/send/deliverySend" method="get">
         <nav class="border-bottom" >
             <!-- Navbar content -->
             <div class="container-xl-fluid">
@@ -214,8 +215,8 @@
                 </div>
                 <div class="row">
                     <div class="col nav-menu">
-                        <a href="${pageContext.request.contextPath}/email/accept/deliverySend"><input type="submit" class="btn btn-outline-info float-left" value="보내기"></a> 
-                        <a href="${pageContext.request.contextPath}/email/accept/delivery?num=${acceptDelivery.emailNumber}"><input type="submit" class="btn btn-outline-info float-left" value="다시쓰기"></a>
+                        <input type="submit" class="btn btn-outline-info float-left" value="보내기"> 
+                        <input type="reset" class="btn btn-outline-info float-left" value="다시쓰기">
                     </div>
                     <div class="col"></div>
                     <div class="col"></div>
@@ -229,7 +230,8 @@
                     <tr>
                         <td style="width: 120px;">보내는 사람 :</td>
                         <td colspan="2">
-                        <input type="email" name="emailSend" class="form-control form-control-sm form-control-plaintext">
+                        <input type="hidden" value="${employee.employeeNumber}" >
+                        <input type="email" readonly value="${employee.employeeEmail}" name="emailSend" class="form-control form-control-sm form-control-plaintext">
                         </td>
                     </tr>
                     <tr>
@@ -253,8 +255,7 @@
                     <tr>
                         <td colspan="2">
                             <textarea id="smartEditor" class="form-control"
-                             name="emailContent" minlength="3500"
-                            style="height: 550px;">
+                             name="emailContent" style="height: 550px;">
 
 
 
@@ -277,6 +278,7 @@ ${acceptDelivery.emailContent}
 
             
         </main>
+        </form>
         <footer class="border-top">
                 푸터요
         </footer>

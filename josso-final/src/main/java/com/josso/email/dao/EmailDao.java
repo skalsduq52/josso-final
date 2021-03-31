@@ -61,6 +61,12 @@ public class EmailDao {
 		return acceptDelivery;
 	}
 	
+	// 받은메일함 - 자세히보기 - 전달버튼 - 보내기버튼 클릭
+	public int SendDeliverySend(Email email) throws Exception{
+		int sendDeliverySend = sqlSession.insert("Email.WriteSend", email);
+		return sendDeliverySend;
+	}
+	
 	// 받은메일함 - 자세히보기 - 휴지통버튼 클릭
 	public Email AcceptWastebasket(int num) throws Exception{
 		Email acceptWastebasket = sqlSession.selectOne("Email.AcceptWastebasket", num);
