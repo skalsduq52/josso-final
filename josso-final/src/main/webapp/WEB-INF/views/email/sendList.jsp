@@ -293,7 +293,7 @@
 	                                <td><input type="checkbox" name="check"></td>
 	                                <td>${n.employeeName}/${n.rankCode}/${n.departmentCode}</td>
 	                                <td class="send-list-content"><a href="${pageContext.request.contextPath}/email/send/detail?num=${n.emailNumber}">${n.emailTitle}</a></td>
-	                                <td><fmt:formatDate value="${n.regDate}" pattern="yy-MM-dd [E] a hh:mm:ss"></fmt:formatDate></td>
+	                                <td><fmt:formatDate value="${n.regDate}" pattern="yyyy년 MM월 dd일 hh시 mm분 ss초"></fmt:formatDate></td>
 	                            </tr>
 							</c:forEach>
                         </tbody>

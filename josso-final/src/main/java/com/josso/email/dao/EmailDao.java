@@ -1,6 +1,7 @@
 package com.josso.email.dao;
 
 import java.util.List;
+import java.util.Date;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
