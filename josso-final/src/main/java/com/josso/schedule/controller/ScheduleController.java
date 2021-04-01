@@ -72,9 +72,9 @@ public class ScheduleController {
 			jObj.put("start", sd.getScheduleStartDate());
 			jObj.put("end", sd.getScheduleEndDate());
 			jArr.add(jObj);
-			System.out.println(jObj);
+//			System.out.println(jObj);
 		}
-		System.out.println(jArr);
+//		System.out.println(jArr);
 		return jArr.toJSONString();
 	}
 	
@@ -89,7 +89,7 @@ public class ScheduleController {
 			Employee em = ep.get(i);
 			System.out.println(em.getEmployeeName());
 		}
-		
+		mv.addObject("employee", ep);
 		mv.setViewName("schedule.scheduleWrite");
 		return mv;
 	}
