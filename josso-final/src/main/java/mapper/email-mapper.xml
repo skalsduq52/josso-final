@@ -45,7 +45,7 @@
 	
 	<!-- 새메일쓰기 - 보내기버튼 -->
 	<insert id="WriteSend" parameterType="Email">
-		INSERT INTO EMAIL VALUES (#{employeeNumber}, EMAIL_NUM_SEQ.NEXTVAL,#{emailSend}, #{emailAccept}, #{emailReference}, #{emailTitle}, #{emailContent},'',SYSDATE, 'NO', 'NO', DEFAULT)
+		INSERT INTO EMAIL VALUES (#{employeeNumber}, EMAIL_NUM_SEQ.NEXTVAL,#{emailSend}, #{emailAccept}, #{emailReference}, #{emailTitle}, #{emailContent},SYSDATE, DEFAULT, DEFAULT, DEFAULT,'')
 	</insert>
 	
 	<!-- 받은메일함 - 자세히보기 - 읽음/안읽음 처리 -->
