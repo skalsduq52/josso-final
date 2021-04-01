@@ -1,6 +1,7 @@
 package com.josso.email.service;
 
 import java.util.List;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,6 +39,24 @@ public class EmailServiceImpl implements EmailService{
 	public List<Email> EmailReply(int number) throws Exception{
 		List<Email> emailReply = emailDao.EmailReply(number);
 		return emailReply;
+	}
+	
+	// 참조자 정보 가져오기
+	public Email Er(int num) throws Exception{
+		Email er = emailDao.Er(num);
+		return er;
+	}
+	
+	// 보낸사람 정보 가져오기
+	public Email Es(int num) throws Exception{
+		Email es = emailDao.Es(num);
+		return es;
+	}
+	
+	// 받는사람 정보 가져오기
+	public Email Ea(int num) throws Exception{
+		Email ea = emailDao.Ea(num);
+		return ea;
 	}
 	
 	// 메일보내기

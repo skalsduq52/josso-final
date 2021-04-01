@@ -1,6 +1,7 @@
 package com.josso.email.service;
 
 import java.util.List;
+import java.util.Date;
 
 import com.josso.email.vo.Email;
 
@@ -17,6 +18,15 @@ public interface EmailService {
 
 	// 답장버튼 누를시(?)
 	public List<Email> EmailReply(int number) throws Exception;
+	
+	// 참조자 정보 뽑아오기
+	public Email Er(int num) throws Exception;
+	
+	// 보낸사람 정보 뽑아오기
+	public Email Es(int num) throws Exception;
+	
+	// 받는사람 정보 뽑아오기
+	public Email Ea(int num) throws Exception;
 
 	// 받은메일함 - 자세히보기
 	public Email AcceptDetail(int num) throws Exception;

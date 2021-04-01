@@ -16,36 +16,53 @@
 		<result property="emailWastebasket" column="EMAIL_WASTEBASKET" />
 		<result property="emailRead" column="EMAIL_READ"/>
 		<result property="emailPosition" column="EMAIL_POSITION"/>
+		<result property="employeeName" column="EMPLOYEE_NAME"/>
+		<result property="rankCode" column="RANK_CODE"/>
+		<result property="departmentCode" column="DEPARTMENT_CODE"/>
 	</resultMap>
 
 	<!-- email 받은메일함 - 리스트 -->
 	<select id="AcceptList" parameterType="String" resultMap="resultEmail"><!-- resultType="Email" -->
-		SELECT * FROM EMAIL WHERE ((EMAIL_ACCEPT = #{id} OR EMAIL_REFERENCE =#{id}) AND EMAIL_WASTEBASKET = 'NO') AND (EMAIL_POSITION = 'ALL' OR EMAIL_POSITION = 'ACCEPT') ORDER BY EMAIL_NUMBER DESC
+		SELECT EMAIL.*, EMPLOYEE.EMPLOYEE_NAME, EMPLOYEE.RANK_CODE, EMPLOYEE.DEPARTMENT_CODE FROM EMAIL, EMPLOYEE WHERE ((EMAIL.EMPLOYEE_NUMBER = EMPLOYEE.EMPLOYEE_NUMBER) AND (((EMAIL.EMAIL_ACCEPT = #{id} OR EMAIL.EMAIL_REFERENCE = #{id}) AND EMAIL.EMAIL_WASTEBASKET = 'NO') AND (EMAIL.EMAIL_POSITION = 'ALL' OR EMAIL.EMAIL_POSITION = 'ACCEPT'))) ORDER BY EMAIL.EMAIL_NUMBER DESC          
 	</select>
 
 	<!-- email 받은메일함 - 리스트 - 자세히보기 -->
 	<select id="AcceptDetail" resultMap="resultEmail">
-		SELECT * FROM EMAIL WHERE EMAIL_NUMBER = #{num}
+		SELECT EMAIL.*, EMPLOYEE.EMPLOYEE_NAME, EMPLOYEE.RANK_CODE, EMPLOYEE.DEPARTMENT_CODE FROM EMAIL, EMPLOYEE WHERE (EMAIL.EMPLOYEE_NUMBER = EMPLOYEE.EMPLOYEE_NUMBER) AND EMAIL_NUMBER = #{num}
 	</select>
 
 	<!-- email 보낸메일함 - 리스트 -->
 	<select id="SendList" parameterType="String" resultMap="resultEmail"><!-- resultType="Email" -->
-		SELECT * FROM EMAIL WHERE EMAIL_SEND = #{id} AND (EMAIL_POSITION = 'ALL' OR EMAIL_POSITION ='SEND') ORDER BY EMAIL_NUMBER DESC
+		SELECT EMAIL.*, EMPLOYEE.EMPLOYEE_NAME, EMPLOYEE.RANK_CODE, EMPLOYEE.DEPARTMENT_CODE FROM EMAIL, EMPLOYEE WHERE ((EMAIL.EMPLOYEE_NUMBER = EMPLOYEE.EMPLOYEE_NUMBER) AND (EMAIL_SEND = #{id} AND (EMAIL_POSITION = 'ALL' OR EMAIL_POSITION ='SEND'))) ORDER BY EMAIL.EMAIL_NUMBER DESC
 	</select>
 	
 	<!-- email 휴지통 - 리스트 -->
 	<select id="WastebasketList" parameterType="String" resultMap="resultEmail"><!-- resultType="Email" -->
-		SELECT * FROM EMAIL WHERE ((EMAIL_ACCEPT = #{id} OR EMAIL_REFERENCE =#{id}) AND EMAIL_WASTEBASKET = 'YES') AND (EMAIL_POSITION = 'ALL' OR EMAIL_POSITION = 'ACCEPT') ORDER BY EMAIL_NUMBER DESC
+		SELECT EMAIL.*, EMPLOYEE.EMPLOYEE_NAME, EMPLOYEE.RANK_CODE, EMPLOYEE.DEPARTMENT_CODE FROM EMAIL, EMPLOYEE WHERE ((EMAIL.EMPLOYEE_NUMBER = EMPLOYEE.EMPLOYEE_NUMBER) AND (((EMAIL.EMAIL_ACCEPT = #{id} OR EMAIL.EMAIL_REFERENCE = #{id}) AND EMAIL.EMAIL_WASTEBASKET = 'YES') AND (EMAIL.EMAIL_POSITION = 'ALL' OR EMAIL.EMAIL_POSITION = 'ACCEPT'))) ORDER BY EMAIL.EMAIL_NUMBER DESC     
 	</select>
 
 	<!-- email 자세히보기 - 답장버튼 -->
 	<select id="EmailReply" parameterType="int" resultMap="resultEmail"><!-- resultType="Email" -->
-		SELECT * FROM EMAIL WHERE EMAIL_NUMBER = #{number}
+		SELECT EMAIL.*, EMPLOYEE.EMPLOYEE_NAME, EMPLOYEE.RANK_CODE, EMPLOYEE.DEPARTMENT_CODE FROM EMAIL, EMPLOYEE WHERE (EMAIL.EMPLOYEE_NUMBER = EMPLOYEE.EMPLOYEE_NUMBER) AND EMAIL_NUMBER = #{num}
 	</select>
 	
+	<!-- 참조자 정보 뽑아오기 -->
+	<select id="Er" parameterType="int" resultMap="resultEmail">
+		SELECT B.EMPLOYEE_NAME, B.DEPARTMENT_CODE, B.RANK_CODE FROM EMAIL A, EMPLOYEE B WHERE A.EMAIL_REFERENCE = B.EMPLOYEE_EMAIL AND A.EMAIL_NUMBER = #{num} <!-- 참조자정보 -->
+	</select>
+	
+	<!-- 보낸사람 정보 뽑아오기 -->
+	<select id="Es" parameterType="int" resultMap="resultEmail">
+		SELECT B.EMPLOYEE_NAME, B.DEPARTMENT_CODE, B.RANK_CODE FROM EMAIL A, EMPLOYEE B WHERE A.EMAIL_SEND = B.EMPLOYEE_EMAIL AND A.EMAIL_NUMBER = #{num}
+	</select>
+	
+	<!-- 받는사람 정보 뽑아오기 -->
+	<select id="Ea" parameterType="int" resultMap="resultEmail">
+		SELECT B.EMPLOYEE_NAME, B.DEPARTMENT_CODE, B.RANK_CODE FROM EMAIL A, EMPLOYEE B WHERE A.EMAIL_ACCEPT = B.EMPLOYEE_EMAIL AND A.EMAIL_NUMBER = #{num}
+	</select>
 	<!-- 새메일쓰기 - 보내기버튼 -->
 	<insert id="WriteSend" parameterType="Email">
-		INSERT INTO EMAIL VALUES (#{employeeNumber}, EMAIL_NUM_SEQ.NEXTVAL,#{emailSend}, #{emailAccept}, #{emailReference}, #{emailTitle}, #{emailContent},'',SYSDATE, 'NO', 'NO', DEFAULT)
+		INSERT INTO EMAIL VALUES (#{employeeNumber}, EMAIL_NUM_SEQ.NEXTVAL,#{emailSend}, #{emailAccept}, #{emailReference}, #{emailTitle}, #{emailContent}, SYSDATE, DEFAULT, DEFAULT, DEFAULT,'')
 	</insert>
 	
 	<!-- 받은메일함 - 자세히보기 - 읽음/안읽음 처리 -->

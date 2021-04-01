@@ -23,7 +23,7 @@
 	<!-- 결재 정보 등록 -->
 	<insert id="insertElecApp" parameterType="ElectronicApproval">
 		INSERT INTO ELECTRONIC_APPROVAL VALUES(APPROVAL_NUM_SEQ.NEXTVAL,#{documentForm},#{documentName},SYSDATE,#{startDate},
-		#{endDate},#{drafter},DEFAULT,#{middle},DEFAULT,#{last},DEFAULT,NULL,#{holyType})
+		#{endDate},#{drafter},DEFAULT,#{middle},DEFAULT,#{last},DEFAULT,NULL,#{holyType},NULL,NULL)
 	</insert>
 	
 	<!-- 내가 기안한 문서 최근 글 3개 가져오기 -->
@@ -32,14 +32,13 @@
 			(SELECT * FROM ELECTRONIC_APPROVAL WHERE DRAFTER = #{empNo} ORDER BY REGISTER_DATE DESC) EA WHERE ROWNUM BETWEEN 1 AND 3
 	</select>
 	
-	<!--  
-	<select id="selectLastWait" parameterType="String" resultMap="ElectronicApproval">
-		SELECT ROWNUM,EA.* FROM
-			(SELECT * FROM ELECTRONIC_APPROVAL WHERE DRAFTER = #{empNo} ORDER BY REGISTER_DATE DESC) EA WHERE ROWNUM BETWEEN 1 AND 3
-	</select>-->
+	<!-- 중간결재자 승인 -->
+	<update id="middleAccept" parameterType="String">
+		UPDATE ELECTRONIC_APPROVAL SET MIDDLE_ACCEPT = 1, MIDDLE_ACCEPT_DATE = SYSDATE WHERE DOCUMENT_NO = #{num}
+	</update>
 	
-	<select id="selectDetail" parameterType="String" resultMap="ElectronicApproval">
-		SELECT * FROM ELECTRONIC_APPROVAL WHERE DOCUMENT_NO = #{num}
-	</select>
-	
+	<!-- 중간결재자 반려 -->
+	<update id="middleReject" parameterType="String">
+		UPDATE ELECTRONIC_APPROVAL SET MIDDLE_ACCEPT = 2, MIDDLE_ACCEPT_DATE = SYSDATE WHERE DOCUMENT_NO = #{num}
+	</update>
 </mapper>

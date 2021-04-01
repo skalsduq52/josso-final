@@ -1,7 +1,8 @@
 $(function() {
 	$('.hover_team1').click(function() {
 		var submenu = $('.modal_mb1');
-//		var department = $('.hover_team1')
+		var department = $('.hover_team1>a>b').text();
+		console.log(department);
 		if (submenu.is(":visible")) {
 			submenu.slideUp();
 //			닫힐 떄
@@ -12,7 +13,7 @@ $(function() {
 //				type: 'POST',
 //			    data: {
 //			    	department
-//				}
+//				},
 //				success: function(result) {
 //					console.log(result);
 //				},

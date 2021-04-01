@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
 		<nav class="border-bottom">
 			<!-- Navbar content -->
 			<div class="content_top">
@@ -185,7 +186,7 @@
 								<li class="hover_team1">
 									<a href="#"> 
 										<i class="fas fa-sort-down fa-rotate-270" style="color: gray"></i>
-										운영팀
+										<b>운영팀</b>
 									</a>
 								</li>
 								<ul class="modal_mb1">
@@ -195,7 +196,7 @@
 								<li class="hover_team2">
 									<a href="#"> 
 										<i class="fas fa-sort-down fa-rotate-270" style="color: gray"></i>
-										개발팀
+										<b>개발팀</b>
 									</a>
 								</li>
 								<ul class="modal_mb2">
@@ -205,7 +206,7 @@
 								<li class="hover_team3">
 									<a href="#"> 
 										<i class="fas fa-sort-down fa-rotate-270" style="color: gray"></i>
-										영업팀
+										<b>영업팀</b>
 									</a>
 								</li>
 								<ul class="modal_mb3">
@@ -215,7 +216,7 @@
 								<li class="hover_team4">
 									<a href="#"> 
 										<i class="fas fa-sort-down fa-rotate-270" style="color: gray"></i>
-										지원팀
+										<b>지원팀</b>
 									</a>
 								</li>
 								<ul class="modal_mb4">

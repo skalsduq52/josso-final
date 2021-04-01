@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
@@ -29,39 +30,39 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <!-- modal,slide 스크립트 사용 -->
 <script src="${pageContext.request.contextPath}/resources/js/modal.js"></script>
-</head>
 <script>
-$(function() {
-var date1 ='';
-var date2 ='';
-var num = '';
+ $(function () {
+	var date1 = new Date("<c:out value='${ev.startDate}'/>");
+	var date2 = new Date("<c:out value='${ev.endDate}'/>");
+	num = ((date2.getTime() - date1.getTime()) / (1000*60*60*24))+1;
+	$('#appDate').text(num);
+	$('#appDate1').text(num);
+	
+	
+	var num = "<c:out value='${ev.documentNo}'/>";
+	
+	$("#accept1").click(function(){
+	    if(confirm("결재 완료하시겠습니까") == true){
+	    	window.location.href="/josso/elecApproval/middleAccept?num="+num;
+	    }
+	    else{
+	        return ;
+	    }
+	});
+	
+	$("#reject1").click(function(){
+	    if(confirm("반려 하시겠습니까?") == true){
+	    	window.location.href="/josso/elecApproval/middleReject?num="+num;
+	    }
+	    else{
+	        return ;
+	    }
+	});
 
-document.getElementById('dt').onchange = function(){
-	date1 = new Date(this.value);
-	if(date1 != '' && date2 != ''){
-		num = ((date2.getTime() - date1.getTime()) / (1000*60*60*24))+1;
-		if($('#restDate').val() < num){
-			alert('잔여일자를 초과했습니다.');
-		}else{
-		$('#appDate').val(num);
-		$('#appDate2').val(num);
-		}
-	}
-}
-document.getElementById('dt1').onchange = function(){
-	date2 = new Date(this.value);
-	if(date1 != '' && date2 != ''){
-		num = ((date2.getTime() - date1.getTime()) / (1000*60*60*24))+1;
-		if($('#restDate').val() < num){
-			alert('잔여일자를 초과했습니다.');
-		}else{
-		$('#appDate').val(num);
-		$('#appDate2').val(num);
-		}
-	}
-}
-});
+	
+ });
 </script>
+</head>
 <body>
 	<!-- navigation 삽입 -->
 	<header>
@@ -82,7 +83,6 @@ document.getElementById('dt1').onchange = function(){
 
 	<!-- main -->
 	<main>
-		<form action="/josso/elecApproval/insert" method="post">
 			<div class="border"
 				style="height: 95%; min-height: 1000px; margin: 10px 10px 10px 10px">
 				<div style="height: 300px; padding-left: 15px;">
@@ -97,20 +97,19 @@ document.getElementById('dt1').onchange = function(){
 									<table border="1" style="width: 300px;">
 										<tr>
 											<td style="width: 100px;" id="td_back">문서번호</td>
-											<td></td>
+											<td>${ev.documentNo}</td>
 										</tr>
 										<tr>
 											<td id="td_back">소속</td>
-											<td>${emp.departmentCode}</td>
+											<td>${ev.departmentCode}</td>
 										</tr>
 										<tr>
 											<td id="td_back">기안자</td>
-											<td>${emp.employeeName}</td>
-											<input type="hidden" name="drafter" value="${emp.employeeNumber}">
+											<td>${ev.employeeName}</td>
 										</tr>
 										<tr>
 											<td id="td_back">작성일자</td>
-											<td><fmt:formatDate value="${date}" pattern="yyyy-MM-dd"/></td>
+											<td><fmt:formatDate value="${ev.registerDate}" pattern="yyyy-MM-dd"/></td>
 										</tr>
 									</table>
 								</td>
@@ -119,21 +118,24 @@ document.getElementById('dt1').onchange = function(){
 										<tbody>
 											<tr>
 												<td rowspan="4"
-													style="height: 130px; background-color: rgb(226, 226, 226);">승<br>인
+													style="height: 150px; background-color: rgb(226, 226, 226);">승<br>인
 												</td>
-												<td style="height: 15px; width: 100px;" align="center">${middle}</td>
-												<td style="height: 15px; width: 100px;" align="center">${last}</td>
+												<td style="height: 15px; width: 100px;" align="center">${middle.departmentCode}</td>
+												<td style="height: 15px; width: 100px;" align="center">${last.departmentCode}</td>
 											</tr>
 											<tr>
-												<td rowspan="2" align="center">${middleName}</td>
-												<input type="hidden" name="middle" value="${middlenum}">
-												<td rowspan="2" align="center">${lastName}</td>
-												<input type="hidden" name="last" value="${lastnum}">
+												<td rowspan="2" align="center">
+												<c:if test="${ev.middleAccept == 1 || ev.middleAccept == 2}"><img style="width:60px;" src="../resources/images/도장.png"></c:if><br>${middle.employeeName}</td>
+												<td rowspan="2" align="center">
+												<c:if test="${ev.lastAccept == 1 || ev.lastAccept == 2}"><img style="width:60px;" src="../resources/images/도장.png"></c:if><br>${last.employeeName}</td>
 											</tr>
 											<tr></tr>
 											<tr>
-												<td style="height: 30px;"></td>
-												<td></td>
+												<td style="height: 30px;" align="center"><c:if test="${ev.middleAccept == 1}"><fmt:formatDate value="${ev.middleAcceptDate}" pattern="yyyy-MM-dd"/></c:if>
+												<c:if test="${ev.middleAccept == 2}">반&emsp;려</c:if>
+												</td>
+												<td align="center"><c:if test="${ev.lastAccept == 1}"><fmt:formatDate value="${ev.lastAcceptDate}" pattern="yyyy-MM-dd"/></c:if>
+												<c:if test="${ev.lastAccept == 2}">반&emsp;려</c:if></td>
 											</tr>
 										</tbody>
 									</table>
@@ -143,14 +145,14 @@ document.getElementById('dt1').onchange = function(){
 												<td rowspan="4"
 													style="height: 130px; background-color: rgb(226, 226, 226);">신<br>청
 												</td>
-												<td style="height: 15px; width: 100px;" align="center">${emp.rankCode}</td>
+												<td style="height: 15px; width: 100px;" align="center">${ev.rankCode}</td>
 											</tr>
 											<tr>
-												<td rowspan="2" align="center">${emp.employeeName}</td>
+												<td rowspan="2" align="center"><img style="width:60px;" src="../resources/images/도장.png"><br>${ev.employeeName}</td>
 											</tr>
 											<tr></tr>
 											<tr>
-												<td style="height: 30px;"></td>
+												<td style="height: 30px;" align="center"><fmt:formatDate value="${ev.registerDate}" pattern="yyyy-MM-dd"/></td>
 											</tr>
 										</tbody>
 									</table>
@@ -164,8 +166,7 @@ document.getElementById('dt1').onchange = function(){
 						<tr>
 							<td align="center" style="height: 40px; width: 150px;"
 								id="td_back">문서제목</td>
-							<td style="width: 850px;"><input type="text" name="documentName"
-								placeholder="연,반차,대체,경조/이름/신청일자 " style="width: 100%;"></td>
+							<td style="width: 850px;">&nbsp;${ev.documentName}</td>
 						</tr>
 					</table>
 				</div>
@@ -175,27 +176,20 @@ document.getElementById('dt1').onchange = function(){
 							<td align="center" style="height: 40px; width: 150px;"
 								id="td_back">휴가종류</td>
 							<td style="width: 850px;">
-							<select style="width: 150px;" name="holyType">
-									<option value="연차" selected="selected">연차</option>
-									<option value="포상">포상</option>
-							</select></td>
+							&nbsp;${ev.holyType}</td>
 						</tr>
 						
 						<tr>
 							<td align="center" style="height: 40px; width: 150px;"
 								id="td_back">기간 및 일시</td>
-							<td style="width: 850px;"><input type="date" name="startDate" id="dt">~<input
-								type="date" name="endDate" id="dt1">&nbsp;신청일수 : <input type="text" readonly
-								style="width: 150px;" id="appDate"></td>
+							<td style="width: 850px;">&nbsp;${ev.startDate} ~ ${ev.endDate}&emsp;&emsp;신청일수 : <span id="appDate"></span> </td>
 						</tr>
 						<tr>
 							<td align="center" style="height: 40px; width: 150px;"
 								id="td_back">연차 일수</td>
-							<td style="width: 850px;">총연차일수 : <input type="text" readonly value="16" style="width: 100px;"> 사용한연차 : <input
-								type="text" readonly value="${used}" style="width: 100px;">
-								잔여연차 : <input type="text" readonly value="16" id="restDate"
-								style="width: 100px;"> 
-								신청연차 : 	<input type="text" id="appDate2" readonly style="width: 100px;">
+							<td style="width: 850px;">&nbsp;총연차일수 : 16 &emsp;&emsp;사용한연차 : ${used}
+								&emsp;&emsp;잔여연차 :  ${drafter.employeeAnnualLeave}
+								&emsp;&emsp;신청연차 : 	<label id="appDate1"></label>
 							</td>
 						</tr>
 						<tr>
@@ -209,12 +203,17 @@ document.getElementById('dt1').onchange = function(){
 							</td>
 						</tr>
 					</table>
+					<div style="padding-top: 150px; margin-left: 15px;">
+					<c:if test="${employee.employeeNumber == middle.employeeNumber && ev.middleAccept == 0}">
+						<button id="accept1">승인</button>
+						<button id="reject1">반려</button>
+					</c:if>
+					<c:if test="${(employee.employeeNumber == last.employeeNumber && ev.lastAccept == 0) && ev.middleAccept == 1}">
+						<button id="accept2">승인</button>
+						<button id="reject2">반려</button>
+					</c:if>
 				</div>
-				<div style="padding-top: 150px; margin-left: 15px;">
-					<input type="submit" value="결재요청" />
-					<button>취소</button>
 				</div>
-		</form>
 		</div>
 		<!-- modal 삽입  -->
 		<%@ include file="../electronicApproval/part/modal.jsp"%>

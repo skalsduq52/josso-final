@@ -16,6 +16,22 @@
 		<org.slf4j-version>1.6.6</org.slf4j-version>		
 	</properties>
 	<dependencies>
+		
+		<!-- 이메일 인증: https://mvnrepository.com/artifact/javax.mail/mail -->
+			<dependency>
+				<groupId>javax.mail</groupId>
+				<artifactId>mail</artifactId>
+				<version>1.4.7</version>
+			</dependency>
+			
+			<!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context-support</artifactId>
+				<version>5.2.0.RELEASE</version>
+			</dependency>
+		<!-- 이메일 인증 끝 -->	
+		
 		<!-- 홍수명 개인 오류 수정 코드 / 경로 내 한글을 못찾는 문제 해결-->
 		<dependency>
 			<groupId>xerces</groupId>

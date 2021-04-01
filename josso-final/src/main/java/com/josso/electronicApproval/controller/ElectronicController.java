@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.josso.electronicApproval.controller.model.dao.electronicApprovalDAO;
+import com.josso.electronicApproval.vo.ElectView;
 import com.josso.electronicApproval.vo.ElectronicApproval;
 import com.josso.employee.vo.Employee;
 
@@ -33,6 +34,8 @@ public class ElectronicController {
 		Employee emp = (Employee) session.getAttribute("employee");
 		String empNo = emp.getEmployeeNumber();
 		List<ElectronicApproval> mySign = ed.selectLastMy(empNo);
+		List<ElectView> waitSign = ed.selectLastWait(empNo);
+		mv.addObject("waitSign",waitSign);
 		mv.addObject("mySign", mySign);
 		mv.addObject("emp",emp);
 		mv.setViewName("/electronicApproval/electronicApprovalMain");
@@ -66,9 +69,12 @@ public class ElectronicController {
 										@RequestParam(name = "middlenum") String middleNum,
 										@RequestParam(name = "last") String last,
 										@RequestParam(name = "lastname") String lastName,
-										@RequestParam(name = "lastnum") String lastNum){
+										@RequestParam(name = "lastnum") String lastNum, HttpSession session){
 		ModelAndView mv = new ModelAndView();
+		Employee emp = (Employee) session.getAttribute("employee");
 		Date date = new Date(System.currentTimeMillis());
+		int usedHoly = 16-emp.getEmployeeAnnualLeave();
+		mv.addObject("emp",emp);
 		mv.addObject("middle",middle);
 		mv.addObject("middleName",middleName);
 		mv.addObject("middlenum",middleNum);
@@ -76,6 +82,7 @@ public class ElectronicController {
 		mv.addObject("lastName",lastName);
 		mv.addObject("lastnum",lastNum);
 		mv.addObject("date",date);
+		mv.addObject("used",usedHoly);
 		mv.setViewName("/electronicApproval/signing");
 		return mv;
 	}
@@ -121,18 +128,35 @@ public class ElectronicController {
 	
 	@RequestMapping(value="elecApproval/signdetail", method=RequestMethod.GET)
 	public ModelAndView detailSign(@RequestParam(name = "num") String num, ModelAndView mv) throws Exception {
-		ElectronicApproval ep = ed.selectElecApp(num);
-		Employee drafter = ed.selectEmpOne(ep.getDrafter());
-		Employee middle = ed.selectEmpOne(ep.getMiddle());
-		Employee last = ed.selectEmpOne(ep.getLast());
+		ElectView ev = ed.selectElecApp(num);
+		Employee drafter = ed.selectEmpOne(ev.getDrafter());
+		Employee middle = ed.selectEmpOne(ev.getMiddle());
+		Employee last = ed.selectEmpOne(ev.getLast());
 		int usedHoly = 16-drafter.getEmployeeAnnualLeave();
-		mv.addObject("elecApp", ep);
+		mv.addObject("ev",ev);
 		mv.addObject("drafter", drafter);
 		mv.addObject("middle", middle);
 		mv.addObject("last", last);
-		mv.addObject("used",usedHoly);
+		mv.addObject("used", usedHoly);
 		mv.setViewName("/electronicApproval/signDetail");
 		return mv;
 	}
+	
+	@RequestMapping(value="elecApproval/middleAccept", method=RequestMethod.GET)
+	public ModelAndView middleAccept(@RequestParam(name="num") String num, ModelAndView mv) throws Exception {
+		ed.middleAccept(num);
+		mv.addObject("num",num);
+		mv.setViewName("redirect:/elecApproval/signdetail");
+		return mv;
+	}
+	
+	@RequestMapping(value="elecApproval/middleReject", method=RequestMethod.GET)
+	public ModelAndView middleReject(@RequestParam(name="num") String num, ModelAndView mv) throws Exception {
+		ed.middleReject(num);
+		mv.addObject("num",num);
+		mv.setViewName("redirect:/elecApproval/signdetail");
+		return mv;
+	}
+	
 	
 }
