@@ -23,23 +23,13 @@
 	<!-- 결재 정보 등록 -->
 	<insert id="insertElecApp" parameterType="ElectronicApproval">
 		INSERT INTO ELECTRONIC_APPROVAL VALUES(APPROVAL_NUM_SEQ.NEXTVAL,#{documentForm},#{documentName},SYSDATE,#{startDate},
-		#{endDate},#{drafter},DEFAULT,#{middle},DEFAULT,#{last},DEFAULT,NULL,#{holyType})
+		#{endDate},#{drafter},DEFAULT,#{middle},DEFAULT,#{last},DEFAULT,NULL,#{holyType},NULL,NULL)
 	</insert>
 	
 	<!-- 내가 기안한 문서 최근 글 3개 가져오기 -->
 	<select id="selectLastMy" parameterType="String" resultMap="ElectronicApproval">
 		SELECT ROWNUM,EA.* FROM
 			(SELECT * FROM ELECTRONIC_APPROVAL WHERE DRAFTER = #{empNo} ORDER BY REGISTER_DATE DESC) EA WHERE ROWNUM BETWEEN 1 AND 3
-	</select>
-	
-	<!--  
-	<select id="selectLastWait" parameterType="String" resultMap="ElectronicApproval">
-		SELECT ROWNUM,EA.* FROM
-			(SELECT * FROM ELECTRONIC_APPROVAL WHERE DRAFTER = #{empNo} ORDER BY REGISTER_DATE DESC) EA WHERE ROWNUM BETWEEN 1 AND 3
-	</select>-->
-	
-	<select id="selectDetail" parameterType="String" resultMap="ElectronicApproval">
-		SELECT * FROM ELECTRONIC_APPROVAL WHERE DOCUMENT_NO = #{num}
 	</select>
 	
 </mapper>

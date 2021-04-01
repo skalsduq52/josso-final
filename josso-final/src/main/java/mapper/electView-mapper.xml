@@ -23,4 +23,16 @@
 		<result property="holyType" column="HOLY_TYPE"/>
 	</resultMap>
 	
+	<!-- 보고서 상세보기  -->
+	<select id="selectDetail" parameterType="String" resultMap="ElectView">
+		SELECT * FROM ELEC_VIEW WHERE DOCUMENT_NO = #{num}
+	</select>
+	
+	<!-- 결재 대기문서 최근 3개 -->
+	<select id="selectLastWait" parameterType="String" resultMap="ElectView">
+		SELECT ROWNUM, EA.* FROM(SELECT * FROM ELEC_VIEW WHERE ((MIDDLE = #{num} and MIDDLE_ACCEPT != 1) 
+		OR (LAST = #{num} AND MIDDLE_ACCEPT = 1)) ORDER BY REGISTER_DATE DESC) EA WHERE ROWNUM BETWEEN 1 AND 3
+	</select>
+	
+	
 </mapper>

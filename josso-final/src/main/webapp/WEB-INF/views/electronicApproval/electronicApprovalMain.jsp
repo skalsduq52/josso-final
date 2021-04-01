@@ -60,27 +60,26 @@
 					</tr>
 				</thead>
 				<tbody>
+					<c:if test="${waitSign[0] != null}">
+						<c:forEach var="waitlist" items="${waitSign}">
+							<tr>
+								<td id="tdnum"><fmt:formatDate value="${waitlist.registerDate}" pattern="yyyy-MM-dd"/></td>
+								<c:if test="${waitlist.documentForm == 'F1'}">
+									<td>휴가신청서</td>
+								</c:if>
+								<td><a href="elecApproval/signdetail?num=${waitlist.documentNo}">${waitlist.documentName}</a></td>
+								<td>${waitlist.employeeName}/${waitlist.rankCode}/${waitlist.departmentCode}</td>
+								<c:if test="${waitlist.lastAccept == 0}">
+									<td>진행중</td>
+								</c:if>
+							</tr>
+						</c:forEach>
+					</c:if>	
+					<c:if test="${waitSign[0] == null}">	
 					<tr>
-						<td id="tdnum">2021-03-17</td>
-						<td>휴가신청서</td>
-						<td>휴가신청의 건</td>
-						<td>나민엽/사원/인사</td>
-						<td>대기중</td>
+						<th colspan="5" id="tdnum"  style="text-align: center;height:300px;">기안한 문서가 없습니다.</th>
 					</tr>
-					<tr>
-						<td id="tdnum">2021-03-17</td>
-						<td>휴가신청서</td>
-						<td>휴가신청의 건</td>
-						<td>안태민/사원/인사</td>
-						<td>대기중</td>
-					</tr>
-					<tr>
-						<td id="tdnum">2021-03-17</td>
-						<td>휴가신청서</td>
-						<td>휴가신청의 건</td>
-						<td>김재윤/사원/인사</td>
-						<td>대기중</td>
-					</tr>
+				</c:if>
 				</tbody>
 			</table>
 			<h4
@@ -114,7 +113,7 @@
 				</c:if>	
 				<c:if test="${mySign[0] == null}">	
 					<tr>
-						<th colspan="5" id="tdnum"  style="text-align: center;height:3000px;">기안한 문서가 없습니다.</th>
+						<th colspan="5" id="tdnum"  style="text-align: center;height:300px;">기안한 문서가 없습니다.</th>
 					</tr>
 				</c:if>
 				</tbody>
