@@ -125,10 +125,12 @@ public class ElectronicController {
 		Employee drafter = ed.selectEmpOne(ep.getDrafter());
 		Employee middle = ed.selectEmpOne(ep.getMiddle());
 		Employee last = ed.selectEmpOne(ep.getLast());
+		int usedHoly = 16-drafter.getEmployeeAnnualLeave();
 		mv.addObject("elecApp", ep);
 		mv.addObject("drafter", drafter);
 		mv.addObject("middle", middle);
 		mv.addObject("last", last);
+		mv.addObject("used",usedHoly);
 		mv.setViewName("/electronicApproval/signDetail");
 		return mv;
 	}

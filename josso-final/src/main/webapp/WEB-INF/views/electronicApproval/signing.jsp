@@ -148,6 +148,7 @@
 									<option value="포상">포상</option>
 							</select></td>
 						</tr>
+						
 						<tr>
 							<td align="center" style="height: 40px; width: 150px;"
 								id="td_back">기간 및 일시</td>

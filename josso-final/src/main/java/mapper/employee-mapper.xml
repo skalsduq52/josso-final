@@ -20,6 +20,7 @@
 		<result property="employeePicture" column="EMPLOYEE_PICTURE"/>
 		<result property="employeeRegistrationDate" column="EMPLOYEE_REGISTRATIONDATE"/>
 		<result property="employeeLoginDate" column="EMPLOYEE_LOGINDATE"/>
+		<result property="employeeAnnualLeave" column="EMPLOYEE_ANNUALLEAVE"/>
 	</resultMap>
 	
 	<!-- EMPLOYEE table의 모든 데이터 select -->
@@ -99,4 +100,3 @@
 		SELECT EMPLOYEE_NUMBER FROM EMPLOYEE WHERE EMPLOYEE_EMAIL= #{employeeEmail}
 	</select>
 </mapper>
-
