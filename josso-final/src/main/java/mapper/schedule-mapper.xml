@@ -29,9 +29,11 @@
 	<select id="selectScheduleAll" resultMap="resultSchedule">
 		SELECT * FROM SCHEDULE
 	</select>
-	
 	<!-- Schedule 하나만 조회 -->
 	<select id="selectSchedule" resultMap="resultSchedule" parameterType="String">
 		SELECT * FROM SCHEDULE WHERE SCHEDULE_NUMBER = #{scheduleNumber}
 	</select>
+	<!-- Schedule 수정 -->
+	<update id="updateSchedule" parameterType="Schedule">
+	</update>
 </mapper>

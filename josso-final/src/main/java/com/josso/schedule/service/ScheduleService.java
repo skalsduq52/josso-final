@@ -21,4 +21,6 @@ public interface ScheduleService {
 	// Schedule 하나만 조회(상세 페이지)
 	public Schedule selectSchedule(String scheduleNum) throws Exception;
 	
+	// Schedule 수정
+	public int updateSchedule(Schedule schedule) throws Exception;
 }

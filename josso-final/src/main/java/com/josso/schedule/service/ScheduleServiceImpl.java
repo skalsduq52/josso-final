@@ -51,4 +51,12 @@ public class ScheduleServiceImpl implements ScheduleService{
 		return sc;
 	}
 	
+	// Schedule 수정
+	@Override
+	public int updateSchedule(Schedule schedule) throws Exception{
+		
+		int result = sd.updateSchedule(schedule);
+		
+		return result;
+	}
 }

@@ -50,4 +50,12 @@ public class ScheduleDao {
 		
 		return sc;
 	}
+	
+	// Schedule 수정
+	public int updateSchedule(Schedule schedule) throws Exception{
+		
+		int result = sqlSession.update("Schedule.updateSchedule", schedule);
+		
+		return result;
+	}
 }

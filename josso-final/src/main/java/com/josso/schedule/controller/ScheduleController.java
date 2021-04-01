@@ -147,4 +147,16 @@ public class ScheduleController {
 		
 		return mv;
 	}
+	
+	@RequestMapping(value="schedule/modify", method=RequestMethod.POST)
+	public ModelAndView scheduleUpdate(Schedule schedule) throws Exception{
+		
+		ModelAndView mv = new ModelAndView();
+		
+		String result = Integer.toString(ss.updateSchedule(schedule));
+		
+		mv.setViewName("schedule.scheduleList");
+		
+		return mv;
+	}
 }
