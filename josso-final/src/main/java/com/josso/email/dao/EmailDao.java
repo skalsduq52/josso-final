@@ -55,6 +55,24 @@ public class EmailDao {
 		return acceptReply;
 	}
 	
+	// 참조자 정보 뽑아오기
+	public Email Er(int num) throws Exception{
+		Email er = sqlSession.selectOne("Email.Er",num);
+		return er;
+	}
+	
+	// 보낸사람 정보뽑아오기
+	public Email Es(int num) throws Exception{
+		Email es = sqlSession.selectOne("Email.Es",num);
+		return es;
+	}
+	
+	// 받는사람 정보뽑아오기
+	public Email Ea(int num) throws Exception{
+		Email ea = sqlSession.selectOne("Email.Ea",num);
+		return ea;
+	}
+	
 	// 받은메일함 - 자세히보기 - 전달버튼 클릭
 	public Email AcceptDelivery(int num) throws Exception{
 		Email acceptDelivery = sqlSession.selectOne("Email.AcceptDetail", num);
@@ -92,8 +110,8 @@ public class EmailDao {
 	}
 	
 	// 답장버튼 누를시
-	public List<Email> EmailReply(int number) throws Exception{
-		List<Email> emailReply = sqlSession.selectList("Email.EmailReply", number);
+	public List<Email> EmailReply(int num) throws Exception{
+		List<Email> emailReply = sqlSession.selectList("Email.EmailReply", num);
 		return emailReply;
 	}
 	

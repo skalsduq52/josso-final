@@ -293,7 +293,7 @@
                             <c:forEach var="n" items="${wastebasketList}">
 								<tr>
 	                                <td><input type="checkbox" name="check"></td>
-	                                <td>${n.emailSend}</td>
+	                                <td>${n.employeeName}/${n.rankCode}/${n.departmentCode}</td>
 	                                <td class="send-list-content"><a href="${pageContext.request.contextPath}/email/wastebasket/detail?num=${n.emailNumber}">${n.emailTitle}</a></td>
 	                                <td><fmt:formatDate value="${n.regDate}" pattern="yy-MM-dd [E] a hh:mm:ss"></fmt:formatDate></td>
 	                            </tr>

@@ -54,16 +54,7 @@ public class EmailController{
 	
 	
 	
-	// 받은메일함 - 자세히보기(완성)
-	@RequestMapping(value = "email/accept/detail", method = RequestMethod.GET)
-	public ModelAndView acceptDetail(int num, ModelAndView modelAndView, HttpSession session) throws Exception{
-		Email acceptDetail = emailService.AcceptDetail(num);
-		
-		modelAndView.addObject("acceptDetail",acceptDetail);
-		modelAndView.setViewName("email/acceptDetail");
-		
-		return modelAndView;
-	}
+	
 	
 	// 받은메일함 - 자세히보기 - 답장버튼 클릭(완성)
 	@RequestMapping(value = "email/accept/reply", method = RequestMethod.GET)
@@ -155,16 +146,63 @@ public class EmailController{
 		return modelAndView;
 	}
 	
+	// 받은메일함 - 자세히보기(완성)
+		@RequestMapping(value = "email/accept/detail", method = RequestMethod.GET)
+		public ModelAndView acceptDetail(int num, ModelAndView modelAndView, HttpSession session) throws Exception{
+			
+			Email acceptDetail = emailService.AcceptDetail(num);
+			Email er = emailService.Er(num);	// 참조자 정보
+			Email es = emailService.Es(num);	// 보낸사람 정보
+			Email ea = emailService.Ea(num);	// 받는사람 정보
+			
+			modelAndView.addObject("ea",ea);
+			modelAndView.addObject("es",es);
+			modelAndView.addObject("er",er);
+			modelAndView.addObject("acceptDetail",acceptDetail);
+			modelAndView.setViewName("email/acceptDetail");
+			
+			return modelAndView;
+		}
+	
 	// 보낸메일함 - 자세히보기(완성)
 	@RequestMapping(value = "email/send/detail", method = RequestMethod.GET)
 	public ModelAndView sendDetail(int num, ModelAndView modelAndView) throws Exception{
 		Email sendDetail = emailService.AcceptDetail(num);
+		
+		Email er = emailService.Er(num);	// 참조자 정보
+		Email es = emailService.Es(num);	// 보낸사람 정보
+		Email ea = emailService.Ea(num);	// 받는사람 정보
+		
+		modelAndView.addObject("ea",ea);
+		modelAndView.addObject("es",es);
+		modelAndView.addObject("er",er);
 		
 		modelAndView.addObject("sendDetail",sendDetail);
 		modelAndView.setViewName("email/sendDetail");
 		
 		return modelAndView;
 	}
+	
+	
+	
+	// 휴지통 - 자세히보기
+		@RequestMapping(value = "email/wastebasket/detail", method = RequestMethod.GET)
+		public ModelAndView wastebasketDetail(int num, ModelAndView modelAndView) throws Exception{
+			Email wastebasketDetail = emailService.WastebasketDetail(num);
+			
+			Email er = emailService.Er(num);	// 참조자 정보
+			Email es = emailService.Es(num);	// 보낸사람 정보
+			Email ea = emailService.Ea(num);	// 받는사람 정보
+			
+			modelAndView.addObject("ea",ea);
+			modelAndView.addObject("es",es);
+			modelAndView.addObject("er",er);
+			
+			modelAndView.addObject("wastebasketDetail",wastebasketDetail);
+			modelAndView.setViewName("email/wastebasketDetail");
+			
+			return modelAndView;
+		}
 	
 	// 받은메일함 - 자세히 보기 - 전달버튼 클릭시
 	@RequestMapping(value = "email/send/delivery", method = RequestMethod.GET)
@@ -217,16 +255,7 @@ public class EmailController{
 		return modelAndView;
 	}
 	
-	// 휴지통 - 자세히보기
-	@RequestMapping(value = "email/wastebasket/detail", method = RequestMethod.GET)
-	public ModelAndView wastebasketDetail(int num, ModelAndView modelAndView) throws Exception{
-		Email wastebasketDetail = emailService.WastebasketDetail(num);
-		
-		modelAndView.addObject("wastebasketDetail",wastebasketDetail);
-		modelAndView.setViewName("email/wastebasketDetail");
-		
-		return modelAndView;
-	}
+	
 	
 	
 	

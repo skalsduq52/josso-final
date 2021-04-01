@@ -244,15 +244,15 @@
                     </tr>
                     <tr>
                         <td>보낸 사람  </td>
-                        <td colspan="2"><input type="email" readonly value="${acceptDetail.emailSend}" class="form-control form-control-sm form-control-plaintext"></td>
+                        <td colspan="2"><input type="email" readonly value="${es.employeeName}/${es.departmentCode}/${es.rankCode}" class="form-control form-control-sm form-control-plaintext"></td>
                     </tr>
                     <tr>
                         <td>받는 사람</td>
-                        <td colspan="2"><input type="email" readonly value="${acceptDetail.emailAccept}" class="form-control form-control-sm form-control-plaintext"></td>
+                        <td colspan="2"><input type="email" readonly value="${ea.employeeName}/${ea.departmentCode}/${ea.rankCode}" class="form-control form-control-sm form-control-plaintext"></td>
                     </tr>
                     <tr>
                         <td>참조</td>
-                        <td colspan="2"><input type="text" readonly value="${acceptDetail.emailReference}"class="form-control form-control-sm form-control-plaintext"></td>
+                        <td colspan="2"><input type="text" readonly value="${er.employeeName}/${er.departmentCode}/${er.rankCode}"class="form-control form-control-sm form-control-plaintext"></td>
                     </tr>
                     <tr>
                         <td>보낸날짜  </td>

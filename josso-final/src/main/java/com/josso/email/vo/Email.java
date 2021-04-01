@@ -16,16 +16,27 @@ public class Email {
 	private String emailWastebasket;
 	private String emailRead;
 	private String emailPosition;
+	private String employeeName;
+	private String rankCode;
+	private String departmentCode;
 	
 	public Email() {
 		
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "Email [employeeNumber=" + employeeNumber + ", emailNumber=" + emailNumber + ", emailSend=" + emailSend
+				+ ", emailAccept=" + emailAccept + ", emailReference=" + emailReference + ", emailTitle=" + emailTitle
+				+ ", emailContent=" + emailContent + ", emailFile=" + emailFile + ", regDate=" + regDate
+				+ ", emailWastebasket=" + emailWastebasket + ", emailRead=" + emailRead + ", emailPosition="
+				+ emailPosition + ", employeeName=" + employeeName + ", rankCode=" + rankCode + ", departmentCode="
+				+ departmentCode + "]";
+	}
 
 	public Email(String employeeNumber, int emailNumber, String emailSend, String emailAccept, String emailReference,
 			String emailTitle, String emailContent, String emailFile, Date regDate, String emailWastebasket,
-			String emailRead, String emailPosition) {
+			String emailRead, String emailPosition, String employeeName, String rankCode, String departmentCode) {
 		super();
 		this.employeeNumber = employeeNumber;
 		this.emailNumber = emailNumber;
@@ -39,20 +50,10 @@ public class Email {
 		this.emailWastebasket = emailWastebasket;
 		this.emailRead = emailRead;
 		this.emailPosition = emailPosition;
+		this.employeeName = employeeName;
+		this.rankCode = rankCode;
+		this.departmentCode = departmentCode;
 	}
-
-
-
-	@Override
-	public String toString() {
-		return "Email [employeeNumber=" + employeeNumber + ", emailNumber=" + emailNumber + ", emailSend=" + emailSend
-				+ ", emailAccept=" + emailAccept + ", emailReference=" + emailReference + ", emailTitle=" + emailTitle
-				+ ", emailContent=" + emailContent + ", emailFile=" + emailFile + ", regDate=" + regDate
-				+ ", emailWastebasket=" + emailWastebasket + ", emailRead=" + emailRead + ", emailPosition="
-				+ emailPosition + "]";
-	}
-
-
 
 	public String getEmployeeNumber() {
 		return employeeNumber;
@@ -149,6 +150,36 @@ public class Email {
 	public void setEmailPosition(String emailPosition) {
 		this.emailPosition = emailPosition;
 	}
+
+	public String getEmployeeName() {
+		return employeeName;
+	}
+
+	public void setEmployeeName(String employeeName) {
+		this.employeeName = employeeName;
+	}
+
+	public String getRankCode() {
+		return rankCode;
+	}
+
+	public void setRankCode(String rankCode) {
+		this.rankCode = rankCode;
+	}
+
+	public String getDepartmentCode() {
+		return departmentCode;
+	}
+
+	public void setDepartmentCode(String departmentCode) {
+		this.departmentCode = departmentCode;
+	}
+	
+	
+	
+	
+	
+
 	
 	
 	

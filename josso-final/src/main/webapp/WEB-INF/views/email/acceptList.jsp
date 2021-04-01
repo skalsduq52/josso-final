@@ -282,7 +282,7 @@
                             <c:forEach var="n" items="${acceptList}">
 								<tr>
 	                                <td><input type="checkbox" class="check" name="check" value="${n.emailNumber}"></td>
-	                                <td>${n.emailSend}</td>
+	                                <td>${n.employeeName}/${n.rankCode}/${n.departmentCode}</td>
 	                                <td class="send-list-content"><a href="${pageContext.request.contextPath}/email/accept/detail?num=${n.emailNumber}">${n.emailTitle}</a></td>
 	                                <td><fmt:formatDate value="${n.regDate}" pattern="yy-MM-dd [E] a hh:mm:ss"></fmt:formatDate></td>
 	                                

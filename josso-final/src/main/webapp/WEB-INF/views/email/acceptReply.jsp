@@ -230,7 +230,7 @@
                         <td style="width: 120px;">보내는 사람 :</td>
                         <td colspan="2">
                         <input type="hidden" name="employeeNumber"  value="${employee.employeeNumber}">
-                        <input type="email" name="emailSend" value="${acceptReply.emailAccept}" class="form-control form-control-sm form-control-plaintext">
+                        <input type="email" name="emailSend" class="form-control form-control-sm form-control-plaintext">
                         </td>
                     </tr>
                     <tr>
