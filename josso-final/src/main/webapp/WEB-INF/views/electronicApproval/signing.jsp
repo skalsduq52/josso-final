@@ -30,6 +30,38 @@
 <!-- modal,slide 스크립트 사용 -->
 <script src="${pageContext.request.contextPath}/resources/js/modal.js"></script>
 </head>
+<script>
+$(function() {
+var date1 ='';
+var date2 ='';
+var num = '';
+
+document.getElementById('dt').onchange = function(){
+	date1 = new Date(this.value);
+	if(date1 != '' && date2 != ''){
+		num = ((date2.getTime() - date1.getTime()) / (1000*60*60*24))+1;
+		if($('#restDate').val() < num){
+			alert('잔여일자를 초과했습니다.');
+		}else{
+		$('#appDate').val(num);
+		$('#appDate2').val(num);
+		}
+	}
+}
+document.getElementById('dt1').onchange = function(){
+	date2 = new Date(this.value);
+	if(date1 != '' && date2 != ''){
+		num = ((date2.getTime() - date1.getTime()) / (1000*60*60*24))+1;
+		if($('#restDate').val() < num){
+			alert('잔여일자를 초과했습니다.');
+		}else{
+		$('#appDate').val(num);
+		$('#appDate2').val(num);
+		}
+	}
+}
+});
+</script>
 <body>
 	<!-- navigation 삽입 -->
 	<header>
@@ -69,12 +101,12 @@
 										</tr>
 										<tr>
 											<td id="td_back">소속</td>
-											<td>${employee.departmentCode}</td>
+											<td>${emp.departmentCode}</td>
 										</tr>
 										<tr>
 											<td id="td_back">기안자</td>
-											<td>${employee.employeeName}</td>
-											<input type="hidden" name="drafter" value="${employee.employeeNumber}">
+											<td>${emp.employeeName}</td>
+											<input type="hidden" name="drafter" value="${emp.employeeNumber}">
 										</tr>
 										<tr>
 											<td id="td_back">작성일자</td>
@@ -111,10 +143,10 @@
 												<td rowspan="4"
 													style="height: 130px; background-color: rgb(226, 226, 226);">신<br>청
 												</td>
-												<td style="height: 15px; width: 100px;" align="center">${employee.rankCode}</td>
+												<td style="height: 15px; width: 100px;" align="center">${emp.rankCode}</td>
 											</tr>
 											<tr>
-												<td rowspan="2" align="center">${employee.employeeName}</td>
+												<td rowspan="2" align="center">${emp.employeeName}</td>
 											</tr>
 											<tr></tr>
 											<tr>
@@ -152,19 +184,18 @@
 						<tr>
 							<td align="center" style="height: 40px; width: 150px;"
 								id="td_back">기간 및 일시</td>
-							<td style="width: 850px;"><input type="date" name="startDate">~<input
-								type="date" name="endDate">&nbsp;신청일수 : <input type="text" readonly
-								value="1" style="width: 150px;"></td>
+							<td style="width: 850px;"><input type="date" name="startDate" id="dt">~<input
+								type="date" name="endDate" id="dt1">&nbsp;신청일수 : <input type="text" readonly
+								style="width: 150px;" id="appDate"></td>
 						</tr>
 						<tr>
 							<td align="center" style="height: 40px; width: 150px;"
 								id="td_back">연차 일수</td>
-							<td style="width: 850px;">총연차일수 : <input type="text"
-								readonly value="16" style="width: 100px;"> 사용한연차 : <input
-								type="text" readonly value="16" style="width: 100px;">
-								잔여연차 : <input type="text" readonly value="16"
-								style="width: 100px;"> 신청연차 : <input type="text"
-								readonly value="16" style="width: 100px;">
+							<td style="width: 850px;">총연차일수 : <input type="text" readonly value="16" style="width: 100px;"> 사용한연차 : <input
+								type="text" readonly value="${used}" style="width: 100px;">
+								잔여연차 : <input type="text" readonly value="16" id="restDate"
+								style="width: 100px;"> 
+								신청연차 : 	<input type="text" id="appDate2" readonly style="width: 100px;">
 							</td>
 						</tr>
 						<tr>

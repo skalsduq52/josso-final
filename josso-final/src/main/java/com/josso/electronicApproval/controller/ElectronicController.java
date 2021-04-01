@@ -66,9 +66,12 @@ public class ElectronicController {
 										@RequestParam(name = "middlenum") String middleNum,
 										@RequestParam(name = "last") String last,
 										@RequestParam(name = "lastname") String lastName,
-										@RequestParam(name = "lastnum") String lastNum){
+										@RequestParam(name = "lastnum") String lastNum, HttpSession session){
 		ModelAndView mv = new ModelAndView();
+		Employee emp = (Employee) session.getAttribute("employee");
 		Date date = new Date(System.currentTimeMillis());
+		int usedHoly = 16-emp.getEmployeeAnnualLeave();
+		mv.addObject("emp",emp);
 		mv.addObject("middle",middle);
 		mv.addObject("middleName",middleName);
 		mv.addObject("middlenum",middleNum);
@@ -76,6 +79,7 @@ public class ElectronicController {
 		mv.addObject("lastName",lastName);
 		mv.addObject("lastnum",lastNum);
 		mv.addObject("date",date);
+		mv.addObject("used",usedHoly);
 		mv.setViewName("/electronicApproval/signing");
 		return mv;
 	}
