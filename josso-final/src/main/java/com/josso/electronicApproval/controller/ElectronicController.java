@@ -142,4 +142,21 @@ public class ElectronicController {
 		return mv;
 	}
 	
+	@RequestMapping(value="elecApproval/middleAccept", method=RequestMethod.GET)
+	public ModelAndView middleAccept(@RequestParam(name="num") String num, ModelAndView mv) throws Exception {
+		ed.middleAccept(num);
+		mv.addObject("num",num);
+		mv.setViewName("redirect:/elecApproval/signdetail");
+		return mv;
+	}
+	
+	@RequestMapping(value="elecApproval/middleReject", method=RequestMethod.GET)
+	public ModelAndView middleReject(@RequestParam(name="num") String num, ModelAndView mv) throws Exception {
+		ed.middleReject(num);
+		mv.addObject("num",num);
+		mv.setViewName("redirect:/elecApproval/signdetail");
+		return mv;
+	}
+	
+	
 }
