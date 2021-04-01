@@ -28,7 +28,7 @@ public class WeeklyController {
 	@Autowired
 	WeeklyService ws;
 	
-	// 주간업무보고(목록)
+	// 주간업무보고(목록) - 완료
 	@RequestMapping(value="report/weekly/list", method=RequestMethod.GET)
 	public ModelAndView weeklyList(ModelAndView mv) throws Exception {
 		System.out.println("주간업무보고 컨트롤러 - 목록보기 들어옴");
@@ -98,11 +98,7 @@ public class WeeklyController {
 	}
 	
 	
-	
-	
-	
-	
-	// 주간업무보고(작성 페이지) '브릿지'
+	// 주간업무보고(작성 페이지) '브릿지' - 완료
 	@RequestMapping(value="report/weekly/write", method=RequestMethod.GET)
 	public ModelAndView weeklyWrite(ModelAndView mv) throws Exception {
 		System.out.println("작성 브릿지");
@@ -111,11 +107,7 @@ public class WeeklyController {
 	}
 	
 	
-	
-	
-	
-	
-	// 주간업무보고(글등록)
+	// 주간업무보고(글등록) - 완료
 	@RequestMapping(value="report/weekly/register", method=RequestMethod.POST)
 	public ModelAndView weeklyRegister(@RequestParam("thisStart") String thisStart, WeeklyReport wr, ModelAndView mv,  HttpSession session) throws Exception {
 		System.out.println("주간업무보고 등록 들어옴");
@@ -157,7 +149,8 @@ public class WeeklyController {
 		// writer에 세션값(employeeName) 넣음
 		System.out.println("세션에 있는 사원번호값 : "+employee.getEmployeeNumber());
 		wr.setWriter(employee.getEmployeeNumber());
-		System.out.println("세션에 있는 사원번호값 : "+wr.getWriter());
+		System.out.println("세션에 있는 사원번호값 : " + wr.getWriter());
+		
 		int result = ws.reportWrite(wr);
 		
 		mv.setViewName("redirect:list");
@@ -166,18 +159,18 @@ public class WeeklyController {
 	}
 	
 	
-	
-	
-	
-	// 주간업무보고(디테일페이지)
+	// 주간업무보고(디테일페이지) - 완료
 	@RequestMapping(value="report/weekly/DetailPage", method=RequestMethod.GET)
 	public ModelAndView weeklyDetailPage(ModelAndView mv, @RequestParam("num") String num) throws Exception {
-		System.out.println("디테일페이지 들어옴");
+		System.out.println("- 디테일페이지 들어옴 -");
+		
+		String num1= num;
 		
 		WeeklyReport wr = ws.selectDetailPage(num);
 		
-		System.out.println("날짜 찍어봄 : " + wr.getThisStart());
+		//System.out.println("날짜 찍어봄 : " + wr.getThisStart());
 		
+		mv.addObject("num1", num1);
 		mv.addObject("wr", wr);
 		mv.setViewName("businessReport/weeklyDetailPage");
 		return mv;
@@ -186,26 +179,53 @@ public class WeeklyController {
 	
 	 
 	
-	// 주간업무보고(수정) '브릿지'
+	// 주간업무보고(update 브릿지) - 완료
 	@RequestMapping(value="report/weekly/updateBridge", method=RequestMethod.GET)
 	public ModelAndView updateBridge(ModelAndView mv, @RequestParam("num") String num) throws Exception {
-		System.out.println("주간업무보고 수정 브릿지 들어옴");
+		System.out.println("- 수정페이지 들어옴 -");
+		System.out.println(num);
+		
+		String num1=num;
 		
 		WeeklyReport wr = ws.selectDetailPage(num);
 		
+		mv.addObject("num", num1);
 		mv.addObject("wr", wr);
 		mv.setViewName("businessReport/weeklyUpdate");
 		return mv;
 	}
 	
 	
-	// 주간업무보고(수정하기 실행)
-	@RequestMapping(value="report/weekly/update", method=RequestMethod.GET)
-	public ModelAndView weeklyUpdate(ModelAndView mv, WeeklyReport wr) throws Exception {
+	// 주간업무보고(수정하기 완료 버튼) - 진행 중
+	@RequestMapping(value="report/weekly/update", method=RequestMethod.POST)
+	public ModelAndView weeklyUpdate(WeeklyReport wr, ModelAndView mv, @RequestParam("num") int num) throws Exception {
+		System.out.println("- 수정완료 버튼 누름 -");
+		System.out.println("num값 : " + num);
+		System.out.println("이것도 드러오나? : " + wr);
+		
+		// 완료
+		wr.setReportNumber(num);
+		
+		int result = ws.reportUpdate(num);
+		
+		System.out.println("result : " + result);
+		
 		mv.setViewName("businessReport/weeklyUpdate");
 		return mv;
 	}
 	
+	
+	// 주간업무보고(삭제하는 페이지) - 완료
+	@RequestMapping(value="report/weekly/delete", method=RequestMethod.GET)
+	public ModelAndView weeklyDelete(ModelAndView mv, @RequestParam("num") String num) throws Exception {
+		System.out.println("삭제 드가자");
+		System.out.println(num);
+		
+		int result = ws.reportDelete(num);
+		
+		mv.setViewName("redirect:list");
+		return mv;
+	}
 	
 	
 }

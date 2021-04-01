@@ -117,8 +117,10 @@
                 width: 100%;
                 height: 200px;
                 border: none;
-                padding : 15px 15px;
                 resize: none;
+                padding : 15px 15px;
+                font-size:1.2em;
+                font-weight:bold;
             }
 
             .week {
@@ -301,10 +303,10 @@
                 <div style="float:left; width: 150px; height: 100px;" >
                 </div>
                 <div style="padding-top: 50px; padding-right: 50px; float:right" class="text-center">
-                	<button class="btn btn-info btn-lg"><a href="updateBridge?num=${ws.reportNumber }" style="color:white">수정하기</a></button>
-                    <input class="btn btn-secondary btn-lg" onclick="history.back()" type="submit" value="목록">
-                </span>
+                	<button class="btn btn-info btn-lg"><a href="updateBridge?num=${num1}" style="color:white">수정하기</a></button>
+                	<button class="btn btn-secondary btn-lg" onclick="return confirm('정말 삭제하시겠습니까?')"><a href="delete?num=${num1 }" style="color:white">삭제하기</a></button>
                 </div>
+            </div>
            </form>        
         </main>
         <br>

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -116,6 +118,9 @@
                 height: 200px;
                 border: none;
                 resize: none;
+                padding : 15px 15px;
+                font-size:1.2em;
+                font-weight:bold;
             }
 
             .week {
@@ -246,7 +251,8 @@
             </div>
         </nav>
         <main>
-            <form>
+            <form action="update?num=${num}" method="POST">
+            <input type="hidden" value=${num } name="reportNumber"/> 
             <div class="border-top">
                 <table style="width: 97%;" id="board">
                     <thead>
@@ -260,29 +266,29 @@
                         <tr style="height: 60px;">
                             <th class="left_td"></th>
                             <th class="report_date">
-                               <input type="date" value="<fmt:formatDate value="${wr.thisStart }" pattern="yyyy-MM-dd"/>" class="date">　∼　<input type="date" value="<fmt:formatDate value="${wr.thisEnd }" pattern="yyyy-MM-dd"/>" class="date"></th><br>
+                                <input type="date" name="thisStart" value="<fmt:formatDate value="${wr.thisStart }" pattern="yyyy-MM-dd"/>" class="date">　∼　<input type="date" name="thisEnd" value="<fmt:formatDate value="${wr.thisEnd }" pattern="yyyy-MM-dd"/>"  class="date"></th><br>
                             <th class="report_date">
-                                <input type="date">　∼　<input type="date"></th><br>
+							    <input type="date" name="nextStart" value="<fmt:formatDate value='${wr.nextStart }' pattern='yyyy-MM-dd'/>" class="date">　∼　<input type="date" name="nextEnd" value="<fmt:formatDate value="${wr.nextStart }" pattern="yyyy-MM-dd"/>" class="date"></th><br>
                         </tr>
                         <tr>
                             <th class="left_td">고객(사) 미팅</th>
-                            <td class="right_td1"><textarea class="write_area" type="text"></textarea></td>
-                            <td class="right_td2"><textarea class="write_area" type="text"></textarea></td>
+                            <td class="right_td1"><textarea name="thisMeeting" class="write_area">${wr.thisMeeting }</textarea></td>
+                            <td class="right_td2"><textarea name="nextMeeting" class="write_area">${wr.nextMeeting }</textarea></td>
                         </tr>
                         <tr >
                             <th class="left_td">회의 내용</th>
-                            <td class="right_td1"><textarea class="write_area" type="text"></textarea></td>
-                            <td class="right_td2"><textarea class="write_area" type="text"></textarea></td>
+                            <td class="right_td1"><textarea name="thisConference" class="write_area">${wr.thisConference }</textarea></td>
+                            <td class="right_td2"><textarea name="nextConference" class="write_area">${wr.nextConference }</textarea></td>
                         </tr>
                         <tr >
                             <th class="left_td">프로젝트</th>
-                            <td class="right_td1"><textarea class="write_area" type="text"></textarea></td>
-                            <td class="right_td2"><textarea class="write_area" type="text"></textarea></td>
+                            <td class="right_td1"><textarea name="thisProject" class="write_area">${wr.thisProject }</textarea></td>
+                            <td class="right_td2"><textarea name="nextProject" class="write_area">${wr.nextProject }</textarea></td>
                         </tr>
                         <tr id="write_content">
                             <th class="left_td">특이사항</th>
-                            <td class="right_td1"><textarea class="write_area" type="text"></textarea></td>
-                            <td class="right_td2"><textarea class="write_area" type="text"></textarea></td>
+                            <td class="right_td1"><textarea name="thisEtc" class="write_area">${wr.thisEtc }</textarea></td>
+                            <td class="right_td2"><textarea name="nextEtc" class="write_area">${wr.nextEtc }</textarea></td>
                         </tr>
                     </tbody>    
                 </table>
@@ -292,9 +298,9 @@
             <div style="float:left; width: 150px; height: 100px;" >
             </div>
             <div style="padding-top: 50px; padding-right: 50px; float:right" class="text-center">
-                <input class="btn btn-info btn-lg" type="submit" value="등록하기">
+                <input class="btn btn-info btn-lg" type="submit" value="수정완료">
                 <input class="btn btn-secondary btn-lg" onclick="history.back()" type="submit" value="취소">
-            </span>
+            </div>
             </div>
            </form>        
         </main>

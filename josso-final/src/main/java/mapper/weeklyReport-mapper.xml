@@ -81,7 +81,7 @@
 	
 	<!-- 삭제 -->
 	<delete id="reportDelete" parameterType="weeklyReport">
-		DELETE FROM REPORT_WEEK WHERE REPORT_NUMBER = #{reportNumber}
+		DELETE FROM REPORT_WEEK WHERE REPORT_NUM = #{num}
 	</delete>
 
 </mapper>

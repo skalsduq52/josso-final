@@ -19,9 +19,9 @@ public interface WeeklyService {
 	public int reportWrite(WeeklyReport wr) throws Exception;
 	
 	// 수정
-	public int reportUpdate(WeeklyReport wr) throws Exception;
+	public int reportUpdate(int num) throws Exception;
 	
 	// 삭제
-	public int reportDelete(WeeklyReport wr) throws Exception;
+	public int reportDelete(String num) throws Exception;
 	
 }

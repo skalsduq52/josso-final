@@ -34,7 +34,7 @@ public class WeeklyReport {
 	private String employeeName;		// 사원이름
 	private String departmentCode;		// 부서
 	private String rankCode;			// 직위
-	
+	 
 
 
 	// 생성자
@@ -192,6 +192,15 @@ public class WeeklyReport {
 	
 	public void setRankCode(String rankCode) {
 		this.rankCode = rankCode;
+	}
+
+	@Override
+	public String toString() {
+		return String.format(
+				"WeeklyReport [reportNumber=%s, reportTitle=%s, writer=%s, writeTime=%s, thisStart=%s, thisEnd=%s, thisMeeting=%s, thisConference=%s, thisProject=%s, thisEtc=%s, nextStart=%s, nextEnd=%s, nextMeeting=%s, nextConference=%s, nextProject=%s, nextEtc=%s, employeeName=%s, departmentCode=%s, rankCode=%s]",
+				reportNumber, reportTitle, writer, writeTime, thisStart, thisEnd, thisMeeting, thisConference,
+				thisProject, thisEtc, nextStart, nextEnd, nextMeeting, nextConference, nextProject, nextEtc,
+				employeeName, departmentCode, rankCode);
 	}
 	
 

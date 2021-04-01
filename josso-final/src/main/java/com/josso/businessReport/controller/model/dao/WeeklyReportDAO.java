@@ -42,14 +42,14 @@ public class WeeklyReportDAO {
 	}
 	
 	// 수정
-	public int reportUpdate(WeeklyReport wr) throws Exception {
-		int result = sqlSession.update("weeklyReport.reportUpdate");
+	public int reportUpdate(int num) throws Exception {
+		int result = sqlSession.update("weeklyReport.reportUpdate", num);
 		return result;
 	}
 	
 	// 삭제
-	public int reportDelete(WeeklyReport wr) throws Exception {
-		int result = sqlSession.delete("weeklyReport.reportDelete");
+	public int reportDelete(String num) throws Exception {
+		int result = sqlSession.delete("weeklyReport.reportDelete", num);
 		return result;
 	}
 	

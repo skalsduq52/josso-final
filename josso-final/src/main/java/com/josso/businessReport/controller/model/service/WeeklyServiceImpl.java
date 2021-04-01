@@ -44,15 +44,15 @@ public class WeeklyServiceImpl implements WeeklyService {
 	
 	// 수정
 	@Override
-	public int reportUpdate(WeeklyReport wr) throws Exception {
-		int result = weeklyreportDao.reportUpdate(wr);
+	public int reportUpdate(int num) throws Exception {
+		int result = weeklyreportDao.reportUpdate(num);
 		return result;
 	}
 	
 	// 삭제
 	@Override
-	public int reportDelete(WeeklyReport wr) throws Exception {
-		int result = weeklyreportDao.reportDelete(wr);
+	public int reportDelete(String num) throws Exception {
+		int result = weeklyreportDao.reportDelete(num);
 		return result; 
 	}
 	
