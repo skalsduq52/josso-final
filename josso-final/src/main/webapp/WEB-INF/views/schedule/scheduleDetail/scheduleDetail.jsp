@@ -9,12 +9,12 @@
 		</nav>
 		<main>
 			<div>
-				<form action="${pageContext.request.contextPath}/schedule/register" method="post">
+				<form action="${pageContext.request.contextPath}/schedule/modify" method="post">
 					<table class="form_type">
 						<tbody>
 							<tr>
 								<th>제목</th>
-								<td><input class="ipt" name="scheduleTitle" type="text" value maxlength="500">
+								<td><input class="ipt" name="scheduleTitle" type="text" value="${schedule.scheduleTitle}" value maxlength="500">
 								</td>
 							</tr>
 	
@@ -29,8 +29,8 @@
 	                                    </div> -->
 									<div class="date_ipt">
 										<span> <%-- <img src="${pageContext.request.contextPath}/resources/images/달력이미지.png">  --%>
-										<input type="date" class="start_date" name="scheduleStartDate" value=""> <!-- <input type="text" class="time_date dropdown-toggle" value=""> -->
-										<input type="time" name="scheduleStartTime">	
+										<input type="date" class="start_date" name="scheduleStartDate" value="${schedule.scheduleStartDate}"> <!-- <input type="text" class="time_date dropdown-toggle" value=""> -->
+										<input type="time" name="scheduleStartTime" value="${schedule.scheduleStartTime}">	
 											<!-- <select name="scheduleStartTime">
 												<option value="00:00">00:00</option>
 												<option value="00:30">00:30</option>
@@ -80,8 +80,8 @@
 												<option value="23:30">23:30</option>
 										</select> -->
 										</span> ~ <span> <%-- <img src="${pageContext.request.contextPath}/resources/images/달력이미지.png"> --%> 
-											<input type="date" class="start_date" name="scheduleEndDate" value=""> <!-- <input type="text" class="time_date dropdown-toggle" value=""> -->
-											<input type="time" name="scheduleEndTime">	 <!-- <input type="text" class="time_date" value=""> -->
+											<input type="date" class="start_date" name="scheduleEndDate" value="${schedule.scheduleEndDate}"> <!-- <input type="text" class="time_date dropdown-toggle" value=""> -->
+											<input type="time" name="scheduleEndTime" value="${schedule.scheduleEndTime}">	 <!-- <input type="text" class="time_date" value=""> -->
 											<!-- <select name="scheduleEndTime">
 												<option value="00:00">00:00</option>
 												<option value="00:30">00:30</option>
@@ -135,7 +135,7 @@
 								</td>
 							</tr>
 	
-							<tr>
+							<%-- <tr>
 								<th>참석자</th>
 								<td>
 									<span class="badge badge-pill badge-secondary" name="Attendee">안태민</span>
@@ -144,111 +144,37 @@
 										<span>참석자 선택</span>
 									</span>
 								</td>
-							</tr>
+							</tr> --%>
 	
 							<tr>
 								<th>장소</th>
-								<td><input class="ipt" name="schedulePlace" type="text" maxlength="500">
+								<td><input class="ipt" name="schedulePlace" type="text" maxlength="500" value="${schedule.schedulePlace}">
 								</td>
 							</tr>
 	
 							<tr>
 								<th>내용</th>
 								<td><textarea class="txtarea" name="scheduleContent" style="resize: none;"
-										rows="10"></textarea></td>
+										rows="10">${schedule.scheduleContent}</textarea></td>
 							</tr>
 						</tbody>
 					</table>
 					<div class="bt_area">
-						<span>
-							<button type="submit" class="btn btn-info">확인</button>
-						</span> <span>
-							<button type="button" class="btn btn-secondary">취소</button>
-						</span>
+						<c:if test="${employee.employeeNumber == schedule.employeeNumber}">
+							<span>
+								<button type="submit" class="btn btn-info">수정</button>
+								
+							</span> 
+							<span>
+								<button type="button" class="btn btn-secondary">취소</button>
+							</span>
+						</c:if>
+						<c:if test="${employee.employeeNumber != schedule.employeeNumber || empty employee.employeeNumber}">
+							<button type="button" onclick="window.history.back()" class="btn btn-info">돌아가기</button>
+						</c:if>
 					</div>
 				</form>
 			</div>
-			<!-- Modal -->
-			<div class="modal fade" id="exampleModal" tabindex="-1"
-				aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div class="modal-dialog modal-sm modal-dialog-scrollable">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h6 class="modal-title" id="exampleModalLabel">참석자 추가</h6>
-							<br>
-							<button type="button" class="close" data-dismiss="modal"
-								aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-							<ul>
-								<li class="hover_team1">
-									<a href="#"> 
-										<i class="fas fa-sort-down fa-rotate-270" style="color: gray"></i>
-										<b>운영팀</b>
-									</a>
-								</li>
-								<ul class="modal_mb1">
-									
-								<c:forEach var="n" items="${employee}">
-									<c:if test="${n.departmentCode eq '운영본부'}">
-										<li>${n.employeeName}&nbsp;${n.rankCode}</li>
-									</c:if>
-								</c:forEach>
-									
-								</ul>
-								<li class="hover_team2">
-									<a href="#"> 
-										<i class="fas fa-sort-down fa-rotate-270" style="color: gray"></i>
-										<b>개발팀</b>
-									</a>
-								</li>
-								<ul class="modal_mb2">
-								
-								<c:forEach var="n" items="${employee}">
-									<c:if test="${n.departmentCode eq '개발본부'}">
-										<li>${n.employeeName}&nbsp;${n.rankCode}</li>
-									</c:if>
-								</c:forEach>
-								
-								</ul>
-								<li class="hover_team3">
-									<a href="#"> 
-										<i class="fas fa-sort-down fa-rotate-270" style="color: gray"></i>
-										<b>영업팀</b>
-									</a>
-								</li>
-								<ul class="modal_mb3">
-									
-								<c:forEach var="n" items="${employee}">
-									<c:if test="${n.departmentCode eq '영업본부'}">
-										<li>${n.employeeName}&nbsp;${n.rankCode}</li>
-									</c:if>
-								</c:forEach>
-								
-								</ul>
-								<li class="hover_team4">
-									<a href="#"> 
-										<i class="fas fa-sort-down fa-rotate-270" style="color: gray"></i>
-										<b>지원팀</b>
-									</a>
-								</li>
-								<ul class="modal_mb4">
-								
-								<c:forEach var="n" items="${employee}">
-									<c:if test="${n.departmentCode eq '지원본부'}">
-										<li>${n.employeeName}&nbsp;${n.rankCode}</li>
-									</c:if>
-								</c:forEach>
-								
-								</ul>
-							</ul>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary"
-								data-dismiss="modal">닫기</button>
-						</div>
 					</div>
 				</div>
 			</div>

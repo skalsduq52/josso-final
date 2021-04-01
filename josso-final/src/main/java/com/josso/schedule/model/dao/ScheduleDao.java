@@ -19,24 +19,35 @@ public class ScheduleDao {
 		// TODO Auto-generated constructor stub
 	}
 	
+	// Schedule 전체 조회
 	public List<Schedule> selectScheduleAll() throws Exception{
 		
-		List<Schedule> scheduleList = sqlSession.selectList("Schedule.selectSchedule");
+		List<Schedule> scheduleList = sqlSession.selectList("Schedule.selectScheduleAll");
 		
 		return scheduleList;
 	}
 	
-	public int scheduleRegister(Schedule schedule) throws Exception{
+	// Schedule 등록
+	public int insertSchedule(Schedule schedule) throws Exception{
 		
 		int result = sqlSession.insert("Schedule.insertSchedule", schedule);
 		
 		return result;
 	}
 	
+	// 참석자 목록 조회
 	public List<Employee> selectAttendeeAll() throws Exception{
 		
 		List<Employee> ep = sqlSession.selectList("Employee.selectEmployeePart");
 		
 		return ep;
+	}
+	
+	// Schedule 하나만 조회(상세 페이지)
+	public Schedule selectSchedule(String scheduleNum) throws Exception{
+		
+		Schedule sc = sqlSession.selectOne("Schedule.selectSchedule", scheduleNum);
+		
+		return sc;
 	}
 }
