@@ -88,7 +88,7 @@
 			.nav-menu {
 			    margin: -15px 0px 0px 8px;
 			}
-            
+            a:hover { color: blue; text-decoration: none;}
         </style>
     </head>
     <body class="body">
@@ -189,6 +189,7 @@
                 </section>
             </div>
         </aside>
+        <form action="${pageContext.request.contextPath}/email/accept/replySend" method="get">
         <nav class="border-bottom" >
             <!-- Navbar content -->
             <div class="container-xl-fluid">
@@ -213,8 +214,8 @@
                 </div>
                 <div class="row">
                     <div class="col nav-menu">
-                        <a href="${pageContext.request.contextPath}/email/accept/replySend"><input type="submit" class="btn btn-outline-info float-left" value="보내기"></a> 
-                        <a href="${pageContext.request.contextPath}/email/accept/reply?num=${acceptReply.emailNumber}"><input type="submit" class="btn btn-outline-info float-left" value="다시쓰기"></a>
+                        <input type="submit" class="btn btn-outline-info float-left" value="보내기">
+                        <input type="reset" class="btn btn-outline-info float-left" value="다시쓰기">
                     </div>
                     <div class="col"></div>
                     <div class="col"></div>
@@ -228,6 +229,7 @@
                     <tr>
                         <td style="width: 120px;">보내는 사람 :</td>
                         <td colspan="2">
+                        <input type="hidden" name="employeeNumber"  value="${employee.employeeNumber}">
                         <input type="email" name="emailSend" value="${acceptReply.emailAccept}" class="form-control form-control-sm form-control-plaintext">
                         </td>
                     </tr>
@@ -252,8 +254,7 @@
                     <tr>
                         <td colspan="2">
                             <textarea id="smartEditor" class="form-control"
-                             name="emailContent" minlength="3500"
-                            style="height: 550px;"></textarea>
+                             name="emailContent" style="height: 550px;"></textarea>
                         </td>
                     </tr>
                 </tbody>
@@ -261,6 +262,7 @@
 
             
         </main>
+        </form>
         <footer class="border-top">
                 푸터요
         </footer>

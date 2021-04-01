@@ -89,6 +89,7 @@
 			.nav-menu {
 			    margin: -15px 0px 0px 8px;
 			}
+			a:hover { color: blue; text-decoration: none;}
             
         </style>
     </head>
@@ -230,7 +231,7 @@
                     <tr>
                         <td style="width: 120px;">보내는 사람 :</td>
                         <td colspan="2">
-                        <input type="text" value="${employee.employeeNumber}" hidden>
+                        <input type="hidden" name="employeeNumber"  value="${employee.employeeNumber}">
                         <input type="email" readonly value="${employee.employeeEmail}" name="emailSend" class="form-control form-control-sm form-control-plaintext">
                         </td>
                     </tr>

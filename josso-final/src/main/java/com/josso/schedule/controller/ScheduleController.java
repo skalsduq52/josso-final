@@ -111,7 +111,7 @@ public class ScheduleController {
 		System.out.println(schedule.getScheduleEndTime());
 		
 		Employee emp = (Employee) session.getAttribute("employee");
-
+		
 		schedule.setEmployeeNumber(emp.getEmployeeNumber());
 		
 		String result = Integer.toString(ss.insertSchedule(schedule));

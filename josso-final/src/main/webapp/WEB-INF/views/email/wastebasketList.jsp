@@ -118,7 +118,15 @@
 			.nav-menu {
 			    margin: -15px 0px 0px 8px;
 			}
+        	 a:hover { color: blue; text-decoration: none;}
         </style>
+        <style type="text/css">
+
+        
+			 .send-list-content a:link { color: blue; text-decoration: none;}
+			 .send-list-content a:visited { color: black; text-decoration: none;}
+			 .send-list-content a:hover { color: blue; text-decoration: underline;}
+		</style>
     </head>
     <body class="body">
         <header>
@@ -286,7 +294,7 @@
 								<tr>
 	                                <td><input type="checkbox" name="check"></td>
 	                                <td>${n.emailSend}</td>
-	                                <td><a href="${pageContext.request.contextPath}/email/wastebasket/detail?num=${n.emailNumber}">${n.emailTitle}</a></td>
+	                                <td class="send-list-content"><a href="${pageContext.request.contextPath}/email/wastebasket/detail?num=${n.emailNumber}">${n.emailTitle}</a></td>
 	                                <td><fmt:formatDate value="${n.regDate}" pattern="yy-MM-dd [E] a hh:mm:ss"></fmt:formatDate></td>
 	                            </tr>
 							</c:forEach>

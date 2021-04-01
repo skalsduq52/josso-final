@@ -92,6 +92,7 @@
 			.nav-menu {
 			    margin: -15px 0px 0px 8px;
 			}
+			a:hover { color: blue; text-decoration: none;}
         </style>
     </head>
     <body class="body">
