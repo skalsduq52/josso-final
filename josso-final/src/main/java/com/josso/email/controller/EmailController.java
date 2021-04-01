@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.josso.email.service.EmailService;
 import com.josso.email.vo.Email;
+import com.josso.employee.vo.Employee;
 
 
 @Controller
@@ -31,9 +32,10 @@ public class EmailController{
 	// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@받은 메일함@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	// 받은메일함 목록 보여주기(완성)
 	@RequestMapping(value = "email/accept/list", method = RequestMethod.GET)
-	public ModelAndView acceptList(String id, ModelAndView modelAndView, HttpServletRequest request) throws Exception{
+	public ModelAndView acceptList(ModelAndView modelAndView, HttpSession session) throws Exception{
 		
-		HttpSession session = request.getSession();
+		Employee employee = (Employee) session.getAttribute("employee");
+		String id = employee.getEmployeeEmail();
 		
 		List<Email> acceptList = emailService.AcceptList(id);
 				
@@ -54,8 +56,7 @@ public class EmailController{
 	
 	// 받은메일함 - 자세히보기(완성)
 	@RequestMapping(value = "email/accept/detail", method = RequestMethod.GET)
-	public ModelAndView acceptDetail(int num, ModelAndView modelAndView) throws Exception{
-//		int cnt = emailService.AutoRead(num);
+	public ModelAndView acceptDetail(int num, ModelAndView modelAndView, HttpSession session) throws Exception{
 		Email acceptDetail = emailService.AcceptDetail(num);
 		
 		modelAndView.addObject("acceptDetail",acceptDetail);
@@ -136,7 +137,10 @@ public class EmailController{
 	// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@보낸 메일함 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	// 보낸메일함 목록 보여주기
 	@RequestMapping(value = "email/send/list", method = RequestMethod.GET)
-	public ModelAndView sentList(@RequestParam("id") String id, ModelAndView modelAndView) throws Exception{
+	public ModelAndView sentList(ModelAndView modelAndView, HttpSession session) throws Exception{
+		Employee employee = (Employee) session.getAttribute("employee");
+		String id = employee.getEmployeeEmail();
+		
 		List<Email> sendList = emailService.SendList(id);
 		modelAndView.addObject("sendList",sendList);
 		modelAndView.setViewName("email/sendList");
@@ -196,7 +200,10 @@ public class EmailController{
 	// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@휴지통 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	// 휴지통 목록 보여주기
 	@RequestMapping(value = "email/wastebasket/list", method = RequestMethod.GET)
-	public ModelAndView wastebasketList(@RequestParam("id") String id, ModelAndView modelAndView) throws Exception{
+	public ModelAndView wastebasketList(ModelAndView modelAndView, HttpSession session) throws Exception{
+		Employee employee = (Employee) session.getAttribute("employee");
+		String id = employee.getEmployeeEmail();
+		
 		List<Email> wastebasketList = emailService.WastebasketList(id);
 		modelAndView.addObject("wastebasketList",wastebasketList);
 		modelAndView.setViewName("email/wastebasketList");
