@@ -63,7 +63,6 @@ public class ScheduleController {
 		for(int i = 0; i<scheduleList.size(); i++) {
 			Schedule sd = scheduleList.get(i);
 			scheduleListArr.add(sd);
-			System.out.println(sd);
 		}
 		
 		JSONArray jArr = new JSONArray();
@@ -79,25 +78,34 @@ public class ScheduleController {
 		return jArr.toJSONString();
 	}
 	
+	// 일정등록 페이지
 	@RequestMapping(value="schedule/write", method=RequestMethod.GET)
-	public ModelAndView scheduleWrite() {
+	public ModelAndView scheduleWrite() throws Exception {
 		
 		ModelAndView mv = new ModelAndView();
 		
-		
+		List<Employee> ep = ss.selectAttendeeAll();
+		for(int i = 0; i<ep.size(); i++) {
+			Employee em = ep.get(i);
+			System.out.println(em.getEmployeeName());
+		}
 		
 		mv.setViewName("schedule.scheduleWrite");
 		return mv;
 	}
 	
-	@RequestMapping(value="attendeeList", method=RequestMethod.POST)
-	public ModelAndView attendeeList() {
-		
-		ModelAndView mv = new ModelAndView();
-		
-		return mv;
-	}
 	
+//	@RequestMapping(value="attendeeList", method=RequestMethod.POST)
+//	public ModelAndView attendeeList() {
+//		
+//		List<Employee> ep = ss.
+//		
+//		ModelAndView mv = new ModelAndView();
+//		
+//		return mv;
+//	}
+	
+	// 일정등록 (로그인 한 사원번호로 일정등록)
 	@RequestMapping(value="schedule/register", method=RequestMethod.POST)
 	public ModelAndView insertSchedule(Schedule schedule, HttpSession session,
 			ModelAndView mv) throws Exception {
@@ -111,7 +119,7 @@ public class ScheduleController {
 		System.out.println(schedule.getScheduleEndTime());
 		
 		Employee emp = (Employee) session.getAttribute("employee");
-		
+
 		schedule.setEmployeeNumber(emp.getEmployeeNumber());
 		
 		String result = Integer.toString(ss.insertSchedule(schedule));

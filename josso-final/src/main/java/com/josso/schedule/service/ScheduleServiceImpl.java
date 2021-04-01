@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.josso.employee.vo.Employee;
 import com.josso.schedule.model.dao.ScheduleDao;
 import com.josso.schedule.vo.Schedule;
 
@@ -28,6 +29,14 @@ public class ScheduleServiceImpl implements ScheduleService{
 		int result = sd.scheduleRegister(schedule);
 		
 		return result;
+	}
+	
+	@Override
+	public List<Employee> selectAttendeeAll() throws Exception{
+		
+		List<Employee> ep = sd.selectAttendeeAll();
+		
+		return ep; 
 	}
 	
 }

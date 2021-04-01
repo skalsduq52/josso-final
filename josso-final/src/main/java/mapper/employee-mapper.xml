@@ -27,7 +27,10 @@
 	<select id="selectEmployeeAll" resultMap="resultEmployee">
 		SELECT * FROM EMPLOYEE
 	</select>
-	
+	<!-- EMPLOYEE 부서, 사원명, 직급 select -->
+	<select id="selectEmployeePart" resultMap="resultEmployee">
+		SELECT DEPARTMENT_CODE, EMPLOYEE_NAME, RANK_CODE FROM EMPLOYEE
+	</select>
 	<!-- EMPLOYEE 하나만 가져오는 select -->
 	<select id="selectEmployee" parameterType="String" resultMap="resultEmployee">
 		SELECT * FROM EMPLOYEE WHERE EMPLOYEE_NUMBER = #{employeeNumber}

@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.josso.employee.vo.Employee;
 import com.josso.schedule.vo.Schedule;
 
 @Repository
@@ -30,5 +31,12 @@ public class ScheduleDao {
 		int result = sqlSession.insert("Schedule.insertSchedule", schedule);
 		
 		return result;
+	}
+	
+	public List<Employee> selectAttendeeAll() throws Exception{
+		
+		List<Employee> ep = sqlSession.selectList("Employee.selectEmployeePart");
+		
+		return ep;
 	}
 }
