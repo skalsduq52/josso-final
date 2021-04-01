@@ -2,6 +2,8 @@ package com.josso.businessReport.vo;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class WeeklyReport {
 	
 	// 필드부
@@ -9,21 +11,24 @@ public class WeeklyReport {
 	private String reportTitle;			// 제목
 	private String writer;				// 작성자
 	private Date writeTime;				// 작성시간
-	
+	// "yyyy-MM-dd HH:mm:ss"
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date thisStart;				// 이번 주 시작날짜
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date thisEnd;				// 이번 주 종료날짜
 	private String thisMeeting;			// 이번 주 미팅
 	private String thisConference;		// 이번 주 회의
 	private String thisProject;			// 이번 주 프로젝트
 	private String thisEtc;				// 이번 주 기타사항
 	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date nextStart;				// 다음 주 시작날짜
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date nextEnd;				// 다음 주 종료날짜
 	private String nextMeeting;			// 다음 주 미팅
 	private String nextConference;		// 다음 주 회의
 	private String nextProject;			// 다음 주 프로젝트
 	private String nextEtc;				// 다음 주 기타사항
-	
 	
 	// 조인을 위해 추가한 것
 	private String employeeName;		// 사원이름

@@ -24,8 +24,8 @@ public class WeeklyReportDAO {
 	}
 	
 	// 디테일페이지
-	public WeeklyReport selectDetailPage(WeeklyReport wr) throws Exception {
-		WeeklyReport WeeklyReport = sqlSession.selectOne("weeklyReport.selectDetailPage");
+	public WeeklyReport selectDetailPage(String num) throws Exception {
+		WeeklyReport WeeklyReport = sqlSession.selectOne("weeklyReport.selectDetailPage",num);
 		return WeeklyReport;
 	}
 	
@@ -37,18 +37,18 @@ public class WeeklyReportDAO {
 	
 	// 작성
 	public int reportWrite(WeeklyReport wr) throws Exception {
-		int result = sqlSession.insert("weeklyReport.reportWrite");
+		int result = sqlSession.insert("weeklyReport.reportWrite", wr);
 		return result;
 	}
 	
 	// 수정
-	public int reportUpdate() throws Exception {
+	public int reportUpdate(WeeklyReport wr) throws Exception {
 		int result = sqlSession.update("weeklyReport.reportUpdate");
 		return result;
 	}
 	
 	// 삭제
-	public int reportDelete() throws Exception {
+	public int reportDelete(WeeklyReport wr) throws Exception {
 		int result = sqlSession.delete("weeklyReport.reportDelete");
 		return result;
 	}

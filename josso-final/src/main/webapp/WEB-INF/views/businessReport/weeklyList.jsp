@@ -234,7 +234,7 @@
                         <tr>
                             <td id="tdnum">${ws.reportNumber}</td>
                             <td>${ws.departmentCode}</td>
-                            <td id="theme"><a href="">${sendTitle[status.index]}</a></td>
+                            <td id="theme"><a href="DetailPage?num=${ws.reportNumber }">${sendTitle[status.index]}</a></td>
                             <td>${ws.employeeName }</td>
                             <td>${ws.rankCode }</td>
                             <td><fmt:formatDate value="${ws.writeTime }" pattern="yy년 MM월 dd일 / HH시 mm분"/></td>

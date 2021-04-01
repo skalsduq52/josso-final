@@ -4,7 +4,7 @@
 
 <mapper namespace="weeklyReport">
 	<resultMap id="weeklyReport" type="weeklyReport">
-		<id property="reportNumber" column="REPORT_NUM"/>
+		<result property="reportNumber" column="REPORT_NUM"/>
 		<result property="reportTitle" column="REPORT_TITLE"/>
 		<result property="writer" column="WRITER"/>
 		<result property="writeTime" column="WRITE_TIME"/>
@@ -34,7 +34,7 @@
 	
 	<!-- 해당 게시물 디테일 페이지 -->
 	<select id="selectDetailPage" resultMap="weeklyReport" parameterType="String">
-		SELECT * FROM REPORT_WEEK WHERE REPORT_NUM = #{reportNumber}
+		SELECT * FROM REPORT_WEEK WHERE REPORT_NUM = #{num}
 	</select>
 	
 	<!-- 검색(작성자, 제목으로 검색) -->

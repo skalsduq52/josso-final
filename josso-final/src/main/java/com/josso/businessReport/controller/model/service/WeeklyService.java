@@ -10,7 +10,7 @@ public interface WeeklyService {
 	public List<WeeklyReport> selectList() throws Exception;
 	
 	// 디테일페이지
-	public WeeklyReport selectDetailPage(WeeklyReport wr) throws Exception;
+	public WeeklyReport selectDetailPage(String num) throws Exception;
 	
 	// 검색기능
 	public List<WeeklyReport> searchBy(WeeklyReport wr) throws Exception;
@@ -19,9 +19,9 @@ public interface WeeklyService {
 	public int reportWrite(WeeklyReport wr) throws Exception;
 	
 	// 수정
-	public int reportUpdate() throws Exception;
+	public int reportUpdate(WeeklyReport wr) throws Exception;
 	
 	// 삭제
-	public int reportDelete() throws Exception;
+	public int reportDelete(WeeklyReport wr) throws Exception;
 	
 }

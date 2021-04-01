@@ -260,7 +260,7 @@
                         <tr style="height: 60px;">
                             <th class="left_td"></th>
                             <th class="report_date">
-                                <input type="date">　∼　<input type="date"></th><br>
+                               <input type="date" value="<fmt:formatDate value="${wr.thisStart }" pattern="yyyy-MM-dd"/>" class="date">　∼　<input type="date" value="<fmt:formatDate value="${wr.thisEnd }" pattern="yyyy-MM-dd"/>" class="date"></th><br>
                             <th class="report_date">
                                 <input type="date">　∼　<input type="date"></th><br>
                         </tr>

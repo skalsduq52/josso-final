@@ -255,6 +255,9 @@
         </nav>
         <main>
             <form action="register" method="POST">
+            <!-- 
+            <input type="hidden" name="writer" value="${SessionScope.employee.employeeName }">
+             -->
             <div class="border-top">
                 <table style="width: 97%;" id="board">
                     <thead>
@@ -301,7 +304,7 @@
             </div>
             <div style="padding-top: 50px; padding-right: 50px; float:right" class="text-center">
                 <input class="btn btn-info btn-lg" type="submit" value="등록하기">
-                <input class="btn btn-secondary btn-lg" onclick="history.back()" type="submit" value="취소">
+                <input class="btn btn-secondary btn-lg" onclick="history.back()" type="button" value="취소">
             </div>
             </div>
            </form>        

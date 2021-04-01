@@ -23,8 +23,8 @@ public class WeeklyServiceImpl implements WeeklyService {
 	
 	// 디테일페이지
 	@Override
-	public WeeklyReport selectDetailPage(WeeklyReport wr) throws Exception {
-		WeeklyReport WeeklyReport = weeklyreportDao.selectDetailPage(wr);
+	public WeeklyReport selectDetailPage(String num) throws Exception {
+		WeeklyReport WeeklyReport = weeklyreportDao.selectDetailPage(num);
 		return WeeklyReport;
 	}
 	
@@ -44,15 +44,15 @@ public class WeeklyServiceImpl implements WeeklyService {
 	
 	// 수정
 	@Override
-	public int reportUpdate() throws Exception {
-		int result = weeklyreportDao.reportUpdate();
+	public int reportUpdate(WeeklyReport wr) throws Exception {
+		int result = weeklyreportDao.reportUpdate(wr);
 		return result;
 	}
 	
 	// 삭제
 	@Override
-	public int reportDelete() throws Exception {
-		int result = weeklyreportDao.reportDelete();
+	public int reportDelete(WeeklyReport wr) throws Exception {
+		int result = weeklyreportDao.reportDelete(wr);
 		return result; 
 	}
 	

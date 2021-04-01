@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -267,29 +269,29 @@
                         <tr style="height: 60px;">
                             <th class="left_td"></th>
                             <th class="report_date">
-                                <input type="date" value="2021-03-15" readonly class="date">　∼　<input type="date" value="2021-03-19" readonly class="date"></th><br>
+                                <input type="date" value="<fmt:formatDate value="${wr.thisStart }" pattern="yyyy-MM-dd"/>" readonly class="date">　∼　<input type="date" value="<fmt:formatDate value="${wr.thisEnd }" pattern="yyyy-MM-dd"/>" readonly class="date"></th><br>
                             <th class="report_date">
-                                <input type="date" value="2021-03-22" readonly class="date">　∼　<input type="date" value="2021-03-26" readonly class="date"></th><br>
+                                <input type="date" value="<fmt:formatDate value="${wr.nextStart }" pattern="yyyy-MM-dd"/>" readonly class="date">　∼　<input type="date" value="<fmt:formatDate value="${wr.nextStart }" pattern="yyyy-MM-dd"/>" readonly class="date"></th><br>
                         </tr>
                         <tr>
                             <th class="left_td">고객(사) 미팅</th>
-                            <td class="right_td1"><textarea class="write_area" type="text" readonly>KT&G 미팅했삼</textarea></td>
-                            <td class="right_td2"><textarea class="write_area" type="text" readonly>행안부 미팅할거임</textarea></td>
+                            <td class="right_td1"><textarea class="write_area" type="text" readonly>${wr.thisMeeting }</textarea></td>
+                            <td class="right_td2"><textarea class="write_area" type="text" readonly>${wr.nextMeeting }</textarea></td>
                         </tr>
                         <tr >
                             <th class="left_td">회의 내용</th>
-                            <td class="right_td1"><textarea class="write_area" type="text" readonly>농협 건 진행여부 회의</textarea></td>
-                            <td class="right_td2"><textarea class="write_area" type="text" readonly>농협 건 진행여부 확정 예정</textarea></td>
+                            <td class="right_td1"><textarea class="write_area" type="text" readonly>${wr.thisConference }</textarea></td>
+                            <td class="right_td2"><textarea class="write_area" type="text" readonly>${wr.nextConference }</textarea></td>
                         </tr>
                         <tr >
                             <th class="left_td">프로젝트</th>
-                            <td class="right_td1"><textarea class="write_area" type="text" readonly>삼성디스플레이 건 진행 중 50% 완료</textarea></td>
-                            <td class="right_td2"><textarea class="write_area" type="text" readonly>삼성디스플레이 70%완료 가능 예상</textarea></td>
+                            <td class="right_td1"><textarea class="write_area" type="text" readonly>${wr.thisProject }</textarea></td>
+                            <td class="right_td2"><textarea class="write_area" type="text" readonly>${wr.nextProject }</textarea></td>
                         </tr>
                         <tr id="write_content">
                             <th class="left_td">특이사항</th>
-                            <td class="right_td1"><textarea class="write_area" type="text" readonly>배고픔</textarea></td>
-                            <td class="right_td2"><textarea class="write_area" type="text" readonly>짜장면 먹고싶음</textarea></td>
+                            <td class="right_td1"><textarea class="write_area" type="text" readonly>${wr.thisEtc }</textarea></td>
+                            <td class="right_td2"><textarea class="write_area" type="text" readonly>${wr.nextEtc }</textarea></td>
                         </tr>
                     </tbody>    
                 </table>
@@ -299,7 +301,7 @@
                 <div style="float:left; width: 150px; height: 100px;" >
                 </div>
                 <div style="padding-top: 50px; padding-right: 50px; float:right" class="text-center">
-                    <input class="btn btn-info btn-lg" type="submit" value="등록하기">
+                	<button class="btn btn-info btn-lg"><a href="updateBridge?num=${ws.reportNumber }" style="color:white">수정하기</a></button>
                     <input class="btn btn-secondary btn-lg" onclick="history.back()" type="submit" value="목록">
                 </span>
                 </div>

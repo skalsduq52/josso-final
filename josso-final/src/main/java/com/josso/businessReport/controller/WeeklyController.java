@@ -1,5 +1,6 @@
 package com.josso.businessReport.controller;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -14,6 +15,7 @@ import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.josso.businessReport.controller.model.service.WeeklyService;
@@ -33,9 +35,7 @@ public class WeeklyController {
 		
 		List<WeeklyReport> weeklyReport = ws.selectList();
 			
-			
 			// 캘린더 생성
-			System.out.println("캘린더 생성까지 들어옴");
 			Calendar calendar = Calendar.getInstance();
 			
 			// 몇 년, 몇 주차 전역변수 선언
@@ -43,63 +43,44 @@ public class WeeklyController {
 			int monthth;
 			int weekth;
 
-			
 			// 전송할 타이틀 결과값을 Array리스트로 전역변수 생성
 			List<String> sendTitle = new ArrayList<>();
 			
 		try {
-			System.out.println("try들어옴");
 			// 날짜형식 맞춤
-			System.out.println("날짜변환 시작");
 			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-			System.out.println("날짜변환 끝");
-			
 
 			String strDate;
 			
 			System.out.println("weeklyReport.size : " + weeklyReport.size());
 			
 			for(int i=0; i<weeklyReport.size(); i++) {
-				System.out.println("반복문 시작");
 				strDate = simpleDateFormat.format(weeklyReport.get(i).getThisStart());
 				
 				// 날짜를 String 배열로 받아 년/월 쪼개기
-				System.out.println("날짜변환 시작");
 				String thisDate = String.valueOf(strDate);
 				String[] titleDate = thisDate.split("-");
 				
 				// 년, 월로 쪼개기
-				System.out.println("년 월 쪼개기 시작");
 				int year = Integer.parseInt(titleDate[0]);
 				int month = Integer.parseInt(titleDate[1]);
 				int day = Integer.parseInt(titleDate[2]);
 				
-				// 캘린더에 년, 월 세팅
-				System.out.println("년, 월 세팅");
-				System.out.println(year);
-				System.out.println(month);
-				System.out.println(day);
-				
 				// 캘린더 셋 시작
-				System.out.println("캘린더 셋 시작");
 				calendar.set(year, month, day);
-				System.out.println("여기가 안 들어옴");
 				
 				// 몇 번째 주인지 추출
-				System.out.println("주차 추출");
 				yearth = calendar.get(Calendar.YEAR);
 				monthth = calendar.get(Calendar.MONTH);
 				weekth = calendar.get(Calendar.WEEK_OF_MONTH);
 				
 				// 출력 찍어봄
-				System.out.println(i+"번째");
-				System.out.println(yearth + "년 " + weekth + "번째 주 업무보고");
+				// System.out.println(i+"번째");
+				// System.out.println(yearth + "년 " + monthth + "월 " + weekth + "번째 주 업무보고");
 				
 				// 뷰단에 뿌려주기
 				sendTitle.add(yearth + "년 " + monthth + "월 " + weekth + "번째 주 업무보고");
-				System.out.println("sendTitle : " + sendTitle);
 				mv.addObject("sendTitle", sendTitle);
-
 
 			}
 
@@ -110,8 +91,6 @@ public class WeeklyController {
 			System.out.println("예외 발생 : " );
 			e.printStackTrace();
 		}
-
-
 
 		mv.addObject("ws", weeklyReport);
 		mv.setViewName("businessReport/weeklyList");
@@ -138,29 +117,53 @@ public class WeeklyController {
 	
 	// 주간업무보고(글등록)
 	@RequestMapping(value="report/weekly/register", method=RequestMethod.POST)
-	public ModelAndView weeklyRegister(ModelAndView mv, WeeklyReport wr, HttpSession session) throws Exception {
+	public ModelAndView weeklyRegister(@RequestParam("thisStart") String thisStart, WeeklyReport wr, ModelAndView mv,  HttpSession session) throws Exception {
 		System.out.println("주간업무보고 등록 들어옴");
+		
+		/* 제목값 구하기*/
+		// thisStart로 변환하여 제목으로 활용
+		Calendar calendar = Calendar.getInstance();
+		System.out.println(thisStart);
+		
+		String titleDate[] = thisStart.split("-");
+		
+		// 년, 월로 쪼개기
+		int year = Integer.parseInt(titleDate[0]);
+		int month = Integer.parseInt(titleDate[1]);
+		int day = Integer.parseInt(titleDate[2]);
+		
+		// 캘린더 셋 시작
+		calendar.set(year, month, day);
+		
+		// 몇 번째 주인지 추출
+		int yearth = calendar.get(Calendar.YEAR);
+		int monthth = calendar.get(Calendar.MONTH);
+		int weekth = calendar.get(Calendar.WEEK_OF_MONTH);
+		
+		// title변수에 제목값 저장
+		String title = yearth + "년 " + monthth + "월 " + weekth + "번째 주 업무보고";
+		
+		// title값 출력 찍어봄
+		System.out.println("날짜값 : " + title);
+			/* 제목값 구하기 끝 */
+		
+		// Employee 세션 가져오기
 		Employee employee = (Employee)session.getAttribute("employee");
-		
+
+		// 제목에 날짜로 계산해 온 제목값 세팅해줌
+		wr.setReportTitle(title);
+		System.out.println("wr vo에 넣은 제목값 : " + wr.getReportTitle() );
+
+		// writer에 세션값(employeeName) 넣음
+		System.out.println("세션에 있는 사원번호값 : "+employee.getEmployeeNumber());
 		wr.setWriter(employee.getEmployeeNumber());
-		wr.setReportTitle("제에목");
-		
-		System.out.println(wr.getWriter());
-		System.out.println(wr.getReportTitle());
-		
-		System.out.println("인트 리절트");
-		
+		System.out.println("세션에 있는 사원번호값 : "+wr.getWriter());
 		int result = ws.reportWrite(wr);
-		
-		System.out.println("글이 등록되었습니다.");
 		
 		mv.setViewName("redirect:list");
 		
-		
 		return mv;
 	}
-	
-	
 	
 	
 	
@@ -168,24 +171,40 @@ public class WeeklyController {
 	
 	// 주간업무보고(디테일페이지)
 	@RequestMapping(value="report/weekly/DetailPage", method=RequestMethod.GET)
-	public ModelAndView weeklyDetailPage(ModelAndView mv) throws Exception {
+	public ModelAndView weeklyDetailPage(ModelAndView mv, @RequestParam("num") String num) throws Exception {
+		System.out.println("디테일페이지 들어옴");
+		
+		WeeklyReport wr = ws.selectDetailPage(num);
+		
+		System.out.println("날짜 찍어봄 : " + wr.getThisStart());
+		
+		mv.addObject("wr", wr);
 		mv.setViewName("businessReport/weeklyDetailPage");
 		return mv;
 	}
+	  
 	
+	 
 	
-	
-	
-	
-	
-	// 주간업무보고(수정)
-	@RequestMapping(value="report/weekly/update", method=RequestMethod.GET)
-	public ModelAndView weekly(ModelAndView mv) throws Exception {
+	// 주간업무보고(수정) '브릿지'
+	@RequestMapping(value="report/weekly/updateBridge", method=RequestMethod.GET)
+	public ModelAndView updateBridge(ModelAndView mv, @RequestParam("num") String num) throws Exception {
+		System.out.println("주간업무보고 수정 브릿지 들어옴");
+		
+		WeeklyReport wr = ws.selectDetailPage(num);
+		
+		mv.addObject("wr", wr);
 		mv.setViewName("businessReport/weeklyUpdate");
 		return mv;
 	}
 	
 	
+	// 주간업무보고(수정하기 실행)
+	@RequestMapping(value="report/weekly/update", method=RequestMethod.GET)
+	public ModelAndView weeklyUpdate(ModelAndView mv, WeeklyReport wr) throws Exception {
+		mv.setViewName("businessReport/weeklyUpdate");
+		return mv;
+	}
 	
 	
 	
