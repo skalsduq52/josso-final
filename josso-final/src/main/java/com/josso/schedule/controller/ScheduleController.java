@@ -68,6 +68,7 @@ public class ScheduleController {
 		JSONArray jArr = new JSONArray();
 		for(Schedule sd : scheduleListArr) {
 			JSONObject jObj = new JSONObject();
+			jObj.put("id", sd.getScheduleNumber());
 			jObj.put("title", sd.getScheduleTitle());
 			jObj.put("start", sd.getScheduleStartDate());
 			jObj.put("end", sd.getScheduleEndDate());
@@ -87,7 +88,6 @@ public class ScheduleController {
 		List<Employee> ep = ss.selectAttendeeAll();
 		for(int i = 0; i<ep.size(); i++) {
 			Employee em = ep.get(i);
-			System.out.println(em.getEmployeeName());
 		}
 		mv.addObject("employee", ep);
 		mv.setViewName("schedule.scheduleWrite");
@@ -125,6 +125,35 @@ public class ScheduleController {
 		String result = Integer.toString(ss.insertSchedule(schedule));
 		
 		System.out.println("결과값 확인 : "+ result);
+		
+		mv.setViewName("schedule.scheduleList");
+		
+		return mv;
+	}
+	
+	@RequestMapping(value="schedule/detail", method=RequestMethod.GET)
+	public ModelAndView scheduleDetail(@RequestParam(value="id", required=false) String scheduleNum) 
+			throws Exception{
+		
+		ModelAndView mv = new ModelAndView();
+		
+		System.out.println(scheduleNum);
+		
+		Schedule sc = ss.selectSchedule(scheduleNum);
+		
+		mv.addObject("schedule", sc);
+		
+		mv.setViewName("schedule.scheduleDetail");
+		
+		return mv;
+	}
+	
+	@RequestMapping(value="schedule/modify", method=RequestMethod.POST)
+	public ModelAndView scheduleUpdate(Schedule schedule) throws Exception{
+		
+		ModelAndView mv = new ModelAndView();
+		
+		String result = Integer.toString(ss.updateSchedule(schedule));
 		
 		mv.setViewName("schedule.scheduleList");
 		

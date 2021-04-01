@@ -15,6 +15,7 @@ public class ScheduleServiceImpl implements ScheduleService{
 	@Autowired
 	ScheduleDao sd;
 	
+	// Schedule 전체 조회
 	@Override
 	public List<Schedule> selectScheduleAll() throws Exception{
 		
@@ -23,14 +24,16 @@ public class ScheduleServiceImpl implements ScheduleService{
 		return scheduleList;
 	}
 	
+	// Schedule 등록
 	@Override
 	public int insertSchedule(Schedule schedule) throws Exception {
 
-		int result = sd.scheduleRegister(schedule);
+		int result = sd.insertSchedule(schedule);
 		
 		return result;
 	}
 	
+	// 참석자 목록 조회
 	@Override
 	public List<Employee> selectAttendeeAll() throws Exception{
 		
@@ -39,4 +42,21 @@ public class ScheduleServiceImpl implements ScheduleService{
 		return ep; 
 	}
 	
+	// Schedule 하나만 조회(상세 페이지)
+	@Override
+	public Schedule selectSchedule(String scheduleNum) throws Exception{
+		
+		Schedule sc = sd.selectSchedule(scheduleNum);
+		
+		return sc;
+	}
+	
+	// Schedule 수정
+	@Override
+	public int updateSchedule(Schedule schedule) throws Exception{
+		
+		int result = sd.updateSchedule(schedule);
+		
+		return result;
+	}
 }

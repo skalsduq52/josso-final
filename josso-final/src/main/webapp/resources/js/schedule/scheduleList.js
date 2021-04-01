@@ -15,6 +15,7 @@ $(function(){
         
     },
     locale: 'ko',
+    editable: true,
     eventSources: [{
     	events: function(info, successCallback, failureCallback){
     		$.ajax({
@@ -28,8 +29,24 @@ $(function(){
 				}
 			});
     	}
-        
-    }]
+    }],
+    eventClick: function(info){
+    	var eventObj = info.event;
+    	console.log(eventObj.id);
+    	
+    	location.href = 'schedule/detail?id='+eventObj.id;
+    	/*$.ajax({
+    		url: '/josso/schedule/detail',
+    		type: 'GET',
+    		data:{
+    			'id' : eventObj.id
+    		}
+//    		success: function(data){
+//    			location.href = 'scheduleDetail'
+//    		}
+    	});
+    	*/
+    }
     });
     calendar.render();
 });
