@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -219,84 +221,25 @@
                 <table style="width: 100%;" id="board">
                     <thead>
                         <tr class="border-bottom" style="height: 40px;">
-                            <th id="tdnum" style="width: 10%;">번호</th>
-                            <th id="theme" style="width: 50%">제목</th>
-                            <th style="width: 15%">작성자</th>
-                            <th style="width: 15%">작성일</th>
-                            <th style="width: 10%">조회</th>
+                            <th id="tdnum" style="width: 7%;">번호</th>
+                            <th style="width: 3%;">부서</th>
+                            <th id="theme" style="width: 20%">제목</th>
+                            <th style="width: 5%">작성자</th>
+                            <th style="width: 5%">직급</th>
+                            <th style="width: 10%">작성일</th>
                         </tr>
                     </thead>
                     <tbody>
+                        <c:forEach var="ws" items="${ms}" varStatus="status">
                         <tr>
-                            <td id="tdnum">10</td>
-                            <td id="theme">늦어서 죄송합니다!! 2월 실적보고 입니다! 열심히 하겠습니다!!!</td>
-                            <td>안태민 대표이사</td>
-                            <td>2020-03-09</td>
-                            <td id="selectnum">0</td>
-                        </tr>
-                        <tr>
-                            <td id="tdnum">9</td>
-                            <td id="theme">[개발 1팀] 2020년 2월 월간 실적보고</td>
-                            <td>박보영 대리</td>
-                            <td>2020-03-01</td>
-                            <td id="selectnum">718</td>
-                        </tr>
-                        <tr>
-                            <td id="tdnum">8</td>
-                            <td id="theme">[마케팅] 2020년 2월 월간 실적보고</td>
-                            <td>이광수 팀장</td>
-                            <td>2020-03-01</td>
-                            <td id="selectnum">2</td>
-                        </tr>
-                        <tr>
-                            <td id="tdnum">7</td>
-                            <td id="theme">Do you know yuna-kim? HeungMin-Son? and Samsung?</td>
-                            <td>포그바 주임</td>
-                            <td>2020-03-01</td>
-                            <td id="selectnum">1</td>
-                        </tr>
-                        <tr>
-                            <td id="tdnum">6</td>
-                            <td id="theme">[회계팀장] 2020년 1월 월간 결산 보고</td>
-                            <td>최낙도 팀장</td>
-                            <td>2020-02-02</td>
-                            <td id="selectnum">1</td>
-                        </tr>
-                        <tr>
-                            <td id="tdnum">5</td>
-                            <td id="theme">[지원본부] 2020년 1월 월간 실적보고</td>
-                            <td>김재윤 본부장</td>
-                            <td>2020-02-02</td>
-                            <td id="selectnum">1</td>
-                        </tr>
-                        <tr>
-                            <td id="tdnum">4</td>
-                            <td id="theme">[인사팀] 2020년 1월 월간 실적보고</td>
-                            <td>나민엽 팀장</td>
-                            <td>2020-02-02</td>
-                            <td id="selectnum">1</td>
-                        </tr>
-                        <tr>
-                            <td id="tdnum">3</td>
-                            <td id="theme">[외부인] 2020년 1월 월간 식비보고</td>
-                            <td>김우영(외부인)</td>
-                            <td>2020-02-02</td>
-                            <td id="selectnum">1</td>
-                        </tr>
-                        <tr>
-                            <td id="tdnum">2</td>
-                            <td id="theme">[개발본] 2020년 1월 월간 실적보고</td>
-                            <td>최민재 본부장</td>
-                            <td>2020-02-01</td>
-                            <td id="selectnum">1</td>
-                        </tr>
-                        <tr>
-                            <td id="tdnum">1</td>
-                            <td id="theme">[운영본부] 2020년 1월 월간 실적보고</td>
-                            <td>홍수명 팀장</td>
-                            <td>2020-02-01</td>
-                            <td id="selectnum">1</td>
-                        </tr>
+                            <td id="tdnum">${ms.reportNumber}</td>
+                            <td>${ws.departmentCode}</td>
+                            <td id="theme"><a href="DetailPage?num=${ms.reportNumber }">${sendTitle[status.index]}</a></td>
+                            <td>${ms.employeeName }</td>
+                            <td>${ms.rankCode }</td>
+                            <td><fmt:formatDate value="${ms.writeTime }" pattern="yy년 MM월 dd일 / HH시 mm분"/></td>
+						</tr>
+                        </c:forEach>
                     </tbody>    
                 </table>
             </div>
@@ -313,7 +256,7 @@
             </div>
             
             <div class="bottom_area" style="float:left; padding-left: 20px;">
-                <button class="btn btn-info">작성하기</button>
+                <button class="btn btn-info"><a href="write" style="color:white">작성하기</a></button>
             </div>
             
             <div class="bottom_area" style="float:right;">

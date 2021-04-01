@@ -2,143 +2,191 @@ package com.josso.businessReport.vo;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class MonthlyReport {
 	
 	// 필드부
 	private int reportNumber;				// 게시글 번호
-	private String reportTitle;			// 제목
-	private String writer;				// 작성자
-	private Date writeTime;				// 작성시간
+	private String reportTitle;				// 제목
+	private String writer;					// 작성자
+	private Date writeTime;					// 작성시간
 	
-	private Date thisMonth;				// 이번 달
-	private String thisMeeting;			// 이번 주 미팅
-	private String thisConference;		// 이번 주 회의
-	private String thisProject;			// 이번 주 프로젝트
-	private String thisEtc;				// 이번 주 기타사항
+	@DateTimeFormat(pattern="yyyy-MM")
+	private Date lastMonth;					// 지난 달
+	private String lastQuantity;			// 지난 달 정량성과
+	private String lastQuality;				// 지난 달 정성성과
+	private String lastReason;				// 지난 달 성과근거
+	private String lastSupplement;			// 보충할 점
 	
-	private Date nextMonth;				// 다음 달
-	private String nextMeeting;			// 다음 주 미팅
-	private String nextConference;		// 다음 주 회의
-	private String nextProject;			// 다음 주 프로젝트
-	private String nextEtc;				// 다음 주 기타사항
+	private Date thisMonth;					// 다음 달
+	private String thisQuantity;			// 다음 달 정량성과
+	private String thisQualiy;				// 다음 달 정성성과
+	private String thisReason;				// 다음 달 성과근거
+	private String thisSupplement;			// 보충할 점
+	
+	// 조인을 위해 추가한 것
+	private String employeeName;		// 사원이름
+	private String departmentCode;		// 부서
+	private String rankCode;			// 직위
 	
 	// 생성자
 	public MonthlyReport() {}
-
-	// 메소드
+	
+	
+	// 메서드
 	public int getReportNumber() {
 		return reportNumber;
 	}
-	
+
+
+
 	public void setReportNumber(int reportNumber) {
 		this.reportNumber = reportNumber;
 	}
-	
+
 	public String getReportTitle() {
 		return reportTitle;
 	}
-	
+
 	public void setReportTitle(String reportTitle) {
 		this.reportTitle = reportTitle;
 	}
-	
+
 	public String getWriter() {
 		return writer;
 	}
-	
+
 	public void setWriter(String writer) {
 		this.writer = writer;
 	}
-	
+
 	public Date getWriteTime() {
 		return writeTime;
 	}
-	
+
 	public void setWriteTime(Date writeTime) {
 		this.writeTime = writeTime;
 	}
-	
+
+	public Date getLastMonth() {
+		return lastMonth;
+	}
+
+	public void setLastMonth(Date lastMonth) {
+		this.lastMonth = lastMonth;
+	}
+
+	public String getLastQuantity() {
+		return lastQuantity;
+	}
+
+	public void setLastQuantity(String lastQuantity) {
+		this.lastQuantity = lastQuantity;
+	}
+
+	public String getLastQuality() {
+		return lastQuality;
+	}
+
+	public void setLastQuality(String lastQuality) {
+		this.lastQuality = lastQuality;
+	}
+
+	public String getLastReason() {
+		return lastReason;
+	}
+
+	public void setLastReason(String lastReason) {
+		this.lastReason = lastReason;
+	}
+
+	public String getLastSupplement() {
+		return lastSupplement;
+	}
+
+	public void setLastSupplement(String lastSupplement) {
+		this.lastSupplement = lastSupplement;
+	}
+
 	public Date getThisMonth() {
 		return thisMonth;
 	}
-	
+
 	public void setThisMonth(Date thisMonth) {
 		this.thisMonth = thisMonth;
 	}
-	
-	public String getThisMeeting() {
-		return thisMeeting;
-	}
-	
-	public void setThisMeeting(String thisMeeting) {
-		this.thisMeeting = thisMeeting;
-	}
-	
-	public String getThisConference() {
-		return thisConference;
-	}
-	
-	public void setThisConference(String thisConference) {
-		this.thisConference = thisConference;
-	}
-	
-	public String getThisProject() {
-		return thisProject;
-	}
-	
-	public void setThisProject(String thisProject) {
-		this.thisProject = thisProject;
-	}
-	
-	public String getThisEtc() {
-		return thisEtc;
-	}
-	
-	public void setThisEtc(String thisEtc) {
-		this.thisEtc = thisEtc;
-	}
-	
-	public Date getNextMonth() {
-		return nextMonth;
-	}
-	
-	public void setNextMonth(Date nextMonth) {
-		this.nextMonth = nextMonth;
-	}
-	
-	public String getNextMeeting() {
-		return nextMeeting;
-	}
-	
-	public void setNextMeeting(String nextMeeting) {
-		this.nextMeeting = nextMeeting;
-	}
-	
-	public String getNextConference() {
-		return nextConference;
-	}
-	
-	public void setNextConference(String nextConference) {
-		this.nextConference = nextConference;
-	}
-	
-	public String getNextProject() {
-		return nextProject;
-	}
-	
-	public void setNextProject(String nextProject) {
-		this.nextProject = nextProject;
-	}
-	
-	public String getNextEtc() {
-		return nextEtc;
-	}
-	
-	public void setNextEtc(String nextEtc) {
-		this.nextEtc = nextEtc;
+
+	public String getThisQuantity() {
+		return thisQuantity;
 	}
 
+	public void setThisQuantity(String thisQuantity) {
+		this.thisQuantity = thisQuantity;
+	}
+
+	public String getThisQualiy() {
+		return thisQualiy;
+	}
+
+	public void setThisQualiy(String thisQualiy) {
+		this.thisQualiy = thisQualiy;
+	}
+
+	public String getThisReason() {
+		return thisReason;
+	}
+
+	public void setThisReason(String thisReason) {
+		this.thisReason = thisReason;
+	}
+
+	public String getThisSupplement() {
+		return thisSupplement;
+	}
+
+	public void setThisSupplement(String thisSupplement) {
+		this.thisSupplement = thisSupplement;
+	}
+
+	public String getEmployeeName() {
+		return employeeName;
+	}
+
+	public void setEmployeeName(String employeeName) {
+		this.employeeName = employeeName;
+	}
+
+	public String getDepartmentCode() {
+		return departmentCode;
+	}
+
+	public void setDepartmentCode(String departmentCode) {
+		this.departmentCode = departmentCode;
+	}
+
+	public String getRankCode() {
+		return rankCode;
+	}
+
+	public void setRankCode(String rankCode) {
+		this.rankCode = rankCode;
+	}
 
 	
+	@Override
+	public String toString() {
+		return String.format(
+				"MonthlyReport [reportNumber=%s, reportTitle=%s, writer=%s, writeTime=%s, lastMonth=%s, lastQuantity=%s, lastQuality=%s, lastReason=%s, lastSupplement=%s, thisMonth=%s, thisQuantity=%s, thisQualiy=%s, thisReason=%s, thisSupplement=%s, employeeName=%s, departmentCode=%s, rankCode=%s]",
+				reportNumber, reportTitle, writer, writeTime, lastMonth, lastQuantity, lastQuality, lastReason,
+				lastSupplement, thisMonth, thisQuantity, thisQualiy, thisReason, thisSupplement, employeeName,
+				departmentCode, rankCode);
+	}
+
+	
+	
+
+
+
 	
 }

@@ -7,15 +7,80 @@
 		<result property="reportTitle" column="REPORT_TITLE" /> 
 		<result property="writer" column="WRITER" /> 
 		<result property="writeTime" column="WRITE_TIME" /> 
+		
+		<result property="lastMonth" column="LAST_MONTH" /> 
+		<result property="lastQuantity" column="LAST_QUANTITY" /> 
+		<result property="lastQuality" column="LAST_QUALITY" /> 
+		<result property="lastReason" column="LAST_REASON" /> 
+		<result property="lastSupplement" column="LAST_SUPPLEMENT" /> 
+		
 		<result property="thisMonth" column="THIS_MONTH" /> 
-		<result property="thisMeeting" column="THIS_MEETING" /> 
-		<result property="thisConference" column="THIS_CONFERENCE" /> 
-		<result property="thisProject" column="THIS_PROJECT" /> 
-		<result property="thisEtc" column="THIS_ETC" /> 
-		<result property="nextMonth" column="NEXT_MONTH" /> 
-		<result property="nextMeeting" column="NEXT_MEETING" /> 
-		<result property="nextConference" column="NEXT_CONFERENCE" /> 
-		<result property="nextProject" column="NEXT_PROJECT" /> 
-		<result property="nextEtc" column="NEXT_ETC" /> 
+		<result property="thisQuantity" column="THIS_QUANTITY" /> 
+		<result property="thisQualiy" column="THIS_QUALITY" /> 
+		<result property="thisReason" column="THIS_REASON" /> 
+		<result property="thisSupplement" column="THIS_SUPPLEMENT" /> 
 	</resultMap>
+	
+	<!-- 월간 실적 보고 -->
+	
+	<!-- 모든 게시물 리스트 -->
+	<select id="selectList" resultMap="monthlyReport">
+		SELECT REPORT_MONTH.*, EMPLOYEE.EMPLOYEE_NAME, EMPLOYEE.DEPARTMENT_CODE, RANK_CODE FROM EMPLOYEE, REPORT_MONTH WHERE EMPLOYEE.EMPLOYEE_NUMBER = REPORT_MONTH.WRITER ORDER BY REPORT_NUM DESC
+	</select>
+	
+	<!-- 해당 게시물 디테일 페이지 -->
+	<select id="selectDetailPage" resultMap="monthlyReport" parameterType="String">
+		SELECT * FROM MONTH_WEEK WHERE REPORT_NUM = #{num}
+	</select>
+	
+	<!-- 검색(작성자, 제목으로 검색) -->
+	<select id="searchBy" resultMap="monthlyReport" parameterType="String">
+		SELECT * FROM MONTH_WEEK WHERE
+		<where>
+			<if test="writer != null">
+				WRITER LIKE '%' || #{writer} || '%' ORDER BY REPORT_NUM DESC
+			</if>
+			<if test="reportTitle != null">
+				REPORT_TITLE LIKE '%' || #{reportTitle} || '%' ORDER BY REPORT_NUM DESC
+			</if>
+		</where>
+	</select>
+	
+
+	<!-- 작성  -->
+	<insert id="reportWrite" parameterType="monthlyReport">
+		INSERT INTO REPORT_MONTH(REPORT_TITLE, WRITER, WRITE_TIME, LAST_MONTH, LAST_QUANTITY, 
+								LAST_QUALITY, LAST_REASON, LAST_SUPPLEMENT, THIS_MONTH, THIS_QUANTITY, 
+								THIS_QUALITY, THIS_REASON, THIS_SUPPLEMENT)
+								
+		VALUES (#{reportTitle}, #{writer}, SYSDATE, #{lastMonth}, #{lastQuantity}, #{lastQuality}, #{lastReason}, #{lastSupplement}, 
+			   #{thisMonth}, #{thisQuantity}, #{thisQuality}, #{thisReason}, #{thisSupplement})
+	</insert>
+	
+	<!-- 수정 -->
+	<update id="reportUpdate" parameterType="monthlyReport">
+		UPDATE REPORT_MONTH SET 
+			LAST_MONTH = #{lastMonth},
+			LAST_QUANTITY = #{lastQuantity},
+			LAST_QUALITY = #{lastQuality},
+			LAST_REASON = #{lastReason},
+			LAST_SUPPLEMENT = #{lastSupplement},
+			THIS_MONTH = #{thisMonth},
+			THIS_QUANTITY = #{thisQuantity},
+			THIS_QUALITY = #{thisQuality},
+			THIS_REASON = #{thisReason},
+			THIS_SUPPLEMENT = #{thisSupplement}
+		WHERE REPORT_NUM = #{reportNumber}
+	</update>
+	
+	<!-- 삭제 -->
+	<delete id="reportDelete" parameterType="monthlyReport">
+		DELETE FROM REPORT_MONTH WHERE REPORT_NUM = #{num}
+	</delete>
+	
+	
+	
+	
+	
+	
 </mapper>

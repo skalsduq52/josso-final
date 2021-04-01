@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -115,8 +117,10 @@
                 width: 100%;
                 height: 200px;
                 border: none;
-                padding : 15px 15px;
                 resize: none;
+                padding : 15px 15px;
+                font-size:1.2em;
+                font-weight:bold;
             }
 
             .week {
@@ -268,29 +272,29 @@
                         <tr style="height: 60px;">
                             <th class="left_td"></th>
                             <th class="report_date">
-                                <input type="month" value="2021-02" readonly class="date"></th><br>
+                                <input type="month" value="<fmt:formatDate value="${mr.lastMonth }" pattern="yyyy-MM-dd"/>" readonly class="date"></th><br>
                             <th class="report_date">
-                                <input type="month" value="2021-03" readonly  class="date"></th><br>
+                                <input type="month" value="<fmt:formatDate value="${mr.thisMonth }" pattern="yyyy-MM-dd"/>" readonly  class="date"></th><br>
                         </tr>
                         <tr>
                             <th class="left_td">정량적 성과</th>
-                            <td class="right_td1"><textarea class="write_area" type="text" readonly>프로젝트 2건 완료</textarea></td>
-                            <td class="right_td2"><textarea class="write_area" type="text" readonly>프로젝트 1건 완료 2건 진행 중</textarea></td>
+                            <td class="right_td1"><textarea class="write_area" readonly>${mr.lastQuantity }</textarea></td>
+                            <td class="right_td2"><textarea class="write_area" readonly>${mr.thisQuantity }</textarea></td>
                         </tr>
                         <tr >
                             <th class="left_td">정성적 성과</th>
-                            <td class="right_td1"><textarea class="write_area" type="text" readonly>안태민 대표의 실력이 많이 늘었음</textarea></td>
-                            <td class="right_td2"><textarea class="write_area" type="text" readonly>안태민 대표를 첫 파견 보냄</textarea></td>
+                            <td class="right_td1"><textarea class="write_area" readonly>${mr.lastQuality }</textarea></td>
+                            <td class="right_td2"><textarea class="write_area" readonly>${mr.thisQuality }</textarea></td>
                         </tr>
                         <tr >
                             <th class="left_td">성과 근거</th>
-                            <td class="right_td1"><textarea class="write_area" type="text" readonly>안태민 대표의 실력 향상으로 업무 효율 증가</textarea></td>
-                            <td class="right_td2"><textarea class="write_area" type="text" readonly>안태민 대표의 파견으로 내가 휴가갈 수 있었음. 개조아</textarea></td>
+                            <td class="right_td1"><textarea class="write_area" readonly>${mr.lastReason }</textarea></td>
+                            <td class="right_td2"><textarea class="write_area" readonly>${mr.thisReason }</textarea></td>
                         </tr>
                         <tr id="write_content">
                             <th class="left_td">보완할 점</th>
-                            <td class="right_td1"><textarea class="write_area" type="text" readonly>안태민 대표가 아직 풀스택이 아님</textarea></td>
-                            <td class="right_td2"><textarea class="write_area" type="text" readonly>안태민 대표를 풀스택으로 만들어야 함</textarea></td>
+                            <td class="right_td1"><textarea class="write_area" readonly>${mr.lastSupplement }</textarea></td>
+                            <td class="right_td2"><textarea class="write_area" readonly>${mr.thisSupplement }</textarea></td>
                         </tr>
                     </tbody>    
                 </table>
@@ -302,8 +306,8 @@
                 <div style="padding-top: 50px; padding-right: 50px; float:right" class="text-center">
                     <input class="btn btn-info btn-lg" type="submit" value="수정하기">
                     <input class="btn btn-secondary btn-lg" onclick="history.back()" type="submit" value="목록">
-                </span>
                 </div>
+            </div>
            </form>        
         </main>
         <br>
