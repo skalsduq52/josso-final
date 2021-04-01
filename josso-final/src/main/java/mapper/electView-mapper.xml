@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ElectView">
+<resultMap id="ElectView" type="ElectView">
+		<id property="documentNo" column="DOCUMENT_NO"/>
+		<result property="rowNum" column="ROWNUM"/>
+		<result property="employeeName" column="EMPLOYEE_NAME"/>
+		<result property="departmentCode" column="DEPARTMENT_CODE"/>
+		<result property="rankCode" column="RANK_CODE"/>
+		<result property="documentForm" column="DOCUMENT_FORM"/>
+		<result property="documentName" column="DOCUMENT_NAME"/>
+		<result property="registerDate" column="REGISTER_DATE"/>
+		<result property="startDate" column="START_DATE"/>
+		<result property="endDate" column="END_DATE"/>
+		<result property="drafter" column="DRAFTER"/>
+		<result property="drafterAccept" column="DRAFTER_ACCEPT"/>
+		<result property="middle" column="MIDDLE"/>
+		<result property="middleAccept" column="MIDDLE_ACCEPT"/>
+		<result property="last" column="LAST"/>
+		<result property="lastAccept" column="LAST_ACCEPT"/>
+		<result property="attachedFile" column="ATTACHED_FILE"/>
+		<result property="holyType" column="HOLY_TYPE"/>
+	</resultMap>
+	
+</mapper>
