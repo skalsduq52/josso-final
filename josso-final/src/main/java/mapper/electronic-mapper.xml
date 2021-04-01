@@ -32,4 +32,13 @@
 			(SELECT * FROM ELECTRONIC_APPROVAL WHERE DRAFTER = #{empNo} ORDER BY REGISTER_DATE DESC) EA WHERE ROWNUM BETWEEN 1 AND 3
 	</select>
 	
+	<!-- 중간결재자 승인 -->
+	<update id="middleAccept" parameterType="String">
+		UPDATE ELECTRONIC_APPROVAL SET MIDDLE_ACCEPT = 1, MIDDLE_ACCEPT_DATE = SYSDATE WHERE DOCUMENT_NO = #{num}
+	</update>
+	
+	<!-- 중간결재자 반려 -->
+	<update id="middleReject" parameterType="String">
+		UPDATE ELECTRONIC_APPROVAL SET MIDDLE_ACCEPT = 2, MIDDLE_ACCEPT_DATE = SYSDATE WHERE DOCUMENT_NO = #{num}
+	</update>
 </mapper>

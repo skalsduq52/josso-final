@@ -49,13 +49,21 @@ public class electronicApprovalDAO {
 		return ev;
 	}
 	
-	
 	// 결재 상세보기
 	public ElectView selectElecApp(String num) throws Exception {
 		ElectView ev = sqlSession.selectOne("ElectView.selectDetail", num);
 		return ev;
 	}
 	
+	// 중간결재 승인
+	public void middleAccept(String num) throws Exception {
+		sqlSession.update("ElectronicApproval.middleAccept",num);
+	}
+	
+	// 중간결재 반려
+	public void middleReject(String num) throws Exception {
+		sqlSession.update("ElectronicApproval.middleReject",num);
+	}
 	
 	
 }

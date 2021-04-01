@@ -22,13 +22,15 @@ public class ElectView {
 	private String lastAccept;
 	private String attachedFile;
 	private String holyType;
+	private Date middleAcceptDate;
+	private Date lastAcceptDate;
 	
 	public ElectView() {}
 
 	public ElectView(int rowNum, String employeeName, String departmentCode, String rankCode, int documentNo,
 			String documentForm, String documentName, Date registerDate, String startDate, String endDate,
 			String drafter, String drafterAccept, String middle, String middleAccept, String last, String lastAccept,
-			String attachedFile, String holyType) {
+			String attachedFile, String holyType, Date middleAcceptDate, Date lastAcceptDate) {
 		this.rowNum = rowNum;
 		this.employeeName = employeeName;
 		this.departmentCode = departmentCode;
@@ -47,7 +49,11 @@ public class ElectView {
 		this.lastAccept = lastAccept;
 		this.attachedFile = attachedFile;
 		this.holyType = holyType;
+		this.middleAcceptDate = middleAcceptDate;
+		this.lastAcceptDate = lastAcceptDate;
 	}
+
+
 
 	public int getRowNum() {
 		return rowNum;
@@ -193,6 +199,22 @@ public class ElectView {
 		this.holyType = holyType;
 	}
 
+	public Date getMiddleAcceptDate() {
+		return middleAcceptDate;
+	}
+
+	public void setMiddleAcceptDate(Date middleAcceptDate) {
+		this.middleAcceptDate = middleAcceptDate;
+	}
+
+	public Date getLastAcceptDate() {
+		return lastAcceptDate;
+	}
+
+	public void setLastAcceptDate(Date lastAcceptDate) {
+		this.lastAcceptDate = lastAcceptDate;
+	}
+
 	@Override
 	public String toString() {
 		return "ElectView [rowNum=" + rowNum + ", employeeName=" + employeeName + ", departmentCode=" + departmentCode
@@ -200,7 +222,9 @@ public class ElectView {
 				+ ", documentName=" + documentName + ", registerDate=" + registerDate + ", startDate=" + startDate
 				+ ", endDate=" + endDate + ", drafter=" + drafter + ", drafterAccept=" + drafterAccept + ", middle="
 				+ middle + ", middleAccept=" + middleAccept + ", last=" + last + ", lastAccept=" + lastAccept
-				+ ", attachedFile=" + attachedFile + ", holyType=" + holyType + "]";
+				+ ", attachedFile=" + attachedFile + ", holyType=" + holyType + ", middleAcceptDate=" + middleAcceptDate
+				+ ", lastAcceptDate=" + lastAcceptDate + "]";
 	}
+
 	
 }

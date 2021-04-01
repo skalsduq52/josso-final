@@ -38,9 +38,21 @@
 	$('#appDate').text(num);
 	$('#appDate1').text(num);
 	
+	
+	var num = "<c:out value='${ev.documentNo}'/>";
+	
 	$("#accept1").click(function(){
 	    if(confirm("결재 완료하시겠습니까") == true){
-	    	window.location.href="www.naver.com";
+	    	window.location.href="/josso/elecApproval/middleAccept?num="+num;
+	    }
+	    else{
+	        return ;
+	    }
+	});
+	
+	$("#reject1").click(function(){
+	    if(confirm("반려 하시겠습니까?") == true){
+	    	window.location.href="/josso/elecApproval/middleReject?num="+num;
 	    }
 	    else{
 	        return ;
@@ -112,13 +124,18 @@
 												<td style="height: 15px; width: 100px;" align="center">${last.departmentCode}</td>
 											</tr>
 											<tr>
-												<td rowspan="2" align="center"><!-- <img style="width:60px;" src="../resources/images/도장.png"> --><br>${middle.employeeName}</td>
-												<td rowspan="2" align="center"><!-- <img style="width:60px;" src="../resources/images/도장.png"> --><br>${last.employeeName}</td>
+												<td rowspan="2" align="center">
+												<c:if test="${ev.middleAccept == 1 || ev.middleAccept == 2}"><img style="width:60px;" src="../resources/images/도장.png"></c:if><br>${middle.employeeName}</td>
+												<td rowspan="2" align="center">
+												<c:if test="${ev.lastAccept == 1 || ev.lastAccept == 2}"><img style="width:60px;" src="../resources/images/도장.png"></c:if><br>${last.employeeName}</td>
 											</tr>
 											<tr></tr>
 											<tr>
-												<td style="height: 30px;"></td>
-												<td></td>
+												<td style="height: 30px;" align="center"><c:if test="${ev.middleAccept == 1}"><fmt:formatDate value="${ev.middleAcceptDate}" pattern="yyyy-MM-dd"/></c:if>
+												<c:if test="${ev.middleAccept == 2}">반&emsp;려</c:if>
+												</td>
+												<td align="center"><c:if test="${ev.lastAccept == 1}"><fmt:formatDate value="${ev.lastAcceptDate}" pattern="yyyy-MM-dd"/></c:if>
+												<c:if test="${ev.lastAccept == 2}">반&emsp;려</c:if></td>
 											</tr>
 										</tbody>
 									</table>
