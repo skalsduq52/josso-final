@@ -37,6 +37,17 @@
 	num = ((date2.getTime() - date1.getTime()) / (1000*60*60*24))+1;
 	$('#appDate').text(num);
 	$('#appDate1').text(num);
+	
+	$("#accept1").click(function(){
+	    if(confirm("결재 완료하시겠습니까") == true){
+	    	window.location.href="www.naver.com";
+	    }
+	    else{
+	        return ;
+	    }
+	});
+
+	
  });
 </script>
 </head>
@@ -175,6 +186,16 @@
 							</td>
 						</tr>
 					</table>
+					<div style="padding-top: 150px; margin-left: 15px;">
+					<c:if test="${employee.employeeNumber == middle.employeeNumber && ev.middleAccept == 0}">
+						<button id="accept1">승인</button>
+						<button id="reject1">반려</button>
+					</c:if>
+					<c:if test="${(employee.employeeNumber == last.employeeNumber && ev.lastAccept == 0) && ev.middleAccept == 1}">
+						<button id="accept2">승인</button>
+						<button id="reject2">반려</button>
+					</c:if>
+				</div>
 				</div>
 		</div>
 		<!-- modal 삽입  -->

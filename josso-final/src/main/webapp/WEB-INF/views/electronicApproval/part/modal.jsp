@@ -126,7 +126,7 @@
 						</div>
 						<div style="width: 100%; height: 150px;">
 								<div class="border"
-									style="width: 180px; height: 120px; float: left; margin-top: 20px; margin-left: 10px;"
+									style="width: 200px; height: 120px; float: left; margin-top: 20px;"
 									id="droppObj">
 									<div class="border-bottom"
 										style="height: 40px; line-height: 40px; text-align: center;">
@@ -134,15 +134,15 @@
 									<table style="width: 100%;" id="drop1">
 										<tbody>
 											<tr class="border-bottom">
-												<td style="width: 40%;">부서</td>
-												<td style="width: 30%;">직급</td>
-												<td style="width: 30%;">이름</td>
+												<td style="width: 36%;">부서</td>
+												<td style="width: 38%;">직급</td>
+												<td style="width: 26%;">이름</td>
 											</tr>
 										</tbody>
 									</table>
 								</div>
 								<div class="border"
-									style="width: 180px; height: 120px; float: left; margin-top: 20px; margin-left: 10px;"
+									style="width: 200px; height: 120px; float: left; margin-top: 20px; margin-left:10px;"
 									id="droppObj1">
 									<div class="border-bottom"
 										style="height: 40px; line-height: 40px; text-align: center;">
@@ -150,9 +150,9 @@
 									<table style="width: 100%;" id="drop2">
 										<tbody id="droppObj1">
 											<tr class="border-bottom">
-												<td style="width: 40%;">부서</td>
-												<td style="width: 30%;">직급</td>
-												<td style="width: 30%;">이름</td>
+												<td style="width: 36%;">부서</td>
+												<td style="width: 38%;">직급</td>
+												<td style="width: 26%;">이름</td>
 											</tr>
 										</tbody>
 									</table>
