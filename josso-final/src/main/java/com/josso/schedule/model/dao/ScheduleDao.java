@@ -58,4 +58,12 @@ public class ScheduleDao {
 		
 		return result;
 	}
+	
+	// Schedule 삭제
+	public int deleteSchedule(String scheduleNum) throws Exception{
+		
+		int result = sqlSession.delete("Schedule.deleteSchedule", scheduleNum);
+		
+		return result;
+	}
 }

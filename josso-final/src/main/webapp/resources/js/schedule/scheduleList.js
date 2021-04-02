@@ -1,10 +1,4 @@
 $(function(){
-//	function getEvent(){
-//		var events;
-//		
-//		
-//		return events;
-//	}
 	var calendarEl = document.getElementById('calendar');
 	
     var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -35,17 +29,6 @@ $(function(){
     	console.log(eventObj.id);
     	
     	location.href = 'schedule/detail?id='+eventObj.id;
-    	/*$.ajax({
-    		url: '/josso/schedule/detail',
-    		type: 'GET',
-    		data:{
-    			'id' : eventObj.id
-    		}
-//    		success: function(data){
-//    			location.href = 'scheduleDetail'
-//    		}
-    	});
-    	*/
     }
     });
     calendar.render();

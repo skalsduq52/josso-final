@@ -45,4 +45,8 @@
 		SCHEDULE_END_TIME = #{scheduleEndTime}
 		WHERE SCHEDULE_NUMBER = #{scheduleNumber}
 	</update>
+	<!-- Schedule 삭제 -->
+	<delete id="deleteSchedule" parameterType="Schedule">
+		DELETE FROM SCHEDULE WHERE SCHEDULE_NUMBER = #{scheduleNumber}
+	</delete>
 </mapper>

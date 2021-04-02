@@ -23,4 +23,7 @@ public interface ScheduleService {
 	
 	// Schedule 수정
 	public int updateSchedule(Schedule schedule) throws Exception;
+	
+	// Schedule 삭제
+	public int deleteSchedule(String scheduleNum) throws Exception;
 }

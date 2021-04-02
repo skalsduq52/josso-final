@@ -4,7 +4,7 @@
 		<nav class="border-bottom">
 			<!-- Navbar content -->
 			<div class="content_top">
-				<h1>일정등록</h1>
+				<h1>일정변경 및 삭제</h1>
 			</div>
 		</nav>
 		<main>
@@ -163,15 +163,18 @@
 					<div class="bt_area">
 						<c:if test="${employee.employeeNumber == schedule.employeeNumber}">
 							<span>
-								<button type="submit" onclick="return confirm('정말로 수정하시겠습니까?')" class="btn btn-info">수정</button>
+								<button type="submit" onclick="return confirm('정말 수정하시겠습니까?')" class="btn btn-info">수정</button>
 								
 							</span> 
 							<span>
 								<button type="button" onclick="window.history.back()" class="btn btn-secondary">취소</button>
 							</span>
+							<span>
+								<button type="button" name="btn_del" onclick="return confirm('정말 삭제하시겠습니까?')" value="${schedule.scheduleNumber}" class="btn btn-danger">삭제</button>
+							</span>
 						</c:if>
 						<c:if test="${employee.employeeNumber != schedule.employeeNumber || empty employee.employeeNumber}">
-							<button type="button" onclick="window.history.back()" class="btn btn-info">돌아가기</button>
+							<button type="button" onclick="window.history.back()"  class="btn btn-info">돌아가기</button>
 						</c:if>
 					</div>
 				</form>

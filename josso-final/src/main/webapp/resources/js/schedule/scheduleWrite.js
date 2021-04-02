@@ -61,6 +61,10 @@ $(function() {
 //			handle : ".modal-header"
 //		});
 	});
+	$('.btn-danger').click(function(){
+		var scheduleNum = $('.btn-danger').val();
+		location.href = '/josso/schedule/delete?scheduleNum='+scheduleNum;
+	});
 });
 //$(function() {
 //	$('.start_date').datepicker({

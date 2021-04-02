@@ -59,4 +59,13 @@ public class ScheduleServiceImpl implements ScheduleService{
 		
 		return result;
 	}
+	
+	// Schedule 삭제
+	@Override
+	public int deleteSchedule(String scheduleNum) throws Exception{
+		
+		int result = sd.deleteSchedule(scheduleNum);
+		
+		return result;
+	}
 }

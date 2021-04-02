@@ -131,6 +131,7 @@ public class ScheduleController {
 		return mv;
 	}
 	
+	// Schedule 상세페이지
 	@RequestMapping(value="schedule/detail", method=RequestMethod.GET)
 	public ModelAndView scheduleDetail(@RequestParam(value="id", required=false) String scheduleNum) 
 			throws Exception{
@@ -148,6 +149,7 @@ public class ScheduleController {
 		return mv;
 	}
 	
+	// Schedule 수정
 	@RequestMapping(value="schedule/update", method=RequestMethod.POST)
 	public ModelAndView scheduleUpdate(Schedule schedule) throws Exception{
 		
@@ -160,6 +162,21 @@ public class ScheduleController {
 		System.out.println(schedule.getScheduleNumber());
 		
 		String result = Integer.toString(ss.updateSchedule(schedule));
+		
+		mv.setViewName("redirect:/schedule");
+		
+		return mv;
+	}
+	
+	// Schedule 삭제
+	@RequestMapping(value="schedule/delete", method=RequestMethod.GET)
+	public ModelAndView scheduleDelete(String scheduleNum) throws Exception{
+		
+		ModelAndView mv = new ModelAndView();
+		
+		System.out.println(scheduleNum);
+		
+		String result = Integer.toString(ss.deleteSchedule(scheduleNum));
 		
 		mv.setViewName("redirect:/schedule");
 		
