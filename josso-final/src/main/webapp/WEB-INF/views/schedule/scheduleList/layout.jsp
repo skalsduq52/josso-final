@@ -29,9 +29,9 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/main.min.css">
         <!-- js -->
         <script src="<c:url value="/resources/js/schedule/scheduleList.js" />"></script>
+        <script src="<c:url value="/resources/js/schedule/aside.js" />"></script>
         <script src="<c:url value="/resources/js/fullcalendar/ko.js" />"></script>
         <script src="<c:url value="/resources/js/fullcalendar/main.min.js" />"></script>
-        <script src="<c:url value="/resources/js/main.js" />"></script>
 </head>
 <body class="body">
 	<!-- header 부분 -->

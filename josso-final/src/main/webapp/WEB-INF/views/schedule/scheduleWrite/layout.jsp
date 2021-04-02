@@ -34,7 +34,7 @@
 			integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ=="
 			crossorigin="anonymous">
 		</script>
-		<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
+		<script src="<c:url value="/resources/js/schedule/aside.js" />"></script>
         <script src="${pageContext.request.contextPath}/resources/js/schedule/scheduleWrite.js"></script>
 </head>
 <body class="body">

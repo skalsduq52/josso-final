@@ -9,7 +9,7 @@
 		</nav>
 		<main>
 			<div>
-				<form action="${pageContext.request.contextPath}/schedule/modify" method="post">
+				<form action="${pageContext.request.contextPath}/schedule/update" method="post">
 					<table class="form_type">
 						<tbody>
 							<tr>
@@ -157,16 +157,17 @@
 								<td><textarea class="txtarea" name="scheduleContent" style="resize: none;"
 										rows="10">${schedule.scheduleContent}</textarea></td>
 							</tr>
+							<input type="hidden" name="scheduleNumber" value="${schedule.scheduleNumber}">
 						</tbody>
 					</table>
 					<div class="bt_area">
 						<c:if test="${employee.employeeNumber == schedule.employeeNumber}">
 							<span>
-								<button type="submit" class="btn btn-info">수정</button>
+								<button type="submit" onclick="return confirm('정말로 수정하시겠습니까?')" class="btn btn-info">수정</button>
 								
 							</span> 
 							<span>
-								<button type="button" class="btn btn-secondary">취소</button>
+								<button type="button" onclick="window.history.back()" class="btn btn-secondary">취소</button>
 							</span>
 						</c:if>
 						<c:if test="${employee.employeeNumber != schedule.employeeNumber || empty employee.employeeNumber}">

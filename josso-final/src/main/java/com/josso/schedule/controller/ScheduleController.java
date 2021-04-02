@@ -126,7 +126,7 @@ public class ScheduleController {
 		
 		System.out.println("결과값 확인 : "+ result);
 		
-		mv.setViewName("schedule.scheduleList");
+		mv.setViewName("redirect:/schedule");
 		
 		return mv;
 	}
@@ -148,14 +148,20 @@ public class ScheduleController {
 		return mv;
 	}
 	
-	@RequestMapping(value="schedule/modify", method=RequestMethod.POST)
+	@RequestMapping(value="schedule/update", method=RequestMethod.POST)
 	public ModelAndView scheduleUpdate(Schedule schedule) throws Exception{
 		
 		ModelAndView mv = new ModelAndView();
 		
+		System.out.println(schedule.getScheduleTitle());
+		System.out.println(schedule.getScheduleContent());
+		System.out.println(schedule.getScheduleStartDate());
+		System.out.println(schedule.getScheduleStartTime());
+		System.out.println(schedule.getScheduleNumber());
+		
 		String result = Integer.toString(ss.updateSchedule(schedule));
 		
-		mv.setViewName("schedule.scheduleList");
+		mv.setViewName("redirect:/schedule");
 		
 		return mv;
 	}

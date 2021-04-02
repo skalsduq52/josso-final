@@ -35,5 +35,14 @@
 	</select>
 	<!-- Schedule 수정 -->
 	<update id="updateSchedule" parameterType="Schedule">
+		UPDATE SCHEDULE SET 
+		SCHEDULE_TITLE = #{scheduleTitle},
+		SCHEDULE_PLACE = #{schedulePlace},
+		SCHEDULE_CONTENT = #{scheduleContent},
+		SCHEDULE_START_DATE = #{scheduleStartDate},
+		SCHEDULE_START_TIME = #{scheduleStartTime},
+		SCHEDULE_END_DATE = #{scheduleEndDate},
+		SCHEDULE_END_TIME = #{scheduleEndTime}
+		WHERE SCHEDULE_NUMBER = #{scheduleNumber}
 	</update>
 </mapper>
