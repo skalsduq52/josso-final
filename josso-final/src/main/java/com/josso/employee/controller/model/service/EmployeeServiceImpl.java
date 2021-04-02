@@ -194,7 +194,7 @@ public class EmployeeServiceImpl implements EmployeeService{
     //이메일 인증 키 검증
     public Employee userAuthKey(String authkey) throws Exception {
     	Employee employee = new Employee();
-        employee = employeeDao.checkkAuthKey(authkey);
+        employee = employeeDao.checkAuthKey(authkey);
    
         if(employee!=null){
             try{

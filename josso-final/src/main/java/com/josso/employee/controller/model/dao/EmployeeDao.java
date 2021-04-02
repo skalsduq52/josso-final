@@ -86,7 +86,7 @@ public class EmployeeDao {
 	}
 	
 	// 이메일 인증코드 확인
-	public Employee checkkAuthKey(String authkey) throws Exception {
+	public Employee checkAuthKey(String authkey) throws Exception {
         return sqlSession.selectOne("checkAuthkey", authkey);
     }
     
