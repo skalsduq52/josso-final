@@ -52,25 +52,31 @@ public class MonthlyController {
 			System.out.println("STR : " + strDate);
 			// 날짜를 String 배열로 받아 년/월 쪼개기
 			String thisDate = String.valueOf(strDate);
+			System.out.println("thisDate : " + thisDate);
 			String[] titleDate = thisDate.split("-");
+			System.out.println("titleDate : " + titleDate[i]);
 			
 			// 년, 월로 쪼개기
 			int year = Integer.parseInt(titleDate[0]);
+			System.out.println(year);
 			int month = Integer.parseInt(titleDate[1]);
+			System.out.println(month);
 			
 			// 캘린더 셋 시작
 			calendar.set(year, month);
 			
 			// 몇 번째 주인지 추출
 			yearth = calendar.get(Calendar.YEAR);
+			System.out.println(yearth);
 			monthth = calendar.get(Calendar.MONTH);
-			
+			System.out.println(monthth);
 			// 출력 찍어봄
 			// System.out.println(i+"번째");
 			// System.out.println(yearth + "년 " + monthth + "월 " + weekth + "번째 주 업무보고");
 			
 			// 뷰단에 뿌려주기
 			sendTitle.add(yearth + "년 " + monthth + "월 성과 업무보고");
+			System.out.println("sendTitle : " + sendTitle);
 			mv.addObject("sendTitle", sendTitle);
 
 		}

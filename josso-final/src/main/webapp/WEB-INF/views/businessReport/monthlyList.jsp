@@ -230,10 +230,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach var="ws" items="${ms}" varStatus="status">
+                        <c:forEach var="ms" items="${ms}" varStatus="status">
                         <tr>
                             <td id="tdnum">${ms.reportNumber}</td>
-                            <td>${ws.departmentCode}</td>
+                            <td>${ms.departmentCode}</td>
                             <td id="theme"><a href="DetailPage?num=${ms.reportNumber }">${sendTitle[status.index]}</a></td>
                             <td>${ms.employeeName }</td>
                             <td>${ms.rankCode }</td>
