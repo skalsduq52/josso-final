@@ -102,4 +102,9 @@
 	<select id="findEmployeeNumber" parameterType="String" resultType="String">
 		SELECT EMPLOYEE_NUMBER FROM EMPLOYEE WHERE EMPLOYEE_EMAIL= #{employeeEmail}
 	</select>
+	
+	<!-- 비밀번호 변경 -->
+	<update id="updatePassword" parameterType="Employee">
+		UPDATE EMPLOYEE SET EMPLYEE_PASSWORD = #{employeePassword} WHERE EMPLOYEE_NUMBER = #{employeeNumber}
+	</update>
 </mapper>

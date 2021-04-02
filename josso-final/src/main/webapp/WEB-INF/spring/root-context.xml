@@ -47,22 +47,7 @@
 		<beans:constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</beans:bean>
 	
-	<!-- email 인증 관련   -->
-    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-        <property name="host" value="smtp.naver.com" />
-        <property name="port" value="465" />
-        <property name="username" value="wanaciel@naver.com"/>
-        <property name="password" value="sixmanjosso" />
-        <property name="javaMailProperties">
-            <props>
-                <prop key="mail.transport.protocol">smtp</prop>
-                <prop key="mail.smtp.auth">true</prop>
-                <prop key="mail.smtp.starttls.enable">true</prop>
-                <prop key="mail.debug">true</prop>
-            </props>
-        </property>
-    </bean>
-    <!-- email 인증 관련  끝 -->
+	
     
 	<!-- 트랜잭션 관리자 -->
 	<!-- 위의 트랜잭션 어노테이션 처리할때 이름을 transactionManager로 설정하면 다음 코드를 쓸 필요 없다. -->

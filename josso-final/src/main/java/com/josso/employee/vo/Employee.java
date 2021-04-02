@@ -27,6 +27,7 @@ public class Employee {
 	   @DateTimeFormat(pattern="yyyy-MM-dd")
 	   private Date employeeLoginDate;			// 사원별 로그인 날짜
 	   private int employeeAnnualLeave;			// 연차휴가
+	   private String emailAuthKey;				// 이메일 인증키
 	   
 	//기본 생성자   
 	public Employee() {
@@ -168,6 +169,16 @@ public class Employee {
 
 	public void setEmployeeAnnualLeave(int employeeAnnualLeave) {
 		this.employeeAnnualLeave = employeeAnnualLeave;
+	}
+	
+	
+
+	public String getEmailAuthKey() {
+		return emailAuthKey;
+	}
+
+	public void setEmailAuthKey(String emailAuthKey) {
+		this.emailAuthKey = emailAuthKey;
 	}
 
 	public static long getSerialversionuid() {

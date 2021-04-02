@@ -78,4 +78,23 @@ public class EmployeeDao {
 	public String findEmployeeNumber(String employeeEmail) throws Exception{
 		return sqlSession.selectOne("Employee.findEmployeeNumber", employeeEmail);
 	}
+	
+	// 비밀번호 변경
+	@Transactional
+	public int updatePassword(Employee employee) throws Exception{
+		return sqlSession.update("Employee.updatePassword", employee);
+	}
+	
+	// 이메일 인증코드 확인
+	public Employee checkkAuthKey(String authkey) throws Exception {
+        return sqlSession.selectOne("checkAuthkey", authkey);
+    }
+    
+    //인증 후 계정 활성화
+    public void successAuthkey(Employee employee) throws Exception {
+        sqlSession.update("keyConfirm", employee);
+    }
+
+
+
 }

@@ -31,4 +31,8 @@ public interface EmployeeService {
 		public void logout(HttpServletResponse response) throws Exception;
 		
 		public String findEmployeeNumber(HttpServletResponse response, String employeeEmail) throws Exception;
+
+		public void regist(Employee employee) throws Exception;
+		
+		public Employee userAuthKey(String authkey) throws Exception;
 }

@@ -7,10 +7,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.josso.employee.controller.model.dao.EmployeeDao;
+import com.josso.employee.email.MailHandler;
+import com.josso.employee.email.TempKey;
 import com.josso.employee.vo.Employee;
 
 
@@ -19,6 +22,11 @@ public class EmployeeServiceImpl implements EmployeeService{
 	
 	@Autowired
 	EmployeeDao employeeDao;
+	@Autowired
+    private JavaMailSender mailSender;
+
+
+
 	
 	@Override
 	public List<Employee> selectEmployeeAll() throws Exception{
@@ -156,6 +164,48 @@ public class EmployeeServiceImpl implements EmployeeService{
 			return employeeNumber;
 		}
 	} 
+	
+	// 인증 메일 발송
+	@Override
+	public void regist(Employee employee) throws Exception {
+        String key = new TempKey().generateKey(30);  // 인증키 생성
+        employee.setEmailAuthKey(key);;
+        System.out.println("key : " + key);
+        
+        //DB에 가입정보등록
+ //       employeeDao.insertEmployee(employee);
+        
+        //메일 전송
+        MailHandler sendMail = new MailHandler(mailSender);
+        sendMail.setSubject("이메일 인증");
+        sendMail.setText(
+                new StringBuffer()
+                .append("<h1>메일인증</h1>")
+                .append("<a href='http://localhost:8080/email_test/emailConfirm?authKey=")
+                .append(key)
+                .append("' target='_blank'>이메일 인증 확인</a>")
+                .toString());
+        
+        sendMail.setFrom("서비스ID@gmail.com", "서비스 이름");
+        sendMail.setTo(employee.getEmployeeEmail());
+        sendMail.send();
+    }
+ 
+    //이메일 인증 키 검증
+    public Employee userAuthKey(String authkey) throws Exception {
+    	Employee employee = new Employee();
+        employee = employeeDao.checkkAuthKey(authkey);
+   
+        if(employee!=null){
+            try{
+            	employeeDao.successAuthkey(employee);
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return employee;
+    }
+
 	
 
 }

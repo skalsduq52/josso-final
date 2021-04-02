@@ -26,6 +26,9 @@ public class EmployeeController {
 	
 	@Autowired
 	EmployeeService employeeService;
+	
+	
+	
 	//로그인 폼 이동
 	@RequestMapping(value= "employee/login/index", method=RequestMethod.GET)
 	public String index() throws Exception{
@@ -136,12 +139,11 @@ public class EmployeeController {
 	}
 	
 	// 사원번호 찾기 폼 이동
-		@RequestMapping(value= "employee/login/findEmployeePassword", method=RequestMethod.GET)
-		public String findEmployeePassword() throws Exception{
-			return "employee/login/findEmployeePassword";
-		}
-	
-	
+	@RequestMapping(value= "employee/login/findEmployeePassword", method=RequestMethod.GET)
+	public String findEmployeePassword() throws Exception{
+		return "employee/login/findEmployeePassword";
+	}
+
 }
 	
 
