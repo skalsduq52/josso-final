@@ -94,103 +94,16 @@
         </style>
     </head>
     <body class="body">
-        <header>
-            <div class="navigation">
-                <ul>
-                    <li>
-                        <a href="#">
-                        <span class="icon"><i class="fa fa-home" aria-hidden="true"></i></span>
-                        <span class="icon">홈</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="${pageContext.request.contextPath}/email/accept/list">
-                        <span class="icon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
-                        <span class="icon">메일</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                        <span class="icon"><i class="fas fa-list-ul fa-lg" aria-hidden="true"></i></span>
-                        <span class="icon">게시판</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                        <span class="icon"><i class="fas fa-calendar-alt fa-lg" aria-hidden="true"></i></span>
-                        <span class="icon">캘린더</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                        <span class="icon"><i class="fas fa-clock fa-lg" aria-hidden="true"></i></span>
-                        <span class="icon">예약</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                        <span class="icon"><i class="fas fa-clipboard fa-lg" aria-hidden="true"></i></span>
-                        <span class="icon">결재</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                        <span class="icon"><i class="fas fa-user-friends fa-lg" aria-hidden="true"></i></span>
-                        <span class="icon">조직도</span>
-                        </a>
-                    </li>
-                
-                </ul>
-            </div>
-        </header>
-        <aside class="border-right">
-            <div>
-                <section>
-                    <div class="title">
-                        <span class="icon"><i class="fas fa-calendar-alt icon_" aria-hidden="true"></i>메일</span>
-                            
-                    </div>
-                </section>
-                <section>
-                    <div class="title_button">
-                        <button type="button" class="btn btn-info btn-sm btn-block"><a class="a" href="${pageContext.request.contextPath}/email/write/open"> 메일쓰기</a></button>
-                    </div>
-                </section>
-                <section>
-                    
-                    <div class="side_title">
-                        <span class="hover_icon">
-                            <i class="fas fa-sort-down fa-rotate-270" style="color:gray"></i>
-                        </span>
-                        <span class="hover_title">내 메일함</span>
-                        <span class="write_img">
-                            <img src="${pageContext.request.contextPath}/resources/images/글쓰기(연필).png">
-                        </span>
-                    </div>
-                    <div>
-                        <ul class="hover_tag">
-                            <li>
-                                <div class="form-check form-check-inline">
-                                    <label class="form-check-label" for="inlineCheckbox1"><a href="${pageContext.request.contextPath}/email/accept/list">받은 메일함</a></label>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="form-check form-check-inline">
-                                    
-                                    <label class="form-check-label" for="inlineCheckbox1"><a href="${pageContext.request.contextPath}/email/send/list"> 보낸 메일함</a></label>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="form-check form-check-inline">
-                                    
-                                    <label class="form-check-label" for="inlineCheckbox1"><a href="${pageContext.request.contextPath}/email/wastebasket/list"> 휴지통</a></label>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </section>
-            </div>
-        </aside>
+        <!-- navigation 삽입 -->
+		<header>
+			<%@ include file="../email/part/header.jsp"%>
+		</header>
+		
+        <!-- aside 삽입 -->
+		<aside class="border-right">
+			<%@ include file="../email/part/aside.jsp"%>
+		</aside>
+		
         <form action="${pageContext.request.contextPath}/email/send/deliverySend" method="get">
         <nav class="border-bottom" >
             <!-- Navbar content -->
