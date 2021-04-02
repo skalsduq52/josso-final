@@ -36,30 +36,35 @@ var date1 ='';
 var date2 ='';
 var num = '';
 
-document.getElementById('dt').onchange = function(){
-	date1 = new Date(this.value);
-	if(date1 != '' && date2 != ''){
-		num = ((date2.getTime() - date1.getTime()) / (1000*60*60*24))+1;
-		if($('#restDate').val() < num){
-			alert('잔여일자를 초과했습니다.');
-		}else{
-		$('#appDate').val(num);
-		$('#appDate2').val(num);
+	document.getElementById('dt').onchange = function(){
+		date1 = new Date(this.value);
+		if(date1 != '' && date2 != ''){
+			num = ((date2.getTime() - date1.getTime()) / (1000*60*60*24))+1;
+			if($('#restDate').val() < num){
+				alert('잔여일자를 초과했습니다.');
+			}else{
+			$('#appDate').val(num);
+			$('#appDate2').val(num);
+			}
 		}
 	}
-}
-document.getElementById('dt1').onchange = function(){
-	date2 = new Date(this.value);
-	if(date1 != '' && date2 != ''){
-		num = ((date2.getTime() - date1.getTime()) / (1000*60*60*24))+1;
-		if($('#restDate').val() < num){
-			alert('잔여일자를 초과했습니다.');
-		}else{
-		$('#appDate').val(num);
-		$('#appDate2').val(num);
+
+	document.getElementById('dt1').onchange = function(){
+		date2 = new Date(this.value);
+		if(date1 != '' && date2 != ''){
+			num = ((date2.getTime() - date1.getTime()) / (1000*60*60*24))+1;
+			if($('#restDate').val() < num){
+				alert('잔여일자를 초과했습니다.');
+			}else{
+			$('#appDate').val(num);
+			$('#appDate2').val(num);
+			}
 		}
 	}
-}
+
+	$('#cancle').click(function(){
+		window.location.href="/josso/elecApproval";
+	});
 });
 </script>
 <body>
@@ -193,7 +198,7 @@ document.getElementById('dt1').onchange = function(){
 								id="td_back">연차 일수</td>
 							<td style="width: 850px;">총연차일수 : <input type="text" readonly value="16" style="width: 100px;"> 사용한연차 : <input
 								type="text" readonly value="${used}" style="width: 100px;">
-								잔여연차 : <input type="text" readonly value="16" id="restDate"
+								잔여연차 : <input type="text" readonly value="${emp.employeeAnnualLeave}" id="restDate"
 								style="width: 100px;"> 
 								신청연차 : 	<input type="text" id="appDate2" readonly style="width: 100px;">
 							</td>
@@ -212,7 +217,7 @@ document.getElementById('dt1').onchange = function(){
 				</div>
 				<div style="padding-top: 150px; margin-left: 15px;">
 					<input type="submit" value="결재요청" />
-					<button>취소</button>
+					<button type="button" id="cancle">취소</button>
 				</div>
 		</form>
 		</div>

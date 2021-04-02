@@ -38,8 +38,8 @@
 	$('#appDate').text(num);
 	$('#appDate1').text(num);
 	
-	
 	var num = "<c:out value='${ev.documentNo}'/>";
+	
 	
 	$("#accept1").click(function(){
 	    if(confirm("결재 완료하시겠습니까") == true){
@@ -58,8 +58,26 @@
 	        return ;
 	    }
 	});
-
 	
+	$("#accept2").click(function(){
+		var num1 = $('#appDate').text();
+		var emno = "<c:out value='${ev.drafter}'/>";
+	    if(confirm("결재 완료하시겠습니까") == true){
+	    	window.location.href="/josso/elecApproval/lastAccept?num="+num+"&&num1="+num1+"&&emno="+emno;
+	    }
+	    else{
+	        return ;
+	    }
+	});
+	
+	$("#reject2").click(function(){
+	    if(confirm("반려 하시겠습니까?") == true){
+	    	window.location.href="/josso/elecApproval/lastReject?num="+num;
+	    }
+	    else{
+	        return ;
+	    }
+	});
  });
 </script>
 </head>

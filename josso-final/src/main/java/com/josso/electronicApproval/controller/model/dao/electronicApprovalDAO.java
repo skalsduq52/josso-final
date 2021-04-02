@@ -1,5 +1,6 @@
 package com.josso.electronicApproval.controller.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -49,6 +50,12 @@ public class electronicApprovalDAO {
 		return ev;
 	}
 	
+	// 결재 수신 문서 최근 3개
+	public List<ElectView> selectLastReceive(String empNo) throws Exception {
+		List<ElectView> ev = sqlSession.selectList("ElectView.selectLastRecive", empNo);
+		return ev;
+	}
+	
 	// 결재 상세보기
 	public ElectView selectElecApp(String num) throws Exception {
 		ElectView ev = sqlSession.selectOne("ElectView.selectDetail", num);
@@ -65,5 +72,18 @@ public class electronicApprovalDAO {
 		sqlSession.update("ElectronicApproval.middleReject",num);
 	}
 	
+	// 최종결재 승인
+	public void lastAccept(String num) throws Exception {
+		sqlSession.update("ElectronicApproval.lastAccept",num);
+	}
 	
+	// 최종결재 반려
+	public void lastReject(String num) throws Exception {
+		sqlSession.update("ElectronicApproval.lastReject",num);
+	}
+	
+	// 최종결재 하면 연차 차감
+	public void dateUpdate(HashMap<String, String> map) throws Exception {
+		sqlSession.update("ElectronicApproval.dateUpdate",map);
+	}
 }

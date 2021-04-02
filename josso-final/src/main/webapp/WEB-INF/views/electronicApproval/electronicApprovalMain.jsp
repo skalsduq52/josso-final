@@ -77,7 +77,7 @@
 					</c:if>	
 					<c:if test="${waitSign[0] == null}">	
 					<tr>
-						<th colspan="5" id="tdnum"  style="text-align: center;height:300px;">기안한 문서가 없습니다.</th>
+						<th colspan="5" id="tdnum"  style="text-align: center;height:200px;">결재 대기중인 문서가 없습니다.</th>
 					</tr>
 				</c:if>
 				</tbody>
@@ -105,7 +105,13 @@
 							</c:if>
 							<td><a href="elecApproval/signdetail?num=${mylist.documentNo}">${mylist.documentName}</a></td>
 							<td>${emp.employeeName}/${emp.rankCode}/${emp.departmentCode}</td>
-							<c:if test="${mylist.lastAccept == 0}">
+							<c:if test="${mylist.middleAccept == 2 || mylist.lastAccept == 2}">
+								<td>반려</td>
+							</c:if>
+							<c:if test="${mylist.middleAccept == 1 && mylist.lastAccept == 1}">
+								<td>완료</td>
+							</c:if>
+							<c:if test="${mylist.middleAccept == 0 || (mylist.middleAccept == 1 && mylist.lastAccept == 0)}">
 								<td>진행중</td>
 							</c:if>
 						</tr>
@@ -113,7 +119,7 @@
 				</c:if>	
 				<c:if test="${mySign[0] == null}">	
 					<tr>
-						<th colspan="5" id="tdnum"  style="text-align: center;height:300px;">기안한 문서가 없습니다.</th>
+						<th colspan="5" id="tdnum"  style="text-align: center;height:200px;">기안한 문서가 없습니다.</th>
 					</tr>
 				</c:if>
 				</tbody>
@@ -132,20 +138,32 @@
 					</tr>
 				</thead>
 				<tbody>
+					<c:if test="${receiveSign[0] != null}">
+					<c:forEach var="receivelist" items="${receiveSign}">
+						<tr>
+							<td id="tdnum"><fmt:formatDate value="${receivelist.registerDate}" pattern="yyyy-MM-dd"/></td>
+							<c:if test="${receivelist.documentForm == 'F1'}">
+								<td>휴가신청서</td>
+							</c:if>
+							<td><a href="elecApproval/signdetail?num=${receivelist.documentNo}">${receivelist.documentName}</a></td>
+							<td>${receivelist.employeeName}/${receivelist.rankCode}/${receivelist.departmentCode}</td>
+							<c:if test="${receivelist.middleAccept == 2 || receivelist.lastAccept == 2}">
+								<td>반려</td>
+							</c:if>
+							<c:if test="${receivelist.middleAccept == 1 && receivelist.lastAccept == 1}">
+								<td>완료</td>
+							</c:if>
+							<c:if test="${receivelist.middleAccept == 0 || (receivelist.middleAccept == 1 && receivelist.lastAccept == 0)}">
+								<td>진행중</td>
+							</c:if>
+						</tr>
+					</c:forEach>
+				</c:if>	
+				<c:if test="${receiveSign[0] == null}">	
 					<tr>
-						<td id="tdnum">2021-03-17</td>
-						<td>휴가신청서</td>
-						<td>휴가신청의 건</td>
-						<td>나민엽/사원/인사</td>
-						<td>완료</td>
+						<th colspan="5" id="tdnum"  style="text-align: center;height:200px;">수신된 문서가 없습니다.</th>
 					</tr>
-					<tr>
-						<td id="tdnum">2021-03-17</td>
-						<td>휴가신청서</td>
-						<td>휴가신청의 건</td>
-						<td>나민엽/사원/인사</td>
-						<td>반려</td>
-					</tr>
+				</c:if>
 				</tbody>
 			</table>
 		</div>

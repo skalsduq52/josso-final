@@ -35,8 +35,10 @@ public class ElectronicController {
 		String empNo = emp.getEmployeeNumber();
 		List<ElectronicApproval> mySign = ed.selectLastMy(empNo);
 		List<ElectView> waitSign = ed.selectLastWait(empNo);
+		List<ElectView> receiveSign = ed.selectLastReceive(empNo);
 		mv.addObject("waitSign",waitSign);
 		mv.addObject("mySign", mySign);
+		mv.addObject("receiveSign", receiveSign);
 		mv.addObject("emp",emp);
 		mv.setViewName("/electronicApproval/electronicApprovalMain");
 		return mv;
@@ -158,5 +160,25 @@ public class ElectronicController {
 		return mv;
 	}
 	
+	@RequestMapping(value="elecApproval/lastAccept", method=RequestMethod.GET)
+	public ModelAndView lastAccept(@RequestParam(name="num") String num,@RequestParam(name="num1") String num1,
+			@RequestParam(name="emno") String emno, ModelAndView mv) throws Exception {
+		ed.lastAccept(num);
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("num1", num1);
+		map.put("emno", emno);
+		ed.dateUpdate(map);
+		mv.addObject("num",num);
+		mv.setViewName("redirect:/elecApproval/signdetail");
+		return mv;
+	}
+	
+	@RequestMapping(value="elecApproval/lastReject", method=RequestMethod.GET)
+	public ModelAndView lastReject(@RequestParam(name="num") String num, ModelAndView mv) throws Exception {
+		ed.lastReject(num);
+		mv.addObject("num",num);
+		mv.setViewName("redirect:/elecApproval/signdetail");
+		return mv;
+	}
 	
 }

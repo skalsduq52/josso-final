@@ -33,8 +33,13 @@
 	<!-- 결재 대기문서 최근 3개 -->
 	<select id="selectLastWait" parameterType="String" resultMap="ElectView">
 		SELECT ROWNUM, EA.* FROM(SELECT * FROM ELEC_VIEW WHERE ((MIDDLE = #{num} and MIDDLE_ACCEPT != 1) 
-		OR (LAST = #{num} AND MIDDLE_ACCEPT = 1)) ORDER BY REGISTER_DATE DESC) EA WHERE ROWNUM BETWEEN 1 AND 3
+		OR (LAST = #{num} AND MIDDLE_ACCEPT = 1 AND LAST_ACCEPT = 0)) ORDER BY REGISTER_DATE DESC) EA WHERE ROWNUM BETWEEN 1 AND 3
 	</select>
 	
+	<!-- 결재 수신문서 최근 3개 -->
+	<select id="selectLastRecive" parameterType="String" resultMap="ElectView">
+		SELECT ROWNUM, A.* FROM(SELECT * FROM ELEC_VIEW WHERE DRAFTER = #{num} OR MIDDLE = #{num}
+		 OR LAST = #{num} ORDER BY REGISTER_DATE DESC) A WHERE ROWNUM BETWEEN 1 AND 3
+	</select>
 	
 </mapper>

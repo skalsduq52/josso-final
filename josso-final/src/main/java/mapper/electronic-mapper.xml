@@ -41,4 +41,20 @@
 	<update id="middleReject" parameterType="String">
 		UPDATE ELECTRONIC_APPROVAL SET MIDDLE_ACCEPT = 2, MIDDLE_ACCEPT_DATE = SYSDATE WHERE DOCUMENT_NO = #{num}
 	</update>
+	
+	<!-- 최종결재자 승인 -->
+	<update id="lastAccept" parameterType="String">
+		UPDATE ELECTRONIC_APPROVAL SET LAST_ACCEPT = 1, LAST_ACCEPT_DATE = SYSDATE WHERE DOCUMENT_NO = #{num}
+	</update>
+	
+	<!-- 최종결재자 반려 -->
+	<update id="lastReject" parameterType="String">
+		UPDATE ELECTRONIC_APPROVAL SET LAST_ACCEPT = 2, LAST_ACCEPT_DATE = SYSDATE WHERE DOCUMENT_NO = #{num}
+	</update>
+	
+	<!-- 최종결재자 반려 -->
+	<update id="dateUpdate" parameterType="HashMap">
+		UPDATE EMPLOYEE SET EMPLOYEE_ANNUALLEAVE = EMPLOYEE_ANNUALLEAVE-#{num1} WHERE EMPLOYEE_NUMBER = #{emno} 
+	</update>
+	
 </mapper>
