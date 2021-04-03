@@ -102,26 +102,20 @@ public class EmailController{
 	// 보낸메일함 목록 보여주기
 	@RequestMapping(value = "email/send/list", method = RequestMethod.GET)
 	public ModelAndView sentList(ModelAndView modelAndView, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception{
-		
-//		System.out.println("2");
-//		
+
+		//		System.out.println("2");
 //		String field_ = request.getParameter("f");
 //		String search = request.getParameter("q");
 //		System.out.println(request.getParameter("f"));
 //		System.out.println(request.getParameter("q"));
-//		
 //		String field = "EMAIL_TITLE";
 //		if(field_ != null && !field_.equals("")) {
 //			field = field_;
 //		}
-//		
 //		String query = "";
 //		if(search != null && !search.equals("")) {
 //			query = search;
 //		}
-		
-		
-		
 		Employee employee = (Employee) session.getAttribute("employee");
 		String id = employee.getEmployeeEmail();
 		List<Email> sendList = emailService.SendList(id); // , String field, String query
