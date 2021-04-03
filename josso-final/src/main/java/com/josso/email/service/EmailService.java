@@ -11,8 +11,8 @@ public interface EmailService {
 	public List<com.josso.email.vo.Email> AcceptList(String id) throws Exception;
 
 	// 보낸메일함 - 리스트
-	public List<Email> SendList(String id) throws Exception;
-
+	public List<Email> SendList(String id) throws Exception; // , String field, String query
+	
 	// 휴지통 - 리스트
 	public List<Email> WastebasketList(String id) throws Exception;
 

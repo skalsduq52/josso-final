@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,13 +34,17 @@ public class EmailController{
 	// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@받은 메일함@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	// 받은메일함 목록 보여주기(완성)
 	@RequestMapping(value = "email/accept/list", method = RequestMethod.GET)
-	public ModelAndView acceptList(ModelAndView modelAndView, HttpSession session) throws Exception{
+	public ModelAndView acceptList(ModelAndView modelAndView, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception{
+		
+		
+		
 		Employee employee = (Employee) session.getAttribute("employee");
 		String id = employee.getEmployeeEmail();
 		List<Email> acceptList = emailService.AcceptList(id);
 		modelAndView.addObject("acceptList",acceptList);
 		modelAndView.setViewName("email/acceptList");
 		return modelAndView;
+		
 	}
 	
 	// 받은메일함 - 자세히보기 - 답장버튼 클릭(완성)
@@ -96,10 +101,30 @@ public class EmailController{
 	// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@보낸 메일함 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	// 보낸메일함 목록 보여주기
 	@RequestMapping(value = "email/send/list", method = RequestMethod.GET)
-	public ModelAndView sentList(ModelAndView modelAndView, HttpSession session) throws Exception{
+	public ModelAndView sentList(ModelAndView modelAndView, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception{
+		
+//		System.out.println("2");
+//		
+//		String field_ = request.getParameter("f");
+//		String search = request.getParameter("q");
+//		System.out.println(request.getParameter("f"));
+//		System.out.println(request.getParameter("q"));
+//		
+//		String field = "EMAIL_TITLE";
+//		if(field_ != null && !field_.equals("")) {
+//			field = field_;
+//		}
+//		
+//		String query = "";
+//		if(search != null && !search.equals("")) {
+//			query = search;
+//		}
+		
+		
+		
 		Employee employee = (Employee) session.getAttribute("employee");
 		String id = employee.getEmployeeEmail();
-		List<Email> sendList = emailService.SendList(id);
+		List<Email> sendList = emailService.SendList(id); // , String field, String query
 		modelAndView.addObject("sendList",sendList);
 		modelAndView.setViewName("email/sendList");
 		return modelAndView;

@@ -93,7 +93,7 @@ public class EmailDao {
 	}
 	
 	// 보낸메일함 메일목록
-	public List<Email> SendList(String id) throws Exception{
+	public List<Email> SendList(String id) throws Exception{ 	// , String field, String query
 		List<Email> sendList = sqlSession.selectList("Email.SendList", id);
 		return sendList;
 	}

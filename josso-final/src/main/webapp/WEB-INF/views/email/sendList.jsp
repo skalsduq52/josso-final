@@ -118,6 +118,17 @@
 					}
 				});
 			});
+			
+			$(function(){
+				$('.searchBtn').click(function(){
+					var f = $('.field option:selected').val();
+					console.log(f);
+					var q = $('.query').val();
+					console.log(q);
+					
+					location.href = '${pageContext.request.contextPath}/email/send/list?f='+f+'&q='+q;
+				})
+			});
         </script>
         <style>
         	.content_top h1{
@@ -181,14 +192,14 @@
                     <div class="col"><span>
                         <div class="input-group justify-content-right nav-search">
                             <div class="form-group-append">
-                                <select class="form-control" name="f">
-                                    <option value="글제목">글제목</option>
-                                    <option value="내용">내용</option>
+                                <select class="field form-control" id="f" name="f">
+                                    <option ${(param.f == "B_TITLE")?"selected":""} value="TITLE">글제목</option>
+									<option ${(param.f == "B_WRITER")?"selected":""} value="WRITER">작성자</option>
                                 </select>
                             </div>
-                            <input type="text" class="form-control" placeholder="Search" name="q" value="">
+                            <input type="text" class="query form-control" placeholder="Search" id="q" name="q" value="">
                             <div class="input-group-append">
-                                <button class="btn btn-success" type="submit">검색</button>
+                                <input class="searchBtn btn btn-success" type="button">검색</input>
                             </div>
                         </div>
                     </span></div>

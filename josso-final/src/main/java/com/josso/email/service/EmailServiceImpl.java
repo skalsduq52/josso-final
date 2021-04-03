@@ -23,8 +23,8 @@ public class EmailServiceImpl implements EmailService{
 	}
 	
 	// 보낸메일함 - 리스트
-	public List<Email> SendList(String id) throws Exception{
-		List<Email> sendList = emailDao.SendList(id);
+	public List<Email> SendList(String id) throws Exception{ // , String field, String query
+		List<Email> sendList = emailDao.SendList(id); 		// , field, query
 		return sendList;
 	}
 	
