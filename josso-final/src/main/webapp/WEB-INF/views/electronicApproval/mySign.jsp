@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,18 +47,10 @@
 	</nav>
 
 	<main>
-		<div
-			style="margin-left: 95%; padding-top: 10px; padding-bottom: 10px;">
-			<select>
-				<option value="10">10</option>
-				<option value="20">20</option>
-				<option value="30">30</option>
-			</select>
-		</div>
 		<div class="border-bottom">
 			<table style="width: 100%; min-width: 1000px;" id="board">
 				<thead>
-					<tr class="border-top border-bottom" style="height: 40px;">
+					<tr class="border-bottom" style="height: 40px;">
 						<th style="padding-left: 40px; width: 15%;">기안일</th>
 						<th style="width: 20%">결재양식</th>
 						<th style="width: 35%">제목</th>
@@ -65,13 +59,25 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td id="tdnum">2021-03-17</td>
-						<td>휴가신청서</td>
-						<td>휴가신청의 건</td>
-						<td>나민엽/사원/인사</td>
-						<td>대기중</td>
-					</tr>
+                    <c:forEach var="elist" items="${myList}">
+                        <tr>
+                        	<td id="tdnum"><fmt:formatDate value="${elist.registerDate}" pattern="yyyy-MM-dd"/></td>
+                            <c:if test="${elist.documentForm == 'F1'}">
+                            	<td>휴가신청서</td>
+                            </c:if>	
+                            <td><a href="/josso/elecApproval/signdetail?num=${elist.documentNo}">${elist.documentName}</a></td>
+                            <td>${elist.employeeName}/${elist.departmentCode}/${elist.rankCode}</td>
+                            <c:if test="${elist.middleAccept == 2 || elist.lastAccept == 2}">
+								<td>반려</td>
+							</c:if>
+							<c:if test="${elist.middleAccept == 1 && elist.lastAccept == 1}">
+								<td>완료</td>
+							</c:if>
+							<c:if test="${elist.middleAccept == 0 || (elist.middleAccept == 1 && elist.lastAccept == 0)}">
+								<td>진행중</td>
+							</c:if>
+                        </tr>
+                    </c:forEach> 
 				</tbody>
 			</table>
 		</div>

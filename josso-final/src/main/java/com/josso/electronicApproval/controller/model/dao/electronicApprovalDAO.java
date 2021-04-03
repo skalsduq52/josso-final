@@ -44,9 +44,21 @@ public class electronicApprovalDAO {
 		return ml;
 	}
 	
+	// 내가 기안한 문서 리스트
+	public List<ElectView> selectMySign(String empNo) throws Exception {
+		List<ElectView> ev = sqlSession.selectList("ElectView.selectMySign", empNo);
+		return ev;
+	}
+	
 	// 결재 대기중 문서 최근 3개
 	public List<ElectView> selectLastWait(String empNo) throws Exception {
 		List<ElectView> ev = sqlSession.selectList("ElectView.selectLastWait", empNo);
+		return ev;
+	}
+	
+	// 결재 대기중 문서 리스트
+	public List<ElectView> selectWaitSign(String empNo) throws Exception {
+		List<ElectView> ev = sqlSession.selectList("ElectView.selectWaitSign", empNo);
 		return ev;
 	}
 	

@@ -69,7 +69,7 @@
 								</c:if>
 								<td><a href="elecApproval/signdetail?num=${waitlist.documentNo}">${waitlist.documentName}</a></td>
 								<td>${waitlist.employeeName}/${waitlist.rankCode}/${waitlist.departmentCode}</td>
-								<c:if test="${waitlist.lastAccept == 0}">
+								<c:if test="${waitlist.middleAccept == 0 || (waitlist.middleAccept == 1 && waitlist.lastAccept == 0)}">
 									<td>진행중</td>
 								</c:if>
 							</tr>
@@ -79,7 +79,7 @@
 					<tr>
 						<th colspan="5" id="tdnum"  style="text-align: center;height:200px;">결재 대기중인 문서가 없습니다.</th>
 					</tr>
-				</c:if>
+					</c:if>
 				</tbody>
 			</table>
 			<h4

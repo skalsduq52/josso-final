@@ -44,23 +44,31 @@ public class ElectronicController {
 		return mv;
 	}
 	
+	// 결재 대기문서 눌렀을 때
 	@RequestMapping(value="elecApproval/waiting", method=RequestMethod.GET)
-	public ModelAndView approvalWaiting() {
-		ModelAndView mv = new ModelAndView();
+	public ModelAndView approvalWaiting(ModelAndView mv, HttpSession session) throws Exception {
+		Employee emp = (Employee) session.getAttribute("employee");
+		String empNo = emp.getEmployeeNumber();
+		List<ElectView> elist = ed.selectWaitSign(empNo);
+		mv.addObject("waitList",elist);
 		mv.setViewName("/electronicApproval/waitingSign");
 		return mv;
 	}
 	
 	@RequestMapping(value="elecApproval/reception", method=RequestMethod.GET)
-	public ModelAndView approvalRecept() {
+	public ModelAndView approvalRecept() throws Exception {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/electronicApproval/receptionSign");
 		return mv;
 	}
 	
+	// 내가 기안한 문서 눌렀을 때
 	@RequestMapping(value="elecApproval/my", method=RequestMethod.GET)
-	public ModelAndView approvalMy() {
-		ModelAndView mv = new ModelAndView();
+	public ModelAndView approvalMy(ModelAndView mv, HttpSession session) throws Exception {
+		Employee emp = (Employee) session.getAttribute("employee");
+		String empNo = emp.getEmployeeNumber();
+		List<ElectView> elist = ed.selectMySign(empNo);
+		mv.addObject("myList",elist);
 		mv.setViewName("/electronicApproval/mySign");
 		return mv;
 	}
@@ -71,7 +79,7 @@ public class ElectronicController {
 										@RequestParam(name = "middlenum") String middleNum,
 										@RequestParam(name = "last") String last,
 										@RequestParam(name = "lastname") String lastName,
-										@RequestParam(name = "lastnum") String lastNum, HttpSession session){
+										@RequestParam(name = "lastnum") String lastNum, HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		Employee emp = (Employee) session.getAttribute("employee");
 		Date date = new Date(System.currentTimeMillis());
