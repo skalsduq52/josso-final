@@ -93,9 +93,6 @@ public class ElectronicController {
 	public void approvalSearch(Employee emp, HttpServletResponse response) throws Exception {
 		System.out.println(emp.getEmployeeName());
 		List<Employee> empList = ed.selectEmpAll(emp);
-		if(empList.size()==0) {
-			System.out.println("없는 사람");
-		}else {
 			// 전송용 최종 json 객체
 			 JSONObject sendJson = new JSONObject();
 			 // JSONArray 객체를 생성하여 JSONObject 객체를 하나씩 담는다
@@ -117,7 +114,6 @@ public class ElectronicController {
 			 out.println(sendJson.toJSONString());
 			 out.flush();
 			 out.close();
-		}
 	}
 	
 	@RequestMapping(value="elecApproval/insert", method=RequestMethod.POST)

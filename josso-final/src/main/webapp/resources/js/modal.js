@@ -74,10 +74,7 @@ $(function() {
 								var trObj = document.createElement('tr');
 								var board = document.getElementById('droppObj');
 								trObj.innerHTML = data;
-								console
-										.log(board.lastElementChild.lastElementChild);
-								board.lastElementChild.lastElementChild
-										.append(trObj);
+								board.lastElementChild.lastElementChild.append(trObj);
 								e.preventDefault();
 							} else {
 								var data = e.originalEvent.dataTransfer
@@ -146,66 +143,69 @@ $(function() {
     });
 	
 	$('#modal_submit').click(function(){
-        if($('#drop1 tr').length != 2 || $('#drop2 tr').length != 2){
-            alert('결재정보를 확인해주세요!');
-        }else{
-        	var middle = $('#drop1').children().children().next().children().next().html();
-            var middlename = $('#drop1').children().children().next().children().next().next().text();
-            var middlenum = $('#drop1').children().children().next().children().next().next().next().val();
-            var last = $('#drop2').children().children().next().children().next().html();
-            var lastname = $('#drop2').children().children().next().children().next().next().text();
-            var lastnum = $('#drop2').children().children().next().children().next().next().next().val();
-            
-            var newForm = document.createElement('form');
-            newForm.setAttribute('charset', 'UTF-8');
-            newForm.name = 'newForm';
-            newForm.method = 'post';
-            newForm.action = '/josso/elecApproval/signing';
-            newForm.name = 'newForm';
-            
-            var input1 = document.createElement('input');
-            var input2 = document.createElement('input');
-            var input3 = document.createElement('input');
-            var input4 = document.createElement('input');
-            var input5 = document.createElement('input');
-            var input6 = document.createElement('input');
-            
-            input1.setAttribute("type","hidden");
-            input1.setAttribute("name","middle");
-            input1.setAttribute("value",middle);
-            input2.setAttribute("type","hidden");
-            input2.setAttribute("name","middlename");
-            input2.setAttribute("value",middlename);
-            input3.setAttribute("type","hidden");
-            input3.setAttribute("name","last");
-            input3.setAttribute("value",last);
-            input4.setAttribute("type","hidden");
-            input4.setAttribute("name","lastname");
-            input4.setAttribute("value",lastname);
-            input5.setAttribute("type","hidden");
-            input5.setAttribute("name","middlenum");
-            input5.setAttribute("value",middlenum);
-            input6.setAttribute("type","hidden");
-            input6.setAttribute("name","lastnum");
-            input6.setAttribute("value",lastnum);
-            
-            
-            newForm.appendChild(input1);
-            newForm.appendChild(input2);
-            newForm.appendChild(input3);
-            newForm.appendChild(input4);
-            newForm.appendChild(input5);
-            newForm.appendChild(input6);
-            
-            document.body.appendChild(newForm);
-            newForm.submit();
-        	
-        }
+		if($('#document_name').text() == ''){
+			alert('문서양식을 선택해주세요!');
+		}else{
+	        if($('#drop1 tr').length != 2 || $('#drop2 tr').length != 2){
+	            alert('결재정보를 확인해주세요!');
+		        }else{
+		        	var middle = $('#drop1').children().children().next().children().next().html();
+		            var middlename = $('#drop1').children().children().next().children().next().next().text();
+		            var middlenum = $('#drop1').children().children().next().children().next().next().next().val();
+		            var last = $('#drop2').children().children().next().children().next().html();
+		            var lastname = $('#drop2').children().children().next().children().next().next().text();
+		            var lastnum = $('#drop2').children().children().next().children().next().next().next().val();
+		            
+		            var newForm = document.createElement('form');
+		            newForm.setAttribute('charset', 'UTF-8');
+		            newForm.name = 'newForm';
+		            newForm.method = 'post';
+		            newForm.action = '/josso/elecApproval/signing';
+		            newForm.name = 'newForm';
+		            
+		            var input1 = document.createElement('input');
+		            var input2 = document.createElement('input');
+		            var input3 = document.createElement('input');
+		            var input4 = document.createElement('input');
+		            var input5 = document.createElement('input');
+		            var input6 = document.createElement('input');
+		            
+		            input1.setAttribute("type","hidden");
+		            input1.setAttribute("name","middle");
+		            input1.setAttribute("value",middle);
+		            input2.setAttribute("type","hidden");
+		            input2.setAttribute("name","middlename");
+		            input2.setAttribute("value",middlename);
+		            input3.setAttribute("type","hidden");
+		            input3.setAttribute("name","last");
+		            input3.setAttribute("value",last);
+		            input4.setAttribute("type","hidden");
+		            input4.setAttribute("name","lastname");
+		            input4.setAttribute("value",lastname);
+		            input5.setAttribute("type","hidden");
+		            input5.setAttribute("name","middlenum");
+		            input5.setAttribute("value",middlenum);
+		            input6.setAttribute("type","hidden");
+		            input6.setAttribute("name","lastnum");
+		            input6.setAttribute("value",lastnum);
+		            
+		            
+		            newForm.appendChild(input1);
+		            newForm.appendChild(input2);
+		            newForm.appendChild(input3);
+		            newForm.appendChild(input4);
+		            newForm.appendChild(input5);
+		            newForm.appendChild(input6);
+		            
+		            document.body.appendChild(newForm);
+		            newForm.submit();
+		        	
+	        }
+		}
       });
 	
 	$('#searchName').keyup(function() {
 		var middlename = $('#drop1').children().children().next().children().next().next().next().html();
-		console.log(middlename);
 		var name = $('#searchName').val();
 		$.ajax({
 			url : "/josso/elecApproval/serachName",
@@ -217,13 +217,17 @@ $(function() {
 				var data = JSON.parse(listStr);
 				$('#droppObj3').html('');
 				var area = $('#droppObj3').html();
-				for(var i in data.list){
-					area +="<tr class='dataRoww' draggable='true'>"
-						+"<td>"+data.list[i].dCode+"</td>"
-						+"<td>"+data.list[i].rCode+"</td>"
-						+"<td>"+data.list[i].name+"</td>"
-						+"<input type='hidden' name='employeeNumber' value='"+data.list[i].empNo+"'></tr>" 
-				}
+				if(data.list.length == 0){
+					area += "<tr><td colspan ='3' align='center'>검색하신 결과가 없습니다.</td></tr>"
+					}else{
+						for(var i in data.list){
+							area +="<tr class='dataRoww' draggable='true'>"
+								+"<td>"+data.list[i].dCode+"</td>"
+								+"<td>"+data.list[i].rCode+"</td>"
+								+"<td>"+data.list[i].name+"</td>"
+								+"<input type='hidden' name='employeeNumber' value='"+data.list[i].empNo+"'></tr>";
+						}
+					}
 				$('#droppObj3').html(area);
 			}
 		});	
