@@ -22,7 +22,7 @@
          <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
          <!-- Latest compiled JavaScript -->
          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        <script>
+         <script>
             $(function(){
                 $('.side_title').click(function(){
                     // $('.hover_tag').slideToggle("slow,linear,callback");
@@ -91,40 +91,68 @@
 					});
 				});
 			});
+			
 			$(function(){
-				$('#acceptWastebasket').click(function(){
-				    // 사용자 ID를 갖고 온다.
-				    var userNum = $("#employeeNumber").val();
-				    console.log(userNum);
-				    // name이 같은 체크박스의 값들을 배열에 담는다.
-				    var checkboxValues = [];
-				    $("input[name='check']:checked").each(function(i) {
-				        checkboxValues.push($(this).val());
-				    });
-				     console.log(checkboxValues);
-				    // 사용자 ID(문자열)와 체크박스 값들(배열)을 name/value 형태로 담는다.
-				    $.ajax({
-				        url:"email/accept/ckWastebasket",
-				        type:'GET',
-				        data: {"userNum": userNum, "checkArray": checkboxValues},
-
-
-				      //데이터 전송이 완료되면 출력되는 메시지
-
-				        success:function(data){
-				            alert("완료!");
-				        },
-
-				       //에러가 발생되면 출력되는 메시지
-
-				        error:function(jqXHR, textStatus, errorThrown){
-				            alert("에러 발생~~ \n" + textStatus + " : " + errorThrown);
-				            self.close();
-				        }
-				    });
+				$('.reBtn').click(function(){
+					var check = Array();
+					var emailNumber = $('.check');
+					var date = 0;
+					for(i=0 ; i<emailNumber.length ; i++){
+						 if(emailNumber[i].checked == true){
+							 check[date] = emailNumber[i].value;
+							date++;
+						}
+					}
+					console.log(check.length);
+					if(check.length == 0){
+						alert("원하는 메일을 체크해주세요.");
+					}else if( check.length > 1){
+						alert("1개의 메일만 선택해주세요.");
+						retunr;
+					}else {
+						location.href = '${pageContext.request.contextPath}/email/accept/reply?num='+check;
+					}
 				});
 			});
 			
+			$(function(){
+				$('.deliBtn').click(function(){
+					var check = Array();
+					var emailNumber = $('.check');
+					var date = 0;
+					for(i=0 ; i<emailNumber.length ; i++){
+						 if(emailNumber[i].checked == true){
+							 check[date] = emailNumber[i].value;
+							date++;
+						}
+					}
+					console.log(check.length);
+					if(check.length == 0){
+						alert("원하는 메일을 체크해주세요.");
+					}else if( check.length > 1){
+						alert("1개의 메일만 선택해주세요.");
+						false;
+					}else {
+						location.href = '${pageContext.request.contextPath}/email/accept/delivery?num='+check;
+					}
+				});
+			});
+			
+			$(function(){
+				$('.readBtn').click(function(){
+					var check = Array();
+					var emailNumber = $('.check');
+					var date = 0;
+					for(i=0 ; i<emailNumber.length ; i++){
+						 if(emailNumber[i].checked == true){
+							 check[date] = emailNumber[i].value;
+							date++;
+						}
+					}
+					console.log(check.length);
+					location.href = '${pageContext.request.contextPath}/email/accept/ckRead?num='+check;
+				});
+			});
 
 			
 			
@@ -140,13 +168,16 @@
 			    margin: -15px 0px 0px 8px;
 			}
 			a:hover { color: blue; text-decoration: none;}
+			
+			.send-list-content a:hover { color: blue; text-decoration: underline;}
+			 
         </style>
-        <style type="text/css">
+        <!-- <style type="text/css">
 			 .send-list-content a:link { color: blue; text-decoration: none;}
 			 .send-list-content a:visited { color: black; text-decoration: none;}
 			 .send-list-content a:hover { color: blue; text-decoration: underline;}
 			 
-		</style>	
+		</style>	 -->
     </head>
     <body class="body">
     
@@ -192,15 +223,9 @@
                 <form action="${pageContext.request.contextPath}/email/accept/ckWastebasket" method="get">
                 <div class="row">
                     <div class="col nav-menu">
-                        <a href="${pageContext.request.contextPath}/email/accept/reply"><input type="submit" class="btn btn-outline-info float-left" value="답장"></a>
-                        
-                       			<c:if test="${acceptDetail.emailRead eq 'NO'}">
-		                        	<a href="${pageContext.request.contextPath}/email/accept/read?num=${acceptDetail.emailNumber}"><input type="submit" class="btn btn-outline-info float-left" value="읽음"></a>
-		                        </c:if>
-		                        <c:if test="${acceptDetail.emailRead eq 'YES'}">
-		                        	<a href="${pageContext.request.contextPath}/email/accept/read?num=${acceptDetail.emailNumber}"><input type="submit" class="btn btn-outline-info float-left" value="안읽음"></a>
-		                        </c:if>
-                        <a href="${pageContext.request.contextPath}/email/accept/delivery"><input type="submit" class="btn btn-outline-info float-left" value="전달"></a> 
+                        <input type="button" class="reBtn btn btn-outline-info float-left" value="답장">
+		                <input type="button" class="readBtn btn btn-outline-info float-left" value="읽음">
+                        <input type="button" class="deliBtn btn btn-outline-info float-left" value="전달"> 
                         <input type="submit" class="btn btn-outline-info float-left" value="휴지통">
                     </div>
                     <div class="col"></div>
@@ -232,9 +257,16 @@
 								<tr>
 	                                <td><input type="checkbox" class="check" name="check" value="${n.emailNumber}"></td>
 	                                <td>${n.employeeName}/${n.rankCode}/${n.departmentCode}</td>
-	                                <td class="send-list-content"><a href="${pageContext.request.contextPath}/email/accept/detail?num=${n.emailNumber}">${n.emailTitle}</a></td>
+	                            <c:set var="read" value="${n.emailRead}"/>
+								
+								<c:if test="${read eq 'YES'}">	                                
+	                                <td class="send-list-content"><a style="color:black;" href="${pageContext.request.contextPath}/email/accept/detail?num=${n.emailNumber}">${n.emailTitle}</a></td>
+	                            </c:if>
+	                            <c:if test="${read eq 'NO'}">
+	                            	<td class="send-list-content"><a style="font-weight:bold; font-size:15px;" href="${pageContext.request.contextPath}/email/accept/detail?num=${n.emailNumber}">${n.emailTitle}</a></td>
+	                            </c:if>
+	                            
 	                                <td><fmt:formatDate value="${n.regDate}" pattern="yyyy년 MM월 dd일 hh시 mm분 ss초"></fmt:formatDate></td>
-	                                
 	                            </tr>
 							</c:forEach>
                         </tbody>
@@ -258,21 +290,6 @@
 
 
             </ul>
-            <div>
-			  <ul>
-			    <c:if test="${pageMaker.prev}">
-			    	<li><a href="${pageContext.request.contextPath}/page${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
-			    </c:if> 
-			
-			    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
-			    	<li><a href="${pageContext.request.contextPath}/page${pageMaker.makeQuery(idx)}?id=${employee.employeeEmail}">${idx}</a></li>
-			    </c:forEach>
-			
-			    <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-			    	<li><a href="${pageContext.request.contextPath}/page${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
-			    </c:if>
-			  </ul>
-			</div>
             
 			
 			

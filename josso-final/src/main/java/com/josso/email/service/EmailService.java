@@ -64,15 +64,14 @@ public interface EmailService {
 	// 휴지통 - 자세히보기 - 삭제버튼 클릭
 	public int WastebasketDelete(int num) throws Exception;
 	
-	// 이메일 *페이징* 목록 조회
-//	public List<Email> list(Criteria cri) throws Exception;
-	
 	// 게시물 총 갯수
 	public int listCount() throws Exception;
 	
 	// 검색기능
 	public List<Email> EmailSearch(String word) throws Exception;
 	
+	// 리스트 - 제목클릭 - 읽음 자동처리
+	public int AutoRead(int num) throws Exception;
 	
 	
 }

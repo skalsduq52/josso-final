@@ -90,6 +90,11 @@
 		UPDATE EMAIL SET EMAIL_POSITION = DECODE(email_position,'ALL','SEND','EMPTY') WHERE EMAIL_NUMBER = #{num}
 	</update>
 	
+	<!-- 리스트 - 제목 클릭 - 자동 읽음처리 -->
+	<update id="autoRead" parameterType="Email">
+		UPDATE EMAIL SET EMAIL_READ = 'YES' WHERE EMAIL_NUMBER = #{num}
+	</update>
+	
 	<!-- 페이징 ListPage -->
 	<!-- <select id="ListPage" resultType="Email" parameterType="com.mvcproject.email.vo.Criteria">
 		SELECT EMAIL_NUMBER, 

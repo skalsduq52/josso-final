@@ -128,22 +128,12 @@ public class EmailDao {
 		return cnt;
 	}
 	
-	// 자세히보기(제목클릭) 할 경우 자동 읽음처리
-//	public int AutoRead(int num)throws Exception{
-//		int cnt = sqlSession.update("Email.AutoRead", num);
-//		return cnt;
-//	}
-	
 	// 새메일쓰기 보내기 버튼
 	public int WriteSend(Email email) throws Exception{
 		int writeSend = sqlSession.insert("Email.WriteSend", email);
 		return writeSend;
 	}
 	
-//	// 이메일 *페이징* 목록 조회
-//	public List<Email> list(Criteria cri) throws Exception{
-//		return sqlSession.selectList("Email.ListPage", cri);
-//	}
 	// 게시물 총 갯수
 	public int listCount() throws Exception{
 		return sqlSession.selectOne("Email.ListCount");
@@ -151,9 +141,13 @@ public class EmailDao {
 	
 	// 검색 기능
 	public List<Email> EmailSearch(String word) throws Exception{
-		System.out.println("다오"+word);
 		List<Email> emailSearch = sqlSession.selectList("Email.EmailSearch", word);
 		return emailSearch;
+	}
+	
+	// 리스트 - 제목클릭 - 자동읽음 처리
+	public int AutoRead(int num) throws Exception{
+		return sqlSession.update("Email.autoRead", num);
 		
 	}
 }

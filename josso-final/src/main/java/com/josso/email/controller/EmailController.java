@@ -42,13 +42,6 @@ public class EmailController{
 		return modelAndView;
 	}
 	
-	// 받은메일함 - 체크 - 읽음
-	@RequestMapping(value ="email/accept/ckRead", method = RequestMethod.GET)
-	@ResponseBody
-	public void acceptCkRead(@RequestParam(value = "valueArrTest[]") List<Email> valueArr) throws Exception{
-		System.out.println(valueArr);
-	}
-
 	// 받은메일함 - 자세히보기 - 답장버튼 클릭(완성)
 	@RequestMapping(value = "email/accept/reply", method = RequestMethod.GET)
 	public ModelAndView acceptReply(int num, ModelAndView modelAndView) throws Exception{
@@ -93,9 +86,10 @@ public class EmailController{
 	// 받은메일함 - 읽음/안읽음 버튼 클릭
 	@RequestMapping(value = "email/accept/read", method = RequestMethod.GET)
 	public ModelAndView acceptRead(int num, ModelAndView modelAndView) throws Exception{
+		System.out.println(num);
 		int acceptRead = emailService.AcceptRead(num);
 		modelAndView.addObject("acceptRead",acceptRead);
-		modelAndView.setViewName("redirect:/email/accept/detail");
+		modelAndView.setViewName("redirect:/email/accept/list");
 		return modelAndView;
 	}
 	
@@ -111,9 +105,20 @@ public class EmailController{
 		return modelAndView;
 	}
 	
+	// 받은메일함 - 읽음/안읽음 버튼 클릭
+	@RequestMapping(value = "email/send/read", method = RequestMethod.GET)
+	public ModelAndView sendRead(int num, ModelAndView modelAndView) throws Exception{
+		System.out.println(num);
+		int sendRead = emailService.AcceptRead(num);
+		modelAndView.addObject("sendRead",sendRead);
+		modelAndView.setViewName("redirect:/email/send/list");
+		return modelAndView;
+	}
+	
 	// 받은메일함 - 자세히보기(완성)
 		@RequestMapping(value = "email/accept/detail", method = RequestMethod.GET)
 		public ModelAndView acceptDetail(int num, ModelAndView modelAndView, HttpSession session) throws Exception{
+			emailService.AutoRead(num);
 			Email acceptDetail = emailService.AcceptDetail(num);
 			Email er = emailService.Er(num);	// 참조자 정보
 			Email es = emailService.Es(num);	// 보낸사람 정보
@@ -130,6 +135,7 @@ public class EmailController{
 	// 보낸메일함 - 자세히보기(완성)
 	@RequestMapping(value = "email/send/detail", method = RequestMethod.GET)
 	public ModelAndView sendDetail(int num, ModelAndView modelAndView) throws Exception{
+		emailService.AutoRead(num);
 		Email sendDetail = emailService.AcceptDetail(num);
 		Email er = emailService.Er(num);	// 참조자 정보
 		Email es = emailService.Es(num);	// 보낸사람 정보
@@ -240,6 +246,17 @@ public class EmailController{
 		return modelAndView;
 	}
 	
+	// 받은메일함 리스트 - 체크박스 - 읽음버튼
+	@RequestMapping(value = "email/accept/ckRead", method = RequestMethod.GET)
+	public ModelAndView acceptCkRead(int num[], ModelAndView modelAndView) throws Exception{ 
+		for(int i=0; i<num.length;i++) {
+			System.out.println(num[i]);
+			emailService.AcceptRead(num[i]);
+		}
+		modelAndView.setViewName("redirect:/email/accept/list");
+		return modelAndView;
+	}
+	
 	// 보낸메일함 리스트 - 체크박스 - 삭제
 	@RequestMapping(value = "email/send/ckWastebasket", method = RequestMethod.GET)
 	public ModelAndView sendCkWastebasket(int check[], ModelAndView modelAndView) throws Exception{ 
@@ -270,19 +287,6 @@ public class EmailController{
 		modelAndView.setViewName("redirect:/email/wastebasket/list");
 		return modelAndView;
 	}
-	
-	
-
-	// 검색기능
-//	@RequestMapping(value = "email/search", method = RequestMethod.GET)
-//	public ModelAndView EmailSearch(String word, ModelAndView modelAndView) throws Exception{
-//		System.out.println("컨트롤러"+word);
-//		List<Email> emailSearch = emailService.EmailSearch(word);
-//		System.out.println(emailSearch);
-//		modelAndView.addObject("emailSearch",emailSearch);
-//		modelAndView.setViewName("final/acceptList");
-//		return modelAndView;
-//	}
 
 	@RequestMapping(value = "email/search", method = RequestMethod.GET)
 	public ModelAndView EmailSearch(String word, ModelAndView modelAndView) throws Exception{
@@ -297,28 +301,6 @@ public class EmailController{
 		return modelAndView;
 	}
 
-	// 게시판 페이지 목록 조회
-//	@RequestMapping(value = "page", method = RequestMethod.GET)
-//	public String list(Model model, Criteria cri) throws Exception{
-//		System.out.println(model);
-//		System.out.println(cri);
-//		model.addAttribute("page", emailService.list(cri));
-//		PageMaker pageMaker = new PageMaker();
-//		pageMaker.setCri(cri);
-//		pageMaker.setTotalCount(emailService.listCount());
-//		model.addAttribute("pageMaker", pageMaker);
-//		return "final/acceptList";
-//	}
-	
-//	@RequestMapping(value="page", method = RequestMethod.GET)
-//	public String list(Criteria cri, ModelAndView modelAndView) throws Exception{
-//		((Model) modelAndView).addAttribute("page", emailService.AcceptList(cri));
-//		PageMaker pageMaker = new PageMaker();
-//		pageMaker.setCri(cri);
-//		pageMaker.setTotalCount(emailService.listCount());
-//		((Model) modelAndView).addAttribute("pageMaker", pageMaker);
-//		return "final/acceptList";
-//	}
 	
 	
 	

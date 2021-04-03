@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+	   		<style type="text/css">
+				 .abc { color: black;}
+			</style>
 			<div>
                 <section>
                     <div class="title">
@@ -9,7 +12,7 @@
                 </section>
                 <section>
                     <div class="title_button">
-                        <button type="button" class="btn btn-info btn-sm btn-block"><a href="${pageContext.request.contextPath}/email/write/open"> 메일쓰기</a></button>
+                        <a href="${pageContext.request.contextPath}/email/write/open"><button type="button" class="btn btn-info btn-sm btn-block"> 메일쓰기</button></a>
                     </div>
                 </section>
                 <section>
@@ -18,7 +21,7 @@
                         <span class="hover_icon">
                             <i class="fas fa-sort-down fa-rotate-270" style="color:gray"></i>
                         </span>
-                        <span class="hover_title">내 메일함</span>
+                        <span style="font-weight:bold; class="abc hover_title">내 메일함</span>
                         <span class="write_img">
                             <img src="${pageContext.request.contextPath}/resources/images/글쓰기(연필).png">
                         </span>
@@ -27,18 +30,18 @@
                         <ul class="hover_tag">
                             <li>
                                 <div class="form-check form-check-inline">
-                                    <label class="form-check-label" for="inlineCheckbox1"><a href="${pageContext.request.contextPath}/email/accept/list">받은 메일함</a></label>
+                                    <label class="form-check-label" for="inlineCheckbox1"><a class="abc" href="${pageContext.request.contextPath}/email/accept/list">받은 메일함</a></label>
                                 </div>
                             </li>
                             <li>
                                 <div class="form-check form-check-inline">
-                                    <label class="form-check-label" for="inlineCheckbox1"><a href="${pageContext.request.contextPath}/email/send/list"> 보낸 메일함</a></label>
+                                    <label class="form-check-label" for="inlineCheckbox1"><a class="abc" href="${pageContext.request.contextPath}/email/send/list"> 보낸 메일함</a></label>
                                 </div>
                             </li>
                             <li>
                                 <div class="form-check form-check-inline">
-                                    
-                                    <label class="form-check-label" for="inlineCheckbox1"><a href="${pageContext.request.contextPath}/email/wastebasket/list"> 휴지통</a></label>
+                                           
+                                    <label class="form-check-label" for="inlineCheckbox1"><a class="abc" href="${pageContext.request.contextPath}/email/wastebasket/list"> 휴지통</a></label>
                                 </div>
                             </li>
                         </ul>

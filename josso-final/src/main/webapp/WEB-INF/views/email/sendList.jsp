@@ -6,7 +6,6 @@
 <html>
     <head>
     <link rel="stylesheet" type="text/css"  href="${pageContext.request.contextPath}/resources/css/common.css"></link>
-        <link rel="stylesheet" href="../team01/common.css" type="text/css">
         <title>josso</title>
         <!-- 외부 글꼴 적용 시 링크 -->
         <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -96,6 +95,29 @@
 					});
 				});
 			});
+			
+			$(function(){
+				$('.deliBtn').click(function(){
+					var check = Array();
+					var emailNumber = $('.check');
+					var date = 0;
+					for(i=0 ; i<emailNumber.length ; i++){
+						 if(emailNumber[i].checked == true){
+							 check[date] = emailNumber[i].value;
+							date++;
+						}
+					}
+					console.log(check.length);
+					if(check.length == 0){
+						alert("원하는 메일을 체크해주세요.");
+					}else if( check.length > 1){
+						alert("1개의 메일만 선택해주세요.");
+						false;
+					}else {
+						location.href = '${pageContext.request.contextPath}/email/send/delivery?num='+check;
+					}
+				});
+			});
         </script>
         <style>
         	.content_top h1{
@@ -121,8 +143,6 @@
 			a:hover { color: blue; text-decoration: none;}
         </style>
         <style type="text/css">
-			 .send-list-content a:link { color: blue; text-decoration: none;}
-			 .send-list-content a:visited { color: black; text-decoration: none;}
 			 .send-list-content a:hover { color: blue; text-decoration: underline;}
 		</style>
     </head>
@@ -173,7 +193,7 @@
                 <form action="${pageContext.request.contextPath}/email/send/ckWastebasket" method="get">
                 <div class="row">
                     <div class="col nav-menu">
-                        <a href="${pageContext.request.contextPath}/email/send/delivery"><input type="submit" class="btn btn-outline-info float-left" value="전달"></a> 
+                        <input type="button" class="deliBtn btn btn-outline-info float-left" value="전달"> 
                         <input type="submit" class="btn btn-outline-info float-left" value="삭제">
                     </div>
                     <div class="col"></div>
@@ -205,7 +225,19 @@
 								<tr>
 	                                <td><input type="checkbox" class="check" name="check" value="${n.emailNumber}"></td>
 	                                <td>${n.employeeName}/${n.rankCode}/${n.departmentCode}</td>
-	                                <td class="send-list-content"><a href="${pageContext.request.contextPath}/email/send/detail?num=${n.emailNumber}">${n.emailTitle}</a></td>
+	                                
+	                                <c:set var="read" value="${n.emailRead}"/>
+								
+									<c:if test="${read eq 'YES'}">	                                
+		                                <td class="send-list-content"><a style="color:black;" href="${pageContext.request.contextPath}/email/send/detail?num=${n.emailNumber}">${n.emailTitle}</a></td>
+		                            </c:if>
+		                            <c:if test="${read eq 'NO'}">
+		                            	<td class="send-list-content"><a style="font-weight:bold; font-size:15px;" href="${pageContext.request.contextPath}/email/send/detail?num=${n.emailNumber}">${n.emailTitle}</a></td>
+		                            </c:if>
+	                                
+	                                
+	                                
+	                                
 	                                <td><fmt:formatDate value="${n.regDate}" pattern="yyyy년 MM월 dd일 hh시 mm분 ss초"></fmt:formatDate></td>
 	                            </tr>
 							</c:forEach>

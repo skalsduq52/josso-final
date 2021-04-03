@@ -141,10 +141,10 @@
 			    margin: -15px 0px 0px 8px;
 			}
         	 a:hover { color: blue; text-decoration: none;}
+        	 
+        	 
         </style>
         <style type="text/css">
-
-        
 			 .send-list-content a:link { color: blue; text-decoration: none;}
 			 .send-list-content a:visited { color: black; text-decoration: none;}
 			 .send-list-content a:hover { color: blue; text-decoration: underline;}
@@ -229,7 +229,7 @@
 								<tr>
 	                                <td><input type="checkbox" class="check" name="check" value="${n.emailNumber}"></td>
 	                                <td>${n.employeeName}/${n.rankCode}/${n.departmentCode}</td>
-	                                <td class="send-list-content"><a href="${pageContext.request.contextPath}/email/wastebasket/detail?num=${n.emailNumber}">${n.emailTitle}</a></td>
+		                                <td class="send-list-content"><a style="color:black;" href="${pageContext.request.contextPath}/email/wastebasket/detail?num=${n.emailNumber}">${n.emailTitle}</a></td>
 	                                <td><fmt:formatDate value="${n.regDate}" pattern="yyyy년 MM월 dd일 hh시 mm분 ss초"></fmt:formatDate></td>
 	                            </tr>
 							</c:forEach>
