@@ -143,6 +143,9 @@
 			a:hover { color: blue; text-decoration: none;}
         </style>
         <style type="text/css">
+	        tbody tr:hover {
+					background: rgb(249, 249, 249);
+			}
 			 .send-list-content a:hover { color: blue; text-decoration: underline;}
 		</style>
     </head>

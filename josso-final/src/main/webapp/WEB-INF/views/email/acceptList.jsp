@@ -158,6 +158,9 @@
 			
         </script>
         <style>
+	        tbody tr:hover {
+				background: rgb(249, 249, 249);
+			}
         	.content_top h1{
 			    margin : -35px 0px 0px -25px;
 			}
@@ -251,6 +254,8 @@
                         </thead>
                         
                         <!-- 받은 메일 반복문으로 출력-->
+                        
+                        
                         
                         <tbody class="table table-borderless table-hover">
                             <c:forEach var="n" items="${acceptList}">

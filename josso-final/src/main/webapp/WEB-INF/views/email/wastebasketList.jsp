@@ -148,6 +148,9 @@
 			 .send-list-content a:link { color: blue; text-decoration: none;}
 			 .send-list-content a:visited { color: black; text-decoration: none;}
 			 .send-list-content a:hover { color: blue; text-decoration: underline;}
+			 tbody tr:hover {
+				background: rgb(249, 249, 249);
+			}
 		</style>
     </head>
     <body class="body">

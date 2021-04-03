@@ -152,28 +152,28 @@
                     <tr>
                         <td style="width: 120px;">제목</td>
                         <td colspan="2">
-                        <input type="email" class="form-control form-control-sm form-control-plaintext" readonly value="${sendDetail.emailTitle}">
+                        <input type="email" class="form-control form-control-sm " readonly value="${sendDetail.emailTitle}">
                         </td>
                     </tr>
                     <tr>
                         <td>보낸 사람  </td>
-                        <td colspan="2"><input type="email" readonly value="${es.employeeName}/${es.rankCode}/${es.departmentCode}" class="form-control form-control-sm form-control-plaintext"></td>
+                        <td colspan="2"><input type="email" readonly value="${es.employeeName}/${es.rankCode}/${es.departmentCode}" class="form-control form-control-sm "></td>
                     </tr>
                     <tr>
                         <td>받는 사람</td>
-                        <td colspan="2"><input type="email" readonly value="${ea.employeeName}/${ea.rankCode}/${ea.departmentCode}" class="form-control form-control-sm form-control-plaintext"></td>
+                        <td colspan="2"><input type="email" readonly value="${ea.employeeName}/${ea.rankCode}/${ea.departmentCode}" class="form-control form-control-sm "></td>
                     </tr>
                     <tr>
                         <td>참조</td>
-                        <td colspan="2"><input type="text" readonly value="${er.employeeName}/${er.rankCode}/${er.departmentCode}"class="form-control form-control-sm form-control-plaintext"></td>
+                        <td colspan="2"><input type="text" readonly value="${er.employeeName}/${er.rankCode}/${er.departmentCode}"class="form-control form-control-sm "></td>
                     </tr>
                     <tr>
                         <td>보낸날짜  </td>
-                        <td colspan="2"><input type="text" readonly value="<fmt:formatDate value="${sendDetail.regDate}" pattern="yy-MM-dd [E] a hh:mm:ss"></fmt:formatDate>" class="form-control form-control-sm form-control-plaintext"></td>
+                        <td colspan="2"><input type="text" readonly value="<fmt:formatDate value="${sendDetail.regDate}" pattern="yy-MM-dd [E] a hh:mm:ss"></fmt:formatDate>" class="form-control form-control-sm "></td>
                     </tr>
                     <tr>
                         <td>첨부파일  </td>
-                        <td colspan="2"><input type="text" readonly value="첨부파일이 없습니다." class="form-control form-control-sm form-control-plaintext"></td>
+                        <td colspan="2"><input type="text" readonly value="첨부파일이 없습니다." class="form-control form-control-sm "></td>
                     </tr>
                 </thead>
                 <tbody>

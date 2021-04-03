@@ -145,20 +145,20 @@
                         <td style="width: 120px;">보내는 사람 :</td>
                         <td colspan="2">
                         <input type="hidden" name="employeeNumber"  value="${employee.employeeNumber}">
-                        <input type="email" readonly value="${employee.employeeEmail}" name="emailSend" class="form-control form-control-sm form-control-plaintext">
+                        <input type="email"  value="${employee.employeeEmail}" name="emailSend" class="form-control form-control-sm">
                         </td>
                     </tr>
                     <tr>
                         <td>받는 사람  </td>
-                        <td colspan="2"><input type="email" name="emailAccept" class="form-control form-control-sm form-control-plaintext"></td>
+                        <td colspan="2"><input type="email" name="emailAccept" class="form-control form-control-sm"></td>
                     </tr>
                     <tr>
                         <td>참조  </td>
-                        <td colspan="2"><input type="email" name="emailReference" class="form-control form-control-sm form-control-plaintext"></td>
+                        <td colspan="2"><input type="email" name="emailReference" class="form-control form-control-sm"></td>
                     </tr>
                     <tr>
                         <td>제목  </td>
-                        <td colspan="2"><input type="text" name="emailTitle" class="form-control form-control-sm form-control-plaintext"></td>
+                        <td colspan="2"><input type="text" name="emailTitle" class="form-control form-control-sm"></td>
                     </tr>
                     <tr>
                         <td>첨부파일  </td>
