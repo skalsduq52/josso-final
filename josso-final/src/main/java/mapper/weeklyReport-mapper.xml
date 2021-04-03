@@ -67,16 +67,16 @@
 			THIS_START = #{thisStart},
 			THIS_END = #{thisEnd},
 			THIS_MEETING = #{thisMeeting},
-			THIS_CONFERENCE = #{thisConfercence},
+			THIS_CONFERENCE = #{thisConference},
 			THIS_PROJECT = #{thisProject},
 			THIS_ETC = #{thisEtc},
 			NEXT_START = #{nextStart},
 			NEXT_END = #{nextEnd},
 			NEXT_MEETING = #{nextMeeting},
-			NEXT_CONFERENCE = #{nextConfercence},
+			NEXT_CONFERENCE = #{nextConference},
 			NEXT_PROJECT = #{nextProject},
 			NEXT_ETC = #{nextEtc}
-		WHERE REPORT_NUM = #{num}
+		WHERE REPORT_NUM = #{reportNumber}
 	</update>
 	
 	<!-- 삭제 -->

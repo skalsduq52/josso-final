@@ -34,8 +34,6 @@ public class WeeklyReport {
 	private String employeeName;		// 사원이름
 	private String departmentCode;		// 부서
 	private String rankCode;			// 직위
-	 
-
 
 	// 생성자
 	public WeeklyReport() {}

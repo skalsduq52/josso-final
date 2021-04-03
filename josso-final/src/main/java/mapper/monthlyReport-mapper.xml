@@ -16,9 +16,13 @@
 		
 		<result property="thisMonth" column="THIS_MONTH" /> 
 		<result property="thisQuantity" column="THIS_QUANTITY" /> 
-		<result property="thisQualiy" column="THIS_QUALITY" /> 
+		<result property="thisQuality" column="THIS_QUALITY" /> 
 		<result property="thisReason" column="THIS_REASON" /> 
 		<result property="thisSupplement" column="THIS_SUPPLEMENT" /> 
+		
+		<result property="employeeName" column="EMPLOYEE_NAME"/>
+		<result property="departmentCode" column="DEPARTMENT_CODE"/>
+		<result property="rankCode" column="RANK_CODE"/>
 	</resultMap>
 	
 	<!-- 월간 실적 보고 -->
@@ -30,12 +34,12 @@
 	
 	<!-- 해당 게시물 디테일 페이지 -->
 	<select id="selectDetailPage" resultMap="monthlyReport" parameterType="String">
-		SELECT * FROM MONTH_WEEK WHERE REPORT_NUM = #{num}
+		SELECT * FROM REPORT_MONTH WHERE REPORT_NUM = #{num}
 	</select>
 	
 	<!-- 검색(작성자, 제목으로 검색) -->
 	<select id="searchBy" resultMap="monthlyReport" parameterType="String">
-		SELECT * FROM MONTH_WEEK WHERE
+		SELECT * FROM REPORT_MONTH WHERE
 		<where>
 			<if test="writer != null">
 				WRITER LIKE '%' || #{writer} || '%' ORDER BY REPORT_NUM DESC

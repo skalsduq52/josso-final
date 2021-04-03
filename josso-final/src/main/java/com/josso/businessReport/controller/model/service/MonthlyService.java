@@ -14,13 +14,13 @@ public interface MonthlyService {
 	public MonthlyReport selectDetailPage(String num) throws Exception;
 	
 	// 검색기능
-	public List<MonthlyReport> searchBy(MonthlyReport wr) throws Exception;
+	public List<MonthlyReport> searchBy(MonthlyReport mr) throws Exception;
 	
 	// 작성
-	public int reportWrite(MonthlyReport wr) throws Exception;
+	public int reportWrite(MonthlyReport mr) throws Exception;
 	
 	// 수정
-	public int reportUpdate(int num) throws Exception;
+	public int reportUpdate(MonthlyReport mr) throws Exception;
 	
 	// 삭제
 	public int reportDelete(String num) throws Exception;

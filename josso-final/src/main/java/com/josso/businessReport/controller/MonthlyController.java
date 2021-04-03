@@ -35,6 +35,7 @@ public class MonthlyController {
 		// 몇 년, 몇 월 전역변수 선언
 		int yearth;
 		int monthth;
+		int day;
 
 		// 전송할 타이틀 결과값을 Array리스트로 전역변수 생성
 		List<String> sendTitle = new ArrayList<>();
@@ -60,10 +61,11 @@ public class MonthlyController {
 			int year = Integer.parseInt(titleDate[0]);
 			System.out.println(year);
 			int month = Integer.parseInt(titleDate[1]);
+			int dayth = Integer.parseInt(titleDate[2]);
 			System.out.println(month);
 			
 			// 캘린더 셋 시작
-			calendar.set(year, month);
+			calendar.set(year, month, dayth);
 			
 			// 몇 번째 주인지 추출
 			yearth = calendar.get(Calendar.YEAR);
@@ -82,14 +84,12 @@ public class MonthlyController {
 		}
 
 		
-	} catch (NumberFormatException e) {
-		System.out.println("NumberFormatException 예외발생");
 	} catch (Exception e) {
 		System.out.println("예외 발생 : " );
 		e.printStackTrace();
 	}
 
-	mv.addObject("ms", monthlyReport);
+		mv.addObject("ms", monthlyReport);
 		mv.setViewName("businessReport/monthlyList");
 		return mv;
 	}
@@ -136,7 +136,7 @@ public class MonthlyController {
 
 		// 제목에 날짜로 계산해 온 제목값 세팅해줌
 		mr.setReportTitle(title);
-		System.out.println("wr vo에 넣은 제목값 : " + mr.getReportTitle() );
+		System.out.println("mr vo에 넣은 제목값 : " + mr.getReportTitle() );
 
 		// writer에 세션값(employeeName) 넣음
 		System.out.println("세션에 있는 사원번호값 : "+employee.getEmployeeNumber());
@@ -176,7 +176,7 @@ public class MonthlyController {
 		MonthlyReport mr = ms.selectDetailPage(num);
 		
 		mv.addObject("num", num1);
-		mv.addObject("wr", ms);
+		mv.addObject("mr", ms);
 		mv.setViewName("businessReport/monthlyUpdate");
 		return mv;
 	}
@@ -185,18 +185,14 @@ public class MonthlyController {
 	
 	// 월간실적보고(수정하기 완료 버튼) - 진행 중
 	@RequestMapping(value="report/monthly/update", method=RequestMethod.POST)
-	public ModelAndView monthlyUpdate(MonthlyReport mr, ModelAndView mv, @RequestParam("num") int num) throws Exception {
+	public ModelAndView monthlyUpdate(MonthlyReport mr, ModelAndView mv) throws Exception {
 		System.out.println("- 수정완료 버튼 누름 -");
-		System.out.println("num값 : " + num);
 		System.out.println("이것도 드러오나? : " + mr);
 		
-		// 완료
-		mr.setReportNumber(num);
-		
-		int result = ms.reportUpdate(num);
+		int result = ms.reportUpdate(mr);
 		
 		System.out.println("result : " + result);
-		
+		mv.addObject("num", mr.getReportNumber());
 		mv.setViewName("businessReport/monthlyUpdate");
 		return mv;
 	}
