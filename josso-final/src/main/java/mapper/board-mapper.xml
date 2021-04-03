@@ -1,5 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="board">
+	<resultMap id="board" type="board">
+		<result property="boardNum" column="BOARD_NUM"></result>
+		<result property="boardKind" column="BOARD_KIND"></result>
+		<result property="boardTitle" column="BOARD_TITLE"></result>
+		<result property="boardContent" column="BOARD_CONTENT"></result>
+		<result property="boardFile" column="BOARD_FILE"></result>
+		<result property="boardWriter" column="BOARD_WRITER"></result>
+		<result property="boardRegDate" column="BOARD_REGDATE"></result>
+		<result property="boardHit" column="BOARD_HIT"></result>
+		<result property="employeeName" column="EMPLOYEE_NAME"></result>
+		<result property="departmentCode" column="DEPARTMENT_CODE"></result>
+		<result property="rankCode" column="RANK_CODE"></result>
+	</resultMap>
+	
+	<!-- 공지사항 전체리스트(목록)-->
+	<select id="selectNoticeAll" resultMap="board">
+		SELECT * FROM BOARD WHERE BOARD_KIND='공지사항'
+	</select>
+	
+	<!-- 공지사항 디테일페이지 -->
+	<select id="selectNoticeDetail" resultMap="board" parameterType="String">
+		SELCT * FROM BOARD WHERE BOARD_NUM = #{boardNum}
+	</select>
+	
+	<!-- 공지사항 작성 -->
+	<insert id="noticeWrite" parameterType="board">
+		INSERT INTO BOARD(BOARD_KIND, BOARD_TITLE, BOARD_CONTENT, BOARD_FILE, BOARD_WRITER, BOARD_REGDATE, BOARD_HIT) 
+					VALUES('공지사항', #{boardTitle}, #{boardContent}, #{boardFile}, #{boardWriter}, SYSDATE, 0);
+	</insert>
+	
+	<!-- 공지사항 수정 -->
+	<update id="noticeUpdate" parameterType="board">
+		UPDATE BOARD SET 
+			BOARD_TITLE = {boardTitle}
+			BOARD_CONTENT = {boardContent}
+			BOARD_FILE = {boardFile}
+		WHERE BOARD_NUM = #{boardNum}
+	</update>
+	
+	<!-- 공지사항 삭제 -->
+	<delete id="noticeDelete" parameterType="board">
+		DELETE FROM BOARD WHERE BOARD_NUM = #{boardNum}
+	</delete>
+	
+	
+	
+	
+	<!-- 건의사항 전체리스트(목록)-->
+	<select id="selectSuggestionAll" resultMap="board">
+		SELECT * FROM BOARD WHERE BOARD_KIND='건의사항'
+	</select>
+	
+	<!-- 건의사항 디테일페이지 -->
+	<select id="selectSuggestionDetail" resultType="board" parameterType="String">
+		SELCT * FROM BOARD WHERE BOARD_NUM = #{boardNum}
+	</select>
+	
+	<!-- 건의사항 작성 -->
+	<insert id="suggestionWrite" parameterType="board">
+		INSERT INTO BOARD(BOARD_KIND, BOARD_TITLE, BOARD_CONTENT, BOARD_FILE, BOARD_WRITER, BOARD_REGDATE, BOARD_HIT) 
+					VALUES('건의사항', #{boardTitle}, #{boardContent}, #{boardFile}, #{boardWriter}, SYSDATE, 0);
+	</insert>
+	
+	<!-- 건의사항 수정 -->
+	<update id="suggestionUpdate" parameterType="board">
+		UPDATE BOARD SET 
+			BOARD_TITLE = #{boardTitle}
+			BOARD_CONTENT = #{boardContent} 
+			BOARD_FILE = #{boardFile}
+		WHERE BOARD_NUM = #{boardNum}
+	</update>
+	
+	<!-- 건의사항 삭제 -->
+	<delete id="suggestionDelete" parameterType="board">
+		DELETE FROM BOARD WHERE BOARD_NUM = #{boardNum}
+	</delete>
+	
 </mapper>

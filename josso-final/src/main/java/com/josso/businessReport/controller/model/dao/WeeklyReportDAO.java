@@ -42,7 +42,7 @@ public class WeeklyReportDAO {
 	}
 	
 	// 수정
-	public int reportUpdate(int num) throws Exception {
+	public int reportUpdate(WeeklyReport wr, int num) throws Exception {
 		int result = sqlSession.update("weeklyReport.reportUpdate", num);
 		return result;
 	}

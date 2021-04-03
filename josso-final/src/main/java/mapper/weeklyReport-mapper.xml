@@ -76,7 +76,7 @@
 			NEXT_CONFERENCE = #{nextConfercence},
 			NEXT_PROJECT = #{nextProject},
 			NEXT_ETC = #{nextEtc}
-		WHERE REPORT_NUM = #{reportNumber}
+		WHERE REPORT_NUM = #{num}
 	</update>
 	
 	<!-- 삭제 -->

@@ -17,14 +17,20 @@ public class WeeklyServiceImpl implements WeeklyService {
 	// 전체 게시물 조회
 	@Override
 	public List<WeeklyReport> selectList() throws Exception  {
+		
 		List<WeeklyReport> weeklyList = weeklyreportDao.selectList();
+		
+		
 		return weeklyList;
 	}
 	
 	// 디테일페이지
 	@Override
 	public WeeklyReport selectDetailPage(String num) throws Exception {
+		
+		
 		WeeklyReport WeeklyReport = weeklyreportDao.selectDetailPage(num);
+		
 		return WeeklyReport;
 	}
 	
@@ -44,8 +50,8 @@ public class WeeklyServiceImpl implements WeeklyService {
 	
 	// 수정
 	@Override
-	public int reportUpdate(int num) throws Exception {
-		int result = weeklyreportDao.reportUpdate(num);
+	public int reportUpdate(WeeklyReport wr, int num) throws Exception {
+		int result = weeklyreportDao.reportUpdate(wr, num);
 		return result;
 	}
 	

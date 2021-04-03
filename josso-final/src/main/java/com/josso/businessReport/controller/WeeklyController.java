@@ -206,11 +206,11 @@ public class WeeklyController {
 		// 완료
 		wr.setReportNumber(num);
 		
-		int result = ws.reportUpdate(num);
+		int result = ws.reportUpdate(wr, num);
 		
 		System.out.println("result : " + result);
 		
-		mv.setViewName("businessReport/weeklyUpdate");
+		mv.setViewName("redirect:DetailPage");
 		return mv;
 	}
 	
