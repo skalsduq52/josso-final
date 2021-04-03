@@ -83,3 +83,6 @@
 					color: black;
 					text-decoration: none;
 				}
+				.modal-body>ul>ul>li{
+					cursor: pointer;
+				}

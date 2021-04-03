@@ -111,12 +111,13 @@ public class ScheduleController {
 			ModelAndView mv) throws Exception {
 		
 		System.out.println(schedule.getScheduleTitle());
-		System.out.println(schedule.getScheduleContent());
-		System.out.println(schedule.getSchedulePlace());
-		System.out.println(schedule.getScheduleStartDate());
-		System.out.println(schedule.getScheduleStartTime());
-		System.out.println(schedule.getScheduleEndDate());
-		System.out.println(schedule.getScheduleEndTime());
+//		System.out.println(schedule.getScheduleContent());
+//		System.out.println(schedule.getSchedulePlace());
+		System.out.println(schedule.getAttendee());
+//		System.out.println(schedule.getScheduleStartDate());
+//		System.out.println(schedule.getScheduleStartTime());
+//		System.out.println(schedule.getScheduleEndDate());
+//		System.out.println(schedule.getScheduleEndTime());
 		
 		Employee emp = (Employee) session.getAttribute("employee");
 
@@ -141,11 +142,21 @@ public class ScheduleController {
 		System.out.println(scheduleNum);
 		
 		Schedule sc = ss.selectSchedule(scheduleNum);
+		System.out.println(sc.getAttendee());
 		
+		String[] array = sc.getAttendee().split(",");
+		
+		for(int i=0; i<array.length; i++) {
+			System.out.println(array[i]);
+		}
+		
+//		List<String> attendee = new ArrayList<>(); 
+		int size = array.length;
+		
+		mv.addObject("size", size);
+		mv.addObject("attendee", array);
 		mv.addObject("schedule", sc);
-		
 		mv.setViewName("schedule.scheduleDetail");
-		
 		return mv;
 	}
 	

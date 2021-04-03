@@ -65,6 +65,11 @@ $(function() {
 		var scheduleNum = $('.btn-danger').val();
 		location.href = '/josso/schedule/delete?scheduleNum='+scheduleNum;
 	});
+	$('.Addattendee').click(function() {
+		var area = "<span class='badge badge-pill badge-secondary' name='Attendee'>"+$(this).text()+"</span>&nbsp;" +
+				"<input type='hidden' name='Attendee' value="+$(this).text()+">";
+		$('#Attendee').append(area);
+	});
 });
 //$(function() {
 //	$('.start_date').datepicker({
