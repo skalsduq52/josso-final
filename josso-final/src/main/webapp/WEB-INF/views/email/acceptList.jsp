@@ -6,7 +6,6 @@
 <html>
     <head>
     <link rel="stylesheet" type="text/css"  href="${pageContext.request.contextPath}/resources/css/common.css"></link>
-        <link rel="stylesheet" href="../team01/common.css" type="text/css">
         <title>josso</title>
         <!-- 외부 글꼴 적용 시 링크 -->
         <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -92,6 +91,41 @@
 					});
 				});
 			});
+			$(function(){
+				$('#acceptWastebasket').click(function(){
+				    // 사용자 ID를 갖고 온다.
+				    var userNum = $("#employeeNumber").val();
+				    console.log(userNum);
+				    // name이 같은 체크박스의 값들을 배열에 담는다.
+				    var checkboxValues = [];
+				    $("input[name='check']:checked").each(function(i) {
+				        checkboxValues.push($(this).val());
+				    });
+				     console.log(checkboxValues);
+				    // 사용자 ID(문자열)와 체크박스 값들(배열)을 name/value 형태로 담는다.
+				    $.ajax({
+				        url:"email/accept/ckWastebasket",
+				        type:'GET',
+				        data: {"userNum": userNum, "checkArray": checkboxValues},
+
+
+				      //데이터 전송이 완료되면 출력되는 메시지
+
+				        success:function(data){
+				            alert("완료!");
+				        },
+
+				       //에러가 발생되면 출력되는 메시지
+
+				        error:function(jqXHR, textStatus, errorThrown){
+				            alert("에러 발생~~ \n" + textStatus + " : " + errorThrown);
+				            self.close();
+				        }
+				    });
+				});
+			});
+			
+
 			
 			
         </script>
@@ -155,7 +189,7 @@
                     </form>
                     </span></div>
                 </div>
-                
+                <form action="${pageContext.request.contextPath}/email/accept/ckWastebasket" method="get">
                 <div class="row">
                     <div class="col nav-menu">
                         <a href="${pageContext.request.contextPath}/email/accept/reply"><input type="submit" class="btn btn-outline-info float-left" value="답장"></a>
@@ -167,7 +201,7 @@
 		                        	<a href="${pageContext.request.contextPath}/email/accept/read?num=${acceptDetail.emailNumber}"><input type="submit" class="btn btn-outline-info float-left" value="안읽음"></a>
 		                        </c:if>
                         <a href="${pageContext.request.contextPath}/email/accept/delivery"><input type="submit" class="btn btn-outline-info float-left" value="전달"></a> 
-                        <a href="${pageContext.request.contextPath}/email/accept/wastebasket"><input id="wastebasket" type="submit" class="btn btn-outline-info float-left" value="휴지통"></a>
+                        <input type="submit" class="btn btn-outline-info float-left" value="휴지통">
                     </div>
                     <div class="col"></div>
                     <div class="col"></div>
@@ -207,6 +241,7 @@
                         </table>
                 </div>
             </div>
+            </form>
             
             <ul class="pagination justify-content-center">
                 

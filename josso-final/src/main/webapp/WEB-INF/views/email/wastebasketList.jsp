@@ -6,7 +6,6 @@
 <html>
     <head>
     <link rel="stylesheet" type="text/css"  href="${pageContext.request.contextPath}/resources/css/common.css"></link>
-        <link rel="stylesheet" href="../team01/common.css" type="text/css">
         <title>josso</title>
         <!-- 외부 글꼴 적용 시 링크 -->
         <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -96,6 +95,29 @@
 					});
 				});
 			});
+			
+			$(function(){
+				$('.delBtn').click(function(){
+					var check = Array();
+					var emailNumber = $('.check');
+					var date = 0;
+					for(i=0 ; i<emailNumber.length ; i++){
+						 if(emailNumber[i].checked == true){
+							 check[date] = emailNumber[i].value;
+							date++;
+						}
+					}
+					location.href = '${pageContext.request.contextPath}/email/wastebasket/ckRestoration?num='+check;
+					for(i=0;i<check.length;i++){
+						console.log(check[i]);
+					}
+					/* location.href = '/josso/schedule/delete'+aa; */
+					
+				});
+			});
+			
+			
+			
         </script>
         <style>
         	.content_top h1{
@@ -172,11 +194,11 @@
                         </div>
                     </span></div>
                 </div>
-                
+                <form action="${pageContext.request.contextPath}/email/wastebasket/ckWastebasket" method="get">
                 <div class="row">
                     <div class="col nav-menu">
-                        <a href="${pageContext.request.contextPath}/email/wastebasket/restoration"><input type="submit" class="btn btn-outline-info float-left" value="복구"></a>  
-                        <a href="${pageContext.request.contextPath}/email/wastebasket/delete"><input type="submit" class="btn btn-outline-info float-left" value="삭제"></a>
+                        <input type="submit" class="btn btn-outline-info float-left" value="복구">  
+                        <input type="button" class="delBtn btn btn-outline-info float-left" value="삭제">
                     </div>
                     <div class="col"></div>
                     <div class="col"></div>
@@ -205,7 +227,7 @@
                         <tbody class="table table-borderless table-hover">
                             <c:forEach var="n" items="${wastebasketList}">
 								<tr>
-	                                <td><input type="checkbox" name="check"></td>
+	                                <td><input type="checkbox" class="check" name="check" value="${n.emailNumber}"></td>
 	                                <td>${n.employeeName}/${n.rankCode}/${n.departmentCode}</td>
 	                                <td class="send-list-content"><a href="${pageContext.request.contextPath}/email/wastebasket/detail?num=${n.emailNumber}">${n.emailTitle}</a></td>
 	                                <td><fmt:formatDate value="${n.regDate}" pattern="yyyy년 MM월 dd일 hh시 mm분 ss초"></fmt:formatDate></td>
@@ -216,6 +238,7 @@
                     </table>
                 </div>
             </div>
+            </form>
             <ul class="pagination justify-content-center">
                 
                     <li class="page-item"><a class="page-link" href="#"><<</a></li>

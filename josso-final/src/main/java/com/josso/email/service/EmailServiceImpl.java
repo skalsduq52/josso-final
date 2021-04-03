@@ -30,7 +30,6 @@ public class EmailServiceImpl implements EmailService{
 	
 	// 휴지통 - 리스트
 	public List<Email> WastebasketList(String id) throws Exception{
-		System.out.println("임플리먼트 id값 :"+ id);
 		List<Email> wastebasketList = emailDao.WastebasketList(id);
 		return wastebasketList;
 	}

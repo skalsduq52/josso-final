@@ -170,11 +170,11 @@
                         </div>
                     </span></div>
                 </div>
-                
+                <form action="${pageContext.request.contextPath}/email/send/ckWastebasket" method="get">
                 <div class="row">
                     <div class="col nav-menu">
                         <a href="${pageContext.request.contextPath}/email/send/delivery"><input type="submit" class="btn btn-outline-info float-left" value="전달"></a> 
-                        <a href="${pageContext.request.contextPath}/email/send/wastebasket"><input type="submit" class="btn btn-outline-info float-left" value="삭제"></a>
+                        <input type="submit" class="btn btn-outline-info float-left" value="삭제">
                     </div>
                     <div class="col"></div>
                     <div class="col"></div>
@@ -203,7 +203,7 @@
                         <tbody class="table table-borderless table-hover">
                             <c:forEach var="n" items="${sendList}">
 								<tr>
-	                                <td><input type="checkbox" name="check"></td>
+	                                <td><input type="checkbox" class="check" name="check" value="${n.emailNumber}"></td>
 	                                <td>${n.employeeName}/${n.rankCode}/${n.departmentCode}</td>
 	                                <td class="send-list-content"><a href="${pageContext.request.contextPath}/email/send/detail?num=${n.emailNumber}">${n.emailTitle}</a></td>
 	                                <td><fmt:formatDate value="${n.regDate}" pattern="yyyy년 MM월 dd일 hh시 mm분 ss초"></fmt:formatDate></td>
