@@ -169,7 +169,7 @@
                     </tr>
                     <tr>
                         <td>보낸날짜  </td>
-                        <td colspan="2"><input type="text" readonly value="<fmt:formatDate value="${acceptDetail.regDate}" pattern="yy-MM-dd [E] a hh:mm:ss"></fmt:formatDate>" class="form-control form-control-sm "></td>
+                        <td colspan="2"><input type="text" readonly value="<fmt:formatDate value="${acceptDetail.regDate}" pattern="yyyy년 MM월 dd일 hh시 mm분 ss초"></fmt:formatDate>" class="form-control form-control-sm "></td>
                     </tr>
                     <tr>
                         <td>첨부파일  </td>

@@ -108,6 +108,16 @@ public class EmailDao {
 		return sqlSession.update("Email.AcceptRead", num);
 	}
 	
+	// 리스트 체크박스 읽음처리(받은메일함)
+	public int ListRead(int num) throws Exception{
+		return sqlSession.update("Email.ListRead", num);
+	}
+	
+	// 리스트 체크박스 읽음처리(받은메일함)
+	public int ListClose(int num) throws Exception{
+		return sqlSession.update("Email.ListClose", num);
+	}
+	
 	// 새메일쓰기 보내기 버튼
 	public int WriteSend(Email email) throws Exception{
 		return sqlSession.insert("Email.WriteSend", email);
@@ -131,5 +141,10 @@ public class EmailDao {
 	// 이메일 이름 검색 기능
 	public List<Employee> selectEmpAll(Employee employee) throws Exception{
 		return sqlSession.selectList("Employee.serachEmpName", employee);
+	}
+	
+	// 받음메일함 안읽은 메일 수
+	public List<Email> emailCount(String id) throws Exception{
+		return sqlSession.selectList("Email.emailCount", id);
 	}
 }

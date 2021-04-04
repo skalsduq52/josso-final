@@ -39,10 +39,13 @@ public class EmailController{
 	// 받은메일함 목록 보여주기(완성)
 	@RequestMapping(value = "email/accept/list", method = RequestMethod.GET)
 	public ModelAndView acceptList(ModelAndView modelAndView, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception{
-		
 		Employee employee = (Employee) session.getAttribute("employee");
 		String id = employee.getEmployeeEmail();
+		List<Email> emailCount = emailService.emailCount(id);
 		List<Email> acceptList = emailService.AcceptList(id);
+		
+		modelAndView.addObject("emailCount",emailCount);
+		modelAndView.setViewName("email/part/aside");
 		modelAndView.addObject("acceptList",acceptList);
 		modelAndView.setViewName("email/acceptList");
 		return modelAndView;
@@ -98,6 +101,7 @@ public class EmailController{
 		modelAndView.setViewName("redirect:/email/accept/list");
 		return modelAndView;
 	}
+	
 	
 	// /* ------------------------------보낸 메일함------------------------------- */
 	// 보낸메일함 목록 보여주기
@@ -271,11 +275,22 @@ public class EmailController{
 	public ModelAndView acceptCkRead(int num[], ModelAndView modelAndView) throws Exception{ 
 		for(int i=0; i<num.length;i++) {
 			System.out.println(num[i]);
-			emailService.AcceptRead(num[i]);
+			emailService.ListRead(num[i]);
 		}
 		modelAndView.setViewName("redirect:/email/accept/list");
 		return modelAndView;
 	}
+	
+	// 받은메일함 리스트 - 체크박스 - 읽음버튼
+		@RequestMapping(value = "email/accept/ckClose", method = RequestMethod.GET)
+		public ModelAndView acceptCkClose(int num[], ModelAndView modelAndView) throws Exception{ 
+			for(int i=0; i<num.length;i++) {
+				System.out.println(num[i]);
+				emailService.ListClose(num[i]);
+			}
+			modelAndView.setViewName("redirect:/email/accept/list");
+			return modelAndView;
+		}
 
 	// 보낸메일함 리스트 - 체크박스 - 삭제
 	@RequestMapping(value = "email/send/ckWastebasket", method = RequestMethod.GET)
@@ -321,7 +336,7 @@ public class EmailController{
 		return modelAndView;
 	}
 	
-	
+	// 작성시 메일주소 검색
 	@RequestMapping(value="email/write/searchName", method=RequestMethod.POST)
 	public void emailSearchName(Employee employee, HttpServletResponse response) throws Exception {
 		System.out.println(employee.getEmployeeName());
@@ -349,6 +364,8 @@ public class EmailController{
 			 out.flush();
 			 out.close();
 	}
+	
+	
 
 	
 	

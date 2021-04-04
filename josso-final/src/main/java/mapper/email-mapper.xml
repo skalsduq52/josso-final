@@ -77,6 +77,16 @@
 		UPDATE EMAIL SET EMAIL_READ = CASE WHEN EMAIL_READ = 'YES' THEN 'NO' ELSE 'YES' END WHERE EMAIL_NUMBER = #{num}
 	</update>
 	
+	<!-- 받은메일함 - 리스트 체크박스 - 읽음 처리 -->
+	<update id="ListRead" parameterType="Email">
+		UPDATE EMAIL SET EMAIL_READ = 'YES' WHERE EMAIL_NUMBER = #{num}
+	</update>
+	
+	<!-- 받은메일함 - 리스트 체크박스 - 읽음 처리 -->
+	<update id="ListClose" parameterType="Email">
+		UPDATE EMAIL SET EMAIL_READ = 'NO' WHERE EMAIL_NUMBER = #{num}
+	</update>
+	
 	<!-- 메일 자세히보기(제목클릭) 할 경우 자동 읽음처리 -->
 	<!-- <update id="AutoRead" parameterType="Email">
 		UPDATE EMAIL SET EMAIL_READ = 'YES' WHERE EMAIL_NUMBER = #{num}
@@ -101,6 +111,11 @@
 	<update id="autoRead" parameterType="Email">
 		UPDATE EMAIL SET EMAIL_READ = 'YES' WHERE EMAIL_NUMBER = #{num}
 	</update>
+	
+	<!-- 받은메일함 안읽은 메일 수 표시 -->
+	<select id="emailCount" parameterType="String" resultMap="resultEmail">
+		SELECT COUNT(*) FROM EMAIL WHERE EMAIL_READ = 'NO' AND EMAIL_ACCEPT = #{id}
+	</select>
 	
 	<!-- 페이징 ListPage -->
 	<!-- <select id="ListPage" resultType="Email" parameterType="com.mvcproject.email.vo.Criteria">
