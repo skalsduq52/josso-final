@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Date;
 
 import com.josso.email.vo.Email;
+import com.josso.employee.vo.Employee;
 
 public interface EmailService {
 
@@ -72,6 +73,9 @@ public interface EmailService {
 	
 	// 리스트 - 제목클릭 - 읽음 자동처리
 	public int AutoRead(int num) throws Exception;
+	
+	// 이메일 이름 검색 기능
+	public  List<Employee> selectEmpAll(Employee employee) throws Exception;
 	
 	
 }

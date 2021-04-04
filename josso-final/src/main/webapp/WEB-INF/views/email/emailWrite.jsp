@@ -6,7 +6,6 @@
 <html>
     <head>
     <link rel="stylesheet" type="text/css"  href="${pageContext.request.contextPath}/resources/css/common.css"></link>
-        <link rel="stylesheet" href="../team01/common.css" type="text/css">
         <title>josso</title>
         <!-- 외부 글꼴 적용 시 링크 -->
         <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -59,6 +58,72 @@
                   });
                 
             });
+            $(function(){
+            	$('#emailAccept').keyup(function(){
+            		var name = $('#emailAccept').val();
+            		console.log(name);
+            		$.ajax({
+            			url : "/josso/email/write/searchName",
+            			data : {"employeeName" : name},
+            			method : "post",
+            			dataType : "json",
+            			success : function(rdata){
+            				var listStr = JSON.stringify(rdata);
+            				var data = JSON.parse(listStr);
+            				console.log(data);
+            				$('#textarea1').html('');
+            				var area = $('#textarea1').html();
+            				if(data.list.length == 0){
+            					area += "검색하신 결과가 없습니다."
+            					}else{
+            						for(var i in data.list){
+            							area += "<li><span class='selectEmp'>"
+            								+data.list[i].name+" / "
+            								+data.list[i].rCode+" / "
+            								+data.list[i].dCode+" / "
+            								+data.list[i].email+" </span></li>";
+            							console.log(data.list[i].email);
+            						}
+            					}
+            				$('#textarea1').html(area);
+            				$('#textarea1').attr("style","display:inline")
+            			}
+            		});	
+            	});		
+            }) 
+            
+            /*
+           $(function(){
+        	   $('#textarea1').children().children('.selectEmp').click(function(){
+        		   
+        	   alert('여기야');
+        	   });
+           });
+            */
+            
+           $(function(){
+        	   $('.selectEmp').click(function(){
+        	   console.log("들어옴");
+        		   
+        	   var val = $('#textarea1').children().children('.selectEmp').text();
+        	   alert(val);
+        	   });
+           });
+
+            
+           $(function(){
+	            $('.selectEmp').click(function() {
+	            	
+	            	console.log('들어옴');
+	            	var a = '123';
+	            	console.log(a);
+	            	var area = "<input autocomplete='off' id='emailAccept' autofocus type='email' required name='emailAccept' value="+$(this).text()+" class='form-control form-control-sm'>";
+		    		$('#emailAccept').append(area);
+			    		/* var area = "<span class='badge badge-pill badge-secondary' name='Attendee'>"+$(this).text()+"</span>&nbsp;";
+					$('#Attendee').append(area); */
+	        		});
+            });
+            
             $("#re").click(function(){
                 if(confirm("정말 등록하시겠습니까 ?") == true){
                     alert("등록되었습니다");
@@ -90,6 +155,8 @@
 			    margin: -15px 0px 0px 8px;
 			}
 			a:hover { color: blue; text-decoration: none;}
+			.selectEmp{ cursor:pointer; }
+			.selectEmp:hover{ text-decoration: underline; }
             
         </style>
     </head>
@@ -142,23 +209,24 @@
             <table class="table table-hover">
                 <thead class="thead-dark text-left">
                     <tr>
-                        <td style="width: 120px;">보내는 사람 :</td>
+                        <td style="width: 120px;">보내는 사람 </td>
                         <td colspan="2">
                         <input type="hidden" name="employeeNumber"  value="${employee.employeeNumber}">
-                        <input type="email"  value="${employee.employeeEmail}" name="emailSend" class="form-control form-control-sm">
+                        <input type="email"  value="${employee.employeeEmail}" required name="emailSend" class="form-control form-control-sm">
                         </td>
                     </tr>
-                    <tr>
+                    <tr >
                         <td>받는 사람  </td>
-                        <td colspan="2"><input type="email" name="emailAccept" class="form-control form-control-sm"></td>
+                        <td colspan="2" id="Attendee"><input autocomplete="off" id="emailAccept" autofocus type="email" required name="emailAccept" class="form-control form-control-sm">
+                        <table id="textarea1" rows="4" cols="100" style="overflow: auto; height: 50px; display:none;"></table></td>
                     </tr>
-                    <tr>
+                    <tr >
                         <td>참조  </td>
-                        <td colspan="2"><input type="email" name="emailReference" class="form-control form-control-sm"></td>
+                        <td colspan="2"><input autocomplete="off" id="emailReference" autofocus type="email" name="emailReference" class="form-control form-control-sm"></td>
                     </tr>
                     <tr>
                         <td>제목  </td>
-                        <td colspan="2"><input type="text" name="emailTitle" class="form-control form-control-sm"></td>
+                        <td colspan="2"><input autocomplete="off" type="text" autofocus name="emailTitle" required class="form-control form-control-sm"></td>
                     </tr>
                     <tr>
                         <td>첨부파일  </td>
@@ -168,8 +236,8 @@
                 <tbody>
                     <tr>
                         <td colspan="2">
-                            <textarea id="smartEditor" class="form-control"
-                             name="emailContent" style="height: 550px;"></textarea>
+                            <div autocomplete="off" autofocus id="smartEditor" class="searchResult form-control"
+                             name="emailContent" style="height: 550px;"></div>
                         </td>
                     </tr>
                 </tbody>

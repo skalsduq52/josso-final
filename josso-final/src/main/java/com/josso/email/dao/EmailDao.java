@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.josso.email.vo.Email;
+import com.josso.employee.vo.Employee;
 
 @Repository
 public class EmailDao {
@@ -125,5 +126,10 @@ public class EmailDao {
 	// 리스트 - 제목클릭 - 자동읽음 처리
 	public int AutoRead(int num) throws Exception{
 		return sqlSession.update("Email.autoRead", num);
+	}
+	
+	// 이메일 이름 검색 기능
+	public List<Employee> selectEmpAll(Employee employee) throws Exception{
+		return sqlSession.selectList("Employee.serachEmpName", employee);
 	}
 }

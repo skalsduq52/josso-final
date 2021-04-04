@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.josso.email.dao.EmailDao;
 import com.josso.email.vo.Email;
+import com.josso.employee.vo.Employee;
 
 @Service
 public class EmailServiceImpl implements EmailService{
@@ -124,5 +125,10 @@ public class EmailServiceImpl implements EmailService{
 	// 리스트 - 제목클릭 - 자동읽음 처리
 	public int AutoRead(int num) throws Exception{
 		return emailDao.AutoRead(num);
+	}
+	
+	// 이메일 이름 검색 기능
+	public  List<Employee> selectEmpAll(Employee employee) throws Exception{
+		return emailDao.selectEmpAll(employee);
 	}
 }

@@ -1,12 +1,15 @@
 package com.josso.email.controller;
 
 import java.util.List;
+import java.io.PrintWriter;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,7 +35,7 @@ public class EmailController{
 		return "email/acceptList";
 	}
 	
-	// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@받은 메일함@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	// /* ------------------------------받은 메일함------------------------------- */
 	// 받은메일함 목록 보여주기(완성)
 	@RequestMapping(value = "email/accept/list", method = RequestMethod.GET)
 	public ModelAndView acceptList(ModelAndView modelAndView, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception{
@@ -96,7 +99,7 @@ public class EmailController{
 		return modelAndView;
 	}
 	
-	// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@보낸 메일함 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	// /* ------------------------------보낸 메일함------------------------------- */
 	// 보낸메일함 목록 보여주기
 	@RequestMapping(value = "email/send/list", method = RequestMethod.GET)
 	public ModelAndView sentList(ModelAndView modelAndView, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception{
@@ -208,7 +211,7 @@ public class EmailController{
 		return modelAndView;
 	}
 	
-	// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@휴지통 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	// /* ------------------------------ 휴지통 ------------------------------- */
 	// 휴지통 목록 보여주기
 	@RequestMapping(value = "email/wastebasket/list", method = RequestMethod.GET)
 	public ModelAndView wastebasketList(ModelAndView modelAndView, HttpSession session) throws Exception{
@@ -237,7 +240,7 @@ public class EmailController{
 		return modelAndView;
 	}
 	
-	// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@새 메일쓰기 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	// /* ------------------------------새 메일쓰기------------------------------- */
 	// 새 메일쓰기
 	@RequestMapping(value = "email/write/open", method = RequestMethod.GET)
 	public String writeOpen() throws Exception{
@@ -252,7 +255,7 @@ public class EmailController{
 		return modelAndView;
 	}
 
-	// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@체크박스 기능 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	// /* ------------------------------체크박스 기능------------------------------- */
 	// 받은메일함 리스트 - 체크박스 - 휴지통
 	@RequestMapping(value = "email/accept/ckWastebasket", method = RequestMethod.GET)
 	public ModelAndView acceptCkWastebasket(int check[], ModelAndView modelAndView) throws Exception{ 
@@ -316,6 +319,35 @@ public class EmailController{
 		modelAndView.addObject("acceptList",acceptList);
 		modelAndView.setViewName("email/acceptList");
 		return modelAndView;
+	}
+	
+	
+	@RequestMapping(value="email/write/searchName", method=RequestMethod.POST)
+	public void emailSearchName(Employee employee, HttpServletResponse response) throws Exception {
+		System.out.println(employee.getEmployeeName());
+		List<Employee> empList = emailService.selectEmpAll(employee);
+			// 전송용 최종 json 객체
+			 JSONObject sendJson = new JSONObject();
+			 // JSONArray 객체를 생성하여 JSONObject 객체를 하나씩 담는다
+			 JSONArray empArray = new JSONArray();
+			 
+			 for(Employee employeeList : empList){
+				 //user 정보 저장할 json 객체 선언
+				 JSONObject em = new JSONObject();
+				 em.put("dCode", employeeList.getDepartmentCode());
+				 em.put("rCode", employeeList.getRankCode());
+				 em.put("name", employeeList.getEmployeeName());
+				 em.put("email", employeeList.getEmployeeEmail());
+				 em.put("empNo", employeeList.getEmployeeNumber());
+				 empArray.add(em);
+			}
+			 sendJson.put("list", empArray);
+			 response.setContentType("application/json; charset=utf-8");
+			 PrintWriter out = response.getWriter();
+			 System.out.println(sendJson.toJSONString());
+			 out.println(sendJson.toJSONString());
+			 out.flush();
+			 out.close();
 	}
 
 	
