@@ -2,6 +2,9 @@ package com.josso.board.controller.model.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import com.josso.board.vo.Board;
 
 public interface BoardService {
@@ -12,16 +15,16 @@ public interface BoardService {
 	public List<Board> selectNoticeAll() throws Exception;
 	
 	// 공지사항 디테일페이지
-	public Board selectNoticeDetail(int boardNum) throws Exception;
+	public Board selectNoticeDetail(String boardNum) throws Exception;
 	
 	// 공지사항 작성
-	public int noticeWrite(Board board) throws Exception;
+	public int noticeWrite(Board board, HttpSession session, HttpServletResponse response) throws Exception;
 
 	// 공지사항 수정
-	public int noticeUpdate(Board board, int boardNum) throws Exception;
+	public int noticeUpdate(Board board) throws Exception;
 	
 	// 공지사항 삭제
-	public int noticeDelete(int boardNum) throws Exception;
+	public int noticeDelete(String boardNum) throws Exception;
 
 	/* ------------------------------------------------------------- */
 	
@@ -38,7 +41,7 @@ public interface BoardService {
 	public int suggestionWrite(Board board) throws Exception;
 	
 	// 건의사항 수정
-	public int suggestionUpdate(Board board, int boardNum) throws Exception;
+	public int suggestionUpdate(Board board) throws Exception;
 	
 	// 건의사항 삭제
 	public int suggestionDelete(int boardNum) throws Exception;

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -162,35 +164,30 @@
                         </tr>
                     </thead>
                     <tbody>
+                    	<c:forEach var="noticeList" items="${noticeList}">
                         <tr>
-                            <td id="tdnum">1</td>
-                            <td>좋소 기업 공지사항 입니다. 필독하시기 바랍니다.</td>
-                            <td>관리자</td>
-                            <td>2020-03-16</td>
-                            <td>0</td>
+                            <td id="tdnum">${noticeList.boardNum}</td>
+                            <td><a href="detailPage?num=${noticeList.boardNum}">${noticeList.boardTitle}</a></td>
+                            <td>${noticeList.employeeName}</td>
+                            <td><fmt:formatDate value="${noticeList.boardRegDate}" pattern="yy년 MM월 dd일 / HH시 mm분"/></td>
+                            <td>${noticeList.boardHit}</td>
                         </tr>
-                        <tr>
-                            <td id="tdnum">2</td>
-                            <td>좋소 기업 공지사항 입니다. 필독하시기 바랍니다.</td>
-                            <td>관리자</td>
-                            <td>2020-03-16</td>
-                            <td>0</td>
-                        </tr>
+                        </c:forEach>
                     </tbody>    
                 </table>
             </div>
-            <div>     
-                <ul class="pagination" style="padding-top: 20px; padding-left: 40%;">
-                    <li class="page-item "><a class="page-link" href="#">Previous</a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                </ul>
+                <div class="bottom_area" style="float:left; padding-left: 20px;">
+                <button class="btn btn-info"><a href="write" style="color:white">작성하기</a></button>
             </div>
-            <div style="margin-left: 80%; padding-top: 10px;padding-bottom: 10px;">
-                <input type="text" name="??"><button>검색</button>
-            </div>         
+            
+            <div class="bottom_area" style="float:right;">
+                <select class="search" style="height: 37px;">
+                    <option>제목</option>
+                    <option>작성자</option>
+                </select>
+                <input type="text" name="search" class="search" style="padding-bottom: 3px; height: 38px;">
+                <button class="btn btn-success" style="height: 38px; margin-bottom: 3px;">검색</button>
+            </div>   
         </main>
         <footer class="border-top">
 
