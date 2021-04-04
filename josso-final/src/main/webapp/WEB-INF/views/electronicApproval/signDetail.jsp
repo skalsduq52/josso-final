@@ -138,8 +138,8 @@
 												<td rowspan="4"
 													style="height: 150px; background-color: rgb(226, 226, 226);">승<br>인
 												</td>
-												<td style="height: 15px; width: 100px;" align="center">${middle.departmentCode}</td>
-												<td style="height: 15px; width: 100px;" align="center">${last.departmentCode}</td>
+												<td style="height: 15px; width: 100px;" align="center">${middle.rankCode}</td>
+												<td style="height: 15px; width: 100px;" align="center">${last.rankCode}</td>
 											</tr>
 											<tr>
 												<td rowspan="2" align="center">

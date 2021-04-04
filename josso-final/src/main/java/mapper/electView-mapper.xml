@@ -32,7 +32,7 @@
 	
 	<!-- 결재 대기문서 최근 3개 -->
 	<select id="selectLastWait" parameterType="String" resultMap="ElectView">
-		SELECT ROWNUM, EA.* FROM(SELECT * FROM ELEC_VIEW WHERE ((MIDDLE = #{num} and MIDDLE_ACCEPT != 1) 
+		SELECT ROWNUM, EA.* FROM(SELECT * FROM ELEC_VIEW WHERE ((MIDDLE = #{num} and MIDDLE_ACCEPT = 0) 
 		OR (LAST = #{num} AND MIDDLE_ACCEPT = 1 AND LAST_ACCEPT = 0)) ORDER BY REGISTER_DATE DESC) EA WHERE ROWNUM BETWEEN 1 AND 3
 	</select>
 	
@@ -43,9 +43,10 @@
 	</select>
 	
 	<!-- 결재 대기문서 리스트 -->
-	<select id="selectWaitSign" parameterType="String" resultMap="ElectView">
-		SELECT * FROM ELEC_VIEW WHERE ((MIDDLE = #{num} and MIDDLE_ACCEPT != 1) 
-		OR (LAST = #{num} AND MIDDLE_ACCEPT = 1 AND LAST_ACCEPT = 0)) ORDER BY REGISTER_DATE DESC
+	<select id="selectWaitSign" parameterType="Paging" resultMap="ElectView">
+		SELECT * FROM(SELECT ROWNUM NUM, EV.* FROM ELEC_VIEW EV WHERE (MIDDLE = #{employeeNum} and MIDDLE_ACCEPT = 0) 
+		OR (LAST = #{employeeNum} AND MIDDLE_ACCEPT = 1 AND LAST_ACCEPT = 0) AND ${title} LIKE '%' || #{query} || '%' ORDER BY REGISTER_DATE DESC)
+		WHERE NUM BETWEEN #{startRange} AND #{endRange}
 	</select>
 	
 	<!-- 내가 기안한 문서 리스트 -->
@@ -54,7 +55,7 @@
 	</select>
 	
 	<!-- 결재 수신 문서 리스트 -->
-	<select id="selectRecepSign" parameterType="String" resultMap="ElectView">
+	<select id="selectReciveSign" parameterType="String" resultMap="ElectView">
 		SELECT * FROM ELEC_VIEW WHERE DRAFTER = #{num} OR MIDDLE = #{num} OR LAST = #{num} ORDER BY REGISTER_DATE DESC
 	</select>
 	

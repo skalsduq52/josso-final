@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.josso.electronicApproval.controller.model.dao.electronicApprovalDAO;
 import com.josso.electronicApproval.vo.ElectView;
 import com.josso.electronicApproval.vo.ElectronicApproval;
+import com.josso.electronicApproval.vo.Paging;
 import com.josso.employee.vo.Employee;
 
 @Controller
@@ -46,18 +47,31 @@ public class ElectronicController {
 	
 	// 결재 대기문서 눌렀을 때
 	@RequestMapping(value="elecApproval/waiting", method=RequestMethod.GET)
-	public ModelAndView approvalWaiting(ModelAndView mv, HttpSession session) throws Exception {
+	public ModelAndView approvalWaiting(ModelAndView mv, Paging page, HttpSession session) throws Exception {
+		
 		Employee emp = (Employee) session.getAttribute("employee");
 		String empNo = emp.getEmployeeNumber();
-		List<ElectView> elist = ed.selectWaitSign(empNo);
+		page.setEmployeeNum(empNo);
+		page.setTitle("DOCUMENT_NAME");
+		page.setCount(ed.selectCount(page));
+		page.setStartNum(page.getPage());
+		page.setLastNum(page.getCount());
+		page.setStartRange(page.getPage());
+		page.setEndRange(page.getPage());
+		List<ElectView> elist = ed.selectWaitSign(page);
 		mv.addObject("waitList",elist);
+		mv.addObject("page",page);
 		mv.setViewName("/electronicApproval/waitingSign");
 		return mv;
 	}
 	
+	// 결재 수신문서 눌렀을 때
 	@RequestMapping(value="elecApproval/reception", method=RequestMethod.GET)
-	public ModelAndView approvalRecept() throws Exception {
-		ModelAndView mv = new ModelAndView();
+	public ModelAndView approvalRecept(ModelAndView mv, HttpSession session) throws Exception {
+		Employee emp = (Employee) session.getAttribute("employee");
+		String empNo = emp.getEmployeeNumber();
+		List<ElectView> recepList = ed.selectReceiveSign(empNo);
+		mv.addObject("recepList",recepList);
 		mv.setViewName("/electronicApproval/receptionSign");
 		return mv;
 	}

@@ -79,11 +79,11 @@
             </div>
             <div>     
                 <ul class="pagination" style="padding-top: 20px; padding-left: 40%;">
-                    <li class="page-item "><a class="page-link" href="#">Previous</a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                    <c:forEach var="i" begin="0" end="4">
+						<c:if test="${(page.startNum+i) <= page.lastNum }">
+							<li class="page-item ${(page.page==(page.startNum+i))?'active':''}"><a class="page-link" href="?page=${page.startNum+i}&title=${param.title}&query=${param.query}">${page.startNum+i}</a></li>
+						</c:if>
+					</c:forEach>
                 </ul>
             </div>
             <div style="margin-left: 80%; padding-top: 10px;padding-bottom: 10px;">

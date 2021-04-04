@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.josso.electronicApproval.vo.ElectView;
 import com.josso.electronicApproval.vo.ElectronicApproval;
+import com.josso.electronicApproval.vo.Paging;
 import com.josso.employee.vo.Employee;
 
 @Repository
@@ -57,14 +58,20 @@ public class electronicApprovalDAO {
 	}
 	
 	// 결재 대기중 문서 리스트
-	public List<ElectView> selectWaitSign(String empNo) throws Exception {
-		List<ElectView> ev = sqlSession.selectList("ElectView.selectWaitSign", empNo);
+	public List<ElectView> selectWaitSign(Paging page) throws Exception {
+		List<ElectView> ev = sqlSession.selectList("ElectView.selectWaitSign", page);
 		return ev;
 	}
 	
 	// 결재 수신 문서 최근 3개
 	public List<ElectView> selectLastReceive(String empNo) throws Exception {
 		List<ElectView> ev = sqlSession.selectList("ElectView.selectLastRecive", empNo);
+		return ev;
+	}
+	
+	// 결재 수신 문서 리스트
+	public List<ElectView> selectReceiveSign(String empNo) throws Exception {
+		List<ElectView> ev = sqlSession.selectList("ElectView.selectReciveSign", empNo);
 		return ev;
 	}
 	
@@ -97,5 +104,10 @@ public class electronicApprovalDAO {
 	// 최종결재 하면 연차 차감
 	public void dateUpdate(HashMap<String, String> map) throws Exception {
 		sqlSession.update("ElectronicApproval.dateUpdate",map);
+	}
+	
+	public int selectCount(Paging pg) throws Exception {
+		int count = sqlSession.selectOne("ElectronicApproval.selectCount", pg);
+		return count;
 	}
 }

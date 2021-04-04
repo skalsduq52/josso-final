@@ -57,4 +57,11 @@
 		UPDATE EMPLOYEE SET EMPLOYEE_ANNUALLEAVE = EMPLOYEE_ANNUALLEAVE-#{num1} WHERE EMPLOYEE_NUMBER = #{emno} 
 	</update>
 	
+	<!-- 결재 대기문서 페이징용 카운트 가져가기 -->
+	<select id="selectCount" parameterType="Paging" resultType="_int">
+		SELECT COUNT(*) FROM (SELECT * FROM ELEC_VIEW WHERE ((MIDDLE = #{employeeNum} and MIDDLE_ACCEPT = 0) 
+		OR (LAST = #{employeeNum} AND MIDDLE_ACCEPT = 1 AND LAST_ACCEPT = 0)) ORDER BY REGISTER_DATE DESC)
+		WHERE ${title} LIKE '%' || #{query} || '%'
+	</select>
+	
 </mapper>

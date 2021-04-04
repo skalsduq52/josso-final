@@ -9,6 +9,7 @@
 	<typeAliases> <!-- Class 별칭을 선언하여 모든 경로를 적어주지 않아도 된다. -->
 		<typeAlias type="com.josso.electronicApproval.vo.ElectronicApproval" alias="ElectronicApproval" />
 		<typeAlias type="com.josso.electronicApproval.vo.ElectView" alias="ElectView" />
+		<typeAlias type="com.josso.electronicApproval.vo.Paging" alias="Paging" />
 		<typeAlias type="com.josso.board.vo.Board" alias="board" />
 		<typeAlias type="com.josso.email.vo.Email" alias="Email" />
 		<typeAlias type="com.josso.employee.vo.Employee" alias="Employee" />
