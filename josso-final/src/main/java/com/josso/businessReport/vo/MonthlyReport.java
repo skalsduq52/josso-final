@@ -21,7 +21,7 @@ public class MonthlyReport {
 	
 	private Date thisMonth;					// 다음 달
 	private String thisQuantity;			// 다음 달 정량성과
-	private String thisQualiy;				// 다음 달 정성성과
+	private String thisQuality;				// 다음 달 정성성과
 	private String thisReason;				// 다음 달 성과근거
 	private String thisSupplement;			// 보충할 점
 	
@@ -32,14 +32,12 @@ public class MonthlyReport {
 	
 	// 생성자
 	public MonthlyReport() {}
-	
+
 	
 	// 메서드
 	public int getReportNumber() {
 		return reportNumber;
 	}
-
-
 
 	public void setReportNumber(int reportNumber) {
 		this.reportNumber = reportNumber;
@@ -125,12 +123,12 @@ public class MonthlyReport {
 		this.thisQuantity = thisQuantity;
 	}
 
-	public String getThisQualiy() {
-		return thisQualiy;
+	public String getThisQuality() {
+		return thisQuality;
 	}
 
-	public void setThisQualiy(String thisQualiy) {
-		this.thisQualiy = thisQualiy;
+	public void setThisQuality(String thisQuality) {
+		this.thisQuality = thisQuality;
 	}
 
 	public String getThisReason() {
@@ -173,15 +171,19 @@ public class MonthlyReport {
 		this.rankCode = rankCode;
 	}
 
-	
+
 	@Override
 	public String toString() {
 		return String.format(
-				"MonthlyReport [reportNumber=%s, reportTitle=%s, writer=%s, writeTime=%s, lastMonth=%s, lastQuantity=%s, lastQuality=%s, lastReason=%s, lastSupplement=%s, thisMonth=%s, thisQuantity=%s, thisQualiy=%s, thisReason=%s, thisSupplement=%s, employeeName=%s, departmentCode=%s, rankCode=%s]",
+				"MonthlyReport [reportNumber=%s, reportTitle=%s, writer=%s, writeTime=%s, lastMonth=%s, lastQuantity=%s, lastQuality=%s, lastReason=%s, lastSupplement=%s, thisMonth=%s, thisQuantity=%s, thisQuality=%s, thisReason=%s, thisSupplement=%s, employeeName=%s, departmentCode=%s, rankCode=%s]",
 				reportNumber, reportTitle, writer, writeTime, lastMonth, lastQuantity, lastQuality, lastReason,
-				lastSupplement, thisMonth, thisQuantity, thisQualiy, thisReason, thisSupplement, employeeName,
+				lastSupplement, thisMonth, thisQuantity, thisQuality, thisReason, thisSupplement, employeeName,
 				departmentCode, rankCode);
 	}
+	
+	
+
+
 
 	
 	

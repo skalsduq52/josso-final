@@ -175,9 +175,6 @@ public class WeeklyController {
 		mv.setViewName("businessReport/weeklyDetailPage");
 		return mv;
 	}
-	  
-	
-	 
 	
 	// 주간업무보고(update 브릿지) - 완료
 	@RequestMapping(value="report/weekly/updateBridge", method=RequestMethod.GET)
@@ -198,18 +195,14 @@ public class WeeklyController {
 	
 	// 주간업무보고(수정하기 완료 버튼) - 진행 중
 	@RequestMapping(value="report/weekly/update", method=RequestMethod.POST)
-	public ModelAndView weeklyUpdate(WeeklyReport wr, ModelAndView mv, @RequestParam("num") int num) throws Exception {
+	public ModelAndView weeklyUpdate(WeeklyReport wr, ModelAndView mv) throws Exception {
 		System.out.println("- 수정완료 버튼 누름 -");
-		System.out.println("num값 : " + num);
 		System.out.println("이것도 드러오나? : " + wr);
 		
-		// 완료
-		wr.setReportNumber(num);
-		
-		int result = ws.reportUpdate(wr, num);
+		int result = ws.reportUpdate(wr);
 		
 		System.out.println("result : " + result);
-		
+		mv.addObject("num",wr.getReportNumber());
 		mv.setViewName("redirect:DetailPage");
 		return mv;
 	}

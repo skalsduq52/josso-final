@@ -50,8 +50,8 @@ public class WeeklyServiceImpl implements WeeklyService {
 	
 	// 수정
 	@Override
-	public int reportUpdate(WeeklyReport wr, int num) throws Exception {
-		int result = weeklyreportDao.reportUpdate(wr, num);
+	public int reportUpdate(WeeklyReport wr) throws Exception {
+		int result = weeklyreportDao.reportUpdate(wr);
 		return result;
 	}
 	

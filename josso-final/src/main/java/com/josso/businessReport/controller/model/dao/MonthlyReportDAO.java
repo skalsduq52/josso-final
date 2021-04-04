@@ -42,8 +42,8 @@ public class MonthlyReportDAO {
 	}
 	
 	// 수정
-	public int reportUpdate(int num) throws Exception {
-		int result = sqlSession.update("monthlyReport.reportUpdate", num);
+	public int reportUpdate(MonthlyReport mr) throws Exception {
+		int result = sqlSession.update("monthlyReport.reportUpdate", mr);
 		return result;
 	}
 	

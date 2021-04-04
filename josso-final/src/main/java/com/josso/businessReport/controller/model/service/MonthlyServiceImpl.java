@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.josso.businessReport.controller.model.dao.MonthlyReportDAO;
 import com.josso.businessReport.vo.MonthlyReport;
+import com.josso.businessReport.vo.WeeklyReport;
 
 @Service
 public class MonthlyServiceImpl implements MonthlyService {
@@ -44,8 +45,8 @@ public class MonthlyServiceImpl implements MonthlyService {
 	
 	// 수정
 	@Override
-	public int reportUpdate(int num) throws Exception {
-		int result = monthlyreportDao.reportUpdate(num);
+	public int reportUpdate(MonthlyReport mr) throws Exception {
+		int result = monthlyreportDao.reportUpdate(mr);
 		return result;
 	}
 	
