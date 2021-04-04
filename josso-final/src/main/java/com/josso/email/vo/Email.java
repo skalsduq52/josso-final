@@ -4,21 +4,21 @@ import java.util.Date;
 
 public class Email {
 	
-	private String employeeNumber;
-	private int emailNumber;
-	private String emailSend;
-	private String emailAccept;
-	private String emailReference;
-	private String emailTitle;
-	private String emailContent;
-	private String emailFile;
-	private Date regDate;
-	private String emailWastebasket;
-	private String emailRead;
-	private String emailPosition;
-	private String employeeName;
-	private String rankCode;
-	private String departmentCode;
+	private String employeeNumber;	// 임직원 번호
+	private int emailNumber;		// 이메일 고유번호
+	private String emailSend;		// 이메일 보낸사람
+	private String emailAccept;		// 이메일 받는사람
+	private String emailReference;	// 이메일  참조자
+	private String emailTitle;		// 이메일  제목
+	private String emailContent;	// 이메일  내용
+	private String emailFile;		// 이메일 첨부파일
+	private Date regDate;			// 이메일 작성날짜
+	private String emailWastebasket;// 이메일 휴지통상태
+	private String emailRead;		// 이메일 읽음상태
+	private String emailPosition;	// 이메일 위치
+	private String employeeName;	// 임직원 이름
+	private String rankCode;		// 임직원 직급
+	private String departmentCode;	// 임직원 부서명
 	
 	public Email() {
 		

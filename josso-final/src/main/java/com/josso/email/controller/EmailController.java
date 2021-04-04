@@ -31,12 +31,11 @@ public class EmailController{
 	public String email() throws Exception{
 		return "email/acceptList";
 	}
+	
 	// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@받은 메일함@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	// 받은메일함 목록 보여주기(완성)
 	@RequestMapping(value = "email/accept/list", method = RequestMethod.GET)
 	public ModelAndView acceptList(ModelAndView modelAndView, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception{
-		
-		
 		
 		Employee employee = (Employee) session.getAttribute("employee");
 		String id = employee.getEmployeeEmail();
@@ -44,7 +43,6 @@ public class EmailController{
 		modelAndView.addObject("acceptList",acceptList);
 		modelAndView.setViewName("email/acceptList");
 		return modelAndView;
-		
 	}
 	
 	// 받은메일함 - 자세히보기 - 답장버튼 클릭(완성)
@@ -135,21 +133,21 @@ public class EmailController{
 	}
 	
 	// 받은메일함 - 자세히보기(완성)
-		@RequestMapping(value = "email/accept/detail", method = RequestMethod.GET)
-		public ModelAndView acceptDetail(int num, ModelAndView modelAndView, HttpSession session) throws Exception{
-			emailService.AutoRead(num);
-			Email acceptDetail = emailService.AcceptDetail(num);
-			Email er = emailService.Er(num);	// 참조자 정보
-			Email es = emailService.Es(num);	// 보낸사람 정보
-			Email ea = emailService.Ea(num);	// 받는사람 정보
-			
-			modelAndView.addObject("ea",ea);
-			modelAndView.addObject("es",es);
-			modelAndView.addObject("er",er);
-			modelAndView.addObject("acceptDetail",acceptDetail);
-			modelAndView.setViewName("email/acceptDetail");
-			return modelAndView;
-		}
+	@RequestMapping(value = "email/accept/detail", method = RequestMethod.GET)
+	public ModelAndView acceptDetail(int num, ModelAndView modelAndView, HttpSession session) throws Exception{
+		emailService.AutoRead(num);
+		Email acceptDetail = emailService.AcceptDetail(num);
+		Email er = emailService.Er(num);	// 참조자 정보
+		Email es = emailService.Es(num);	// 보낸사람 정보
+		Email ea = emailService.Ea(num);	// 받는사람 정보
+		
+		modelAndView.addObject("ea",ea);
+		modelAndView.addObject("es",es);
+		modelAndView.addObject("er",er);
+		modelAndView.addObject("acceptDetail",acceptDetail);
+		modelAndView.setViewName("email/acceptDetail");
+		return modelAndView;
+	}
 	
 	// 보낸메일함 - 자세히보기(완성)
 	@RequestMapping(value = "email/send/detail", method = RequestMethod.GET)
@@ -169,20 +167,20 @@ public class EmailController{
 	}
 	
 	// 휴지통 - 자세히보기
-		@RequestMapping(value = "email/wastebasket/detail", method = RequestMethod.GET)
-		public ModelAndView wastebasketDetail(int num, ModelAndView modelAndView) throws Exception{
-			Email wastebasketDetail = emailService.WastebasketDetail(num);
-			Email er = emailService.Er(num);	// 참조자 정보
-			Email es = emailService.Es(num);	// 보낸사람 정보
-			Email ea = emailService.Ea(num);	// 받는사람 정보
-			
-			modelAndView.addObject("ea",ea);
-			modelAndView.addObject("es",es);
-			modelAndView.addObject("er",er);
-			modelAndView.addObject("wastebasketDetail",wastebasketDetail);
-			modelAndView.setViewName("email/wastebasketDetail");
-			return modelAndView;
-		}
+	@RequestMapping(value = "email/wastebasket/detail", method = RequestMethod.GET)
+	public ModelAndView wastebasketDetail(int num, ModelAndView modelAndView) throws Exception{
+		Email wastebasketDetail = emailService.WastebasketDetail(num);
+		Email er = emailService.Er(num);	// 참조자 정보
+		Email es = emailService.Es(num);	// 보낸사람 정보
+		Email ea = emailService.Ea(num);	// 받는사람 정보
+		
+		modelAndView.addObject("ea",ea);
+		modelAndView.addObject("es",es);
+		modelAndView.addObject("er",er);
+		modelAndView.addObject("wastebasketDetail",wastebasketDetail);
+		modelAndView.setViewName("email/wastebasketDetail");
+		return modelAndView;
+	}
 	
 	// 받은메일함 - 자세히 보기 - 전달버튼 클릭시
 	@RequestMapping(value = "email/send/delivery", method = RequestMethod.GET)
@@ -275,7 +273,7 @@ public class EmailController{
 		modelAndView.setViewName("redirect:/email/accept/list");
 		return modelAndView;
 	}
-	
+
 	// 보낸메일함 리스트 - 체크박스 - 삭제
 	@RequestMapping(value = "email/send/ckWastebasket", method = RequestMethod.GET)
 	public ModelAndView sendCkWastebasket(int check[], ModelAndView modelAndView) throws Exception{ 

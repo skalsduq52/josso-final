@@ -39,7 +39,7 @@
 		    WHERE ((EMAIL.EMPLOYEE_NUMBER = EMPLOYEE.EMPLOYEE_NUMBER) 
 		    AND (EMAIL_SEND = #{id}
 		    AND (EMAIL_POSITION = 'ALL' 
-		    OR EMAIL_POSITION ='SEND'))) 
+		    OR EMAIL_POSITION ='SEND'))) ORDER BY EMAIL.EMAIL_NUMBER DESC 
 		    <!-- WHERE EMAIL_TITLE LIKE '%' || #{field} ||'%' AND EMAIL_ACCEPT LIKE '%' || #{query} ||'%'; -->
 	</select>
 	

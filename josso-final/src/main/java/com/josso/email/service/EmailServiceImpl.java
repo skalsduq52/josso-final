@@ -17,124 +17,98 @@ public class EmailServiceImpl implements EmailService{
 	
 	// 받은메일함 - 리스트
 	public List<Email> AcceptList(String id) throws Exception{
-		
-		List<Email> acceptList = emailDao.AcceptList(id);
-		return acceptList;
+		return emailDao.AcceptList(id);
 	}
 	
 	// 보낸메일함 - 리스트
 	public List<Email> SendList(String id) throws Exception{ // , String field, String query
-		List<Email> sendList = emailDao.SendList(id); 		// , field, query
-		return sendList;
+		return emailDao.SendList(id); 
 	}
 	
 	// 휴지통 - 리스트
 	public List<Email> WastebasketList(String id) throws Exception{
-		List<Email> wastebasketList = emailDao.WastebasketList(id);
-		return wastebasketList;
+		return emailDao.WastebasketList(id);
 	}
 	
 	// 답장버튼 누를시
 	public List<Email> EmailReply(int number) throws Exception{
-		List<Email> emailReply = emailDao.EmailReply(number);
-		return emailReply;
+		return emailDao.EmailReply(number);
 	}
 	
 	// 참조자 정보 가져오기
 	public Email Er(int num) throws Exception{
-		Email er = emailDao.Er(num);
-		return er;
+		return emailDao.Er(num);
 	}
 	
 	// 보낸사람 정보 가져오기
 	public Email Es(int num) throws Exception{
-		Email es = emailDao.Es(num);
-		return es;
+		return emailDao.Es(num);
 	}
 	
 	// 받는사람 정보 가져오기
 	public Email Ea(int num) throws Exception{
-		Email ea = emailDao.Ea(num);
-		return ea;
+		return emailDao.Ea(num);
 	}
 	
 	// 메일보내기
 	public int emailWriteAction(Email email) throws Exception{
-		int cnt = emailDao.emailWriteAction(email);
-		return cnt;
+		return emailDao.emailWriteAction(email);
 	}
 	
 	// 자세히보기(받은 메일함)
 	public Email AcceptDetail(int num) throws Exception{
-		Email acceptDetail = emailDao.AcceptDetail(num);
-		return acceptDetail;
+		return emailDao.AcceptDetail(num);
 	}
 	
 	// 받은메일함 - 자세히보기 - 답장버튼 클릭
 	public Email AcceptReply(int num) throws Exception{
-		Email acceptReply = emailDao.AcceptReply(num);
-		return acceptReply;
+		return emailDao.AcceptReply(num);
 	}
 	
 	// 받은메일함 - 자세히보기 - 읽음/안읽음
 	public int AcceptRead(int num) throws Exception{
-		int cnt = emailDao.AcceptRead(num);
-		return cnt;
+		return emailDao.AcceptRead(num);
 	}
-	
-	// 자세히보기(제목클릭) 할 경우 자동 읽음처리
-//	public int AutoRead(int num) throws Exception{
-//		int cnt = emailDao.AutoRead(num);
-//		return cnt;
-//	}
 	
 	// 받은메일함 - 자세히보기 - 휴지통버튼 클릭
 	public Email AcceptWastebasket(int num) throws Exception{
-		Email acceptWastebasket = emailDao.AcceptWastebasket(num);
-		return acceptWastebasket;
+		return emailDao.AcceptWastebasket(num);
 	}
 	
 	// 보낸메일함 - 자세히보기 - 휴지통버튼 클릭
 	public int SendWastebasket(int num) throws Exception{
-		int sendWastebasket = emailDao.SendWastebasket(num);
-		return sendWastebasket;
+		return emailDao.SendWastebasket(num);
 	}
 	
 	// 받은메일함 - 자세히보기 - 전달버튼 클릭
 	public Email AcceptDelivery(int num) throws Exception{
-		Email acceptDelivery = emailDao.AcceptDelivery(num);
-		return acceptDelivery;
+		return emailDao.AcceptDelivery(num);
 	}
 	
 	// 받은메일함 - 자세히보기 - 전달버튼 - 보내기버튼 클릭
 	public int SendDeliverySend(Email email) throws Exception{
-		int sendDeliverySend = emailDao.SendDeliverySend(email);
-		return sendDeliverySend;
+		return emailDao.SendDeliverySend(email);
 	}
 	
 	// 휴지통 - 자세히보기 
 	public Email WastebasketDetail(int num) throws Exception{
-		Email wastebasketDetail = emailDao.WastebasketDetail(num);
-		return wastebasketDetail;
+		return emailDao.WastebasketDetail(num);
 		
 	}
 	
 	// 휴지통 - 자세히보기 - 복구버튼 클릭
 	public int WastebasketRestoration(int num) throws Exception{
-		int wastebasketRestoration = emailDao.WastebasketRestoration(num);
-		return wastebasketRestoration;
+		return emailDao.WastebasketRestoration(num);
 	}
 	
 	// 휴지통 - 자세히보기 - 삭제버튼 클릭
 	public int WastebasketDelete(int num) throws Exception{
-		int wastebasketDelete = emailDao.WastebasketDelete(num);
-		return wastebasketDelete;
+		return emailDao.WastebasketDelete(num);
 	}
 	
 	// 새메일 쓰기 - 보내기 버튼
 	public int WriteSend(Email email) throws Exception{
-		int writeSend = emailDao.WriteSend(email);
-		return writeSend;
+		return emailDao.WriteSend(email);
 	}
 	
 	// 개시물 총 갯수
@@ -144,8 +118,7 @@ public class EmailServiceImpl implements EmailService{
 	
 	// 검색기능
 	public List<Email> EmailSearch(String word) throws Exception{
-		List<Email> emailSearch = emailDao.EmailSearch(word);
-		return emailSearch;
+		return emailDao.EmailSearch(word);
 	}
 
 	// 리스트 - 제목클릭 - 자동읽음 처리

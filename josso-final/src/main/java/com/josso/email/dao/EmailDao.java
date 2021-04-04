@@ -9,129 +9,107 @@ import org.springframework.stereotype.Repository;
 
 import com.josso.email.vo.Email;
 
-
 @Repository
 public class EmailDao {
 
 	@Autowired
 	private SqlSessionTemplate sqlSession;
-	
 	public EmailDao() {
-		
 	}
 	
 	// 받은(메인)메일함 메일목록
 	public List<Email> AcceptList(String id) throws Exception{
-		List<Email> acceptList = sqlSession.selectList("Email.AcceptList", id);
-		return acceptList;
+		return sqlSession.selectList("Email.AcceptList", id);
 	}
 	
 	// 받은메일함 - 자세히보기
 	public Email AcceptDetail(int num) throws Exception{
-		Email acceptDetail = sqlSession.selectOne("Email.AcceptDetail", num);
-		return acceptDetail;
+		return sqlSession.selectOne("Email.AcceptDetail", num);
 	}
 	
 	// 휴지통 - 자세히보기
 	public Email WastebasketDetail(int num) throws Exception{
-		Email wastebasketDetail = sqlSession.selectOne("Email.AcceptDetail", num);
-		return wastebasketDetail;
+		return sqlSession.selectOne("Email.AcceptDetail", num);
 	}
 	
 	// 휴지통 - 자세히보기 - 복구버튼
 	public int WastebasketRestoration(int num) throws Exception{
-		int wastebasketRestoration = sqlSession.update("Email.AcceptWastebasket", num);
-		return wastebasketRestoration;
+		return sqlSession.update("Email.AcceptWastebasket", num);
 	}
 	
 	// 휴지통 - 자세히보기 - 삭제버튼
 	public int WastebasketDelete(int num) throws Exception{
-		int wastebasketDelete = sqlSession.update("Email.WastebasketDelete", num);
-		return wastebasketDelete;
+		return sqlSession.update("Email.WastebasketDelete", num);
 	}
 	
 	// 받은메일함 - 자세히보기 - 답장버튼 클릭
 	public Email AcceptReply(int num) throws Exception{
-		Email acceptReply = sqlSession.selectOne("Email.AcceptDetail", num);
-		return acceptReply;
+		return sqlSession.selectOne("Email.AcceptDetail", num);
 	}
 	
 	// 참조자 정보 뽑아오기
 	public Email Er(int num) throws Exception{
-		Email er = sqlSession.selectOne("Email.Er",num);
-		return er;
+		return sqlSession.selectOne("Email.Er",num);
 	}
 	
 	// 보낸사람 정보뽑아오기
 	public Email Es(int num) throws Exception{
-		Email es = sqlSession.selectOne("Email.Es",num);
-		return es;
+		return sqlSession.selectOne("Email.Es",num);
 	}
 	
 	// 받는사람 정보뽑아오기
 	public Email Ea(int num) throws Exception{
-		Email ea = sqlSession.selectOne("Email.Ea",num);
-		return ea;
+		return sqlSession.selectOne("Email.Ea",num);
 	}
 	
 	// 받은메일함 - 자세히보기 - 전달버튼 클릭
 	public Email AcceptDelivery(int num) throws Exception{
-		Email acceptDelivery = sqlSession.selectOne("Email.AcceptDetail", num);
-		return acceptDelivery;
+		return sqlSession.selectOne("Email.AcceptDetail", num);
 	}
 	
 	// 받은메일함 - 자세히보기 - 전달버튼 - 보내기버튼 클릭
 	public int SendDeliverySend(Email email) throws Exception{
-		int sendDeliverySend = sqlSession.insert("Email.WriteSend", email);
-		return sendDeliverySend;
+		return sqlSession.insert("Email.WriteSend", email);
 	}
 	
 	// 받은메일함 - 자세히보기 - 휴지통버튼 클릭
 	public Email AcceptWastebasket(int num) throws Exception{
-		Email acceptWastebasket = sqlSession.selectOne("Email.AcceptWastebasket", num);
-		return acceptWastebasket;
+		return sqlSession.selectOne("Email.AcceptWastebasket", num);
 	}
 	
 	// 보낸메일함 메일목록
 	public List<Email> SendList(String id) throws Exception{ 	// , String field, String query
-		List<Email> sendList = sqlSession.selectList("Email.SendList", id);
-		return sendList;
+		return sqlSession.selectList("Email.SendList", id);
 	}
 	
 	// 보낸메일함 - 자세히보기 - 휴지통
 	public int SendWastebasket(int num) throws Exception{
-		int sendWastebasket = sqlSession.update("Email.SendWastebasket", num);
-		return sendWastebasket;
+		return sqlSession.update("Email.SendWastebasket", num);
 	}
 	
 	// 휴지통 메일목록
 	public List<Email> WastebasketList(String id) throws Exception{
-		List<Email> wastebasketList = sqlSession.selectList("Email.WastebasketList", id);
-		return wastebasketList;
+		return sqlSession.selectList("Email.WastebasketList", id);
 	}
 	
 	// 답장버튼 누를시
 	public List<Email> EmailReply(int num) throws Exception{
-		List<Email> emailReply = sqlSession.selectList("Email.EmailReply", num);
-		return emailReply;
+		return sqlSession.selectList("Email.EmailReply", num);
 	}
 	
 	// 메일쓰기에서 보내기 버튼 클릭
 	public int emailWriteAction(Email email) throws Exception{
-		int cnt = sqlSession.insert("Email.emailWriteAction", email);
-		return cnt;
+		return sqlSession.insert("Email.emailWriteAction", email);
 	}
 	
 	// 자세히보기 읽음처리(받은메일함)
 	public int AcceptRead(int num) throws Exception{
-		int cnt = sqlSession.update("Email.AcceptRead", num);
-		return cnt;
+		return sqlSession.update("Email.AcceptRead", num);
 	}
 	
 	// 새메일쓰기 보내기 버튼
 	public int WriteSend(Email email) throws Exception{
-		int writeSend = sqlSession.insert("Email.WriteSend", email);
-		return writeSend;
+		return sqlSession.insert("Email.WriteSend", email);
 	}
 	
 	// 게시물 총 갯수
@@ -141,13 +119,11 @@ public class EmailDao {
 	
 	// 검색 기능
 	public List<Email> EmailSearch(String word) throws Exception{
-		List<Email> emailSearch = sqlSession.selectList("Email.EmailSearch", word);
-		return emailSearch;
+		return sqlSession.selectList("Email.EmailSearch", word);
 	}
 	
 	// 리스트 - 제목클릭 - 자동읽음 처리
 	public int AutoRead(int num) throws Exception{
 		return sqlSession.update("Email.autoRead", num);
-		
 	}
 }
