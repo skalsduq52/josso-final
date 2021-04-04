@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -247,7 +249,8 @@
 
         
         <main>
-            <form>
+            <form action="update?num=${num}" method="POST">
+            <input type="hidden" value=${num } name="reportNumber"/> 
             <div class="border-top">
                 <table style="width: 97%;" id="board">
                     <thead>
@@ -261,29 +264,29 @@
                         <tr style="height: 60px;">
                             <th class="left_td"></th>
                             <th class="report_date">
-                                <input type="month"></th><br>
+                                <input type="month" name="lastMonth" value="<fmt:formatDate value="${mr.lastMonth }" pattern="yyyy-MM"/>" class="date"></th><br>
                             <th class="report_date">
-                                <input type="month"></th><br>
+                                <input type="month" name="thisMonth" value="<fmt:formatDate value="${mr.thisMonth }" pattern="yyyy-MM"/>" class="date"> </th><br>
                         </tr>
                         <tr>
                             <th class="left_td">정량적 성과</th>
-                            <td class="right_td1"><textarea class="write_area" type="text"></textarea></td>
-                            <td class="right_td2"><textarea class="write_area" type="text"></textarea></td>
+                            <td class="right_td1"><textarea class="write_area" name="lastQuantity">${mr.lastQuantity }</textarea></td>
+                            <td class="right_td2"><textarea class="write_area" name="thisQuantity">${mr.thisQuantity }</textarea></td>
                         </tr>
                         <tr >
                             <th class="left_td">정성적 성과</th>
-                            <td class="right_td1"><textarea class="write_area" type="text"></textarea></td>
-                            <td class="right_td2"><textarea class="write_area" type="text"></textarea></td>
+                            <td class="right_td1"><textarea class="write_area" name="lastQuality">${mr.lastQuality }</textarea></td>
+                            <td class="right_td2"><textarea class="write_area" name="thisQuality">${mr.thisQuality }</textarea></td>
                         </tr>
                         <tr >
                             <th class="left_td">성과 근거</th>
-                            <td class="right_td1"><textarea class="write_area" type="text"></textarea></td>
-                            <td class="right_td2"><textarea class="write_area" type="text"></textarea></td>
+                            <td class="right_td1"><textarea class="write_area" name="lastReason">${mr.lastReason }</textarea></td>
+                            <td class="right_td2"><textarea class="write_area" name="thisReason">${mr.thisReason }</textarea></td>
                         </tr>
                         <tr id="write_content">
                             <th class="left_td">보완할 점</th>
-                            <td class="right_td1"><textarea class="write_area" type="text"></textarea></td>
-                            <td class="right_td2"><textarea class="write_area" type="text"></textarea></td>
+                            <td class="right_td1"><textarea class="write_area" name="lastSupplement">${mr.lastSupplement }</textarea></td>
+                            <td class="right_td2"><textarea class="write_area" name="thisSupplement">${mr.thisSupplement }</textarea></td>
                         </tr>
                     </tbody>    
                 </table>
@@ -293,9 +296,9 @@
             <div style="float:left; width: 150px; height: 100px;" >
             </div>
             <div style="padding-top: 50px; padding-right: 50px; float:right" class="text-center">
-                <input class="btn btn-info btn-lg" type="submit" value="등록하기">
+                <input class="btn btn-info btn-lg" type="submit" value="수정완료">
                 <input class="btn btn-secondary btn-lg" onclick="history.back()" type="submit" value="취소">
-            </span>
+            </div>
             </div>
            </form>        
         </main>

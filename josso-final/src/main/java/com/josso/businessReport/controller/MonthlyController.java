@@ -57,7 +57,7 @@ public class MonthlyController {
 			String[] titleDate = thisDate.split("-");
 			System.out.println("titleDate : " + titleDate[i]);
 			
-			// 년, 월로 쪼개기
+			// 년, 월로 배열에 담아주기
 			int year = Integer.parseInt(titleDate[0]);
 			System.out.println(year);
 			int month = Integer.parseInt(titleDate[1]);
@@ -94,7 +94,7 @@ public class MonthlyController {
 		return mv;
 	}
 	
-	// 월간실적보고(작성) '브릿지'
+	// 월간실적보고(작성)
 	@RequestMapping(value="report/monthly/write", method=RequestMethod.GET)
 	public ModelAndView monthlyWrite(ModelAndView mv) throws Exception  {
 		mv.setViewName("businessReport/monthlyWrite");
@@ -102,7 +102,7 @@ public class MonthlyController {
 	}
 	
 	// 월간실적보고(글등록) - 완료
-	@RequestMapping(value="report/monthkly/register", method=RequestMethod.POST)
+	@RequestMapping(value="report/monthly/register", method=RequestMethod.POST)
 	public ModelAndView monthlyRegister(@RequestParam("thisMonth") String thisMonth, MonthlyReport mr, ModelAndView mv,  HttpSession session) throws Exception {
 		System.out.println("주간업무보고 등록 들어옴");
 		
@@ -110,19 +110,22 @@ public class MonthlyController {
 		// thisStart로 변환하여 제목으로 활용
 		Calendar calendar = Calendar.getInstance();
 		System.out.println(thisMonth);
+
 		
 		String titleDate[] = thisMonth.split("-");
 		
-		// 년, 월로 쪼개기
+		// 년, 월로 배열에 담아주기
 		int year = Integer.parseInt(titleDate[0]);
 		int month = Integer.parseInt(titleDate[1]);
+		int day = 0;
 		
 		// 캘린더 셋 시작
-		calendar.set(year, month);
+		calendar.set(year, month, day);
 		
 		// 몇 번째 주인지 추출
 		int yearth = calendar.get(Calendar.YEAR);
 		int monthth = calendar.get(Calendar.MONTH);
+		int dayth = calendar.get(Calendar.DAY_OF_MONTH);
 		
 		// title변수에 제목값 저장
 		String title = yearth + "년 " + monthth + "월 실적  보고";
@@ -159,6 +162,7 @@ public class MonthlyController {
 		
 		MonthlyReport mr = ms.selectDetailPage(num);
 		
+		
 		mv.addObject("num1", num1);
 		mv.addObject("mr", mr);
 		mv.setViewName("businessReport/monthlyDetailPage");
@@ -176,7 +180,7 @@ public class MonthlyController {
 		MonthlyReport mr = ms.selectDetailPage(num);
 		
 		mv.addObject("num", num1);
-		mv.addObject("mr", ms);
+		mv.addObject("mr", mr);
 		mv.setViewName("businessReport/monthlyUpdate");
 		return mv;
 	}
@@ -191,9 +195,14 @@ public class MonthlyController {
 		
 		int result = ms.reportUpdate(mr);
 		
+		System.out.println("넘버 값 : " + mr.getReportNumber());
+		
+		System.out.println("들어오는 날짜 : " + mr.getThisMonth());
+		System.out.println(mr.getLastMonth());
+		
 		System.out.println("result : " + result);
 		mv.addObject("num", mr.getReportNumber());
-		mv.setViewName("businessReport/monthlyUpdate");
+		mv.setViewName("redirect:DetailPage");
 		return mv;
 	}
 	

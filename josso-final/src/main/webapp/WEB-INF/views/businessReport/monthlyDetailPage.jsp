@@ -272,9 +272,9 @@
                         <tr style="height: 60px;">
                             <th class="left_td"></th>
                             <th class="report_date">
-                                <input type="month" value="<fmt:formatDate value="${mr.lastMonth }" pattern="yyyy-MM-dd"/>" readonly class="date"></th><br>
+                                <input type="month" value="<fmt:formatDate value="${mr.lastMonth}" pattern="yyyy-MM"/>" readonly class="date"></th><br>
                             <th class="report_date">
-                                <input type="month" value="<fmt:formatDate value="${mr.thisMonth }" pattern="yyyy-MM-dd"/>" readonly  class="date"></th><br>
+                                <input type="month" value="<fmt:formatDate value="${mr.thisMonth}" pattern="yyyy-MM"/>" readonly  class="date"></th><br>
                         </tr>
                         <tr>
                             <th class="left_td">정량적 성과</th>
@@ -298,17 +298,27 @@
                         </tr>
                     </tbody>    
                 </table>
-            </div>
-
-            <div>
-                <div style="float:left; width: 150px; height: 100px;" >
-                </div>
-                <div style="padding-top: 50px; padding-right: 50px; float:right" class="text-center">
-                    <input class="btn btn-info btn-lg" type="submit" value="수정하기">
-                    <input class="btn btn-secondary btn-lg" onclick="history.back()" type="submit" value="목록">
-                </div>
-            </div>
-           </form>        
+	            </div>
+	
+				<div style="display: inline-block">
+	
+					<div style="float: left; width: 150px; height: 100px; padding-top: 50px;">
+					</div>
+	
+					<div style="float: left; width: 875px; height: 100px; padding-top: 50px;">
+						<button class="btn btn-info btn-lg"><a href="list" style="color: white">목록으로</a></button>
+					</div>
+	
+					<div style="padding-top: 50px; float: right" class="text-center">
+						<div>
+							<button class="btn btn-info btn-lg"><a href="updateBridge?num=${num1}" style="color: white">수정하기</a></button>
+							<button class="btn btn-secondary btn-lg" onclick="return confirm('정말 삭제하시겠습니까?')"><a href="delete?num=${num1 }" style="color: white">삭제하기</a>
+							</button>
+						</div>
+					</div>
+	
+				</div>
+			</form>        
         </main>
         <br>
         <br>

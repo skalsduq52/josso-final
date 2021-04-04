@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.josso.businessReport.controller.model.dao.MonthlyReportDAO;
 import com.josso.businessReport.vo.MonthlyReport;
-import com.josso.businessReport.vo.WeeklyReport;
 
 @Service
 public class MonthlyServiceImpl implements MonthlyService {

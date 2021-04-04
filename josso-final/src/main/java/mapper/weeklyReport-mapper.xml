@@ -8,18 +8,21 @@
 		<result property="reportTitle" column="REPORT_TITLE"/>
 		<result property="writer" column="WRITER"/>
 		<result property="writeTime" column="WRITE_TIME"/>
+		
 		<result property="thisStart" column="THIS_START"/>
 		<result property="thisEnd" column="THIS_END"/>
 		<result property="thisMeeting" column="THIS_MEETING"/>
 		<result property="thisConference" column="THIS_CONFERENCE"/>
 		<result property="thisProject" column="THIS_PROJECT"/>
 		<result property="thisEtc" column="THIS_ETC"/>
+		
 		<result property="nextStart" column="NEXT_START"/>
 		<result property="nextEnd" column="NEXT_END"/>
 		<result property="nextMeeting" column="NEXT_MEETING"/>
 		<result property="nextConference" column="NEXT_CONFERENCE"/>
 		<result property="nextProject" column="NEXT_PROJECT"/>
 		<result property="nextEtc" column="NEXT_ETC"/>
+		
 		<result property="employeeName" column="EMPLOYEE_NAME"/>
 		<result property="departmentCode" column="DEPARTMENT_CODE"/>
 		<result property="rankCode" column="RANK_CODE"/>

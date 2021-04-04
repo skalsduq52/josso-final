@@ -3,7 +3,6 @@ package com.josso.businessReport.controller.model.service;
 import java.util.List;
 
 import com.josso.businessReport.vo.MonthlyReport;
-import com.josso.businessReport.vo.WeeklyReport;
 
 public interface MonthlyService {
 	

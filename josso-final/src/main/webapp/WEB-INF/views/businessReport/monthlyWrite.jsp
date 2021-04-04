@@ -247,7 +247,7 @@
 
         
         <main>
-            <form>
+            <form action="register" method="POST">
             <div class="border-top">
                 <table style="width: 97%;" id="board">
                     <thead>
@@ -261,29 +261,29 @@
                         <tr style="height: 60px;">
                             <th class="left_td"></th>
                             <th class="report_date">
-                                <input type="month"></th><br>
+                                <input type="month" name="lastMonth" required></th><br>
                             <th class="report_date">
-                                <input type="month"></th><br>
+                                <input type="month" name="thisMonth" required></th><br>
                         </tr>
                         <tr>
                             <th class="left_td">정량적 성과</th>
-                            <td class="right_td1"><textarea class="write_area" type="text"></textarea></td>
-                            <td class="right_td2"><textarea class="write_area" type="text"></textarea></td>
+                            <td class="right_td1"><textarea class="write_area" name="lastQuantity"></textarea></td>
+                            <td class="right_td2"><textarea class="write_area" name="thisQuantity"></textarea></td>
                         </tr>
                         <tr >
                             <th class="left_td">정성적 성과</th>
-                            <td class="right_td1"><textarea class="write_area" type="text"></textarea></td>
-                            <td class="right_td2"><textarea class="write_area" type="text"></textarea></td>
+                            <td class="right_td1"><textarea class="write_area" name="lastQuality"></textarea></td>
+                            <td class="right_td2"><textarea class="write_area" name="thisQuality"></textarea></td>
                         </tr>
                         <tr >
                             <th class="left_td">성과 근거</th>
-                            <td class="right_td1"><textarea class="write_area" type="text"></textarea></td>
-                            <td class="right_td2"><textarea class="write_area" type="text"></textarea></td>
+                            <td class="right_td1"><textarea class="write_area" name="lastReason"></textarea></td>
+                            <td class="right_td2"><textarea class="write_area" name="thisReason"></textarea></td>
                         </tr>
                         <tr id="write_content">
                             <th class="left_td">보완할 점</th>
-                            <td class="right_td1"><textarea class="write_area" type="text"></textarea></td>
-                            <td class="right_td2"><textarea class="write_area" type="text"></textarea></td>
+                            <td class="right_td1"><textarea class="write_area" name="lastSupplement"></textarea></td>
+                            <td class="right_td2"><textarea class="write_area" name="thisSupplement"></textarea></td>
                         </tr>
                     </tbody>    
                 </table>
@@ -294,7 +294,7 @@
             </div>
             <div style="padding-top: 50px; padding-right: 50px; float:right" class="text-center">
                 <input class="btn btn-info btn-lg" type="submit" value="등록하기">
-                <input class="btn btn-secondary btn-lg" onclick="history.back()" type="submit" value="취소">
+                <input type="button" class="btn btn-secondary btn-lg" onclick="history.back()" value="취소">
             </div>
             </div>
            </form>        

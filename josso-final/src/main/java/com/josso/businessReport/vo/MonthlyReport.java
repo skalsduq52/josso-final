@@ -19,6 +19,7 @@ public class MonthlyReport {
 	private String lastReason;				// 지난 달 성과근거
 	private String lastSupplement;			// 보충할 점
 	
+	@DateTimeFormat(pattern="yyyy-MM")
 	private Date thisMonth;					// 다음 달
 	private String thisQuantity;			// 다음 달 정량성과
 	private String thisQuality;				// 다음 달 정성성과
