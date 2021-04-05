@@ -114,11 +114,14 @@ public class BoardController {
 		return mv;
 	}
 	
+	
 	// 건의사항 (디테일페이지)
 	@RequestMapping(value="board/suggestion/detailPage", method=RequestMethod.GET)
 	public ModelAndView suggestionDetail(ModelAndView mv, @RequestParam("num") String boardNum) throws Exception {
 		Board suggestionBoard = boardService.boardDetail(boardNum);
 		String num = boardNum;
+		
+		System.out.println("들어오는 페이지값 : " + num);
 		
 		mv.addObject("num", num);
 		mv.addObject("suggestionBoard", suggestionBoard);
@@ -132,7 +135,7 @@ public class BoardController {
 	public ModelAndView suggestionUpdateBridge(ModelAndView mv, @RequestParam("num") String num) throws Exception {
 		String num1 = num;
 		Board board = boardService.boardDetail(num);
-		
+
 		mv.addObject("num1", num1);
 		mv.addObject("board", board);
 		mv.setViewName("board/suggestionUpdate");
@@ -143,6 +146,7 @@ public class BoardController {
 	@RequestMapping(value="board/suggestion/update", method=RequestMethod.POST)
 	public ModelAndView suggestionUpdate(ModelAndView mv, Board board, @RequestParam("boarNum") int boardNum) throws Exception {
 		boardService.boardUpdate(board);
+		mv.addObject("num", board.getBoardNum());
 		mv.setViewName("redirect:detailPage");
 		return mv;
 	}
