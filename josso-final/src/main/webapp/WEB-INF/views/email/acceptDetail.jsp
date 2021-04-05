@@ -161,11 +161,13 @@
                     </tr>
                     <tr>
                         <td>받는 사람</td>
-                        <td colspan="2"><input type="email" readonly value="${ea.employeeName}/${ea.departmentCode}/${ea.rankCode}" class="form-control form-control-sm "></td>
+                        <td colspan="2"><input type="email" readonly value="${ea.employeeName}/${ea.departmentCode}/${ea.rankCode}" class="form-control form-control-sm ">
+                        <table id="textarea1" rows="4" cols="100" style="overflow: auto; height: 50px; display:none;"></table></td>
                     </tr>
                     <tr>
                         <td>참조</td>
-                        <td colspan="2"><input type="text" readonly value="${er.employeeName}/${er.departmentCode}/${er.rankCode}"class="form-control form-control-sm "></td>
+                        <td colspan="2"><input type="text" readonly value="${er.employeeName}/${er.departmentCode}/${er.rankCode}"class="form-control form-control-sm ">
+                        <table id="textarea2" rows="4" cols="100" style="overflow: auto; height: 50px; display:none;"></table></td>
                     </tr>
                     <tr>
                         <td>보낸날짜  </td>

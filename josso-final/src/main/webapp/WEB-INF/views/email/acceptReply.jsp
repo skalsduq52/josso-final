@@ -58,6 +58,90 @@
                   });
                 
             });
+         // 받는사람 검색 기능
+            $(function(){
+            	var emailAdrr = "";
+            	var empty = "";
+            	$('#emailAccept').keyup(function(){
+            		var name = $('#emailAccept').val();
+            		console.log(name);
+            		$.ajax({
+            			url : "/josso/email/write/searchName",
+            			data : {"employeeName" : name},
+            			method : "post",
+            			dataType : "json",
+            			success : function(rdata){
+            				var listStr = JSON.stringify(rdata);
+            				var data = JSON.parse(listStr);
+            				console.log(data);
+            				$('#textarea1').html('');
+            				var area = $('#textarea1').html();
+            				if(data.list.length == 0){
+            					area += "검색하신 결과가 없습니다."
+            					}else{
+            						for(var i in data.list){
+            							area += "<li class='selectEmp'><span  onclick='fnEmpSet1(\""+data.list[i].email+"\")'>"
+            								+data.list[i].name+" / "
+            								+data.list[i].rCode+" / "
+            								+data.list[i].dCode+" / "
+            								+data.list[i].email+" </span></li>";
+            							console.log(data.list[i].email);
+            							emailAdrr = data.list[i].email;
+            						}
+            					}
+            				$('#textarea1').html(area);
+            				$('#textarea1').attr("style","display:inline")
+            			}
+            		});	
+            	});	
+            })
+            // 검색목록에서 이메일 추출
+            function fnEmpSet1(empEmail){
+				$('#emailAccept').val(empEmail);
+				$('#textarea1').attr("style","display:none");
+			}
+            // 참조자 검색 기능
+            $(function(){
+            	var emailAdrr = "";
+            	var empty = "";
+            	$('#emailReference').keyup(function(){
+            		var name = $('#emailReference').val();
+            		console.log(name);
+            		$.ajax({
+            			url : "/josso/email/write/searchName",
+            			data : {"employeeName" : name},
+            			method : "post",
+            			dataType : "json",
+            			success : function(rdata){
+            				var listStr = JSON.stringify(rdata);
+            				var data = JSON.parse(listStr);
+            				console.log(data);
+            				$('#textarea2').html('');
+            				var area = $('#textarea2').html();
+            				if(data.list.length == 0){
+            					area += "검색하신 결과가 없습니다."
+            					}else{
+            						for(var i in data.list){
+            							area += "<li class='selectEmp'><span  onclick='fnEmpSet2(\""+data.list[i].email+"\")'>"
+            								+data.list[i].name+" / "
+            								+data.list[i].rCode+" / "
+            								+data.list[i].dCode+" / "
+            								+data.list[i].email+" </span></li>";
+            							console.log(data.list[i].email);
+            							emailAdrr = data.list[i].email;
+            						}
+            					}
+            				$('#textarea2').html(area);
+            				$('#textarea2').attr("style","display:inline")
+            			}
+            		});	
+            	});	
+            })
+         	// 검색목록에서 이메일 추출
+            function fnEmpSet2(empEmail){
+				$('#emailReference').val(empEmail);
+				$('#textarea2').attr("style","display:none");
+			}
             $("#re").click(function(){
                 if(confirm("정말 등록하시겠습니까 ?") == true){
                     alert("등록되었습니다");
@@ -89,6 +173,8 @@
 			    margin: -15px 0px 0px 8px;
 			}
             a:hover { color: blue; text-decoration: none;}
+            .selectEmp{ cursor:pointer; }
+			.selectEmp:hover{ text-decoration: underline; }
         </style>
     </head>
     <body class="body">
@@ -143,20 +229,22 @@
                         <td style="width: 120px;">보내는 사람 :</td>
                         <td colspan="2">
                         <input type="hidden" name="employeeNumber"  value="${employee.employeeNumber}">
-                        <input type="email" name="emailSend" class="form-control form-control-sm form-control-plaintext">
+                        <input type="email" name="emailSend" class="form-control form-control-sm">
                         </td>
                     </tr>
                     <tr>
                         <td>받는 사람  </td>
-                        <td colspan="2"><input type="email" value="${acceptReply.emailSend}" name="emailAccept" class="form-control form-control-sm form-control-plaintext"></td>
+                        <td colspan="2"><input type="email" autocomplete="off" autofocus  value="${acceptReply.emailSend}" name="emailAccept" id="emailAccept" class="form-control form-control-sm">
+                        <table id="textarea1" rows="4" cols="100" style="overflow: auto; height: 50px; display:none;"></table></td>
                     </tr>
                     <tr>
                         <td>참조  </td>
-                        <td colspan="2"><input type="email" name="emailReference" class="form-control form-control-sm form-control-plaintext"></td>
+                        <td colspan="2"><input type="email" autocomplete="off" autofocus  id="emailReference" name="emailReference" class="form-control form-control-sm">
+                        <table id="textarea2" rows="4" cols="100" style="overflow: auto; height: 50px; display:none;"></table></td>
                     </tr>
                     <tr>
                         <td>제목  </td>
-                        <td colspan="2"><input type="text" value="RE: ${acceptReply.emailTitle}" name="emailTitle" class="form-control form-control-sm form-control-plaintext"></td>
+                        <td colspan="2"><input type="text" value="RE: ${acceptReply.emailTitle}" name="emailTitle" class="form-control form-control-sm"></td>
                     </tr>
                     <tr>
                         <td>첨부파일  </td>

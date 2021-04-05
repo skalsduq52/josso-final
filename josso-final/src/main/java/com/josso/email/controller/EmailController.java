@@ -31,8 +31,21 @@ public class EmailController{
  
 	// 메일 메인페이지(완성)
 	@RequestMapping(value = "email.do", method = RequestMethod.GET)
-	public String email() throws Exception{
-		return "email/acceptList";
+	public String email(HttpSession session) throws Exception{
+		return "email/emailWrite";
+	}
+	
+	@RequestMapping(value = "main.do", method = RequestMethod.GET)
+	public ModelAndView emailwrite(ModelAndView modelAndView, HttpSession session) throws Exception{
+		Employee employee = (Employee) session.getAttribute("employee");
+		String id = employee.getEmployeeEmail();
+		int emailCount = emailService.emailCount(id);
+		int wastebasketCount = emailService.wastebasketCount(id);
+		modelAndView.addObject("wastebasketCount",wastebasketCount);
+		modelAndView.addObject("emailCount",emailCount);
+		modelAndView.setViewName("email/part/aside");
+		modelAndView.setViewName("email.do");
+		return modelAndView;
 	}
 	
 	// /* ------------------------------받은 메일함------------------------------- */
@@ -365,7 +378,15 @@ public class EmailController{
 	// /* ------------------------------새 메일쓰기------------------------------- */
 	// 새 메일쓰기
 	@RequestMapping(value = "email/write/open", method = RequestMethod.GET)
-	public String writeOpen() throws Exception{
+	public String writeOpen(ModelAndView modelAndView, HttpSession session) throws Exception{
+		Employee employee = (Employee) session.getAttribute("employee");
+		String id = employee.getEmployeeEmail();
+		int emailCount = emailService.emailCount(id);
+		int wastebasketCount = emailService.wastebasketCount(id);
+		modelAndView.addObject("wastebasketCount",wastebasketCount);
+		modelAndView.addObject("emailCount",emailCount);
+		modelAndView.setViewName("email/part/aside");
+		modelAndView.setViewName("redirect:/email.do");
 		return "email/emailWrite";
 	}
 	

@@ -58,6 +58,7 @@
                   });
                 
             });
+       	    // 받는사람 검색 기능
             $(function(){
             	var emailAdrr = "";
             	var empty = "";
@@ -79,7 +80,7 @@
             					area += "검색하신 결과가 없습니다."
             					}else{
             						for(var i in data.list){
-            							area += "<li class='selectEmp'><span  onclick='fnEmpSet(\""+data.list[i].email+"\")'>"
+            							area += "<li class='selectEmp'><span  onclick='fnEmpSet1(\""+data.list[i].email+"\")'>"
             								+data.list[i].name+" / "
             								+data.list[i].rCode+" / "
             								+data.list[i].dCode+" / "
@@ -88,22 +89,19 @@
             							emailAdrr = data.list[i].email;
             						}
             					}
-            				$('#textarea1').html(area);
+            				$('#textarea1').attr("style","overflow:auto")
             				$('#textarea1').attr("style","display:inline")
+            				$('#textarea1').html(area);
             			}
             		});	
             	});	
-				alert('selectEmp click');            	
-            	$('.selectEmp').on('click','span' ,function(){
-            		alert($(this).html());
-            	});
-	
-            	/* $('#textarea1').click(function(){
-         		   $('#emailAccept').val(emailAdrr);
-         		   $('#textarea1').html(empty);
-         	   });
-            	 */
             })
+            // 검색목록에서 이메일 추출
+            function fnEmpSet1(empEmail){
+				$('#emailAccept').val(empEmail);
+				$('#textarea1').attr("style","display:none");
+			}
+            // 참조자 검색 기능
             $(function(){
             	var emailAdrr = "";
             	var empty = "";
@@ -125,7 +123,7 @@
             					area += "검색하신 결과가 없습니다."
             					}else{
             						for(var i in data.list){
-            							area += "<li><span class='selectEmp'>"
+            							area += "<li class='selectEmp'><span  onclick='fnEmpSet2(\""+data.list[i].email+"\")'>"
             								+data.list[i].name+" / "
             								+data.list[i].rCode+" / "
             								+data.list[i].dCode+" / "
@@ -139,37 +137,13 @@
             			}
             		});	
             	});	
-            	$('#textarea2').click(function(){
-         		   $('#emailReference').val(emailAdrr);
-         		   $('#textarea2').html(empty);
-         	   });
             })
-function fnEmpSet(empEmail){
-	alert(empEmail)            	
-}         
-           /* $(function(){
-        	   $('.selectEmp').click(function(){
-        	   console.log("들어옴");
-        		   
-        	   var val = $('#textarea1').children().children('.selectEmp').text();
-        	   alert(val);
-        	   });
-           });
- 
-            
-           $(function(){
-	            $('.selectEmp').click(function() {
-	            	var area = '';
-	            	$('#emailAccept').append(area);
-	            	console.log('들어옴');
-	            	var a = '123';
-	            	console.log(a);
-	            	var area = "<input autocomplete='off' id='emailAccept' autofocus type='email' required name='emailAccept' value="+$(this).text()+" class='form-control form-control-sm'>";
-		    		$('#emailAccept').append(area);
-			    		/* var area = "<span class='badge badge-pill badge-secondary' name='Attendee'>"+$(this).text()+"</span>&nbsp;";
-					$('#Attendee').append(area); 
-	        		});
-            });*/
+         	// 검색목록에서 이메일 추출
+            function fnEmpSet2(empEmail){
+				$('#emailReference').val(empEmail);
+				$('#textarea2').attr("style","display:none");
+			}
+         
             
             $("#re").click(function(){
                 if(confirm("정말 등록하시겠습니까 ?") == true){
@@ -259,13 +233,13 @@ function fnEmpSet(empEmail){
                         <td style="width: 120px;">보내는 사람 </td>
                         <td colspan="2">
                         <input type="hidden" name="employeeNumber"  value="${employee.employeeNumber}">
-                        <input type="email"  value="${employee.employeeEmail}" required name="emailSend" class="form-control form-control-sm">
+                        <input type="email"  readonly autocomplete="off" autofocus value="${employee.employeeEmail}" required name="emailSend" class="form-control form-control-sm">
                         </td>
                     </tr>
                     <tr >
                         <td>받는 사람  </td>
-                        <td colspan="2" id="Attendee"><input autocomplete="off" id="emailAccept" autofocus type="email" required name="emailAccept" class="form-control form-control-sm">
-                        <table id="textarea1" rows="4" cols="100" style="overflow: auto; height: 50px; display:none;"></table></td>
+                        <td colspan="2" id="Attendee"><input autocomplete="off" autofocus id="emailAccept"  type="email" required name="emailAccept" class="form-control form-control-sm">
+                        <table id="textarea1" rows="4" cols="10" style="height: 50px; display:none;"></table></td>
                     </tr>
                     <tr >
                         <td>참조  </td>

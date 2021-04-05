@@ -58,6 +58,90 @@
                   });
                 
             });
+         // 받는사람 검색 기능
+            $(function(){
+            	var emailAdrr = "";
+            	var empty = "";
+            	$('#emailAccept').keyup(function(){
+            		var name = $('#emailAccept').val();
+            		console.log(name);
+            		$.ajax({
+            			url : "/josso/email/write/searchName",
+            			data : {"employeeName" : name},
+            			method : "post",
+            			dataType : "json",
+            			success : function(rdata){
+            				var listStr = JSON.stringify(rdata);
+            				var data = JSON.parse(listStr);
+            				console.log(data);
+            				$('#textarea1').html('');
+            				var area = $('#textarea1').html();
+            				if(data.list.length == 0){
+            					area += "검색하신 결과가 없습니다."
+            					}else{
+            						for(var i in data.list){
+            							area += "<li class='selectEmp'><span  onclick='fnEmpSet1(\""+data.list[i].email+"\")'>"
+            								+data.list[i].name+" / "
+            								+data.list[i].rCode+" / "
+            								+data.list[i].dCode+" / "
+            								+data.list[i].email+" </span></li>";
+            							console.log(data.list[i].email);
+            							emailAdrr = data.list[i].email;
+            						}
+            					}
+            				$('#textarea1').html(area);
+            				$('#textarea1').attr("style","display:inline")
+            			}
+            		});	
+            	});	
+            })
+            // 검색목록에서 이메일 추출
+            function fnEmpSet1(empEmail){
+				$('#emailAccept').val(empEmail);
+				$('#textarea1').attr("style","display:none");
+			}
+            // 참조자 검색 기능
+            $(function(){
+            	var emailAdrr = "";
+            	var empty = "";
+            	$('#emailReference').keyup(function(){
+            		var name = $('#emailReference').val();
+            		console.log(name);
+            		$.ajax({
+            			url : "/josso/email/write/searchName",
+            			data : {"employeeName" : name},
+            			method : "post",
+            			dataType : "json",
+            			success : function(rdata){
+            				var listStr = JSON.stringify(rdata);
+            				var data = JSON.parse(listStr);
+            				console.log(data);
+            				$('#textarea2').html('');
+            				var area = $('#textarea2').html();
+            				if(data.list.length == 0){
+            					area += "검색하신 결과가 없습니다."
+            					}else{
+            						for(var i in data.list){
+            							area += "<li class='selectEmp'><span  onclick='fnEmpSet2(\""+data.list[i].email+"\")'>"
+            								+data.list[i].name+" / "
+            								+data.list[i].rCode+" / "
+            								+data.list[i].dCode+" / "
+            								+data.list[i].email+" </span></li>";
+            							console.log(data.list[i].email);
+            							emailAdrr = data.list[i].email;
+            						}
+            					}
+            				$('#textarea2').html(area);
+            				$('#textarea2').attr("style","display:inline")
+            			}
+            		});	
+            	});	
+            })
+         	// 검색목록에서 이메일 추출
+            function fnEmpSet2(empEmail){
+				$('#emailReference').val(empEmail);
+				$('#textarea2').attr("style","display:none");
+			}
             $("#re").click(function(){
                 if(confirm("정말 등록하시겠습니까 ?") == true){
                     alert("등록되었습니다");
@@ -150,7 +234,8 @@
                     </tr>
                     <tr>
                         <td>보낸 사람  </td>
-                        <td colspan="2"><input type="email" readonly value="${es.employeeName}/${es.rankCode}/${es.departmentCode}" class="form-control form-control-sm "></td>
+                        <td colspan="2"><input type="email" readonly value="${es.employeeName}/${es.rankCode}/${es.departmentCode}" class="form-control form-control-sm ">
+                        <table id="textarea2" rows="4" cols="100" style="overflow: auto; height: 50px; display:none;"></table></td>
                     </tr>
                     <tr>
                         <td>받는 사람</td>
@@ -166,7 +251,7 @@
                     </tr>
                     <tr>
                         <td>첨부파일  </td>
-                        <td colspan="2"><input type="text" readonly value="첨부파일이 없습니다." class="form-control form-control-sm form-control-plaintext"></td>
+                        <td colspan="2"><input type="text" readonly value="첨부파일이 없습니다." class="form-control form-control-sm "></td>
                     </tr>
                 </thead>
                 <tbody>
