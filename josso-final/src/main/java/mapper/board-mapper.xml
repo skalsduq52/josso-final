@@ -12,72 +12,67 @@
 		<result property="boardWriter" column="BOARD_WRITER"></result>
 		<result property="boardRegDate" column="BOARD_REGDATE"></result>
 		<result property="boardHit" column="BOARD_HIT"></result>
+		<!-- 가상 VO생성 -->
 		<result property="employeeName" column="EMPLOYEE_NAME"></result>
 		<result property="departmentCode" column="DEPARTMENT_CODE"></result>
 		<result property="rankCode" column="RANK_CODE"></result>
 	</resultMap>
 	
-	<!-- 공지사항 전체리스트(목록)-->
-	<select id="selectNoticeAll" resultMap="board">
-		SELECT * FROM BOARD WHERE BOARD_KIND='공지사항'
+	
+	<!-- 공통(디테일 / 수정 / 삭제 / 조회수) -->
+	
+	<!-- 디테일 -->
+	<select id="selectDetail" resultMap="board" parameterType="String">
+		SELECT * FROM BOARD WHERE BOARD_NUM = #{boardNum}
 	</select>
 	
-	<!-- 공지사항 디테일페이지 -->
-	<select id="selectNoticeDetail" resultMap="board" parameterType="String">
-		SELCT * FROM BOARD WHERE BOARD_NUM = #{boardNum}
+	<!-- 수정 -->
+	<update id="Update" parameterType="board">
+		UPDATE BOARD SET 
+			BOARD_TITLE = #{boardTitle},
+			BOARD_CONTENT = #{boardContent},
+			BOARD_FILE = #{boardFile}
+		WHERE BOARD_NUM = #{boardNum}
+	</update>
+	
+	<!-- 삭제 -->
+	<delete id="Delete" parameterType="board">
+		DELETE FROM BOARD WHERE BOARD_NUM = #{boardNum}
+	</delete>
+	
+	<!-- 조회수 -->
+	<update id="hit" parameterType="String">
+		UPDATE BOARD SET BOARD_HIT=BOARD_HIT+1 WHERE BOARD_NUM = #{boardNum}
+	</update>
+	
+	
+	
+	<!-- 공지사항 -->
+	<!-- 공지사항 전체리스트(목록)-->
+	<select id="selectNoticeAll" resultMap="board">
+		        SELECT BOARD.*, EMPLOYEE.EMPLOYEE_NAME, EMPLOYEE.DEPARTMENT_CODE, EMPLOYEE.RANK_CODE FROM BOARD, EMPLOYEE WHERE BOARD_KIND='공지사항' AND EMPLOYEE.EMPLOYEE_NUMBER = BOARD.BOARD_WRITER ORDER BY BOARD_NUM DESC
 	</select>
 	
 	<!-- 공지사항 작성 -->
 	<insert id="noticeWrite" parameterType="board">
 		INSERT INTO BOARD(BOARD_KIND, BOARD_TITLE, BOARD_CONTENT, BOARD_FILE, BOARD_WRITER, BOARD_REGDATE, BOARD_HIT) 
-					VALUES('공지사항', #{boardTitle}, #{boardContent}, #{boardFile}, #{boardWriter}, SYSDATE, 0);
+					VALUES('공지사항', #{boardTitle}, #{boardContent}, #{boardFile}, #{boardWriter}, SYSDATE, 0)
 	</insert>
 	
-	<!-- 공지사항 수정 -->
-	<update id="noticeUpdate" parameterType="board">
-		UPDATE BOARD SET 
-			BOARD_TITLE = {boardTitle}
-			BOARD_CONTENT = {boardContent}
-			BOARD_FILE = {boardFile}
-		WHERE BOARD_NUM = #{boardNum}
-	</update>
-	
-	<!-- 공지사항 삭제 -->
-	<delete id="noticeDelete" parameterType="board">
-		DELETE FROM BOARD WHERE BOARD_NUM = #{boardNum}
-	</delete>
 	
 	
-	
-	
+	<!-- 건의사항 -->
 	<!-- 건의사항 전체리스트(목록)-->
 	<select id="selectSuggestionAll" resultMap="board">
-		SELECT * FROM BOARD WHERE BOARD_KIND='건의사항'
-	</select>
-	
-	<!-- 건의사항 디테일페이지 -->
-	<select id="selectSuggestionDetail" resultType="board" parameterType="String">
-		SELCT * FROM BOARD WHERE BOARD_NUM = #{boardNum}
+		SELECT BOARD.*, EMPLOYEE.EMPLOYEE_NAME, EMPLOYEE.DEPARTMENT_CODE, EMPLOYEE.RANK_CODE FROM BOARD, EMPLOYEE WHERE BOARD_KIND='건의사항' AND EMPLOYEE.EMPLOYEE_NUMBER = BOARD.BOARD_WRITER ORDER BY BOARD_NUM DESC
 	</select>
 	
 	<!-- 건의사항 작성 -->
 	<insert id="suggestionWrite" parameterType="board">
 		INSERT INTO BOARD(BOARD_KIND, BOARD_TITLE, BOARD_CONTENT, BOARD_FILE, BOARD_WRITER, BOARD_REGDATE, BOARD_HIT) 
-					VALUES('건의사항', #{boardTitle}, #{boardContent}, #{boardFile}, #{boardWriter}, SYSDATE, 0);
+					VALUES('건의사항', #{boardTitle}, #{boardContent}, #{boardFile}, #{boardWriter}, SYSDATE, 0)
 	</insert>
 	
-	<!-- 건의사항 수정 -->
-	<update id="suggestionUpdate" parameterType="board">
-		UPDATE BOARD SET 
-			BOARD_TITLE = #{boardTitle}
-			BOARD_CONTENT = #{boardContent} 
-			BOARD_FILE = #{boardFile}
-		WHERE BOARD_NUM = #{boardNum}
-	</update>
-	
-	<!-- 건의사항 삭제 -->
-	<delete id="suggestionDelete" parameterType="board">
-		DELETE FROM BOARD WHERE BOARD_NUM = #{boardNum}
-	</delete>
+
 	
 </mapper>

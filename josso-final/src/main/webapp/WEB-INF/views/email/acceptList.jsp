@@ -153,6 +153,22 @@
 					location.href = '${pageContext.request.contextPath}/email/accept/ckRead?num='+check;
 				});
 			});
+			
+			$(function(){
+				$('.rereadBtn').click(function(){
+					var check = Array();
+					var emailNumber = $('.check');
+					var date = 0;
+					for(i=0 ; i<emailNumber.length ; i++){
+						 if(emailNumber[i].checked == true){
+							 check[date] = emailNumber[i].value;
+							date++;
+						}
+					}
+					console.log(check.length);
+					location.href = '${pageContext.request.contextPath}/email/accept/ckClose?num='+check;
+				});
+			});
 
 			
 			
@@ -228,6 +244,7 @@
                     <div class="col nav-menu">
                         <input type="button" class="reBtn btn btn-outline-info float-left" value="답장">
 		                <input type="button" class="readBtn btn btn-outline-info float-left" value="읽음">
+		                <input type="button" class="rereadBtn btn btn-outline-info float-left" value="안읽음">
                         <input type="button" class="deliBtn btn btn-outline-info float-left" value="전달"> 
                         <input type="submit" class="btn btn-outline-info float-left" value="휴지통">
                     </div>

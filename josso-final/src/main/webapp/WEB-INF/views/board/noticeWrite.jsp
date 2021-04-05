@@ -278,20 +278,20 @@
 
         
         <main>
-            <form>
+            <form action="register" method="POST">
             <div class="border-top">
                 <table style="width: 100%;" id="board">
                     <thead>
                         <tr>
-                            <th class="left_td">제목</th>
-                            <td class="right_td"><input type="text" style="width: 100%;"></td><br>
+                            <th class="left_td" >제목</th>
+                            <td class="right_td"><input type="text" style="width: 100%;" name="boardTitle"></td><br>
                         </tr>
                         <tr >
-                            <th class="left_td">파일첨부</th>
+                            <th class="left_td" >파일첨부</th>
                             <td class="right_td">
                                 <div id="multipart">
                                 <span>이 곳에 파일을 드래그 하세요. 또는</span>
-                                    <input type="file" class="custom-file-input" id="customFile" style="display: none;">
+                                    <input type="file" class="custom-file-input" id="customFile" style="display: none;" name="boardFile">
                                     <label for="customFile" id="attach_file" >파일선택</label>
                                     <table id="fileListTable" width="100%" border="0px">
                                          <tbody id="fileTableTbody">
@@ -305,7 +305,7 @@
                     <tbody>
                         <tr id="write_content">
                             <th class="left_td">내용</th>
-                            <td class="right_td"><textarea id="smartEditor" style="height: 400px; width: 100%;"></textarea></td>
+                            <td class="right_td"><textarea id="smartEditor" style="height: 400px; width: 100%;" name="boardContent"></textarea></td>
                         </tr>
                     </tbody>    
                 </table>

@@ -38,8 +38,11 @@ public interface EmailService {
 	// 받은메일함 - 자세히보기 - 읽음/안읽음
 	public int AcceptRead(int num) throws Exception;
 	
-	// 자세히보기(제목클릭) 할 경우 자동 읽음처리
-//	public int AutoRead(int num) throws Exception;
+	// 받은메일함 - 리스트 체크박스 - 모두 읽음 처리
+	public int ListRead(int num) throws Exception;
+	
+	// 받은메일함 - 리스트 체크박스 - 모두 읽음 처리
+	public int ListClose(int num) throws Exception;
 
 	// 받은메일함 - 자세히보기 - 휴지통버튼
 	public Email AcceptWastebasket(int num) throws Exception;
@@ -77,5 +80,7 @@ public interface EmailService {
 	// 이메일 이름 검색 기능
 	public  List<Employee> selectEmpAll(Employee employee) throws Exception;
 	
+	// 받은이메일중 안읽은 메일 갯수 카운트
+	public List<Email> emailCount(String id) throws Exception;
 	
 }

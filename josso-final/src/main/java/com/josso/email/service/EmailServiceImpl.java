@@ -71,6 +71,18 @@ public class EmailServiceImpl implements EmailService{
 		return emailDao.AcceptRead(num);
 	}
 	
+	// 받은메일함 - 리스트 체크항목 - 읽음
+	public int ListRead(int num) throws Exception{
+		return emailDao.ListRead(num);
+	}
+	
+	// 받은메일함 - 리스트 체크항목 - 읽음
+	public int ListClose(int num) throws Exception{
+		return emailDao.ListClose(num);
+	}
+	
+	
+	
 	// 받은메일함 - 자세히보기 - 휴지통버튼 클릭
 	public Email AcceptWastebasket(int num) throws Exception{
 		return emailDao.AcceptWastebasket(num);
@@ -130,5 +142,10 @@ public class EmailServiceImpl implements EmailService{
 	// 이메일 이름 검색 기능
 	public  List<Employee> selectEmpAll(Employee employee) throws Exception{
 		return emailDao.selectEmpAll(employee);
+	}
+	
+	// 받은메일함 안읽은 메일 수
+	public List<Email> emailCount(String id) throws Exception{
+		return emailDao.emailCount(id);
 	}
 }

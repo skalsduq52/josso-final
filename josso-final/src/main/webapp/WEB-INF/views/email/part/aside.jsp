@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 	   		<style type="text/css">
 				 .abc { color: black;}
 			</style>
@@ -30,7 +31,7 @@
                         <ul class="hover_tag">
                             <li>
                                 <div class="form-check form-check-inline">
-                                    <label class="form-check-label" for="inlineCheckbox1"><a class="abc" href="${pageContext.request.contextPath}/email/accept/list">받은 메일함</a></label>
+                                    <label class="form-check-label" for="inlineCheckbox1"><a class="abc" href="${pageContext.request.contextPath}/email/accept/list">받은 메일함</a></label><label style="color: gray; padding:8px 0px 0px 10px;">${emailCount}</label>
                                 </div>
                             </li>
                             <li>
@@ -41,7 +42,7 @@
                             <li>
                                 <div class="form-check form-check-inline">
                                            
-                                    <label class="form-check-label" for="inlineCheckbox1"><a class="abc" href="${pageContext.request.contextPath}/email/wastebasket/list"> 휴지통</a></label>
+                                    <label class="form-check-label" for="inlineCheckbox1"><a class="abc" href="${pageContext.request.contextPath}/email/wastebasket/list"> 휴지통</a></label><label style="color: gray; padding:8px 0px 0px 10px;">  3</label>
                                 </div>
                             </li>
                         </ul>

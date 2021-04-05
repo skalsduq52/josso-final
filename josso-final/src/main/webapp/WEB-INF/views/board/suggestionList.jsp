@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -238,62 +240,15 @@
                         </tr>
                     </thead>
                     <tbody>
+                    	<c:forEach var="suggestionList" items="${suggestionList}">
                         <tr>
-                            <td id="tdnum">7</td>
-                            <td id="theme">연봉 좀 올려주시면 안될까요,, 먹고 살기 힘들어요</td>
-                            <td>안태민 대표이사</td>
-                            <td>2020-03-16</td>
-                            <td id="selectnum">357</td>
+                            <td id="tdnum">${suggestionList.boardNum}</td>
+                            <td id="theme"><a href="detailPage?num=${suggestionList.boardNum}">${suggestionList.boardTitle}</a></td>
+                            <td>${suggestionList.employeeName}</td>
+                            <td><fmt:formatDate value="${suggestionList.boardRegDate}" pattern="yy년 MM월 dd일 / HH시 mm분"/></td>
+                            <td id="selectnum">${suggestionList.boardHit}</td>
                         </tr>
-                        <tr>
-                            <td id="tdnum">6</td>
-                            <td id="theme">무야호~~~~ 나그도나르도~~</td>
-                            <td>최낙도 팀장</td>
-                            <td>2020-03-16</td>
-                            <td id="selectnum">1</td>
-                        </tr>
-                        <tr>
-                            <td id="tdnum">5</td>
-                            <td id="theme">않이,, 삼실에서 담배피면 외 않되?</td>
-                            <td>김재윤 본부장</td>
-                            <td>2020-03-16</td>
-                            <td id="selectnum">1</td>
-                        </tr>
-                        <tr>
-                            <td id="tdnum">4</td>
-                            <td id="theme">저 과장 안시켜주면 si로 이직할겁니다.</td>
-                            <td>나민엽 대리</td>
-                            <td>2020-03-16</td>
-                            <td id="selectnum">1</td>
-                        </tr>
-                        <tr>
-                            <td id="tdnum">3</td>
-                            <td id="theme">구내식당 가격이 너무 비싸요,,</td>
-                            <td>김우영(외부인)</td>
-                            <td>2020-03-16</td>
-                            <td id="selectnum">1</td>
-                        </tr>
-                        <tr>
-                            <td id="tdnum">2</td>
-                            <td id="theme">화장실에 비데설치해주세요.. 제발요 ㅠㅠ</td>
-                            <td>최민재 본부장</td>
-                            <td>2020-03-16</td>
-                            <td id="selectnum">1</td>
-                        </tr>
-                        <tr>
-                            <td id="tdnum"></td>
-                            <td id="theme" style="color:blue">ㄴRe : 휴지도 아깝다!! 내 연봉 떨어진다!</td>
-                            <td>안태민 대표이사</td>
-                            <td>2020-03-16</td>
-                            <td id="selectnum">0</td>
-                        </tr>
-                        <tr>
-                            <td id="tdnum">1</td>
-                            <td id="theme">최민재 본부장이 사내에서 폭력을 사용합니다 (※익명 보장좀※)</td>
-                            <td>홍수명 팀장</td>
-                            <td>2020-03-16</td>
-                            <td id="selectnum">0</td>
-                        </tr>
+						</c:forEach>
                     </tbody>    
                 </table>
             </div>
@@ -309,7 +264,7 @@
                 </ul>
             </div>
             <div class="bottom_area" style="float:left; padding-left: 20px;">
-                <button class="btn btn-info">작성하기</button>
+                <button class="btn btn-info"><a href="write" style="color:white">작성하기</a></button>
             </div>
             
             <div class="bottom_area" style="float:right;">

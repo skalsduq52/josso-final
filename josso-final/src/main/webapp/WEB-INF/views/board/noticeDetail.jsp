@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -124,34 +126,28 @@
         
         <main>
             <div class="border-top" style="padding-left: 20px;padding-top: 20px; width: 90%;">
-                <h3 style="font-weight: bold;">좋소기업 공지사항 입니다. 필독하시기 바랍니다.</h3><br>
+                <h3 style="font-weight: bold;">${noticeBoard.boardTitle}</h3><br>
                 <table>
                     <tr>
                         <td>작성자 : </td>
-                        <td>관리자 </td>
+                        <td>${employee.employeeName}</td>
                     </tr>
                     <tr>
                         <td>작성일자 : </td>
-                        <td>2021-03-17</td>
+                        <td>${noticeBoard.boardRegDate}</td>
                     </tr>
                     <tr>
                         <td>첨부파일 : </td>
-                        <td>필독사항.pdf</td>
+                        <td>${noticeBoard.boardFile}</td>
                     </tr>
                 </table>
                 <br>
                 <div id="content">
-                    올해   초부터 캘리포니아 농부성 협력기관 한 곳으로부터 의뢰를 받아서 캘리포니아 한인 농부들에게 제공할 여러 가지 문서를 번역해 왔습니다. 작년에 우연한 계기로 서류를 번역해 드렸던 한인분이 적극 추천해 주셔서 본의 아니게 농업 분야 서류를 번역하게 되었네요. 덕분에 우수농산물관리제도(Good Agricultural Practices)라든가 식품안전계획(Food Safety Plan)과 같은 용어에 친숙해졌습니다. 우물 안 개구리처럼 사는 저에게는 새로운 세상이 신기하고 재밌습니다. :-)
-
-                    (나중에 타지역 한인 농부들도 참고하도록 웹에다 올릴 계획이고 정부 공개 자료를 이해하기 쉽도록 정리한 내용이니) 기밀을 유지하지 않아도 되는 문서라 한 문장 골라서 분석합니다. 신문 기사나 책처럼 정제되지 않은, 실생활에서 사용하는 문장이라 보시면 되겠습니다. 농장에서 사용하는 물은 1년에 한 번 수질 검사를 해야 하는데, 샘플 채취 방법을 설명하는 문장입니다.
-                    올해 초부터 캘리포니아 농부성 협력기관 한 곳으로부터 의뢰를 받아서 캘리포니아 한인 농부들에게 제공할 여러 가지 문서를 번역해 왔습니다. 작년에 우연한 계기로 서류를 번역해 드렸던 한인분이 적극 추천해 주셔서 본의 아니게 농업 분야 서류를 번역하게 되었네요. 덕분에 우수농산물관리제도(Good Agricultural Practices)라든가 식품안전계획(Food Safety Plan)과 같은 용어에 친숙해졌습니다. 우물 안 개구리처럼 사는 저에게는 새로운 세상이 신기하고 재밌습니다. :-)
-
-                    (나중에 타지역 한인 농부들도 참고하도록 웹에다 올릴 계획이고 정부 공개 자료를 이해하기 쉽도록 정리한 내용이니) 기밀을 유지하지 않아도
-                    올해 초부터 캘리포니아 농부성 협력기관 한 곳으로부터 의뢰를 받아서 캘리포니아 한인 농부들에게 제공할 여러 가지 문서를 번역해 왔습니다. 작년에 우연한 계기로 서류를 번역해 드렸던 한인분이 적극 추천해 주셔서 본의 아니게 농업 분야 서류를 번역하게 되었네요. 덕분에 우수농산물관리제도(Good Agricultural Practices)라든가 식품안전계획(Food Safety Plan)과 같은 용어에 친숙해졌습니다. 우물 안 개구리처럼 사는 저에게는 새로운 세상이 신기하고 재밌습니다. :-)
-
-                    (나중에 타지역 한인 농부들도 참고하도록 웹에다 올릴 계획이고 정부 공개 자료를 이해하기 쉽도록 정리한 내용이니) 기밀을 유지하지 않아도 되는 문서라 한 문장 골라서 분석합니다. 신문 기사나 책처럼 정제되지 않은, 실생활에서 사용하는 문장이라 보시면 되겠습니다. 농장에서 사용하는 물은 1년에 한 번 수질 검사를 해야 하는데, 샘플 채취 방법을 설명하는 문장입니다. 되는 문서라 한 문장 골라서 분석합니다. 신문 기사나 책처럼 정제되지 않은, 실생활에서 사용하는 문장이라 보시면 되겠습니다. 농장에서 사용하는 물은 1년에 한 번 수질 검사를 해야 하는데, 샘플 채취 방법을 설명하는 문장입니다.
+                	${noticeBoard.boardContent}
                 </div><br>
-                <a href="http://127.0.0.1:5500/final/notice.html"><button>목록</button></a>
+                <a href="list"><button>목록</button></a>
+                <a href="updateBridge?num=${num}"><button>수정</button></a>
+                <a href="delete?num=${num }"><button>삭제</button></a>
             </div>
         </main>
         <footer class="border-top">
