@@ -44,7 +44,7 @@ public class EmailController{
 		modelAndView.addObject("wastebasketCount",wastebasketCount);
 		modelAndView.addObject("emailCount",emailCount);
 		modelAndView.setViewName("email/part/aside");
-		modelAndView.setViewName("email.do");
+		modelAndView.setViewName("email/emailWrite");
 		return modelAndView;
 	}
 	
@@ -378,7 +378,7 @@ public class EmailController{
 	// /* ------------------------------새 메일쓰기------------------------------- */
 	// 새 메일쓰기
 	@RequestMapping(value = "email/write/open", method = RequestMethod.GET)
-	public String writeOpen(ModelAndView modelAndView, HttpSession session) throws Exception{
+	public ModelAndView writeOpen(ModelAndView modelAndView, HttpSession session) throws Exception{
 		Employee employee = (Employee) session.getAttribute("employee");
 		String id = employee.getEmployeeEmail();
 		int emailCount = emailService.emailCount(id);
@@ -386,8 +386,8 @@ public class EmailController{
 		modelAndView.addObject("wastebasketCount",wastebasketCount);
 		modelAndView.addObject("emailCount",emailCount);
 		modelAndView.setViewName("email/part/aside");
-		modelAndView.setViewName("redirect:/email.do");
-		return "email/emailWrite";
+		modelAndView.setViewName("email/emailWrite");
+		return modelAndView;
 	}
 	
 	// 새 메일쓰기 - 보내기 버튼
