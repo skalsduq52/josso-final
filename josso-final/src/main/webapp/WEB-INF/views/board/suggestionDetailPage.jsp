@@ -305,12 +305,12 @@
                 </table>
             </div>
 
-            <div style="float:right; padding-right: 30px; padding-top: 30px;">
-                <button class="btn btn-info" href="list">목록</button>
-                <button class="btn btn-info" href="updateBridge?num=${num}">수정</button>
-                <button class="btn btn-info" href="delete?num=${num}">삭제</button>
-            </div>  
            </form>        
+            <div style="float:right; padding-right: 30px; padding-top: 30px;">
+            	<a class="btn-info" href="${pageContext.request.contextPath}/board/suggestion/list"><button>목록</button></a>
+            	<a class="btn-info" href="updateBridge?num=${num}"><button>수정</button></a>
+            	<a class="btn-info" href="delete?num=${num}"><button>삭제</button></a>
+            </div>  
         </main>
         <footer class="border-top">
 
