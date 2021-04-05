@@ -44,8 +44,8 @@
 	
 	<!-- 결재 대기문서 리스트 -->
 	<select id="selectWaitSign" parameterType="Paging" resultMap="ElectView">
-		SELECT * FROM(SELECT ROWNUM NUM, EV.* FROM ELEC_VIEW EV WHERE (MIDDLE = #{employeeNum} and MIDDLE_ACCEPT = 0) 
-		OR (LAST = #{employeeNum} AND MIDDLE_ACCEPT = 1 AND LAST_ACCEPT = 0) AND ${title} LIKE '%' || #{query} || '%' ORDER BY REGISTER_DATE DESC)
+		SELECT * FROM (SELECT ROWNUM NUM, EV.* FROM (SELECT * FROM ELEC_VIEW WHERE ((MIDDLE = #{employeeNum} and MIDDLE_ACCEPT = 0) OR 
+		((LAST = #{employeeNum} AND MIDDLE_ACCEPT = 1) AND LAST_ACCEPT = 0)) AND ${title} LIKE '%' || #{query} || '%' ORDER BY REGISTER_DATE DESC) EV)
 		WHERE NUM BETWEEN #{startRange} AND #{endRange}
 	</select>
 	
