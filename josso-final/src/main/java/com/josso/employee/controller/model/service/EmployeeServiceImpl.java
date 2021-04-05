@@ -139,15 +139,11 @@ public class EmployeeServiceImpl implements EmployeeService{
 	// 사원번호 찾기
 	@Override
 	public String findEmployeeNumber(HttpServletResponse response, String employeeEmail) throws Exception{
-		
-		
-		
+				
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		String employeeNumber = employeeDao.findEmployeeNumber(employeeEmail);
-		
-		
-		
+				
 		if(employeeNumber == null) {
 			out.println("<script>");
 			out.println("alert('가입된 사원번호가 없습니다.');");
@@ -167,28 +163,42 @@ public class EmployeeServiceImpl implements EmployeeService{
 	
 	// 인증 메일 발송
 	@Override
-	public void regist(Employee employee) throws Exception {
-        String key = new TempKey().generateKey(30);  // 인증키 생성
-        employee.setEmailAuthKey(key);;
-        System.out.println("key : " + key);
-        
-        //DB에 가입정보등록
- //       employeeDao.insertEmployee(employee);
-        
-        //메일 전송
-        MailHandler sendMail = new MailHandler(mailSender);
-        sendMail.setSubject("이메일 인증");
-        sendMail.setText(
-                new StringBuffer()
-                .append("<h1>메일인증</h1>")
-                .append("<a href='http://localhost:8080/email_test/emailConfirm?authKey=")
-                .append(key)
-                .append("' target='_blank'>이메일 인증 확인</a>")
-                .toString());
-        
-        sendMail.setFrom("서비스ID@gmail.com", "서비스 이름");
-        sendMail.setTo(employee.getEmployeeEmail());
-        sendMail.send();
+	public String findEmployeePassword(HttpServletResponse response, String employeeNumber) throws Exception {
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+			if((employeeDao.checkEmployeeNumber(employeeNumber))==0) {
+        	
+	        	out.println("<script>");
+				out.println("alert('사원번호가 없습니다,다시 입력해 주세요.');");
+				out.println("history.go(-1);");
+				out.println("</script>");
+				out.close();
+				return null;
+			}else {
+				Employee employee = new Employee();
+				String key = new TempKey().generateKey(30);  // 인증키 생성
+		        employee.setEmailAuthKey(key);;
+		        System.out.println("key : " + key);
+		        String employeeEmail = employeeDao.findEmployeePassword(employeeNumber);
+		        //DB에 가입정보등록
+		 //       employeeDao.insertEmployee(employee);
+		        
+		        //메일 전송
+		        MailHandler sendMail = new MailHandler(mailSender);
+		        sendMail.setSubject("이메일 인증");
+		        sendMail.setText(
+		                new StringBuffer()
+		                .append("<h1>메일인증</h1>")
+		                .append("<a href='http://localhost:8080/email_test/emailConfirm?authKey=")
+		                .append(key)
+		                .append("' target='_blank'>이메일 인증 확인</a>")
+		                .toString());
+		        
+		        sendMail.setFrom("wanaciel@naver.com", "josoo 메일 인증");
+		        sendMail.setTo(employeeEmail);
+		        sendMail.send();
+				return key;
+			}
     }
  
     //이메일 인증 키 검증

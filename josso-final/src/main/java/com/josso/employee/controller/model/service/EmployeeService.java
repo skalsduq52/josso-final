@@ -32,7 +32,7 @@ public interface EmployeeService {
 		
 		public String findEmployeeNumber(HttpServletResponse response, String employeeEmail) throws Exception;
 
-		public void regist(Employee employee) throws Exception;
-		
+		public String findEmployeePassword(HttpServletResponse response, String employeeNumber) throws Exception;
+						
 		public Employee userAuthKey(String authkey) throws Exception;
 }

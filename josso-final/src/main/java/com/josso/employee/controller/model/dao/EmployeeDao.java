@@ -79,6 +79,11 @@ public class EmployeeDao {
 		return sqlSession.selectOne("Employee.findEmployeeNumber", employeeEmail);
 	}
 	
+	// 비밀번호 찾기
+		public String findEmployeePassword(String employeeNumber) throws Exception{
+			return sqlSession.selectOne("Employee.findEmployeePassword", employeeNumber);
+		}
+	
 	// 비밀번호 변경
 	@Transactional
 	public int updatePassword(Employee employee) throws Exception{

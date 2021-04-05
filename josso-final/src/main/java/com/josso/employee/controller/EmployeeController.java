@@ -51,7 +51,7 @@ public class EmployeeController {
 		employeeService.logout(response);
 	}
 	
-	
+	// 사원리스트보기
 	@RequestMapping(value="employee/employeeList", method = RequestMethod.GET)
 	public ModelAndView employeeListService(ModelAndView modelAndView)throws Exception{
 		
@@ -63,6 +63,8 @@ public class EmployeeController {
 		return modelAndView;	//modelAndView 객체에 데이터를 저장해서 리턴
 		
 	}
+	
+	// 사원정보 보기
 	@RequestMapping(value="employee/employeeView", method = RequestMethod.GET)
 	public String employeeViewService(@RequestParam("employeeNumber") String employeeNumber, Model model)throws Exception{
 		
@@ -71,6 +73,8 @@ public class EmployeeController {
 		
 		return "employee/employeeView";				//보여줄 페이지만 리턴
 	}
+	
+	// 사원 삭제
 	@RequestMapping(value="employeeDelete.do", method = RequestMethod.GET)	
 	//@GetMapping //@PostMapping 도 사용가능
 	public ModelAndView deleteEmployee(Employee employee, ModelAndView modelAndView) throws Exception {
@@ -83,6 +87,7 @@ public class EmployeeController {
 		return modelAndView;
 	}
 	
+	// 사원 등록 폼 이동
 	@RequestMapping(value="employee/employeeInsert", method = RequestMethod.GET)
 	public ModelAndView employeeInsertForm(Employee employee, ModelAndView modelAndView) throws Exception {
 		System.out.println("employeeInsert.do get");
@@ -90,6 +95,7 @@ public class EmployeeController {
 		return modelAndView;
 	}
 	
+	//사원 등록
 	@RequestMapping(value="employeeInsert.do", method = RequestMethod.POST)
 	public ModelAndView employeeInsert(Employee employee, ModelAndView modelAndView) throws Exception {
 		int cnt = employeeService.insertEmployee(employee);
@@ -99,6 +105,7 @@ public class EmployeeController {
 		return modelAndView;
 	}
 	
+	// 사원정보 수정 폼이동
 	@RequestMapping(value="employee/employeeUpdate", method=RequestMethod.GET)
 	public ModelAndView employeeUpdate(@RequestParam("employeeNumber") String employeeNumber,ModelAndView modelAndView) throws Exception{
 		Employee employee = employeeService.selectEmployee(employeeNumber);
@@ -106,6 +113,8 @@ public class EmployeeController {
 		modelAndView.setViewName("employee/employeeUpdate");
 		return  modelAndView;
 	}
+	
+	// 사원정보 수정
 	@RequestMapping(value="employee/employeeUpdate.do", method=RequestMethod.POST)
 	public ModelAndView employeeUpdate(Employee employee, ModelAndView modelAndView) throws Exception {
 		int cnt = employeeService.updateEmployee(employee);
@@ -115,11 +124,13 @@ public class EmployeeController {
 		return  modelAndView;
 	}
 	
+	// 사원번호 중복체크
 	@RequestMapping(value="checkEmployeeNumber.do", method = RequestMethod.POST)
 	public void checkEmployeeNumber(@RequestParam("employeeNumber") String employeeNumber, HttpServletResponse response) throws Exception {
 		employeeService.checkEmployeeNumber(employeeNumber, response);
 	}
 	
+	// 사원 이메일 중복 체크
 	@RequestMapping(value="checkEmployeeEmail.do", method = RequestMethod.POST)
 	public void checkEmployeeEmail(@RequestParam("employeeEmail") String employeeEmail, HttpServletResponse response) throws Exception {
 		employeeService.checkEmployeeEmail(employeeEmail, response);
@@ -137,16 +148,26 @@ public class EmployeeController {
 		System.out.println(employeeEmail);
 		return "/employee/login/findEmployeeNumber";
 	}
-	
+		
 	// 비밀번호 찾기 폼 이동
 	@RequestMapping(value= "employee/login/findEmployeePassword", method=RequestMethod.GET)
 	public String findEmployeePassword() throws Exception{
 		return "employee/login/findEmployeePassword";
 	}
 	
-	
+	// 비밀번호 찾기- 임시비밀번호 생성후 이메일 발송
+	@RequestMapping(value="findEmployeePassword.do", method=RequestMethod.POST)
+	public String findEmployeePassword(@RequestParam("employeeNumber") String employeeNumber, HttpServletResponse response) throws Exception{
+		employeeService.findEmployeePassword(response, employeeNumber);
+		
+		return "/employee/login/findEmployeePassword";
+	}
 
 }
+	
+
+
+
 	
 
 

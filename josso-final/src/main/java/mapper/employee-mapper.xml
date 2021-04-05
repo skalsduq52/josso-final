@@ -21,6 +21,8 @@
 		<result property="employeeRegistrationDate" column="EMPLOYEE_REGISTRATIONDATE"/>
 		<result property="employeeLoginDate" column="EMPLOYEE_LOGINDATE"/>
 		<result property="employeeAnnualLeave" column="EMPLOYEE_ANNUALLEAVE"/>
+		<result property="emailAuthKey" column="EMAIL_AUTHKEY"/>
+		
 	</resultMap>
 	
 	<!-- EMPLOYEE table의 모든 데이터 select -->
@@ -101,6 +103,11 @@
 	<!-- 사원번호 찾기 -->
 	<select id="findEmployeeNumber" parameterType="String" resultType="String">
 		SELECT EMPLOYEE_NUMBER FROM EMPLOYEE WHERE EMPLOYEE_EMAIL= #{employeeEmail}
+	</select>
+	
+	<!-- 비밀번호 찾기 -->
+	<select id="findEmployeePassword" parameterType="String" resultType="String">
+		SELECT EMPLOYEE_EMAIL FROM EMPLOYEE WHERE EMPLOYEE_NUMBER = #{employeeNumber}
 	</select>
 	
 	<!-- 비밀번호 변경 -->
