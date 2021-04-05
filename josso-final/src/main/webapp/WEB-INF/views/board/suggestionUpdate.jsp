@@ -306,7 +306,7 @@
                     <tbody>
                         <tr id="write_content">
                             <th class="left_td">내용</th>
-                            <td class="right_td"><textarea id="smartEditor" style="height: 400px; width: 100%;">${board.boardContent }</textarea></td>
+                            <td class="right_td"><textarea id="smartEditor" style="height: 400px; width: 100%;" name="boardContent">${board.boardContent }</textarea></td>
                         </tr>
                     </tbody>    
                 </table>

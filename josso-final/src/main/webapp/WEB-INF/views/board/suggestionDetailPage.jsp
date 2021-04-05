@@ -307,7 +307,7 @@
 
            </form>        
             <div style="float:right; padding-right: 30px; padding-top: 30px;">
-            	<a class="btn-info" href="${pageContext.request.contextPath}/board/suggestion/list"><button>목록</button></a>
+            	<a class="btn-info" href="list"><button>목록</button></a>
             	<a class="btn-info" href="updateBridge?num=${num}"><button>수정</button></a>
             	<a class="btn-info" href="delete?num=${num}"><button>삭제</button></a>
             </div>  

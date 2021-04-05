@@ -131,7 +131,7 @@ public class BoardController {
 	
 	
 	// 건의사항 (수정) '브릿지'
-	@RequestMapping(value="board/suggestion/updateBirdge", method=RequestMethod.GET)
+	@RequestMapping(value="board/suggestion/updateBridge", method=RequestMethod.GET)
 	public ModelAndView suggestionUpdateBridge(ModelAndView mv, @RequestParam("num") String num) throws Exception {
 		String num1 = num;
 		Board board = boardService.boardDetail(num);
@@ -142,9 +142,10 @@ public class BoardController {
 		return mv;
 	}
 	
+
 	// 건의사항 (수정)
 	@RequestMapping(value="board/suggestion/update", method=RequestMethod.POST)
-	public ModelAndView suggestionUpdate(ModelAndView mv, Board board, @RequestParam("boarNum") int boardNum) throws Exception {
+	public ModelAndView suggestionUpdate(ModelAndView mv, Board board) throws Exception {
 		boardService.boardUpdate(board);
 		mv.addObject("num", board.getBoardNum());
 		mv.setViewName("redirect:detailPage");
