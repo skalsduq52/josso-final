@@ -44,7 +44,7 @@ public class EmailController{
 		int emailCount = emailService.emailCount(id);
 		System.out.println("수"+emailCount);
 		List<Email> acceptList = emailService.AcceptList(id);
-		
+		// ㅇㅇ
 		int wastebasketCount = emailService.wastebasketCount(id);
 		modelAndView.addObject("wastebasketCount",wastebasketCount);
 		modelAndView.addObject("emailCount",emailCount);
