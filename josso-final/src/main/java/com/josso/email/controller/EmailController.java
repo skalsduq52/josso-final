@@ -28,7 +28,7 @@ public class EmailController{
 	
 	@Autowired
 	private EmailService emailService;
-
+ 
 	// 메일 메인페이지(완성)
 	@RequestMapping(value = "email.do", method = RequestMethod.GET)
 	public String email() throws Exception{
@@ -41,9 +41,12 @@ public class EmailController{
 	public ModelAndView acceptList(ModelAndView modelAndView, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception{
 		Employee employee = (Employee) session.getAttribute("employee");
 		String id = employee.getEmployeeEmail();
-		List<Email> emailCount = emailService.emailCount(id);
+		int emailCount = emailService.emailCount(id);
+		System.out.println("수"+emailCount);
 		List<Email> acceptList = emailService.AcceptList(id);
 		
+		int wastebasketCount = emailService.wastebasketCount(id);
+		modelAndView.addObject("wastebasketCount",wastebasketCount);
 		modelAndView.addObject("emailCount",emailCount);
 		modelAndView.setViewName("email/part/aside");
 		modelAndView.addObject("acceptList",acceptList);
@@ -53,7 +56,16 @@ public class EmailController{
 	
 	// 받은메일함 - 자세히보기 - 답장버튼 클릭(완성)
 	@RequestMapping(value = "email/accept/reply", method = RequestMethod.GET)
-	public ModelAndView acceptReply(int num, ModelAndView modelAndView) throws Exception{
+	public ModelAndView acceptReply(int num, ModelAndView modelAndView, HttpSession session) throws Exception{
+		
+		Employee employee = (Employee) session.getAttribute("employee");
+		String id = employee.getEmployeeEmail();
+		int wastebasketCount = emailService.wastebasketCount(id);
+		modelAndView.addObject("wastebasketCount",wastebasketCount);
+		int emailCount = emailService.emailCount(id);
+		modelAndView.addObject("emailCount",emailCount);
+		modelAndView.setViewName("email/part/aside");
+		
 		Email acceptReply = emailService.AcceptReply(num);
 		modelAndView.addObject("acceptReply",acceptReply);
 		modelAndView.setViewName("email/acceptReply");
@@ -62,7 +74,16 @@ public class EmailController{
 	
 	// 받은메일함 - 답장보내기버튼 클릭
 	@RequestMapping(value = "email/accept/replySend", method = RequestMethod.GET)
-	public ModelAndView acceptReplySend(Email email, ModelAndView modelAndView) throws Exception{
+	public ModelAndView acceptReplySend(Email email, ModelAndView modelAndView, HttpSession session) throws Exception{
+		
+		Employee employee = (Employee) session.getAttribute("employee");
+		String id = employee.getEmployeeEmail();
+		int wastebasketCount = emailService.wastebasketCount(id);
+		modelAndView.addObject("wastebasketCount",wastebasketCount);
+		int emailCount = emailService.emailCount(id);
+		modelAndView.addObject("emailCount",emailCount);
+		modelAndView.setViewName("email/part/aside");
+		
 		int writeSend = emailService.WriteSend(email);
 		modelAndView.setViewName("redirect:/email/accept/list");
 		return modelAndView;
@@ -70,7 +91,15 @@ public class EmailController{
 	
 	// 받은메일함 - 자세히 보기 - 전달버튼 클릭시
 	@RequestMapping(value = "email/accept/delivery", method = RequestMethod.GET)
-	public ModelAndView acceptDelivery(int num, ModelAndView modelAndView) throws Exception{
+	public ModelAndView acceptDelivery(int num, ModelAndView modelAndView, HttpSession session) throws Exception{
+		Employee employee = (Employee) session.getAttribute("employee");
+		String id = employee.getEmployeeEmail();
+		int wastebasketCount = emailService.wastebasketCount(id);
+		modelAndView.addObject("wastebasketCount",wastebasketCount);
+		int emailCount = emailService.emailCount(id);
+		modelAndView.addObject("emailCount",emailCount);
+		modelAndView.setViewName("email/part/aside");
+		
 		Email acceptDelivery = emailService.AcceptDelivery(num);
 		modelAndView.addObject("acceptDelivery",acceptDelivery);
 		modelAndView.setViewName("email/acceptDelivery");
@@ -85,7 +114,15 @@ public class EmailController{
 	
 	// 받은메일함 - 휴지통버튼 클릭
 	@RequestMapping(value = "email/accept/wastebasket", method = RequestMethod.GET)
-	public ModelAndView acceptWastebasket(int num, ModelAndView modelAndView) throws Exception{
+	public ModelAndView acceptWastebasket(int num, ModelAndView modelAndView, HttpSession session) throws Exception{
+		Employee employee = (Employee) session.getAttribute("employee");
+		String id = employee.getEmployeeEmail();
+		int wastebasketCount = emailService.wastebasketCount(id);
+		modelAndView.addObject("wastebasketCount",wastebasketCount);
+		int emailCount = emailService.emailCount(id);
+		modelAndView.addObject("emailCount",emailCount);
+		modelAndView.setViewName("email/part/aside");
+		
 		Email acceptWastebasket = emailService.AcceptWastebasket(num);
 		modelAndView.addObject("acceptWastebasket",acceptWastebasket);
 		modelAndView.setViewName("redirect:/email/accept/list");
@@ -94,8 +131,15 @@ public class EmailController{
 	
 	// 받은메일함 - 읽음/안읽음 버튼 클릭
 	@RequestMapping(value = "email/accept/read", method = RequestMethod.GET)
-	public ModelAndView acceptRead(int num, ModelAndView modelAndView) throws Exception{
-		System.out.println(num);
+	public ModelAndView acceptRead(int num, ModelAndView modelAndView, HttpSession session) throws Exception{
+		Employee employee = (Employee) session.getAttribute("employee");
+		String id = employee.getEmployeeEmail();
+		int wastebasketCount = emailService.wastebasketCount(id);
+		modelAndView.addObject("wastebasketCount",wastebasketCount);
+		int emailCount = emailService.emailCount(id);
+		modelAndView.addObject("emailCount",emailCount);
+		modelAndView.setViewName("email/part/aside");
+		
 		int acceptRead = emailService.AcceptRead(num);
 		modelAndView.addObject("acceptRead",acceptRead);
 		modelAndView.setViewName("redirect:/email/accept/list");
@@ -123,7 +167,13 @@ public class EmailController{
 //		}
 		Employee employee = (Employee) session.getAttribute("employee");
 		String id = employee.getEmployeeEmail();
+		int wastebasketCount = emailService.wastebasketCount(id);
+		modelAndView.addObject("wastebasketCount",wastebasketCount);
+		int emailCount = emailService.emailCount(id);
 		List<Email> sendList = emailService.SendList(id); // , String field, String query
+		
+		modelAndView.addObject("emailCount",emailCount);
+		modelAndView.setViewName("email/part/aside");
 		modelAndView.addObject("sendList",sendList);
 		modelAndView.setViewName("email/sendList");
 		return modelAndView;
@@ -131,8 +181,16 @@ public class EmailController{
 	
 	// 받은메일함 - 읽음/안읽음 버튼 클릭
 	@RequestMapping(value = "email/send/read", method = RequestMethod.GET)
-	public ModelAndView sendRead(int num, ModelAndView modelAndView) throws Exception{
-		System.out.println(num);
+	public ModelAndView sendRead(int num, ModelAndView modelAndView, HttpSession session) throws Exception{
+
+		Employee employee = (Employee) session.getAttribute("employee");
+		String id = employee.getEmployeeEmail();
+		int wastebasketCount = emailService.wastebasketCount(id);
+		modelAndView.addObject("wastebasketCount",wastebasketCount);
+		int emailCount = emailService.emailCount(id);
+		modelAndView.addObject("emailCount",emailCount);
+		modelAndView.setViewName("email/part/aside");
+		
 		int sendRead = emailService.AcceptRead(num);
 		modelAndView.addObject("sendRead",sendRead);
 		modelAndView.setViewName("redirect:/email/send/list");
@@ -142,6 +200,14 @@ public class EmailController{
 	// 받은메일함 - 자세히보기(완성)
 	@RequestMapping(value = "email/accept/detail", method = RequestMethod.GET)
 	public ModelAndView acceptDetail(int num, ModelAndView modelAndView, HttpSession session) throws Exception{
+		
+		Employee employee = (Employee) session.getAttribute("employee");
+		String id = employee.getEmployeeEmail();
+		int wastebasketCount = emailService.wastebasketCount(id);
+		modelAndView.addObject("wastebasketCount",wastebasketCount);
+		int emailCount = emailService.emailCount(id);
+		modelAndView.addObject("emailCount",emailCount);
+		modelAndView.setViewName("email/part/aside");
 		emailService.AutoRead(num);
 		Email acceptDetail = emailService.AcceptDetail(num);
 		Email er = emailService.Er(num);	// 참조자 정보
@@ -158,7 +224,17 @@ public class EmailController{
 	
 	// 보낸메일함 - 자세히보기(완성)
 	@RequestMapping(value = "email/send/detail", method = RequestMethod.GET)
-	public ModelAndView sendDetail(int num, ModelAndView modelAndView) throws Exception{
+	public ModelAndView sendDetail(int num, ModelAndView modelAndView, HttpSession session) throws Exception{
+		
+		Employee employee = (Employee) session.getAttribute("employee");
+		String id = employee.getEmployeeEmail();
+		int wastebasketCount = emailService.wastebasketCount(id);
+		modelAndView.addObject("wastebasketCount",wastebasketCount);
+		int emailCount = emailService.emailCount(id);
+		modelAndView.addObject("emailCount",emailCount);
+		modelAndView.setViewName("email/part/aside");
+		
+		
 		emailService.AutoRead(num);
 		Email sendDetail = emailService.AcceptDetail(num);
 		Email er = emailService.Er(num);	// 참조자 정보
@@ -175,7 +251,16 @@ public class EmailController{
 	
 	// 휴지통 - 자세히보기
 	@RequestMapping(value = "email/wastebasket/detail", method = RequestMethod.GET)
-	public ModelAndView wastebasketDetail(int num, ModelAndView modelAndView) throws Exception{
+	public ModelAndView wastebasketDetail(int num, ModelAndView modelAndView, HttpSession session) throws Exception{
+		
+		Employee employee = (Employee) session.getAttribute("employee");
+		String id = employee.getEmployeeEmail();
+		int wastebasketCount = emailService.wastebasketCount(id);
+		modelAndView.addObject("wastebasketCount",wastebasketCount);
+		int emailCount = emailService.emailCount(id);
+		modelAndView.addObject("emailCount",emailCount);
+		modelAndView.setViewName("email/part/aside");
+		
 		Email wastebasketDetail = emailService.WastebasketDetail(num);
 		Email er = emailService.Er(num);	// 참조자 정보
 		Email es = emailService.Es(num);	// 보낸사람 정보
@@ -191,7 +276,17 @@ public class EmailController{
 	
 	// 받은메일함 - 자세히 보기 - 전달버튼 클릭시
 	@RequestMapping(value = "email/send/delivery", method = RequestMethod.GET)
-	public ModelAndView sendDelivery(int num, ModelAndView modelAndView) throws Exception{
+	public ModelAndView sendDelivery(int num, ModelAndView modelAndView, HttpSession session) throws Exception{
+		
+		Employee employee = (Employee) session.getAttribute("employee");
+		String id = employee.getEmployeeEmail();
+		int wastebasketCount = emailService.wastebasketCount(id);
+		modelAndView.addObject("wastebasketCount",wastebasketCount);
+		int emailCount = emailService.emailCount(id);
+		modelAndView.addObject("emailCount",emailCount);
+		modelAndView.setViewName("email/part/aside");
+
+		
 		Email sendDelivery = emailService.AcceptDelivery(num);
 		modelAndView.addObject("sendDelivery",sendDelivery);
 		modelAndView.setViewName("email/sendDelivery");
@@ -200,7 +295,16 @@ public class EmailController{
 	
 	// 보낸메일함 - 삭제버튼 클릭
 	@RequestMapping(value = "email/send/wastebasket", method = RequestMethod.GET)
-	public ModelAndView sendWastebasket(int num, ModelAndView modelAndView) throws Exception{
+	public ModelAndView sendWastebasket(int num, ModelAndView modelAndView, HttpSession session) throws Exception{
+		
+		Employee employee = (Employee) session.getAttribute("employee");
+		String id = employee.getEmployeeEmail();
+		int wastebasketCount = emailService.wastebasketCount(id);
+		modelAndView.addObject("wastebasketCount",wastebasketCount);
+		int emailCount = emailService.emailCount(id);
+		modelAndView.addObject("emailCount",emailCount);
+		modelAndView.setViewName("email/part/aside");
+
 		int sendWastebasket = emailService.SendWastebasket(num);
 		modelAndView.addObject("sendWastebasket",sendWastebasket);
 		modelAndView.setViewName("redirect:/email/send/list");
@@ -209,7 +313,16 @@ public class EmailController{
 		
 	// 보낸메일함 - 자세히보기 -전달버튼 - 전달보내기 버튼
 	@RequestMapping(value = "email/send/deliverySend", method = RequestMethod.GET)
-	public ModelAndView sendDeliverySend(Email email, ModelAndView modelAndView) throws Exception{
+	public ModelAndView sendDeliverySend(Email email, ModelAndView modelAndView, HttpSession session) throws Exception{
+		
+		Employee employee = (Employee) session.getAttribute("employee");
+		String id = employee.getEmployeeEmail();
+		int wastebasketCount = emailService.wastebasketCount(id);
+		modelAndView.addObject("wastebasketCount",wastebasketCount);
+		int emailCount = emailService.emailCount(id);
+		modelAndView.addObject("emailCount",emailCount);
+		modelAndView.setViewName("email/part/aside");
+		
 		int sendDeliverySend = emailService.SendDeliverySend(email);
 		modelAndView.setViewName("redirect:/email/send/list");
 		return modelAndView;
@@ -221,6 +334,11 @@ public class EmailController{
 	public ModelAndView wastebasketList(ModelAndView modelAndView, HttpSession session) throws Exception{
 		Employee employee = (Employee) session.getAttribute("employee");
 		String id = employee.getEmployeeEmail();
+		int wastebasketCount = emailService.wastebasketCount(id);
+		modelAndView.addObject("wastebasketCount",wastebasketCount);
+		int emailCount = emailService.emailCount(id);
+		modelAndView.addObject("emailCount",emailCount);
+		modelAndView.setViewName("email/part/aside");
 		List<Email> wastebasketList = emailService.WastebasketList(id);
 		modelAndView.addObject("wastebasketList",wastebasketList);
 		modelAndView.setViewName("email/wastebasketList");
@@ -262,7 +380,16 @@ public class EmailController{
 	// /* ------------------------------체크박스 기능------------------------------- */
 	// 받은메일함 리스트 - 체크박스 - 휴지통
 	@RequestMapping(value = "email/accept/ckWastebasket", method = RequestMethod.GET)
-	public ModelAndView acceptCkWastebasket(int check[], ModelAndView modelAndView) throws Exception{ 
+	public ModelAndView acceptCkWastebasket(int check[], ModelAndView modelAndView, HttpSession session) throws Exception{ 
+		Employee employee = (Employee) session.getAttribute("employee");
+		String id = employee.getEmployeeEmail();
+		
+		int emailCount = emailService.emailCount(id);
+		modelAndView.addObject("emailCount",emailCount);
+		int wastebasketCount = emailService.wastebasketCount(id);
+		modelAndView.addObject("wastebasketCount",wastebasketCount);
+		modelAndView.setViewName("email/part/aside");
+
 		for(int i=0; i<check.length;i++) {
 			emailService.AcceptWastebasket(check[i]);
 		}
@@ -272,7 +399,15 @@ public class EmailController{
 	
 	// 받은메일함 리스트 - 체크박스 - 읽음버튼
 	@RequestMapping(value = "email/accept/ckRead", method = RequestMethod.GET)
-	public ModelAndView acceptCkRead(int num[], ModelAndView modelAndView) throws Exception{ 
+	public ModelAndView acceptCkRead(int num[], ModelAndView modelAndView, HttpSession session) throws Exception{ 
+		Employee employee = (Employee) session.getAttribute("employee");
+		String id = employee.getEmployeeEmail();
+		int wastebasketCount = emailService.wastebasketCount(id);
+		modelAndView.addObject("wastebasketCount",wastebasketCount);
+		int emailCount = emailService.emailCount(id);
+		modelAndView.addObject("emailCount",emailCount);
+		modelAndView.setViewName("email/part/aside");
+		
 		for(int i=0; i<num.length;i++) {
 			System.out.println(num[i]);
 			emailService.ListRead(num[i]);
@@ -282,19 +417,34 @@ public class EmailController{
 	}
 	
 	// 받은메일함 리스트 - 체크박스 - 읽음버튼
-		@RequestMapping(value = "email/accept/ckClose", method = RequestMethod.GET)
-		public ModelAndView acceptCkClose(int num[], ModelAndView modelAndView) throws Exception{ 
-			for(int i=0; i<num.length;i++) {
-				System.out.println(num[i]);
-				emailService.ListClose(num[i]);
-			}
-			modelAndView.setViewName("redirect:/email/accept/list");
-			return modelAndView;
+	@RequestMapping(value = "email/accept/ckClose", method = RequestMethod.GET)
+	public ModelAndView acceptCkClose(int num[], ModelAndView modelAndView, HttpSession session) throws Exception{ 
+		Employee employee = (Employee) session.getAttribute("employee");
+		String id = employee.getEmployeeEmail();
+		int wastebasketCount = emailService.wastebasketCount(id);
+		modelAndView.addObject("wastebasketCount",wastebasketCount);
+		int emailCount = emailService.emailCount(id);
+		modelAndView.addObject("emailCount",emailCount);
+		modelAndView.setViewName("email/part/aside");
+		
+		for(int i=0; i<num.length;i++) {
+			System.out.println(num[i]);
+			emailService.ListClose(num[i]);
 		}
+		modelAndView.setViewName("redirect:/email/accept/list");
+		return modelAndView;
+	}
 
 	// 보낸메일함 리스트 - 체크박스 - 삭제
 	@RequestMapping(value = "email/send/ckWastebasket", method = RequestMethod.GET)
-	public ModelAndView sendCkWastebasket(int check[], ModelAndView modelAndView) throws Exception{ 
+	public ModelAndView sendCkWastebasket(int check[], ModelAndView modelAndView, HttpSession session) throws Exception{ 
+		Employee employee = (Employee) session.getAttribute("employee");
+		String id = employee.getEmployeeEmail();
+		int wastebasketCount = emailService.wastebasketCount(id);
+		modelAndView.addObject("wastebasketCount",wastebasketCount);
+		int emailCount = emailService.emailCount(id);
+		modelAndView.addObject("emailCount",emailCount);
+		modelAndView.setViewName("email/part/aside");
 		for(int i=0; i<check.length;i++) {
 			emailService.SendWastebasket(check[i]);
 		}
@@ -304,7 +454,14 @@ public class EmailController{
 	
 	// 휴지통리스트 - 체크박스 - 복구
 	@RequestMapping(value = "email/wastebasket/ckWastebasket", method = RequestMethod.GET)
-	public ModelAndView wastebasketCkWastebasket(int check[], ModelAndView modelAndView) throws Exception{ 
+	public ModelAndView wastebasketCkWastebasket(int check[], ModelAndView modelAndView, HttpSession session) throws Exception{ 
+		Employee employee = (Employee) session.getAttribute("employee");
+		String id = employee.getEmployeeEmail();
+		int wastebasketCount = emailService.wastebasketCount(id);
+		modelAndView.addObject("wastebasketCount",wastebasketCount);
+		int emailCount = emailService.emailCount(id);
+		modelAndView.addObject("emailCount",emailCount);
+		modelAndView.setViewName("email/part/aside");
 		for(int i=0; i<check.length;i++) {
 			emailService.AcceptWastebasket(check[i]);
 		}
@@ -314,7 +471,15 @@ public class EmailController{
 	
 	// 휴지통리스트 - 체크박스 - 삭제
 	@RequestMapping(value = "email/wastebasket/ckRestoration", method = RequestMethod.GET)
-	public ModelAndView wastebasketCkRestoration(int num[], ModelAndView modelAndView) throws Exception{ 
+	public ModelAndView wastebasketCkRestoration(int num[], ModelAndView modelAndView, HttpSession session) throws Exception{ 
+		Employee employee = (Employee) session.getAttribute("employee");
+		String id = employee.getEmployeeEmail();
+		int wastebasketCount = emailService.wastebasketCount(id);
+		modelAndView.addObject("wastebasketCount",wastebasketCount);
+		int emailCount = emailService.emailCount(id);
+		modelAndView.addObject("emailCount",emailCount);
+		modelAndView.setViewName("email/part/aside");
+
 		for(int i=0; i<num.length;i++) {
 			System.out.println(num[i]);
 			emailService.WastebasketDelete(num[i]);
@@ -338,8 +503,15 @@ public class EmailController{
 	
 	// 작성시 메일주소 검색
 	@RequestMapping(value="email/write/searchName", method=RequestMethod.POST)
-	public void emailSearchName(Employee employee, HttpServletResponse response) throws Exception {
-		System.out.println(employee.getEmployeeName());
+	public void emailSearchName(Employee employee, ModelAndView modelAndView, HttpServletResponse response, HttpSession session) throws Exception {
+		Employee eemployee = (Employee) session.getAttribute("employee");
+		String id = eemployee.getEmployeeEmail();
+		int wastebasketCount = emailService.wastebasketCount(id);
+		modelAndView.addObject("wastebasketCount",wastebasketCount);
+		int emailCount = emailService.emailCount(id);
+		modelAndView.addObject("emailCount",emailCount);
+		modelAndView.setViewName("email/part/aside");
+		
 		List<Employee> empList = emailService.selectEmpAll(employee);
 			// 전송용 최종 json 객체
 			 JSONObject sendJson = new JSONObject();

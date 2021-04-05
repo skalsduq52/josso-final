@@ -81,6 +81,9 @@ public interface EmailService {
 	public  List<Employee> selectEmpAll(Employee employee) throws Exception;
 	
 	// 받은이메일중 안읽은 메일 갯수 카운트
-	public List<Email> emailCount(String id) throws Exception;
+	public int emailCount(String id) throws Exception;
+	
+	// 휴지통 메일 개수
+	public int wastebasketCount(String id) throws Exception;
 	
 }

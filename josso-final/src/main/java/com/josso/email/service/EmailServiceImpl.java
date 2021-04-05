@@ -145,7 +145,13 @@ public class EmailServiceImpl implements EmailService{
 	}
 	
 	// 받은메일함 안읽은 메일 수
-	public List<Email> emailCount(String id) throws Exception{
+	public int emailCount(String id) throws Exception{
 		return emailDao.emailCount(id);
 	}
+	
+	// 휴지통 메일 개수
+	public int wastebasketCount(String id) throws Exception{
+		return emailDao.wastebasketCount(id);
+	}
+	
 }

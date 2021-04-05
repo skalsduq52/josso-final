@@ -144,7 +144,12 @@ public class EmailDao {
 	}
 	
 	// 받음메일함 안읽은 메일 수
-	public List<Email> emailCount(String id) throws Exception{
-		return sqlSession.selectList("Email.emailCount", id);
+	public int emailCount(String id) throws Exception{
+		return sqlSession.selectOne("Email.emailCount", id);
+	}
+	
+	// 휴지통 메일 개수
+	public int wastebasketCount(String id) throws Exception{
+		return sqlSession.selectOne("Email.wastebasketCount", id);
 	}
 }
