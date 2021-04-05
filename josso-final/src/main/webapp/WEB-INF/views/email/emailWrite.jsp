@@ -59,6 +59,7 @@
                 
             });
             $(function(){
+            	var emailAdrr = "";
             	$('#emailAccept').keyup(function(){
             		var name = $('#emailAccept').val();
             		console.log(name);
@@ -83,25 +84,22 @@
             								+data.list[i].dCode+" / "
             								+data.list[i].email+" </span></li>";
             							console.log(data.list[i].email);
+            							emailAdrr = data.list[i].email;
             						}
             					}
             				$('#textarea1').html(area);
             				$('#textarea1').attr("style","display:inline")
             			}
             		});	
-            	});		
+            	});	
+            	$('#textarea1').click(function(){
+         		   $('#emailAccept').val(emailAdrr);
+         		   /* .children().children('.selectEmp') */
+         	   alert('여기야');
+         	   });
             }) 
             
-            /*
-           $(function(){
-        	   $('#textarea1').children().children('.selectEmp').click(function(){
-        		   
-        	   alert('여기야');
-        	   });
-           });
-            */
-            
-           $(function(){
+           /* $(function(){
         	   $('.selectEmp').click(function(){
         	   console.log("들어옴");
         		   
@@ -109,20 +107,21 @@
         	   alert(val);
         	   });
            });
-
+ 
             
            $(function(){
 	            $('.selectEmp').click(function() {
-	            	
+	            	var area = '';
+	            	$('#emailAccept').append(area);
 	            	console.log('들어옴');
 	            	var a = '123';
 	            	console.log(a);
 	            	var area = "<input autocomplete='off' id='emailAccept' autofocus type='email' required name='emailAccept' value="+$(this).text()+" class='form-control form-control-sm'>";
 		    		$('#emailAccept').append(area);
 			    		/* var area = "<span class='badge badge-pill badge-secondary' name='Attendee'>"+$(this).text()+"</span>&nbsp;";
-					$('#Attendee').append(area); */
+					$('#Attendee').append(area); 
 	        		});
-            });
+            });*/
             
             $("#re").click(function(){
                 if(confirm("정말 등록하시겠습니까 ?") == true){

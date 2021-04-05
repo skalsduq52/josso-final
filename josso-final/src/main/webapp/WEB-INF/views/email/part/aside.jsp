@@ -42,7 +42,7 @@
                             <li>
                                 <div class="form-check form-check-inline">
                                            
-                                    <label class="form-check-label" for="inlineCheckbox1"><a class="abc" href="${pageContext.request.contextPath}/email/wastebasket/list"> 휴지통</a></label><label style="color: gray; padding:8px 0px 0px 10px;">  3</label>
+                                    <label class="form-check-label" for="inlineCheckbox1"><a class="abc" href="${pageContext.request.contextPath}/email/wastebasket/list"> 휴지통</a></label><label style="color: gray; padding:8px 0px 0px 10px;">${wastebasketCount}</label>
                                 </div>
                             </li>
                         </ul>

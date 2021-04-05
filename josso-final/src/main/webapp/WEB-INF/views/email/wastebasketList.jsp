@@ -111,8 +111,6 @@
 					for(i=0;i<check.length;i++){
 						console.log(check[i]);
 					}
-					/* location.href = '/josso/schedule/delete'+aa; */
-					
 				});
 			});
 			
