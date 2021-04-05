@@ -60,6 +60,7 @@
             });
             $(function(){
             	var emailAdrr = "";
+            	var empty = "";
             	$('#emailAccept').keyup(function(){
             		var name = $('#emailAccept').val();
             		console.log(name);
@@ -78,7 +79,7 @@
             					area += "검색하신 결과가 없습니다."
             					}else{
             						for(var i in data.list){
-            							area += "<li><span class='selectEmp'>"
+            							area += "<li class='selectEmp'><span  onclick='fnEmpSet(\""+data.list[i].email+"\")'>"
             								+data.list[i].name+" / "
             								+data.list[i].rCode+" / "
             								+data.list[i].dCode+" / "
@@ -92,13 +93,60 @@
             			}
             		});	
             	});	
-            	$('#textarea1').click(function(){
+				alert('selectEmp click');            	
+            	$('.selectEmp').on('click','span' ,function(){
+            		alert($(this).html());
+            	});
+	
+            	/* $('#textarea1').click(function(){
          		   $('#emailAccept').val(emailAdrr);
-         		   /* .children().children('.selectEmp') */
-         	   alert('여기야');
+         		   $('#textarea1').html(empty);
          	   });
-            }) 
-            
+            	 */
+            })
+            $(function(){
+            	var emailAdrr = "";
+            	var empty = "";
+            	$('#emailReference').keyup(function(){
+            		var name = $('#emailReference').val();
+            		console.log(name);
+            		$.ajax({
+            			url : "/josso/email/write/searchName",
+            			data : {"employeeName" : name},
+            			method : "post",
+            			dataType : "json",
+            			success : function(rdata){
+            				var listStr = JSON.stringify(rdata);
+            				var data = JSON.parse(listStr);
+            				console.log(data);
+            				$('#textarea2').html('');
+            				var area = $('#textarea2').html();
+            				if(data.list.length == 0){
+            					area += "검색하신 결과가 없습니다."
+            					}else{
+            						for(var i in data.list){
+            							area += "<li><span class='selectEmp'>"
+            								+data.list[i].name+" / "
+            								+data.list[i].rCode+" / "
+            								+data.list[i].dCode+" / "
+            								+data.list[i].email+" </span></li>";
+            							console.log(data.list[i].email);
+            							emailAdrr = data.list[i].email;
+            						}
+            					}
+            				$('#textarea2').html(area);
+            				$('#textarea2').attr("style","display:inline")
+            			}
+            		});	
+            	});	
+            	$('#textarea2').click(function(){
+         		   $('#emailReference').val(emailAdrr);
+         		   $('#textarea2').html(empty);
+         	   });
+            })
+function fnEmpSet(empEmail){
+	alert(empEmail)            	
+}         
            /* $(function(){
         	   $('.selectEmp').click(function(){
         	   console.log("들어옴");
@@ -221,7 +269,9 @@
                     </tr>
                     <tr >
                         <td>참조  </td>
-                        <td colspan="2"><input autocomplete="off" id="emailReference" autofocus type="email" name="emailReference" class="form-control form-control-sm"></td>
+                        <td colspan="2"><input autocomplete="off" id="emailReference" autofocus type="email" name="emailReference" class="form-control form-control-sm">
+                        <table id="textarea2" rows="4" cols="100" style="overflow: auto; height: 50px; display:none;"></table></td>
+                        
                     </tr>
                     <tr>
                         <td>제목  </td>
@@ -235,8 +285,8 @@
                 <tbody>
                     <tr>
                         <td colspan="2">
-                            <div autocomplete="off" autofocus id="smartEditor" class="searchResult form-control"
-                             name="emailContent" style="height: 550px;"></div>
+                            <textarea autocomplete="off" autofocus id="smartEditor" class="searchResult form-control"
+                             name="emailContent" style="height: 550px;"></textarea>
                         </td>
                     </tr>
                 </tbody>

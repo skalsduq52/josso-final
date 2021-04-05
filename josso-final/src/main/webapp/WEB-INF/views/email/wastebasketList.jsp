@@ -190,7 +190,7 @@
                             </div>
                             <input type="text" class="form-control" placeholder="Search" name="q" value="">
                             <div class="input-group-append">
-                                <button class="btn btn-success" type="submit">검색</button>
+                                <input class="btn btn-success" type="button" value="검색"></button>
                             </div>
                         </div>
                     </span></div>

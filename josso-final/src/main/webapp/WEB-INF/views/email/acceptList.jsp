@@ -231,9 +231,15 @@
                     <div class="col"><span>
                     <form action="${pageContext.request.contextPath}/email/search" method="get">
                         <div class="input-group justify-content-right nav-search">
-                            <input type="text" class="form-control" placeholder="Search" name="word" value="">
+	                        <div class="form-group-append">
+                                <select class="field form-control" id="f" name="f">
+                                    <option ${(param.f == "B_TITLE")?"selected":""} value="TITLE">글제목</option>
+									<option ${(param.f == "B_WRITER")?"selected":""} value="WRITER">작성자</option>
+                                </select>
+                            </div>
+                            <input type="text" class="query form-control" placeholder="Search" name="word" value="">
                             <div class="input-group-append">
-                                <button class="btn btn-success" type="submit">검색</button>
+                                <input class="btn btn-success" type="button" value="검색"></button>
                             </div>
                         </div>
                     </form>
