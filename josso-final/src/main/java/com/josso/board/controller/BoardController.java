@@ -27,9 +27,7 @@ public class BoardController {
 	// 공지사항 (목록)
 	@RequestMapping(value="board/notice/list", method=RequestMethod.GET)
 	public ModelAndView noticeList(ModelAndView mv) throws Exception {
-		
 		List<Board> noticeList =  boardService.selectNoticeAll();
-		
 		mv.addObject("noticeList", noticeList);
 		mv.setViewName("board/noticeList");
 		return mv;
@@ -52,8 +50,7 @@ public class BoardController {
 	// 공지사항 (디테일페이지)
 	@RequestMapping(value="board/notice/detailPage", method=RequestMethod.GET)
 	public ModelAndView noticeDetail(ModelAndView mv, @RequestParam("num") String boardNum) throws Exception {
-		Board noticeBoard = boardService.selectNoticeDetail(boardNum);
-		
+		Board noticeBoard = boardService.boardDetail(boardNum);
 		String num = boardNum;
 		
 		mv.addObject("num", num);
@@ -66,7 +63,7 @@ public class BoardController {
 	@RequestMapping(value="board/notice/updateBridge", method=RequestMethod.GET)
 	public ModelAndView noticeUpdateBridge(ModelAndView mv, @RequestParam("num") String num) throws Exception {
 		String num1 = num;
-		Board board = boardService.selectNoticeDetail(num);
+		Board board = boardService.boardDetail(num);
 		
 		mv.addObject("num1", num1);
 		mv.addObject("board", board);
@@ -77,18 +74,17 @@ public class BoardController {
 	// 공지사항 (수정)
 	@RequestMapping(value="board/notice/update", method=RequestMethod.POST)
 	public ModelAndView noticeUpdate(ModelAndView mv, Board board) throws Exception {
-		System.out.println("보드 넘버 : " + board.getBoardNum());
-		boardService.noticeUpdate(board);
+		boardService.boardUpdate(board);
+		mv.addObject("num", board.getBoardNum());
 		mv.setViewName("redirect:detailPage");
 		return mv;
 	}
 	
 	// 공지사항(삭제)
 	@RequestMapping(value="board/notice/delete", method=RequestMethod.GET)
-	public ModelAndView noticeDelete(ModelAndView mv, @RequestParam("num") String num) throws Exception {
-		
-		int result = boardService.noticeDelete(num);
-		mv.setViewName("redirect:detailPage");
+	public ModelAndView noticeDelete(ModelAndView mv, @RequestParam("num") int boardNum) throws Exception {
+		boardService.boardDelete(boardNum);
+		mv.setViewName("redirect:list");
 		return mv;
 	}
 	
@@ -104,48 +100,58 @@ public class BoardController {
 	}
 	
 	// 건의사항 (글 작성)
-	@RequestMapping(value="board/suggestion/writeBridge", method=RequestMethod.GET)
+	@RequestMapping(value="board/suggestion/write", method=RequestMethod.GET)
 	public ModelAndView suggestionWriteBridge(ModelAndView mv) throws Exception {
-		System.out.println("작성 브릿지");
 		mv.setViewName("board/suggestionWrite");
 		return mv;
 	}
 	
 	// 건의사항 (글 등록)
-	@RequestMapping(value="board/suggestion/write", method=RequestMethod.GET)
-	public ModelAndView suggestionWrite(ModelAndView mv, Board board) throws Exception {
-		int result = boardService.suggestionWrite(board);
+	@RequestMapping(value="board/suggestion/register", method=RequestMethod.POST)
+	public ModelAndView suggestionWrite(ModelAndView mv, Board board, HttpSession session, HttpServletResponse response) throws Exception {
+		boardService.suggestionWrite(board, session, response);
 		mv.setViewName("redirect:list");
 		return mv;
 	}
 	
 	// 건의사항 (디테일페이지)
 	@RequestMapping(value="board/suggestion/detailPage", method=RequestMethod.GET)
-	public ModelAndView suggestionDetail(ModelAndView mv, @RequestParam("boarNum") int boardNum) throws Exception {
-		Board suggestionBoard = boardService.selectSuggestionDetail(boardNum);
+	public ModelAndView suggestionDetail(ModelAndView mv, @RequestParam("num") String boardNum) throws Exception {
+		Board suggestionBoard = boardService.boardDetail(boardNum);
+		String num = boardNum;
+		
+		mv.addObject("num", num);
 		mv.addObject("suggestionBoard", suggestionBoard);
 		mv.setViewName("/board/suggestionDetailPage");
 		return mv;
 	}
 	
+	
 	// 건의사항 (수정) '브릿지'
 	@RequestMapping(value="board/suggestion/updateBirdge", method=RequestMethod.GET)
-	public ModelAndView suggestionUpdateBridge(ModelAndView mv, int boardNum) throws Exception {
-		System.out.println("수정 브릿지");
+	public ModelAndView suggestionUpdateBridge(ModelAndView mv, @RequestParam("num") String num) throws Exception {
+		String num1 = num;
+		Board board = boardService.boardDetail(num);
 		
-		int boardNum1 = boardNum;
-		
-		mv.addObject("boardNum1", boardNum1);
+		mv.addObject("num1", num1);
+		mv.addObject("board", board);
 		mv.setViewName("board/suggestionUpdate");
 		return mv;
 	}
 	
 	// 건의사항 (수정)
-	@RequestMapping(value="board/suggestion/update", method=RequestMethod.GET)
+	@RequestMapping(value="board/suggestion/update", method=RequestMethod.POST)
 	public ModelAndView suggestionUpdate(ModelAndView mv, Board board, @RequestParam("boarNum") int boardNum) throws Exception {
-		int result = boardService.suggestionUpdate(board);
-		
+		boardService.boardUpdate(board);
 		mv.setViewName("redirect:detailPage");
+		return mv;
+	}
+	
+	// 건의사항(삭제)
+	@RequestMapping(value="board/suggestion/delete", method=RequestMethod.GET)
+	public ModelAndView suggestionDelete(ModelAndView mv, @RequestParam("num") int boardNum) throws Exception {
+		boardService.boardDelete(boardNum);
+		mv.setViewName("redirect:list");
 		return mv;
 	}
 	

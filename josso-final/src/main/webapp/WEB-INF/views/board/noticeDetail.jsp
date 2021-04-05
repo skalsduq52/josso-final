@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -128,7 +130,7 @@
                 <table>
                     <tr>
                         <td>작성자 : </td>
-                        <td>${noticeBoard.employeeName}</td>
+                        <td>${employee.employeeName}</td>
                     </tr>
                     <tr>
                         <td>작성일자 : </td>
@@ -145,7 +147,7 @@
                 </div><br>
                 <a href="list"><button>목록</button></a>
                 <a href="updateBridge?num=${num}"><button>수정</button></a>
-                <a href="delete"><button>삭제</button></a>
+                <a href="delete?num=${num }"><button>삭제</button></a>
             </div>
         </main>
         <footer class="border-top">

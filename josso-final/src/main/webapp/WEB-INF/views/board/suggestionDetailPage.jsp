@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>   
     <head>    
@@ -283,13 +285,13 @@
                     <thead>
                         <tr class="left_tr border-bottom"> 
                             <th class="left_td">제목</th>
-                            <td class="right_td"><span>제목 들어오는 곳</span></td><br>
+                            <td class="right_td"><span>${suggestionBoard.boardTitle}</span></td><br>
                         </tr>
                         <tr class="border-bottom" style="height: 50px;">
                             <th class="left_td" style="padding-top: 20px;">파일첨부</th>
                             <td class="right_td" style="padding-top: 20px;">
                                 <div>
-                                <span>첨부파일이 없습니다.</span>
+                                <span>${suggestionBoard.boardFile}</span>
                                 </div>
                             </td>
                         </tr>
@@ -297,14 +299,16 @@
                     <tbody>
                         <tr id="write_content" class="border-bottom">
                             <th class="left_td">내용</th>
-                            <td class="right_td"><div id="smartEditor" style="height: 400px; width: 100%;"><span>내용 들어오는 곳</span></div></td>
+                            <td class="right_td"><div id="smartEditor" style="height: 400px; width: 100%;"><span>${suggestionBoard.boardContent}</span></div></td>
                         </tr>
                     </tbody>    
                 </table>
             </div>
 
             <div style="float:right; padding-right: 30px; padding-top: 30px;">
-                <button class="btn btn-info" href="">목록</button>
+                <button class="btn btn-info" href="list">목록</button>
+                <button class="btn btn-info" href="updateBridge?num=${num}">수정</button>
+                <button class="btn btn-info" href="delete?num=${num}">삭제</button>
             </div>  
            </form>        
         </main>

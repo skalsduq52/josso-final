@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
 <html>
     <head>
@@ -278,8 +279,8 @@
 
         
         <main>
-            <form action="update" method="POST">
-        	<input type="hidden" name="boardNum" value="${num1}">
+            <form action="update?num=${num1}" method="POST">
+        	<input type="hidden" value="${num1}" name="boardNum" />
             <div class="border-top">
                 <table style="width: 100%;" id="board">
                     <thead>
