@@ -56,8 +56,8 @@
             </li>
             <c:if test="${employee.roleCode == '1'}">
 	             <li >
-	                <a href="/josso/staff/organization">
-	                <span class="icon"><i class="fas fa-user-friends fa-lg" aria-hidden="true" ></i></span>
+	                <a href="/josso/employee/employeeInsert">
+	                <span class="icon"><i class="fas fa-user-lock fa-lg" aria-hidden="true" ></i></span>
 	                <span class="icon" >관리자</span>
 	                </a>
 	            </li>
