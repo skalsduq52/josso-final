@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -22,7 +24,7 @@
          <!-- Latest compiled JavaScript -->
          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
          <!-- SmartEditor2 라이브러리(경로 맞춰줘야 함.) -->
-         <script type="text/javascript" src="../final_project/smartEditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/smartEditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
          <script>
             $(function(){
                 $('.side_title').click(function(){
@@ -131,7 +133,7 @@
               oAppRef: oEditors,
               elPlaceHolder: "smartEditor", //textarea에서 지정한 id와 일치해야 함. 
               //SmartEditor2Skin.html 파일이 존재하는 경로
-              sSkinURI: "smartEditor/SmartEditor2Skin.html",  
+              sSkinURI: "${pageContext.request.contextPath}/resources/smartEditor/SmartEditor2Skin.html",  
               htParams : {
                   // 툴바 사용 여부 (true:사용/ false:사용하지 않음)
                   bUseToolbar : true,             
@@ -142,6 +144,14 @@
               }, 
               fCreator: "createSEditor2"
           });
+     	  
+          
+          // 스마트에디터 값 전송
+          $('form').click(function(){
+    	 	oEditors.getById['smartEditor'].exec("UPDATE_CONTENTS_FIELD", []);
+          });
+          
+         
         
     });
 </script>

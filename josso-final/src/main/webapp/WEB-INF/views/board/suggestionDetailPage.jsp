@@ -77,15 +77,19 @@
 
             .left_td {
                 padding-bottom: 20px;
-                padding-left: 40px;
                 width: 10%;
-                min-width: 100px;               
+                min-width: 100px;
+                background:lightgray;  
+                opacity:0.5;         
             }
 
 
             .right_td {
                 padding-bottom: 20px;
+                width:50%;
                 padding-right: 30px;
+                font-weight:700;
+                font-size:1.2em;
             }
 
             #multipart {
@@ -119,6 +123,10 @@
 
            .report_kind:hover {
                text-decoration: none;
+           }
+           
+           .row {
+           		padding-top:30px;
            }
 
 
@@ -266,7 +274,7 @@
             </section>
         </div>
     </aside>
-    <nav class="border-bottom">
+    <nav >
         <div class="nav_title">
             <h2 id="suggestion_title" style="font-weight: 600;">건의사항 게시판</h2>
         </div>
@@ -280,12 +288,12 @@
         
         <main>
             <form>
-            <div class="border-top">
-                <table style="width: 100%;" id="board">
+            <div  style="padding-left:10px;">
+                <table style="width: 100%; text-align:center" id="board">
                     <thead>
                         <tr class="left_tr border-bottom"> 
-                            <th class="left_td">제목</th>
-                            <td class="right_td"><span>${suggestionBoard.boardTitle}</span></td><br>
+                            <th class="left_td" style="padding-top:20px">제목</th>
+                            <td class="right_td" style="padding-top:20px"><span>${suggestionBoard.boardTitle}</span></td><br>
                         </tr>
                         <tr class="border-bottom" style="height: 50px;">
                             <th class="left_td" style="padding-top: 20px;">파일첨부</th>
@@ -305,12 +313,16 @@
                 </table>
             </div>
 
-           </form>        
-            <div style="float:right; padding-right: 30px; padding-top: 30px;">
-            	<a class="btn-info" href="list"><button>목록</button></a>
-            	<a class="btn-info" href="updateBridge?num=${num}"><button>수정</button></a>
-            	<a class="btn-info" href="delete?num=${num}"><button>삭제</button></a>
-            </div>  
+           </form>
+           <div class="row">        
+            	<div class="container col-sm-6" style="text-align:left; padding-left:30px">
+                	<button class="btn btn-info"><a href="list" style="color:white">목록</a></button>
+            	</div>
+            	<div class="container col-sm-6" style="text-align:right">
+	                <button class="btn btn-info"><a href="updateBridge?num=${num}" style="color:white">수정하기</a></button>
+    	            <button class="btn btn-secondary"><a href="delete?num=${num}" style="color:white">삭제</a></button>
+            	</div>
+            </div>
         </main>
         <footer class="border-top">
 

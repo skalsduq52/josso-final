@@ -5,7 +5,7 @@ public class Paging {
 	private static final long serialVersionUID = 1111L;
 	private String employeeNum;
 	private int page = 1;
-	private String title;
+	private String title = "";
 	private String query = "";
 	private int count;
 	private int startNum;

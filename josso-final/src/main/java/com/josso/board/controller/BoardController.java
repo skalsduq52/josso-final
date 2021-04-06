@@ -2,6 +2,7 @@ package com.josso.board.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -49,8 +50,8 @@ public class BoardController {
 	
 	// 공지사항 (디테일페이지)
 	@RequestMapping(value="board/notice/detailPage", method=RequestMethod.GET)
-	public ModelAndView noticeDetail(ModelAndView mv, @RequestParam("num") String boardNum) throws Exception {
-		Board noticeBoard = boardService.boardDetail(boardNum);
+	public ModelAndView noticeDetail(ModelAndView mv, @RequestParam("num") String boardNum, HttpServletRequest request) throws Exception {
+		Board noticeBoard = boardService.boardDetail(boardNum, request);
 		String num = boardNum;
 		
 		mv.addObject("num", num);
@@ -61,9 +62,9 @@ public class BoardController {
 	
 	// 공지사항 (수정) '브릿지'
 	@RequestMapping(value="board/notice/updateBridge", method=RequestMethod.GET)
-	public ModelAndView noticeUpdateBridge(ModelAndView mv, @RequestParam("num") String num) throws Exception {
+	public ModelAndView noticeUpdateBridge(ModelAndView mv, @RequestParam("num") String num, HttpServletRequest request) throws Exception {
 		String num1 = num;
-		Board board = boardService.boardDetail(num);
+		Board board = boardService.boardDetail(num, request);
 		
 		mv.addObject("num1", num1);
 		mv.addObject("board", board);
@@ -73,8 +74,8 @@ public class BoardController {
 	
 	// 공지사항 (수정)
 	@RequestMapping(value="board/notice/update", method=RequestMethod.POST)
-	public ModelAndView noticeUpdate(ModelAndView mv, Board board) throws Exception {
-		boardService.boardUpdate(board);
+	public ModelAndView noticeUpdate(ModelAndView mv, Board board, HttpServletRequest request) throws Exception {
+		boardService.boardUpdate(board, request);
 		mv.addObject("num", board.getBoardNum());
 		mv.setViewName("redirect:detailPage");
 		return mv;
@@ -117,8 +118,8 @@ public class BoardController {
 	
 	// 건의사항 (디테일페이지)
 	@RequestMapping(value="board/suggestion/detailPage", method=RequestMethod.GET)
-	public ModelAndView suggestionDetail(ModelAndView mv, @RequestParam("num") String boardNum) throws Exception {
-		Board suggestionBoard = boardService.boardDetail(boardNum);
+	public ModelAndView suggestionDetail(ModelAndView mv, @RequestParam("num") String boardNum, HttpServletRequest request) throws Exception {
+		Board suggestionBoard = boardService.boardDetail(boardNum, request);
 		String num = boardNum;
 		
 		System.out.println("들어오는 페이지값 : " + num);
@@ -132,9 +133,9 @@ public class BoardController {
 	
 	// 건의사항 (수정) '브릿지'
 	@RequestMapping(value="board/suggestion/updateBridge", method=RequestMethod.GET)
-	public ModelAndView suggestionUpdateBridge(ModelAndView mv, @RequestParam("num") String num) throws Exception {
+	public ModelAndView suggestionUpdateBridge(ModelAndView mv, @RequestParam("num") String num, HttpServletRequest request) throws Exception {
 		String num1 = num;
-		Board board = boardService.boardDetail(num);
+		Board board = boardService.boardDetail(num, request);
 
 		mv.addObject("num1", num1);
 		mv.addObject("board", board);
@@ -145,8 +146,8 @@ public class BoardController {
 
 	// 건의사항 (수정)
 	@RequestMapping(value="board/suggestion/update", method=RequestMethod.POST)
-	public ModelAndView suggestionUpdate(ModelAndView mv, Board board) throws Exception {
-		boardService.boardUpdate(board);
+	public ModelAndView suggestionUpdate(ModelAndView mv, Board board, HttpServletRequest request) throws Exception {
+		boardService.boardUpdate(board, request);
 		mv.addObject("num", board.getBoardNum());
 		mv.setViewName("redirect:detailPage");
 		return mv;

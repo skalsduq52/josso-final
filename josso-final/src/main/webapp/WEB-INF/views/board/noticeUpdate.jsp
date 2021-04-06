@@ -314,7 +314,8 @@
             </div>
 
             <div style="float:right; padding-right: 30px;">
-                <input class="btn btn-primary" type="submit" href="update" value="제출하기"></tr>
+                <input class="btn btn-info" type="submit" href="update" value="수정하기"></tr>
+                <input class="btn btn-secondary" type="button" onclick="history.back();" value="취소"></tr>
             </div>  
            </form>        
         </main>

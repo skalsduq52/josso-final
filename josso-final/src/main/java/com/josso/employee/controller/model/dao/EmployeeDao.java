@@ -80,14 +80,16 @@ public class EmployeeDao {
 	}
 	
 	// 비밀번호 찾기
-		public String findEmployeePassword(String employeeNumber) throws Exception{
-			return sqlSession.selectOne("Employee.findEmployeePassword", employeeNumber);
-		}
-	
-	// 비밀번호 변경
+	public String findEmployeePassword(String employeeNumber) throws Exception{
+		return sqlSession.selectOne("Employee.findEmployeePassword", employeeNumber);
+	}
+
+	// 비밀번호 변경 - 인증키(emailAuthKey)를 비밀번호로
 	@Transactional
 	public int updatePassword(Employee employee) throws Exception{
+		
 		return sqlSession.update("Employee.updatePassword", employee);
+		
 	}
 	
 	// 이메일 인증코드 확인
@@ -99,6 +101,8 @@ public class EmployeeDao {
     public void successAuthkey(Employee employee) throws Exception {
         sqlSession.update("keyConfirm", employee);
     }
+
+	
 
 
 

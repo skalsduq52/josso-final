@@ -166,7 +166,9 @@ public class EmployeeServiceImpl implements EmployeeService{
 	public String findEmployeePassword(HttpServletResponse response, String employeeNumber) throws Exception {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
-			if((employeeDao.checkEmployeeNumber(employeeNumber))==0) {
+		Employee employee = new Employee();
+		employee.setEmployeeNumber(employeeNumber);
+			if(employeeDao.checkEmployeeNumber(employeeNumber)==0) {
         	
 	        	out.println("<script>");
 				out.println("alert('사원번호가 없습니다,다시 입력해 주세요.');");
@@ -175,23 +177,27 @@ public class EmployeeServiceImpl implements EmployeeService{
 				out.close();
 				return null;
 			}else {
-				Employee employee = new Employee();
-				String key = new TempKey().generateKey(30);  // 인증키 생성
-		        employee.setEmailAuthKey(key);;
+				String key = new TempKey().generateKey(10);  // 인증키 생성
+				// EmployeeVO에 인증키 저장
+				
+		        employee.setEmailAuthKey(key);
+		        System.out.println(employee);
+		        
+		        employeeDao.updatePassword(employee);
 		        System.out.println("key : " + key);
-		        String employeeEmail = employeeDao.findEmployeePassword(employeeNumber);
-		        //DB에 가입정보등록
-		 //       employeeDao.insertEmployee(employee);
+		        String employeeEmail = employeeDao.findEmployeePassword(employee.getEmployeeNumber());
+		
 		        
 		        //메일 전송
 		        MailHandler sendMail = new MailHandler(mailSender);
-		        sendMail.setSubject("이메일 인증");
+		        sendMail.setSubject("임시 비밀번호 입니다.");
 		        sendMail.setText(
 		                new StringBuffer()
-		                .append("<h1>메일인증</h1>")
-		                .append("<a href='http://localhost:8080/email_test/emailConfirm?authKey=")
+		                .append("<h1>임시 비밀번호는</h1>")
+		                .append("사원번호 "+ employeeNumber+ "님의 임시 비밀번호는")
 		                .append(key)
-		                .append("' target='_blank'>이메일 인증 확인</a>")
+		                .append("입니다")
+				.append("<p><a href='http://localhost:8181/josso/employee/login/index'>로그인하러 가기</a></p>")
 		                .toString());
 		        
 		        sendMail.setFrom("wanaciel@naver.com", "josoo 메일 인증");
