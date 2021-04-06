@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 	   		<style type="text/css">
 				 .abc { color: black;}
+				 
 			</style>
 			<div>
                 <section>
@@ -22,7 +23,7 @@
                         <span class="hover_icon">
                             <i class="fas fa-sort-down fa-rotate-270" style="color:gray"></i>
                         </span>
-                        <span style="font-weight:bold; class="abc hover_title">내 메일함</span>
+                        <span style="font-weight:bold;" class="myEmail abc hover_title">내 메일함</span>
                         <span class="write_img">
                             <img src="${pageContext.request.contextPath}/resources/images/글쓰기(연필).png">
                         </span>

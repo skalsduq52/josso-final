@@ -175,6 +175,34 @@
             a:hover { color: blue; text-decoration: none;}
             .selectEmp{ cursor:pointer; }
 			.selectEmp:hover{ text-decoration: underline; }
+			.listEmail1{
+            	position: absolute;
+            	z-index: 5;
+            	top: 220px;
+            	background-color: white;
+            	width:75.3%;
+            	opacity: 1.0;
+            	overflow: auto;
+            	max-height: 130px;
+            	border-style: groove;
+            	padding: 0px 0px 0px 7px;
+            	list-style: none;
+            	border-radius: 1%;
+            }
+            .listEmail2{
+            	position: absolute;
+            	z-index: 5;
+            	top: 275px;
+            	background-color: white;
+            	width:75.3%;
+            	opacity: 1.0;
+            	overflow: auto;
+            	max-height: 130px;
+            	border-style: groove;
+            	padding: 0px 0px 0px 7px;
+            	list-style: none;
+            	border-radius: 1%;
+            }
         </style>
     </head>
     <body class="body">
@@ -229,18 +257,18 @@
                         <td style="width: 120px;">보내는 사람 :</td>
                         <td colspan="2">
                         <input type="hidden" name="employeeNumber"  value="${employee.employeeNumber}">
-                        <input type="email" name="emailSend" class="form-control form-control-sm">
+                        <input type="email" autocomplete="off" readonly value="${employee.employeeEmail}" name="emailSend" class="form-control form-control-sm">
                         </td>
                     </tr>
                     <tr>
                         <td>받는 사람  </td>
-                        <td colspan="2"><input type="email" autocomplete="off" autofocus  value="${acceptReply.emailSend}" name="emailAccept" id="emailAccept" class="form-control form-control-sm">
-                        <table id="textarea1" rows="4" cols="100" style="overflow: auto; height: 50px; display:none;"></table></td>
+                        <td colspan="2"><input type="email" placeholder="이름을 입력해주세요"  autocomplete="off" autofocus  value="${acceptReply.emailSend}" name="emailAccept" id="emailAccept" class="inputEmali1 form-control form-control-sm">
+                        <div id="textarea1" class="listEmail1" style="display:none;"></div></td>
                     </tr>
                     <tr>
                         <td>참조  </td>
-                        <td colspan="2"><input type="email" autocomplete="off" autofocus  id="emailReference" name="emailReference" class="form-control form-control-sm">
-                        <table id="textarea2" rows="4" cols="100" style="overflow: auto; height: 50px; display:none;"></table></td>
+                        <td colspan="2"><input type="email" placeholder="이름을 입력해주세요"  autocomplete="off" autofocus  id="emailReference" name="emailReference" class="inputEmali2 form-control form-control-sm">
+                        <div id="textarea2" class="listEmail2" style="display:none;"></div></td>
                     </tr>
                     <tr>
                         <td>제목  </td>
