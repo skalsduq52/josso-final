@@ -208,7 +208,7 @@
     <body class="body">
         <!-- navigation 삽입 -->
 		<header>
-			<%@ include file="../email/part/header.jsp"%>
+			<%@ include file="../include/header.jsp"%>
 		</header>
 		
         <!-- aside 삽입 -->
