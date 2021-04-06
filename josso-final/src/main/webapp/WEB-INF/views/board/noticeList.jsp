@@ -145,13 +145,6 @@
         </nav>
         
         <main>
-            <div style="margin-left: 95%; padding-top: 10px;padding-bottom: 10px;">
-                <select>
-                    <option value="10">10</option>
-                    <option value="20">20</option>
-                    <option value="30">30</option>
-                </select>
-            </div>
             <div class="border-top border-bottom">
                 <table style="width: 100%;" id="board">
                     <thead>
@@ -176,11 +169,11 @@
                     </tbody>    
                 </table>
             </div>
-                <div class="bottom_area" style="float:left; padding-left: 20px;">
+                <div class="bottom_area" style="float:left; padding-left: 20px; padding-top:30px">
                 <button class="btn btn-info"><a href="write" style="color:white">작성하기</a></button>
             </div>
             
-            <div class="bottom_area" style="float:right;">
+            <div class="bottom_area" style="float:right; padding-top:30px">
                 <select class="search" style="height: 37px;">
                     <option>제목</option>
                     <option>작성자</option>
@@ -188,9 +181,29 @@
                 <input type="text" name="search" class="search" style="padding-bottom: 3px; height: 38px;">
                 <button class="btn btn-success" style="height: 38px; margin-bottom: 3px;">검색</button>
             </div>   
+            
+            <ul class="pagination" style="padding-top: 20px; padding-left: 40%;">
+                	<c:if test="${param.page !=1 and not empty param.page}">
+						<li class="page-item"><a class="page-link" href="?page=${param.page-1}&title=${param.title}&query=${param.query}"><</a></li>&nbsp;&nbsp;
+					</c:if>
+					<c:if test="${param.page == 1 || empty param.page}">
+						<li class="page-item disabled"><a class="page-link"><</a></li>&nbsp;&nbsp;
+					</c:if>
+                    <c:forEach var="i" begin="0" end="4">
+						<c:if test="${(page.startNum+i) <= page.lastNum}">
+							<li class="page-item ${(page.page==(page.startNum+i))?'active':''}"><a class="page-link" href="?page=${page.startNum+i}&title=${param.title}&query=${param.query}">${page.startNum+i}</a></li>
+						</c:if>
+					</c:forEach>
+					<c:if test="${page.page+1 <= page.lastNum}">
+						&nbsp;&nbsp;<li class="page-item"><a class="page-link" href="?page=${page.page+1}&title=${param.title}&query=${param.query}">></a></li>
+					</c:if>
+					<c:if test="${page.page+1 > page.lastNum}">
+						&nbsp;&nbsp;<li class="page-item disabled"><a class="page-link">></a></li>
+					</c:if>
+                </ul>           
+            
+            
+            
         </main>
-        <footer class="border-top">
-
-        </footer>
     </body>
 </html>

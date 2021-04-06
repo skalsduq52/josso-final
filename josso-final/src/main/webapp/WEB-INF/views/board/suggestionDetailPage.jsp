@@ -297,11 +297,12 @@
                         </tr>
                         <tr class="border-bottom" style="height: 50px;">
                             <th class="left_td" style="padding-top: 20px;">파일첨부</th>
-                            <td class="right_td" style="padding-top: 20px;">
-                                <div>
-                                <span>${suggestionBoard.boardFile}</span>
-                                </div>
-                            </td>
+                            <td>
+                            <c:if test="${empty suggestionBoard.boardFile}">
+	                        	첨부파일 없음.
+	                        </c:if> <c:if test="${not empty suggestionBoard.boardFile}">
+									<a href="${pageContext.request.contextPath}/resources/multipartFile/${suggestionBoard.boardFile}"download> ${suggestionBoard.boardFile} </a>
+							</c:if></td>
                         </tr>
                     </thead>
                     <tbody>

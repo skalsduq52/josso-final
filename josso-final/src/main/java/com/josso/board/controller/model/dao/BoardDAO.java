@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.josso.board.vo.Board;
+import com.josso.electronicApproval.vo.Paging;
 
 @Repository
 public class BoardDAO {
@@ -49,8 +50,8 @@ public class BoardDAO {
 	
 	// 공지사항
 	// 공지사항 리스트 조회
-	public List<Board> selectNoticeAll() throws Exception {
-		List<Board> boardList = sqlSession.selectList("board.selectNoticeAll");
+	public List<Board> noticeList(Paging page) throws Exception {
+		List<Board> boardList = sqlSession.selectList("board.selectNoticeAll", page);
 		return boardList;
 	}
 	
@@ -60,13 +61,18 @@ public class BoardDAO {
 		return result;
 	}
 
+	// 공지사항 개시물 갯수
+	public int noticeBoardCount(Paging page) throws Exception {
+		int count = sqlSession.selectOne("board.suggestionBoardCount", page);
+		return count;
+	}
 	
 	/* ------------------------------------------------------------- */
 
 	// 건의사항
 	// 건의사항 리스트 조회
-	public List<Board> selectSuggestionAll() throws Exception {
-		List<Board> boardList = sqlSession.selectList("board.selectSuggestionAll");
+	public List<Board> suggestionList(Paging page) throws Exception {
+		List<Board> boardList = sqlSession.selectList("board.selectSuggestionAll", page);
 		return boardList;
 	}
 	
@@ -76,8 +82,12 @@ public class BoardDAO {
 			return result;
 	}
 	
-
+	// 건의사항 게시물 갯수
+	public int suggestionBoardCount(Paging page) throws Exception {
+		int count = sqlSession.selectOne("board.suggestionBoardCount", page);
+		return count;
+	}
 	
-
+	
 
 }

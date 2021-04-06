@@ -27,6 +27,19 @@ public class Paging {
 		this.startRange = startRange;
 		this.endRange = endRange;
 	}
+	
+	// 게시판에서 쓸 생성자
+	public Paging(int page, String title, String query, int count, int startNum, int lastNum,
+			int startRange, int endRange) {
+		this.page = page;
+		this.title = title;
+		this.query = query;
+		this.count = count;
+		this.startNum = startNum;
+		this.lastNum = lastNum;
+		this.startRange = startRange;
+		this.endRange = endRange;
+	}
 
 	public String getEmployeeNum() {
 		return employeeNum;

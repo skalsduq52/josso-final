@@ -3,6 +3,7 @@ package com.josso.board.vo;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 public class Board {
 	
@@ -12,18 +13,19 @@ public class Board {
 	private String boardTitle;
 	private String boardContent;
 	private String boardFile;
+	//private MultipartFile boardFile;
 	private String boardWriter;
-	private Date boardRegDate;
+	private Date boardRegDate; 
 	private int boardHit;
 	// 조인할 때 쓸 것
 	private String employeeName;
 	private String departmentCode;
 	private String rankCode;
 	
-	
-	
+
 	// 기본 생성자
 	public Board() {}
+
 	
 	// 메서드
 	public int getBoardNum() {
@@ -114,6 +116,7 @@ public class Board {
 		this.rankCode = rankCode;
 	}
 
+
 	@Override
 	public String toString() {
 		return String.format(
@@ -121,9 +124,7 @@ public class Board {
 				boardNum, boardKind, boardTitle, boardContent, boardFile, boardWriter, boardRegDate, boardHit,
 				employeeName, departmentCode, rankCode);
 	}
-
-
-
+	
 	
 	
 	

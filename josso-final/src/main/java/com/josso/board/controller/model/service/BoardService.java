@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.josso.board.vo.Board;
+import com.josso.electronicApproval.vo.Paging;
 
 public interface BoardService {
 	
@@ -26,11 +27,13 @@ public interface BoardService {
 	
 	// 공지사항
 	// 공지사항 리스트 조회
-	public List<Board> selectNoticeAll() throws Exception;
+	public List<Board> noticeList(Paging page) throws Exception;
 	
 	// 공지사항 작성
-	public int noticeWrite(Board board, HttpSession session, HttpServletResponse response) throws Exception;
+	public int noticeWrite(Board board, HttpSession session, HttpServletResponse response, HttpServletRequest request) throws Exception;
 
+	// 공지사항 갯수
+	public int noticeBoardCount(Paging page) throws Exception;
 
 
 	/* ------------------------------------------------------------- */
@@ -38,12 +41,12 @@ public interface BoardService {
 
 	// 건의사항
 	// 건의사항 리스트 조회
-	public List<Board> selectSuggestionAll() throws Exception;
+	public List<Board> suggestionList(Paging page) throws Exception;
 	
 	// 건의사항 작성
-	public int suggestionWrite(Board board, HttpSession session, HttpServletResponse response) throws Exception;
+	public int suggestionWrite(Board board, HttpSession session, HttpServletResponse response, HttpServletRequest request) throws Exception;
 	
-
+	// 건의사항 갯수
+	public int suggestionBoardCount(Paging page) throws Exception;
 	
-
 }

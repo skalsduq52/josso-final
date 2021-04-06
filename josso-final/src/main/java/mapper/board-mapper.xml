@@ -49,8 +49,9 @@
 	
 	<!-- 공지사항 -->
 	<!-- 공지사항 전체리스트(목록)-->
-	<select id="selectNoticeAll" resultMap="board">
-		        SELECT BOARD.*, EMPLOYEE.EMPLOYEE_NAME, EMPLOYEE.DEPARTMENT_CODE, EMPLOYEE.RANK_CODE FROM BOARD, EMPLOYEE WHERE BOARD_KIND='공지사항' AND EMPLOYEE.EMPLOYEE_NUMBER = BOARD.BOARD_WRITER ORDER BY BOARD_NUM DESC
+	<select id="selectNoticeAll" parameterType="Paging" resultMap="board">
+		SELECT * FROM (SELECT * FROM BOARD WHERE BOARD_KIND = '공지사항' ORDER BY BOARD_NUM DESC) WHERE BOARD_TITLE LIKE '%' || #{query} || '%'
+		<!-- SELECT BOARD.*, EMPLOYEE.EMPLOYEE_NAME, EMPLOYEE.DEPARTMENT_CODE, EMPLOYEE.RANK_CODE FROM BOARD, EMPLOYEE WHERE BOARD_KIND='공지사항' AND EMPLOYEE.EMPLOYEE_NUMBER = BOARD.BOARD_WRITER ORDER BY BOARD_NUM DESC -->
 	</select>
 	
 	<!-- 공지사항 작성 -->
@@ -59,12 +60,17 @@
 					VALUES('공지사항', #{boardTitle}, #{boardContent}, #{boardFile}, #{boardWriter}, SYSDATE, 0)
 	</insert>
 	
+	<!-- 공지사항 개시물 갯수 -->
+	<select id="noticeBoardCount" parameterType="Paging" resultType="_int">
+		SELECT COUNT(*) FROM (SELECT * FROM BOARD WHERE BOARD_KIND = '공지사항' ORDER BY BOARD_NUM DESC) WHERE BOARD_TITLE LIKE '%' || #{query} || '%'
+	</select>
+	
 	
 	
 	<!-- 건의사항 -->
 	<!-- 건의사항 전체리스트(목록)-->
-	<select id="selectSuggestionAll" resultMap="board">
-		SELECT BOARD.*, EMPLOYEE.EMPLOYEE_NAME, EMPLOYEE.DEPARTMENT_CODE, EMPLOYEE.RANK_CODE FROM BOARD, EMPLOYEE WHERE BOARD_KIND='건의사항' AND EMPLOYEE.EMPLOYEE_NUMBER = BOARD.BOARD_WRITER ORDER BY BOARD_NUM DESC
+	<select id="selectSuggestionAll" parameterType="Paging" resultMap="board">
+				SELECT BOARD.*, EMPLOYEE.EMPLOYEE_NAME, EMPLOYEE.DEPARTMENT_CODE, EMPLOYEE.RANK_CODE FROM BOARD, EMPLOYEE WHERE BOARD_KIND='건의사항' AND EMPLOYEE.EMPLOYEE_NUMBER = BOARD.BOARD_WRITER ORDER BY BOARD_NUM DESC
 	</select>
 	
 	<!-- 건의사항 작성 -->
@@ -73,6 +79,10 @@
 					VALUES('건의사항', #{boardTitle}, #{boardContent}, #{boardFile}, #{boardWriter}, SYSDATE, 0)
 	</insert>
 	
+	<!-- 건의사항 개시물 갯수 -->
+	<select id="suggestionBoardCount" parameterType="Paging" resultType="_int">
+		SELECT COUNT(*) FROM (SELECT * FROM BOARD WHERE BOARD_KIND = '공지사항' ORDER BY BOARD_NUM DESC) WHERE BOARD_TITLE LIKE '%' || #{query} || '%'
+	</select>
 
 	
 </mapper>

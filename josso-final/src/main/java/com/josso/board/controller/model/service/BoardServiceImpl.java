@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.josso.board.controller.model.dao.BoardDAO;
 import com.josso.board.vo.Board;
+import com.josso.electronicApproval.vo.Paging;
 import com.josso.employee.vo.Employee;
 
 @Service
@@ -28,6 +29,8 @@ public class BoardServiceImpl implements BoardService {
 		// 디테일 보여주기
 		Board NoticeDetail = boardDao.boardDetail(boardNum);
 		// 치환
+		String title = NoticeDetail.getBoardTitle();
+		title = title.replace(" ", "&nbsp;");
 		String content = NoticeDetail.getBoardContent();
 		content = content.replace("\n\r", "<br>");
 		content = content.replace(" ", "&nbsp;");
@@ -58,13 +61,13 @@ public class BoardServiceImpl implements BoardService {
 	// 공지사항
 	// 공지사항 리스트 조회
 	@Override
-	public List<Board> selectNoticeAll() throws Exception {
-		List<Board> NoticeList = boardDao.selectNoticeAll();
+	public List<Board> noticeList(Paging page) throws Exception {
+		List<Board> NoticeList = boardDao.noticeList(page);
 		return NoticeList;
 	}
 	
 	// 공지사항 작성
-	public int noticeWrite(Board board, HttpSession session, HttpServletResponse response) throws Exception {
+	public int noticeWrite(Board board, HttpSession session, HttpServletResponse response, HttpServletRequest request) throws Exception {
 		// 캐릭터인코딩
 		response.setContentType("text/html;charset=utf-8");
 		
@@ -81,18 +84,27 @@ public class BoardServiceImpl implements BoardService {
 		return result;
 	}
 
+	// 공지사항 갯수
+	public int noticeBoardCount(Paging page) throws Exception {
+		int count = boardDao.noticeBoardCount(page);
+		return count;
+	}
 
+	
+	
 	/* ------------------------------------------------------------- */
+	
+	
 	
 	// 건의사항
 	// 건의사항 리스트 조회
-	public List<Board> selectSuggestionAll() throws Exception {
-		List<Board> SuggestionList = boardDao.selectSuggestionAll();
+	public List<Board> suggestionList(Paging page) throws Exception {
+		List<Board> SuggestionList = boardDao.suggestionList(page);
 		return SuggestionList;
 	}
 	
 	// 건의사항 작성
-	public int suggestionWrite(Board board, HttpSession session, HttpServletResponse response) throws Exception {
+	public int suggestionWrite(Board board, HttpSession session, HttpServletResponse response, HttpServletRequest request) throws Exception {
 		// 캐릭터인코딩
 		response.setContentType("text/html;charset=utf-8");
 		
@@ -100,10 +112,20 @@ public class BoardServiceImpl implements BoardService {
 		Employee employee = (Employee)session.getAttribute("employee");
 		board.setBoardWriter(employee.getEmployeeNumber());
 		
+		PrintWriter out = response.getWriter();
+		out.print("<script>alert('글이 등록되었습니다.'); location.href='list'; </script>");
+		out.close();
+		
 		int result = boardDao.suggestionWrite(board);
 		return result;
 	}
 	
+	
+	// 건의사항 갯수
+	public int suggestionBoardCount(Paging page) throws Exception {
+		int count = boardDao.suggestionBoardCount(page);
+		return count;
+	}
 
 	
 

@@ -1,6 +1,9 @@
 package com.josso.board.controller;
 
+import java.io.File;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,11 +15,14 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.josso.board.controller.model.dao.BoardDAO;
 import com.josso.board.controller.model.service.BoardService;
 import com.josso.board.vo.Board;
+import com.josso.electronicApproval.vo.Paging;
 import com.josso.employee.vo.Employee;
 
 @Controller 
@@ -27,9 +33,27 @@ public class BoardController {
 	
 	// 공지사항 (목록)
 	@RequestMapping(value="board/notice/list", method=RequestMethod.GET)
-	public ModelAndView noticeList(ModelAndView mv) throws Exception {
-		List<Board> noticeList =  boardService.selectNoticeAll();
+	public ModelAndView noticeList(ModelAndView mv, Paging page) throws Exception {
+		// 공지사항 게시물 총 갯수(사실상 필요없네..)
+		int noticeBoardCount = boardService.noticeBoardCount(page);
+		
+		// 세팅
+		if(page.getTitle().contentEquals("")) {
+			page.setTitle("Search");
+		}
+		page.setCount(noticeBoardCount);
+		page.setStartNum(page.getPage());
+		page.setLastNum(page.getCount());
+		page.setStartRange(page.getPage());
+		page.setEndRange(page.getPage());
+		
+		// 공지사항 리스트 불러오기
+		List<Board> noticeList =  boardService.noticeList(page);
+		
+		// 값 전송
+		mv.addObject("page", page);
 		mv.addObject("noticeList", noticeList);
+		mv.addObject(noticeBoardCount);
 		mv.setViewName("board/noticeList");
 		return mv;
 	}
@@ -41,16 +65,79 @@ public class BoardController {
 		return mv;
 	}
 	
+	// 첨부파일 업로드 기능
+	/* private void saveFile(MultipartFile file, HttpServletRequest request) {
+		 
+		 String savePath = request.getSession().getServletContext().getRealPath("${pageContext.request.contextPath}/resources/multipartFile"); 
+		 String filePath = null; 
+		 
+		 File folder = new File(savePath);
+		  
+		 if(!folder.exists()) { 
+		 	 folder.mkdir(); 
+		 }
+		 
+		 try { 
+			 System.out.println(file.getOriginalFilename() + "을 저장합니다.");
+			 System.out.println("저장경로 : " + savePath);
+		 
+			 filePath = folder + "\\" + file.getOriginalFilename();
+		 
+			 file.transferTo(new File(filePath));
+		 
+			 System.out.println("파일명 : " + file.getOriginalFilename());
+			 System.out.println("파일 경로 : " + filePath);
+			 System.out.println("파일 전송이 완료되었습니다.");
+		 
+		 } catch (Exception e) { 
+			 System.out.println("파일 전송 에러 : " + e.getMessage()); }
+		 }*/
+	
 	// 공지사항 (글 등록)
 	@RequestMapping(value="board/notice/register", method=RequestMethod.POST)
-	public ModelAndView noticeRegister(ModelAndView mv, Board board, HttpSession session, HttpServletResponse response) throws Exception {
-		boardService.noticeWrite(board, session, response);
+	public ModelAndView noticeRegister(
+			@RequestParam("boardTitle") String title,
+			@RequestParam("boardContent") String content,
+			@RequestParam("boardFile") MultipartFile file,
+			ModelAndView mv,  HttpSession session, HttpServletResponse response, MultipartHttpServletRequest request) throws Exception {
+		
+		// 보드 객체 생성
+		Board board = new Board();
+		
+		// 보드vo에 requestParam값 입력
+		board.setBoardTitle(title);
+		board.setBoardContent(content);
+		
+		// 첨부파일 originalName을 변수에 저장
+		String originalName = file.getOriginalFilename();
+		
+		// uuid로 새로운 파일명으로 변환
+		UUID uid = UUID.randomUUID();
+		String rename = uid.toString() + "_" + originalName;
+		
+		// 내가 가진 깃 리포지토리 저장경로(절대경로임)(홍수명)
+		String path = "C:/Git-Final/josso-final/josso-final/src/main/webapp/resources/multipartFile/"+rename;
+		// 깃으로 돌릴 때는 이 주소값 쓰세요(※주의※ 'workspace 경로에 한글이 들어가면 안됨')
+		//String path = request.getSession().getServletContext().getRealPath("resources/multipartFile"); 
+		
+		// 파일저장
+		file.transferTo(new File(path));
+		
+		// boardVO에 파일 저장
+		board.setBoardFile(rename);
+		
+		boardService.noticeWrite(board, session, response, request);
+		
+		mv.setViewName("redirect:list");
+		
 		return mv;
 	}
 	
+
 	// 공지사항 (디테일페이지)
 	@RequestMapping(value="board/notice/detailPage", method=RequestMethod.GET)
 	public ModelAndView noticeDetail(ModelAndView mv, @RequestParam("num") String boardNum, HttpServletRequest request) throws Exception {
+		
 		Board noticeBoard = boardService.boardDetail(boardNum, request);
 		String num = boardNum;
 		
@@ -91,11 +178,30 @@ public class BoardController {
 	
 	/* ------------------------------------------------------------------- */
 	
+	
 	// 건의사항 (목록)
 	@RequestMapping(value="board/suggestion/list", method=RequestMethod.GET)
-	public ModelAndView suggestionList(ModelAndView mv) throws Exception {
-		List<Board> suggestionList = boardService.selectSuggestionAll();
+	public ModelAndView suggestionList(ModelAndView mv, Paging page) throws Exception {
+		// 공지사항 게시물 총 갯수(사실상 필요없네..)
+		int suggestionBoardCount = boardService.suggestionBoardCount(page);
+		
+		// 세팅
+		if(page.getTitle().contentEquals("")) {
+			page.setTitle("Search");
+		}
+		page.setCount(suggestionBoardCount);
+		page.setStartNum(page.getPage());
+		page.setLastNum(page.getCount());
+		page.setStartRange(page.getPage());
+		page.setEndRange(page.getPage());
+		
+		// 건의사항 리스트 불러오기
+		List<Board> suggestionList = boardService.suggestionList(page);
+		
+		// 값 전송
+		mv.addObject("page", page);
 		mv.addObject("suggestionList", suggestionList);
+		mv.addObject("count", suggestionBoardCount);
 		mv.setViewName("/board/suggestionList");
 		return mv;
 	}
@@ -107,10 +213,45 @@ public class BoardController {
 		return mv;
 	}
 	
+	
 	// 건의사항 (글 등록)
 	@RequestMapping(value="board/suggestion/register", method=RequestMethod.POST)
-	public ModelAndView suggestionWrite(ModelAndView mv, Board board, HttpSession session, HttpServletResponse response) throws Exception {
-		boardService.suggestionWrite(board, session, response);
+	public ModelAndView suggestionWrite(
+			@RequestParam("boardTitle") String title,
+			@RequestParam("boardContent") String content,
+			@RequestParam("boardFile") MultipartFile file,
+			ModelAndView mv, HttpSession session, HttpServletResponse response, MultipartHttpServletRequest request) throws Exception {
+		
+		System.out.println("제목 : " + title);
+		System.out.println("내용 : " + content);
+		
+		
+		// 보드 객체 생성
+		Board board = new Board();
+		
+		// 보드vo에 requestParam값 입력
+		board.setBoardTitle(title);
+		board.setBoardContent(content);
+		
+		// 첨부파일 originalName을 변수에 저장
+		String originalName = file.getOriginalFilename();
+		
+		// uuid로 새로운 파일명으로 변환
+		UUID uid = UUID.randomUUID();
+		String rename = uid.toString() + "_" + originalName;
+		
+		// 내가 가진 깃 리포지토리 저장경로(절대경로임)(홍수명)
+		String path = "C:/Git-Final/josso-final/josso-final/src/main/webapp/resources/multipartFile/"+rename;
+		// 깃으로 돌릴 때는 이 주소값 쓰세요(※주의※ 'workspace 경로에 한글이 들어가면 안됨')
+		//String path = request.getSession().getServletContext().getRealPath("resources/multipartFile"); 
+		
+		// 파일저장
+		file.transferTo(new File(path));
+		
+		// boardVO에 파일 저장
+		board.setBoardFile(rename);
+		
+		boardService.suggestionWrite(board, session, response, request);
 		mv.setViewName("redirect:list");
 		return mv;
 	}

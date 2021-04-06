@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -22,7 +24,7 @@
          <!-- Latest compiled JavaScript -->
          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
          <!-- SmartEditor2 라이브러리(경로 맞춰줘야 함.) -->
-         <script type="text/javascript" src="../final_project/smartEditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/smartEditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
          <script>
             $(function(){
                 $('.side_title').click(function(){
@@ -131,7 +133,7 @@
               oAppRef: oEditors,
               elPlaceHolder: "smartEditor", //textarea에서 지정한 id와 일치해야 함. 
               //SmartEditor2Skin.html 파일이 존재하는 경로
-              sSkinURI: "smartEditor/SmartEditor2Skin.html",  
+              sSkinURI: "${pageContext.request.contextPath}/resources/smartEditor/SmartEditor2Skin.html",  
               htParams : {
                   // 툴바 사용 여부 (true:사용/ false:사용하지 않음)
                   bUseToolbar : true,             
@@ -143,6 +145,11 @@
               fCreator: "createSEditor2"
           });
         
+    });
+    
+    // 스마트에디터 값 전송
+    $('form').click(function(){
+	 	oEditors.getById['smartEditor'].exec("UPDATE_CONTENTS_FIELD", []);
     });
 </script>
 
@@ -278,7 +285,7 @@
 
         
         <main>
-            <form action="register" method="POST">
+            <form action="register" method="POST" enctype="multipart/form-data">
             <div class="border-top">
                 <table style="width: 100%;" id="board">
                     <thead>
@@ -289,8 +296,8 @@
                         <tr >
                             <th class="left_td">파일첨부</th>
                             <td class="right_td">
-                                <div id="multipart">
-                                <span>이 곳에 파일을 드래그 하세요. 또는</span>
+                                <input type="file" name="boardFile">
+                                <!-- <span>이 곳에 파일을 드래그 하세요. 또는</span>
                                     <input type="file" class="custom-file-input" id="customFile" style="display: none;" name="boardFile">
                                     <label for="customFile" id="attach_file" >파일선택</label>
                                     <table id="fileListTable" width="100%" border="0px">
@@ -298,14 +305,15 @@
     
                                          </tbody>
                                     </table>
-                                </div>
+                                </div> -->
                             </td>
                         </tr>
                     </thead>
                     <tbody>
                         <tr id="write_content">
                             <th class="left_td">내용</th>
-                            <td class="right_td"><textarea id="smartEditor" style="height: 400px; width: 100%;" name="boardContent"></textarea></td>
+                            <td class="right_td">
+                            <textarea id="smartEditor" style="height: 400px; width: 100%;" name="boardContent"></textarea></td>
                         </tr>
                     </tbody>    
                 </table>

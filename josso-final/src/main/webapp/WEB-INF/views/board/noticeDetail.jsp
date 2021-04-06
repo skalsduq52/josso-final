@@ -138,7 +138,16 @@
                     </tr>
                     <tr>
                         <td>첨부파일 : </td>
-                        <td>${noticeBoard.boardFile}</td>
+                        <td>
+	                        <c:if test="${empty noticeBoard.boardFile}">
+	                        	첨부파일 없음.
+	                        </c:if>
+	                        <c:if test="${not empty noticeBoard.boardFile}">
+	                        	<a href="${pageContext.request.contextPath}/resources/multipartFile/${noticeBoard.boardFile}"download>
+	                        		${noticeBoard.boardFile}
+	                        	</a>
+	                        </c:if>
+                        </td>
                     </tr>
                 </table>
                 <br>
