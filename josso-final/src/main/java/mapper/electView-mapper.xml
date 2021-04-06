@@ -56,8 +56,10 @@
 	</select>
 	
 	<!-- 결재 수신 문서 리스트 -->
-	<select id="selectReciveSign" parameterType="String" resultMap="ElectView">
-		SELECT * FROM ELEC_VIEW WHERE DRAFTER = #{num} OR MIDDLE = #{num} OR LAST = #{num} ORDER BY REGISTER_DATE DESC
+	<select id="selectReciveSign" parameterType="Paging" resultMap="ElectView">
+		SELECT * FROM(SELECT ROWNUM NUM, EV.* FROM(SELECT * FROM ELEC_VIEW WHERE (DRAFTER = #{employeeNum}
+		OR MIDDLE = #{employeeNum} OR LAST = #{employeeNum}) AND ${title} LIKE '%' || #{query} || '%' ORDER BY REGISTER_DATE DESC) EV)
+		WHERE NUM BETWEEN 11 AND 20
 	</select>
 	
 </mapper>

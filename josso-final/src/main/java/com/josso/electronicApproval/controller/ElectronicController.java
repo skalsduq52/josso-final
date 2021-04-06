@@ -68,11 +68,22 @@ public class ElectronicController {
 	
 	// 결재 수신문서 눌렀을 때
 	@RequestMapping(value="elecApproval/reception", method=RequestMethod.GET)
-	public ModelAndView approvalRecept(ModelAndView mv, HttpSession session) throws Exception {
+	public ModelAndView approvalRecept(ModelAndView mv, Paging page, HttpSession session) throws Exception {
 		Employee emp = (Employee) session.getAttribute("employee");
 		String empNo = emp.getEmployeeNumber();
-		List<ElectView> recepList = ed.selectReceiveSign(empNo);
+		page.setEmployeeNum(empNo);
+		if(page.getTitle().equals("")) {
+			page.setTitle("DOCUMENT_NAME");
+		}
+		page.setCount(ed.selectReceiveCount(page));
+		page.setStartNum(page.getPage());
+		page.setLastNum(page.getCount());
+		page.setStartRange(page.getPage());
+		page.setEndRange(page.getPage());
+		System.out.println(page);
+		List<ElectView> recepList = ed.selectReceiveSign(page);
 		mv.addObject("recepList",recepList);
+		mv.addObject("page",page);
 		mv.setViewName("/electronicApproval/receptionSign");
 		return mv;
 	}

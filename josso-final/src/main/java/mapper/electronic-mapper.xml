@@ -67,5 +67,9 @@
 		SELECT COUNT(*) FROM (SELECT * FROM ELEC_VIEW WHERE DRAFTER = #{employeeNum})
 	</select>
 	
+	<!-- 결재 수신문서 페이징용 카운트 가져가기 -->
+	<select id="selectReceiveCount" parameterType="Paging" resultType="_int">
+		SELECT COUNT(*) FROM (SELECT * FROM ELEC_VIEW WHERE DRAFTER = #{employeeNum} OR MIDDLE = #{employeeNum} OR LAST = #{employeeNum})
+	</select>
 	
 </mapper>

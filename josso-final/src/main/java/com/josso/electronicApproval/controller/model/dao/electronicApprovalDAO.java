@@ -70,8 +70,8 @@ public class electronicApprovalDAO {
 	}
 	
 	// 결재 수신 문서 리스트
-	public List<ElectView> selectReceiveSign(String empNo) throws Exception {
-		List<ElectView> ev = sqlSession.selectList("ElectView.selectReciveSign", empNo);
+	public List<ElectView> selectReceiveSign(Paging page) throws Exception {
+		List<ElectView> ev = sqlSession.selectList("ElectView.selectReciveSign", page);
 		return ev;
 	}
 	
@@ -115,6 +115,12 @@ public class electronicApprovalDAO {
 	// 내가 기안한문서용 카운트
 	public int selectMyCount(Paging pg) throws Exception {
 		int count = sqlSession.selectOne("ElectronicApproval.selectMyCount", pg);
+		return count;
+	}
+	
+	// 결재 수신문서용 카운트
+	public int selectReceiveCount(Paging pg) throws Exception {
+		int count = sqlSession.selectOne("ElectronicApproval.selectReceiveCount", pg);
 		return count;
 	}
 }

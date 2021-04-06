@@ -95,21 +95,46 @@
 				</tbody>
 			</table>
 		</div>
-		<div>
-			<ul class="pagination" style="padding-top: 20px; padding-left: 40%;">
-				<li class="page-item "><a class="page-link" href="#">Previous</a></li>
-				<li class="page-item"><a class="page-link" href="#">1</a></li>
-				<li class="page-item"><a class="page-link" href="#">2</a></li>
-				<li class="page-item"><a class="page-link" href="#">3</a></li>
-				<li class="page-item"><a class="page-link" href="#">Next</a></li>
-			</ul>
-		</div>
-		<div
-			style="margin-left: 80%; padding-top: 10px; padding-bottom: 10px;">
-			<input type="text" name="??" id="search">
-			<button>검색</button>
-		</div>
-
+		<c:if test="${recepList[0] != null}">
+		 <div>     
+                <ul class="pagination" style="padding-top: 20px; padding-left: 40%;">
+                	<c:if test="${param.page !=1 and not empty param.page}">
+						<li class="page-item"><a class="page-link" href="?page=${param.page-1}&title=${param.title}&query=${param.query}"><</a></li>&nbsp;&nbsp;
+					</c:if>
+					<c:if test="${param.page == 1 || empty param.page}">
+						<li class="page-item disabled"><a class="page-link"><</a></li>&nbsp;&nbsp;
+					</c:if>
+                    <c:forEach var="i" begin="0" end="4">
+						<c:if test="${(page.startNum+i) <= page.lastNum}">
+							<li class="page-item ${(page.page==(page.startNum+i))?'active':''}"><a class="page-link" href="?page=${page.startNum+i}&title=${param.title}&query=${param.query}">${page.startNum+i}</a></li>
+						</c:if>
+					</c:forEach>
+					<c:if test="${page.page+1 <= page.lastNum}">
+						&nbsp;&nbsp;<li class="page-item"><a class="page-link" href="?page=${page.page+1}&title=${param.title}&query=${param.query}">></a></li>
+					</c:if>
+					<c:if test="${page.page+1 > page.lastNum}">
+						&nbsp;&nbsp;<li class="page-item disabled"><a class="page-link">></a></li>
+					</c:if>
+                </ul>
+            </div>
+        </c:if>
+        <br>
+		<div style="float:right">
+	            <form>
+					<div class="input-group justify-content-right">
+						<div class="form-group-append">
+							<select class="form-control" name="title">
+								<option ${(param.title == "DOCUMENT_NAME")?"Selected":""} value="DOCUMENT_NAME">문서제목</option>
+								<option ${(param.title == "EMPLOYEE_NAME")?"Selected":""} value="EMPLOYEE_NAME">기안자</option>
+							</select>
+						</div>
+						<input type="text" class="form-control" placeholder="Search" name="query" value="${param.query}">
+						<div class="input-group-append">
+							<button class="btn btn-success" type="submit">Go</button>
+						</div>
+					</div>
+				</form>   
+			</div>	 
 		<!-- modal 삽입  -->
 		<%@ include file="../electronicApproval/part/modal.jsp"%>
 	</main>
