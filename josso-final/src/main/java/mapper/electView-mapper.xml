@@ -23,6 +23,8 @@
 		<result property="holyType" column="HOLY_TYPE"/>
 		<result property="middleAcceptDate" column="MIDDLE_ACCEPT_DATE"/>
 		<result property="lastAcceptDate" column="LAST_ACCEPT_DATE"/>
+		<result property="rejecter" column="REJECTER"/>
+		<result property="rejectComment" column="REJECT_COMMENT"/>
 	</resultMap>
 	
 	<!-- 보고서 상세보기  -->
@@ -39,7 +41,7 @@
 	<!-- 결재 수신문서 최근 3개 -->
 	<select id="selectLastRecive" parameterType="String" resultMap="ElectView">
 		SELECT ROWNUM, A.* FROM(SELECT * FROM ELEC_VIEW WHERE DRAFTER = #{num} OR MIDDLE = #{num}
-		 OR LAST = #{num} ORDER BY REGISTER_DATE DESC) A WHERE ROWNUM BETWEEN 1 AND 3
+		 OR (LAST = #{num} AND MIDDLE_ACCEPT = 1) ORDER BY REGISTER_DATE DESC) A WHERE ROWNUM BETWEEN 1 AND 3
 	</select>
 	
 	<!-- 결재 대기문서 리스트 -->
@@ -58,8 +60,8 @@
 	<!-- 결재 수신 문서 리스트 -->
 	<select id="selectReciveSign" parameterType="Paging" resultMap="ElectView">
 		SELECT * FROM(SELECT ROWNUM NUM, EV.* FROM(SELECT * FROM ELEC_VIEW WHERE (DRAFTER = #{employeeNum}
-		OR MIDDLE = #{employeeNum} OR LAST = #{employeeNum}) AND ${title} LIKE '%' || #{query} || '%' ORDER BY REGISTER_DATE DESC) EV)
-		WHERE NUM BETWEEN 11 AND 20
+		OR MIDDLE = #{employeeNum} OR (LAST = #{employeeNum} AND MIDDLE_ACCEPT = 1)) AND ${title} LIKE '%' || #{query} || '%' ORDER BY REGISTER_DATE DESC) EV)
+		WHERE NUM BETWEEN ${startRange} AND #{endRange}
 	</select>
 	
 </mapper>

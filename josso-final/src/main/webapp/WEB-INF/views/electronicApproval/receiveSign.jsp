@@ -66,8 +66,8 @@
 					</tr>
 				</thead>
 				<tbody>
-				<c:if test="${recepList[0] != null}">
-					<c:forEach var="elist" items="${recepList}">
+				<c:if test="${receiveList[0] != null}">
+					<c:forEach var="elist" items="${receiveList}">
 						<tr>
 							<td id="tdnum"><fmt:formatDate value="${elist.registerDate}" pattern="yyyy-MM-dd"/></td>
 							<c:if test="${elist.documentForm == 'F1'}">
@@ -87,7 +87,7 @@
 						</tr>
 					</c:forEach>
 				</c:if>	
-				<c:if test="${recepList[0] == null}">	
+				<c:if test="${receiveList[0] == null}">	
 					<tr>
 						<th colspan="5" id="tdnum"  style="text-align: center;height:200px;">수신된 문서가 없습니다.</th>
 					</tr>
@@ -95,7 +95,7 @@
 				</tbody>
 			</table>
 		</div>
-		<c:if test="${recepList[0] != null}">
+		<c:if test="${receiveList[0] != null}">
 		 <div>     
                 <ul class="pagination" style="padding-top: 20px; padding-left: 40%;">
                 	<c:if test="${param.page !=1 and not empty param.page}">
@@ -119,7 +119,7 @@
             </div>
         </c:if>
         <br>
-		<div style="float:right">
+		<div style="float:right;padding-right:30px">
 	            <form>
 					<div class="input-group justify-content-right">
 						<div class="form-group-append">

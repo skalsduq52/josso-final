@@ -18,6 +18,8 @@
 		<result property="lastAccept" column="LAST_ACCEPT"/>
 		<result property="attachedFile" column="ATTACHED_FILE"/>
 		<result property="holyType" column="HOLY_TYPE"/>
+		<result property="rejecter" column="REJECTER"/>
+		<result property="rejectComment" column="REJECT_COMMENT"/>
 	</resultMap>
 	
 	<!-- 결재 정보 등록 -->
@@ -38,8 +40,8 @@
 	</update>
 	
 	<!-- 중간결재자 반려 -->
-	<update id="middleReject" parameterType="String">
-		UPDATE ELECTRONIC_APPROVAL SET MIDDLE_ACCEPT = 2, MIDDLE_ACCEPT_DATE = SYSDATE WHERE DOCUMENT_NO = #{num}
+	<update id="middleReject" parameterType="ElectronicApproval">
+		UPDATE ELECTRONIC_APPROVAL SET MIDDLE_ACCEPT = 2, MIDDLE_ACCEPT_DATE = SYSDATE, REJECTER = #{rejecter}, REJECT_COMMENT = #{rejectComment} WHERE DOCUMENT_NO = #{documentNo}
 	</update>
 	
 	<!-- 최종결재자 승인 -->

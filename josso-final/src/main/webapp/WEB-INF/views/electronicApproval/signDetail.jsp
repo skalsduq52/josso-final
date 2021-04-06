@@ -37,9 +37,7 @@
 	num = ((date2.getTime() - date1.getTime()) / (1000*60*60*24))+1;
 	$('#appDate').text(num);
 	$('#appDate1').text(num);
-	
 	var num = "<c:out value='${ev.documentNo}'/>";
-	
 	
 	$("#accept1").click(function(){
 	    if(confirm("결재 완료하시겠습니까") == true){
@@ -51,12 +49,42 @@
 	});
 	
 	$("#reject1").click(function(){
-	    if(confirm("반려 하시겠습니까?") == true){
-	    	window.location.href="/josso/elecApproval/middleReject?num="+num;
-	    }
-	    else{
-	        return ;
-	    }
+	    var reject = $('#d');
+	    output = '';
+	    output += '<br>';
+	    output += '<div class="border">';
+	    output += '<form>'
+	    output +='<textarea style="border: none; resize: none; width:100%" rows="3" cols="146" id="content" name="comment" placeholder="반려이유를 작성해주세요"></textarea><br>';
+	    output +='<input type="button" class="btn btn-md btn-primary rejectcancle" style="float: right;" value="취소">';
+        output +='<input type="button" class="btn btn-md btn-primary rejectadd" style="float: right;" value="등록">';
+	    output += '</form>'
+	    output += '</div>'
+	    reject.append(output);
+	});
+	
+	$("#d").on('click','.rejectadd',function() {
+		var rejecter = "<c:out value='${employee.employeeNumber}'/>";
+		console.log(rejecter);
+		var content = $(this).prev().prev().prev().val();
+		var num = "<c:out value='${param.num}'/>"
+		if(confirm("반려처리 하시겠습니까?") == true){
+			$.ajax({
+	  		  type : "post",
+	  		  url : "/josso/elecApproval/middleReject",
+	  		  data : {
+	  			  "rejecter" : rejecter,
+	  			  "rejectComment" : content,
+				  "documentNo" : num	  			  
+	  		  },
+				  success : function(result) {
+					 if(result == 1){
+						 window.location.href="/josso/elecApproval/signdetail?num="+num;
+					 }
+				  } 
+  	  		});
+		}else{
+			return;
+		}
 	});
 	
 	$("#accept2").click(function(){
@@ -71,14 +99,48 @@
 	});
 	
 	$("#reject2").click(function(){
-	    if(confirm("반려 하시겠습니까?") == true){
+	    /* if(confirm("반려 하시겠습니까?") == true){
 	    	window.location.href="/josso/elecApproval/lastReject?num="+num;
 	    }
 	    else{
 	        return ;
-	    }
+	    } */
 	});
+	
+	getComment();
+	
+	function getComment() {
+		var num = "<c:out value='${param.num}'/>"
+		$.ajax({
+			type : "post",
+			url : "/josso/elecApproval/rejectComment",
+			data : {"documentNo" : num},
+			datatype: "json",
+			success : function(data){
+				if(data != 1){
+				var listStr = JSON.stringify(data);
+				var data = JSON.parse(listStr);
+				$('#d').empty();
+				$('#content').text('');
+				output = '';
+				output += "<div class='border' style='width:100%; height:100%'>"
+				output += "<table><tr><td style='padding-left:10px;padding-top:10px'>"+data.rejecter+"/"+data.rankCode+"/"+data.departmentCode
+				output += "<div class='border' style='width:950px;height:80px;margin-top:10px;margin-left:15px;padding-left:10px;padding-top:5px'>"
+				output += data.rejectComment+"</div></div>"
+				$('#d').append(output);
+				}
+			}
+		});
+	}
+	
  });
+ 
+ 
+ 
+	
+		
+			
+		
 </script>
 </head>
 <body>
@@ -221,16 +283,19 @@
 							</td>
 						</tr>
 					</table>
-					<div style="padding-top: 150px; margin-left: 15px;">
-					<c:if test="${employee.employeeNumber == middle.employeeNumber && ev.middleAccept == 0}">
-						<button id="accept1">승인</button>
-						<button id="reject1">반려</button>
-					</c:if>
-					<c:if test="${(employee.employeeNumber == last.employeeNumber && ev.lastAccept == 0) && ev.middleAccept == 1}">
-						<button id="accept2">승인</button>
-						<button id="reject2">반려</button>
-					</c:if>
-				</div>
+					<div style="padding-top: 20px; padding-left: 450px;">
+						<c:if test="${employee.employeeNumber == middle.employeeNumber && ev.middleAccept == 0}">
+							<button id="accept1">승인</button>
+							<button id="reject1">반려</button>
+						</c:if>
+						<c:if test="${(employee.employeeNumber == last.employeeNumber && ev.lastAccept == 0) && ev.middleAccept == 1}">
+							<button id="accept2">승인</button>
+							<button id="reject2">반려</button>
+						</c:if>
+					</div>
+					<div id="d" style="width:1000px;height:150px;margin-top:10px">
+							
+					</div>
 				</div>
 		</div>
 		<!-- modal 삽입  -->

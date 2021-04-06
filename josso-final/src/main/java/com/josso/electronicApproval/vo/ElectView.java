@@ -24,13 +24,16 @@ public class ElectView {
 	private String holyType;
 	private Date middleAcceptDate;
 	private Date lastAcceptDate;
+	private String rejecter;
+	private String rejectComment;
 	
 	public ElectView() {}
 
 	public ElectView(int rowNum, String employeeName, String departmentCode, String rankCode, int documentNo,
 			String documentForm, String documentName, Date registerDate, String startDate, String endDate,
 			String drafter, String drafterAccept, String middle, String middleAccept, String last, String lastAccept,
-			String attachedFile, String holyType, Date middleAcceptDate, Date lastAcceptDate) {
+			String attachedFile, String holyType, Date middleAcceptDate, Date lastAcceptDate, String rejecter,
+			String rejectComment) {
 		this.rowNum = rowNum;
 		this.employeeName = employeeName;
 		this.departmentCode = departmentCode;
@@ -51,9 +54,9 @@ public class ElectView {
 		this.holyType = holyType;
 		this.middleAcceptDate = middleAcceptDate;
 		this.lastAcceptDate = lastAcceptDate;
+		this.rejecter = rejecter;
+		this.rejectComment = rejectComment;
 	}
-
-
 
 	public int getRowNum() {
 		return rowNum;
@@ -215,6 +218,22 @@ public class ElectView {
 		this.lastAcceptDate = lastAcceptDate;
 	}
 
+	public String getRejecter() {
+		return rejecter;
+	}
+
+	public void setRejecter(String rejecter) {
+		this.rejecter = rejecter;
+	}
+
+	public String getRejectComment() {
+		return rejectComment;
+	}
+
+	public void setRejectComment(String rejectComment) {
+		this.rejectComment = rejectComment;
+	}
+
 	@Override
 	public String toString() {
 		return "ElectView [rowNum=" + rowNum + ", employeeName=" + employeeName + ", departmentCode=" + departmentCode
@@ -223,8 +242,8 @@ public class ElectView {
 				+ ", endDate=" + endDate + ", drafter=" + drafter + ", drafterAccept=" + drafterAccept + ", middle="
 				+ middle + ", middleAccept=" + middleAccept + ", last=" + last + ", lastAccept=" + lastAccept
 				+ ", attachedFile=" + attachedFile + ", holyType=" + holyType + ", middleAcceptDate=" + middleAcceptDate
-				+ ", lastAcceptDate=" + lastAcceptDate + "]";
+				+ ", lastAcceptDate=" + lastAcceptDate + ", rejecter=" + rejecter + ", rejectComment=" + rejectComment
+				+ "]";
 	}
-
 	
 }

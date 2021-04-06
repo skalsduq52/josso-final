@@ -112,7 +112,7 @@
             </div>
         </c:if>
         <br>  
-		<div style="float:right">
+		<div style="float:right; padding-right:30px">
 	            <form>
 					<div class="input-group justify-content-right">
 						<div class="form-group-append">

@@ -28,7 +28,7 @@
 			<ul>
 				<li><span class="hover_title"><i
 						class="fas fa-sort-down fa-rotate-270" style="color: gray"></i> 
-						<a href="/josso/elecApproval/reception">결재 수신 문서 </a></span></li>
+						<a href="/josso/elecApproval/receive">결재 수신 문서 </a></span></li>
 			</ul>
 		</div>
 	</section>

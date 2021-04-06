@@ -34,9 +34,8 @@ public class electronicApprovalDAO {
 	}
 	
 	// 결재 등록
-	public int insertApp(ElectronicApproval ep) throws Exception {
+	public void insertApp(ElectronicApproval ep) throws Exception {
 		int result = sqlSession.insert("ElectronicApproval.insertElecApp",ep);
-		return result;
 	}
 	
 	// 내가 기안한 문서 최근 3개
@@ -87,8 +86,8 @@ public class electronicApprovalDAO {
 	}
 	
 	// 중간결재 반려
-	public void middleReject(String num) throws Exception {
-		sqlSession.update("ElectronicApproval.middleReject",num);
+	public void middleReject(ElectronicApproval ep) throws Exception {
+		sqlSession.update("ElectronicApproval.middleReject",ep);
 	}
 	
 	// 최종결재 승인
