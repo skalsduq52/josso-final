@@ -31,7 +31,7 @@ public class BoardServiceImpl implements BoardService {
 		String content = NoticeDetail.getBoardContent();
 		content = content.replace("\n\r", "<br>");
 		content = content.replace(" ", "&nbsp;");
-		
+		// 깃 받아라
 		return NoticeDetail;
 	}
 	
