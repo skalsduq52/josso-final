@@ -1,6 +1,7 @@
 package com.josso.reserve.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -238,7 +239,7 @@ public class ReserveController {
 	// 이번주 일요일 ~ 월요일 dayOfWeek2로 jsp에 데이터 넘기기
 	@RequestMapping(value = "reserve/room/first", method = RequestMethod.GET)
 	public String reserveRoomFirst(Model model, @RequestParam("itemNumber") int itemNumber,
-			HttpServletResponse response) throws Exception {
+			HttpServletResponse response, HttpSession session) throws Exception {
 		// 이번주 일요일 날짜 구하기 int dayOfWeek 1=일요일, 2=월요일 ....... 7=토요일
 		SimpleDateFormat dayFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar cal = Calendar.getInstance();
@@ -268,6 +269,11 @@ public class ReserveController {
 		cal.add(Calendar.DATE, 168);
 		String dayOfWeek2Last = dayFormat.format(cal.getTime());
 		
+		Employee employee = (Employee) session.getAttribute("employee");
+		String employeeName = employee.getEmployeeName();
+		employee.setEmployeeName(employeeName);
+		
+		model.addAttribute("employeeName", employeeName);
 		model.addAttribute("dayOfWeek2First", dayOfWeek2First);
 		model.addAttribute("dayOfWeek2Last", dayOfWeek2Last);
 		model.addAttribute("dayOfWeek2", dayOfWeek2);
@@ -326,17 +332,17 @@ public class ReserveController {
 			}
 		}
 		int itemNumber = reserve.getItemNumber();
-
+		
 		modelAndView.addObject("success", success);
 		modelAndView.addObject("itemNumber", itemNumber);
+		
 		modelAndView.setViewName("redirect:/reserve/room/first");
-
 		return modelAndView;
 	}
 
 	@RequestMapping(value = "reserve/room/second", method = RequestMethod.GET)
 	public String reserveRoomSecond(Model model, @RequestParam("itemNumber") int itemNumber,
-			HttpServletResponse response) throws Exception {
+			HttpServletResponse response, HttpSession session) throws Exception {
 		// 이번주 일요일 날짜 구하기 int dayOfWeek 1=일요일, 2=월요일 ....... 7=토요일
 		SimpleDateFormat dayFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar cal = Calendar.getInstance();
@@ -365,7 +371,11 @@ public class ReserveController {
 		String dayOfWeek2First = dayFormat.format(cal2.getTime());
 		cal.add(Calendar.DATE, 168);
 		String dayOfWeek2Last = dayFormat.format(cal.getTime());
+		Employee employee = (Employee) session.getAttribute("employee");
+		String employeeName = employee.getEmployeeName();
+		employee.setEmployeeName(employeeName);
 		
+		model.addAttribute("employeeName", employeeName);
 		model.addAttribute("dayOfWeek2First", dayOfWeek2First);
 		model.addAttribute("dayOfWeek2Last", dayOfWeek2Last);
 		model.addAttribute("dayOfWeek2", dayOfWeek2);
@@ -422,7 +432,7 @@ public class ReserveController {
 
 	@RequestMapping(value = "reserve/room/third", method = RequestMethod.GET)
 	public String reserveRoomThird(Model model, @RequestParam("itemNumber") int itemNumber,
-			HttpServletResponse response) throws Exception {
+			HttpServletResponse response, HttpSession session) throws Exception {
 		// 이번주 일요일 날짜 구하기 int dayOfWeek 1=일요일, 2=월요일 ....... 7=토요일
 		SimpleDateFormat dayFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar cal = Calendar.getInstance();
@@ -451,7 +461,11 @@ public class ReserveController {
 		String dayOfWeek2First = dayFormat.format(cal2.getTime());
 		cal.add(Calendar.DATE, 168);
 		String dayOfWeek2Last = dayFormat.format(cal.getTime());
+		Employee employee = (Employee) session.getAttribute("employee");
+		String employeeName = employee.getEmployeeName();
+		employee.setEmployeeName(employeeName);
 		
+		model.addAttribute("employeeName", employeeName);
 		model.addAttribute("dayOfWeek2First", dayOfWeek2First);
 		model.addAttribute("dayOfWeek2Last", dayOfWeek2Last);
 		model.addAttribute("dayOfWeek2", dayOfWeek2);
@@ -508,7 +522,7 @@ public class ReserveController {
 
 	@RequestMapping(value = "reserve/car/avante", method = RequestMethod.GET)
 	public String reserveCarAvante(Model model, @RequestParam("itemNumber") int itemNumber,
-			HttpServletResponse response) throws Exception {
+			HttpServletResponse response, HttpSession session) throws Exception {
 		// 이번주 일요일 날짜 구하기 int dayOfWeek 1=일요일, 2=월요일 ....... 7=토요일
 		SimpleDateFormat dayFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar cal = Calendar.getInstance();
@@ -537,7 +551,11 @@ public class ReserveController {
 		String dayOfWeek2First = dayFormat.format(cal2.getTime());
 		cal.add(Calendar.DATE, 168);
 		String dayOfWeek2Last = dayFormat.format(cal.getTime());
+		Employee employee = (Employee) session.getAttribute("employee");
+		String employeeName = employee.getEmployeeName();
+		employee.setEmployeeName(employeeName);
 		
+		model.addAttribute("employeeName", employeeName);
 		model.addAttribute("dayOfWeek2First", dayOfWeek2First);
 		model.addAttribute("dayOfWeek2Last", dayOfWeek2Last);
 		model.addAttribute("dayOfWeek2", dayOfWeek2);
@@ -593,7 +611,7 @@ public class ReserveController {
 	}
 
 	@RequestMapping(value = "reserve/car/benz", method = RequestMethod.GET)
-	public String reserveCarBenz(Model model, @RequestParam("itemNumber") int itemNumber, HttpServletResponse response)
+	public String reserveCarBenz(Model model, @RequestParam("itemNumber") int itemNumber, HttpServletResponse response, HttpSession session)
 			throws Exception {
 		// 이번주 일요일 날짜 구하기 int dayOfWeek 1=일요일, 2=월요일 ....... 7=토요일
 		SimpleDateFormat dayFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -623,7 +641,11 @@ public class ReserveController {
 		String dayOfWeek2First = dayFormat.format(cal2.getTime());
 		cal.add(Calendar.DATE, 168);
 		String dayOfWeek2Last = dayFormat.format(cal.getTime());
+		Employee employee = (Employee) session.getAttribute("employee");
+		String employeeName = employee.getEmployeeName();
+		employee.setEmployeeName(employeeName);
 		
+		model.addAttribute("employeeName", employeeName);
 		model.addAttribute("dayOfWeek2First", dayOfWeek2First);
 		model.addAttribute("dayOfWeek2Last", dayOfWeek2Last);
 		model.addAttribute("dayOfWeek2", dayOfWeek2);

@@ -5,54 +5,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-    	<style>
-			.d-flex{
-				font-weight: bolder;
-    			font-size: 20px;
-    			margin: 15px 19px;
-			}
-			.table{
-				line-height:0;
-			}
-			#help_icon{
-				margin-right: 10px;
-				
-			}
-			#bell_icon{
-				margin-right: 10px;
-			}
-			#left_icon{
-				font-size: 17px;
-			}
-			#right_icon{
-				font-size: 17px;
-			}
-			.date_all{
-				font-size: 27px;
-				padding: 0px 30px;
-			}
-			.table-bordered{
-				table-layout: fixed;
-			}
-			.table-content-color{
-				font-size: 0.7em;
-				color: white;
-				font-weight: bold;
-			}
-			.table-content-color td{
-				text-overflow:ellipsis; 
-				overflow:hidden;
-				white-space:nowrap;
-			}
-			.hour-color{
-				color: black;
-				font-size: 1.5em;
-			}
-			
-    	</style>
         <title>josso</title>
-         <!-- navigaion.css 적용-->
+         <!-- josso css -->
          <link rel="stylesheet" href="../../resources/css/common.css" type="text/css">
+         <link rel="stylesheet" href="../../resources/css/reserve/item.css" type="text/css">
          <!-- Icon -->
          <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
          crossorigin="anonymous">
@@ -130,7 +86,11 @@
 	    			    	            			for(var j = 0; j<timeIdArr.length; j++){
 	    			    	            				if(Itemdata[i].startTime == jQuery($(timeIdArr[j])).attr("class")){
 	    			    	            					var m = 0;
-	    			    	            					$(timeIdArr[j+m]).children(weekClassArr[k]).html(decodeURIComponent(Itemdata[i].userName)+decodeURIComponent(Itemdata[i].reservationPurpose));
+	    			    	            					$(timeIdArr[j+m]).children(weekClassArr[k]).html(
+	    			    	            							Itemdata[i].startTime+' ~ '
+	    				    	            						+Itemdata[i].endTime+' '
+	    				    	            						+decodeURIComponent(Itemdata[i].userName)+' '
+	    				    	            						+decodeURIComponent(Itemdata[i].reservationPurpose));
 	    			    	            					$(timeIdArr[j+m]).children(weekClassArr[k]).css("background-color","silver");
 	    			    	            					while(Itemdata[i].endTime != jQuery($(timeIdArr[j+m])).attr("class") || Itemdata[i].startTime != jQuery($(timeIdArr[j])).attr("class")){
 	    			    	            						$(timeIdArr[j+m]).children(weekClassArr[k]).css("background-color","silver");
@@ -194,7 +154,11 @@
 	    			    	            			for(var j = 0; j<timeIdArr.length; j++){
 	    			    	            				if(Itemdata[i].startTime == jQuery($(timeIdArr[j])).attr("class")){
 	    			    	            					var m = 0;
-	    			    	            					$(timeIdArr[j+m]).children(weekClassArr[k]).html(decodeURIComponent(Itemdata[i].userName)+decodeURIComponent(Itemdata[i].reservationPurpose));
+	    			    	            					$(timeIdArr[j+m]).children(weekClassArr[k]).html(
+	    			    	            							Itemdata[i].startTime+' ~ '
+	    				    	            						+Itemdata[i].endTime+' '
+	    				    	            						+decodeURIComponent(Itemdata[i].userName)+' '
+	    				    	            						+decodeURIComponent(Itemdata[i].reservationPurpose));
 	    			    	            					$(timeIdArr[j+m]).children(weekClassArr[k]).css("background-color","silver");
 	    			    	            					while(Itemdata[i].endTime != jQuery($(timeIdArr[j+m])).attr("class")){
 	    			    	            						$(timeIdArr[j+m]).children(weekClassArr[k]).css("background-color","silver");
@@ -243,8 +207,10 @@
 	    	            				if(Itemdata[i].startTime == jQuery($(timeIdArr[j])).attr("class")){
 	    	            					var m = 0;
 	    	            					$(timeIdArr[j+m]).children(weekClassArr[k]).html(
-	    	            						decodeURIComponent(Itemdata[i].userName)+
-	    	            						decodeURIComponent(Itemdata[i].reservationPurpose));
+	    	            						Itemdata[i].startTime+' ~ '
+	    	            						+Itemdata[i].endTime+' '
+	    	            						+decodeURIComponent(Itemdata[i].userName)+' '
+	    	            						+decodeURIComponent(Itemdata[i].reservationPurpose));
 	    	            					$(timeIdArr[j+m]).children(weekClassArr[k]).css("background-color","silver");
 	    	            					while(Itemdata[i].endTime != jQuery($(timeIdArr[j+m])).attr("class")){
 	    	            						$(timeIdArr[j+m]).children(weekClassArr[k]).css("background-color","silver");
@@ -265,22 +231,19 @@
             });
             
             $(function(){
-            	$('#submit-dialog').click(function(){
-            		if('${success}' == 1){
+            		var success = $('#submit-success').val();
+            		if(success == 1){
             			alert("예약 완료했습니다.");
-            		}else if('${success}' == -1){
+            		}else if(success == -1){
             			alert("값을 입력하지 않으셨습니다.");
-            		}else if('${success}' == -2){
+            		}else if(success == -2){
             			alert("같은 시간을 선택하셨습니다.");
-            		}else if('${success}' == -3){
+            		}else if(success == -3){
             			alert("예약 시작 시간과 예약 종료 시간을 잘못 선택하셨습니다.");
-            		}else if('${success}' == -4){
+            		}else if(success == -4){
             			alert("이미 예약된 시간입니다.")
             		}else{
-            			alert("와우")
             		}
-            	});
-            	
             });
             
             $(function(){
@@ -708,14 +671,14 @@
         <div id="form_dialog" style="display:none">
             <form action="reservation" method="GET">
                 <div>
-                	<div>
-	                    <span>예약일</span>
+                	<div class="date-form-dialog">
+	                    <span class="date-write-dialog">예약일</span>
 	                    <span>
 	                    	<input id="datepickerFirst" type="text" name="reservationStartDate" readonly>
 	                    </span>
                     </div>
-                    <div>
-                    	<span>예약시간</span>
+                    <div class="time-form-dialog">
+                    	<span class="time-write-dialog">예약시간</span>
                     	<span>
 	                    	<select class="start-time-select" name="startTime">
 	                    		<option value="700">07:00</option>
@@ -774,18 +737,18 @@
 	                    	</select>
 	                    </span>
                     </div>
-                    <div>
-                    	<span>예약자</span>
-                    	<span><input type="text" name="userNumber"></span>
+                    <div class="name-form-dialog">
+                    	<span class="name-write-dialog">예약자</span>
+                    	<span><input type="text" value="${employeeName }" readonly></span>
                 	</div>
-                	<div>
-                    	<span>이용목적</span>
+                	<div class="purpose-form-dialog">
+                    	<span class="purpose-write-dialog">이용목적</span>
                     	<span><input type="text" name="reservationPurpose"></span>
                 	</div>
-                	<div>
+                	<div class="item-form-dialog">
                 		<input type="text" name="itemNumber" value="1" readonly style="display:none">
                 	</div>
-                	<div>
+                	<div class="button-form-dialog">
                 		<input type="submit" value="제출" id="submit-dialog">
                 		<input type="button" value="취소" id="cancle-dialog">
                 	</div>
@@ -793,5 +756,6 @@
                 </div>   
             </form>
         </div>
+        <div id="submit-success">${success }</div>
     </body>
 </html>

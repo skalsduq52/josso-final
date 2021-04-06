@@ -1,0 +1,93 @@
+@charset "UTF-8";
+.d-flex {
+	font-weight: bolder;
+	font-size: 20px;
+	margin: 15px 19px;
+}
+
+.table {
+	line-height: 0;
+}
+
+#help_icon {
+	margin-right: 10px;
+}
+
+#bell_icon {
+	margin-right: 10px;
+}
+
+#left_icon {
+	font-size: 17px;
+}
+
+#right_icon {
+	font-size: 17px;
+}
+
+.date_all {
+	font-size: 27px;
+	padding: 0px 30px;
+}
+
+.table-bordered {
+	table-layout: fixed;
+}
+
+.table-content-color {
+	font-size: 0.7em;
+	color: white;
+	font-weight: bold;
+}
+
+.table-content-color td {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+.hour-color {
+	color: black;
+	font-size: 1.5em;
+}
+
+.date-form-dialog {
+	margin-bottom: 10px;
+}
+
+.time-form-dialog {
+	margin-bottom: 10px;
+}
+
+.purpose-form-dialog {
+	margin-bottom: 10px;
+}
+
+.name-form-dialog {
+	margin-bottom: 10px;
+}
+
+.item-form-dialog {
+	margin-bottom: 10px;
+}
+
+.button-form-dialog {
+	margin-top: 30px;
+	margin-left: 420px;
+}
+
+.date-write-dialog {
+	padding-right: 25px;
+}
+
+.time-write-dialog {
+	padding-right: 8px;
+}
+
+.name-write-dialog {
+	padding-right: 25px;
+}
+
+.purpose-write-dialog {
+	padding-right: 8px;
+}

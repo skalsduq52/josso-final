@@ -105,13 +105,15 @@
 			    	            			if(Itemdata[i].itemNumber == jQuery($(itemNumberMain[e])).attr("class")){
     			    	            			var m = 0;
     			    	            			$(itemNumberMain[e]).children(timeIdArr[j+m]).html(		
-    			    	            				decodeURIComponent(Itemdata[i].userName)+
-    			    	            				decodeURIComponent(Itemdata[i].reservationPurpose));
+    			    	            					decodeURIComponent(Itemdata[i].userName)+' '
+        			    	            				+Itemdata[i].startTime+' ~ '
+        	    			    	            		+Itemdata[i].endTime);
     			    	            			$(itemNumberMain[e]).children(timeIdArr[j+m]).css("background-color","#00a1b9");
     			    	            			while(Itemdata[i].endTime != jQuery($(timeIdArr[j+m])).attr("class")){
     			    	            				$(itemNumberMain[e]).children(timeIdArr[j+m]).html(		
-		    			    	            				decodeURIComponent(Itemdata[i].userName)+
-		    			    	            				decodeURIComponent(Itemdata[i].reservationPurpose));
+    			    	            						decodeURIComponent(Itemdata[i].userName)+' '
+    	    			    	            				+Itemdata[i].startTime+' ~ '
+    	    	    			    	            		+Itemdata[i].endTime);
     			    	            				$(itemNumberMain[e]).children(timeIdArr[j+m]).css("background-color","#00a1b9");
     			    	            				m++;
     			    	            			}
@@ -206,13 +208,15 @@
 			    			    	            			if(Itemdata[i].itemNumber == jQuery($(itemNumberMain[e])).attr("class")){
 				    			    	            			var m = 0;
 				    			    	            			$(itemNumberMain[e]).children(timeIdArr[j+m]).html(		
-				    			    	            				decodeURIComponent(Itemdata[i].userName)+
-				    			    	            				decodeURIComponent(Itemdata[i].reservationPurpose));
+				    			    	            					decodeURIComponent(Itemdata[i].userName)+' '
+				        			    	            				+Itemdata[i].startTime+' ~ '
+				        	    			    	            		+Itemdata[i].endTime);
 				    			    	            			$(itemNumberMain[e]).children(timeIdArr[j+m]).css("background-color","#00a1b9");
 				    			    	            			while(Itemdata[i].endTime != jQuery($(timeIdArr[j+m])).attr("class")){
 				    			    	            				$(itemNumberMain[e]).children(timeIdArr[j+m]).html(		
-						    			    	            				decodeURIComponent(Itemdata[i].userName)+
-						    			    	            				decodeURIComponent(Itemdata[i].reservationPurpose));
+				    			    	            						decodeURIComponent(Itemdata[i].userName)+' '
+				    	    			    	            				+Itemdata[i].startTime+' ~ '
+				    	    	    			    	            		+Itemdata[i].endTime);
 				    			    	            				$(itemNumberMain[e]).children(timeIdArr[j+m]).css("background-color","#00a1b9");
 				    			    	            				m++;
 				    			    	            			}
@@ -317,13 +321,15 @@
 			    			    	            			if(Itemdata[i].itemNumber == jQuery($(itemNumberMain[e])).attr("class")){
 				    			    	            			var m = 0;
 				    			    	            			$(itemNumberMain[e]).children(timeIdArr[j+m]).html(		
-				    			    	            				decodeURIComponent(Itemdata[i].userName)+
-				    			    	            				decodeURIComponent(Itemdata[i].reservationPurpose));
+				    			    	            					decodeURIComponent(Itemdata[i].userName)+' '
+				        			    	            				+Itemdata[i].startTime+' ~ '
+				        	    			    	            		+Itemdata[i].endTime);
 				    			    	            			$(itemNumberMain[e]).children(timeIdArr[j+m]).css("background-color","#00a1b9");
 				    			    	            			while(Itemdata[i].endTime != jQuery($(timeIdArr[j+m])).attr("class")){
 				    			    	            				$(itemNumberMain[e]).children(timeIdArr[j+m]).html(		
-						    			    	            				decodeURIComponent(Itemdata[i].userName)+
-						    			    	            				decodeURIComponent(Itemdata[i].reservationPurpose));
+				    			    	            						decodeURIComponent(Itemdata[i].userName)+' '
+				    	    			    	            				+Itemdata[i].startTime+' ~ '
+				    	    	    			    	            		+Itemdata[i].endTime);
 				    			    	            				$(itemNumberMain[e]).children(timeIdArr[j+m]).css("background-color","#00a1b9");
 				    			    	            				m++;
 				    			    	            			}
