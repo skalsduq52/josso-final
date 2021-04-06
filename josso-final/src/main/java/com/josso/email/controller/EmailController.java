@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.josso.email.service.EmailService;
 import com.josso.email.vo.Email;
+import com.josso.email.vo.EmailPaging;
 import com.josso.employee.vo.Employee;
 
 
@@ -29,39 +30,36 @@ public class EmailController{
 	@Autowired
 	private EmailService emailService;
  
-//	// 메일 메인페이지(완성)
-//	@RequestMapping(value = "email.do", method = RequestMethod.GET)
-//	public String email(HttpSession session) throws Exception{
-//		return "email/emailWrite";
-//	}
-//	
-//	@RequestMapping(value = "main.do", method = RequestMethod.GET)
-//	public ModelAndView emailwrite(ModelAndView modelAndView, HttpSession session) throws Exception{
-//		Employee employee = (Employee) session.getAttribute("employee");
-//		String id = employee.getEmployeeEmail();
-//		int emailCount = emailService.emailCount(id);
-//		int wastebasketCount = emailService.wastebasketCount(id);
-//		modelAndView.addObject("wastebasketCount",wastebasketCount);
-//		modelAndView.addObject("emailCount",emailCount);
-//		modelAndView.setViewName("email/part/aside");
-//		modelAndView.setViewName("email/emailWrite");
-//		return modelAndView;
-//	}
-	
 	// /* ------------------------------받은 메일함------------------------------- */
 	// 받은메일함 목록 보여주기(완성)
 	@RequestMapping(value = "email/accept/list", method = RequestMethod.GET)
-	public ModelAndView acceptList(ModelAndView modelAndView, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception{
+	public ModelAndView acceptList(ModelAndView modelAndView, EmailPaging page, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception{
 		Employee employee = (Employee) session.getAttribute("employee");
+		System.out.println("employee:"+employee);
 		String id = employee.getEmployeeEmail();
-		int emailCount = emailService.emailCount(id);
-		List<Email> acceptList = emailService.AcceptList(id);
+		System.out.println("id :"+id);
 		int wastebasketCount = emailService.wastebasketCount(id);
+		int acceptCount = emailService.acceptCount(id);		// 받은메일함 - 전체메일 수
+		int emailCount = emailService.emailCount(id);		// 받은메일함 - 안읽은 메일 수
+		System.out.println(emailCount);
+		page.setEmployeeEmail(employee.getEmployeeEmail());
+
+		if(page.getTitle().equals("")) {
+			page.setTitle("EMAIL_TITLE");
+		}
+		page.setCount(acceptCount);
+		page.setStartNum(page.getPage());
+		page.setLastNum(page.getCount());
+		page.setStartRange(page.getPage());
+		page.setEndRange(page.getPage());
+		List<Email> acceptList = emailService.AcceptList(page);
 		modelAndView.addObject("wastebasketCount",wastebasketCount);
-		modelAndView.addObject("emailCount",emailCount);
+		modelAndView.addObject("emailCount",emailCount);		
+		modelAndView.addObject("acceptList", acceptList);
+		modelAndView.addObject("page", page);
 		modelAndView.setViewName("email/part/aside");
-		modelAndView.addObject("acceptList",acceptList);
 		modelAndView.setViewName("email/acceptList");
+		
 		return modelAndView;
 	}
 	

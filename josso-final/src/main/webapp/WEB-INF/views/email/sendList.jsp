@@ -176,8 +176,8 @@
             <div class="container-xl-fluid">
                 <div class="row">
                     <div class="col">
-                        <div class="content_top">
-                            <h1>보낸메일함</h1>
+                        <div>
+                            <h3 style="padding:10px 0px 0px 10px; font-size: 20px; font-weight: bold;">보낸메일함</h3>
                         </div>
                     </div>
                     
@@ -190,18 +190,22 @@
                     <div class="col"> </div>
                     <div class="col"></div>
                     <div class="col"><span>
-                        <div class="input-group justify-content-right nav-search">
-                            <div class="form-group-append">
-                                <select class="field form-control" id="f" name="f">
-                                    <option ${(param.f == "B_TITLE")?"selected":""} value="TITLE">글제목</option>
-									<option ${(param.f == "B_WRITER")?"selected":""} value="WRITER">작성자</option>
-                                </select>
-                            </div>
-                            <input type="text" class="query form-control" placeholder="Search" id="q" name="q" value="">
-                            <div class="input-group-append">
-                                <input class="btn btn-success" type="button" value="검색"></button>
-                            </div>
-                        </div>
+                        <div style="float:right">
+			            <form>
+							<div class="input-group justify-content-right">
+								<div class="form-group-append">
+									<select class="form-control" name="title">
+										<option ${(param.title == "EMAIL_TITLE")?"Selected":""} value="EMAIL_TITLE">제목</option>
+										<option ${(param.title == "EMAIL_ACCEPT")?"Selected":""} value="EMAIL_ACCEPT">보낸사람</option>
+									</select>
+								</div>
+								<input type="text" class="form-control" placeholder="Search" name="query" value="${param.query}">
+								<div class="input-group-append">
+									<button class="btn btn-success" type="submit">Go</button>
+								</div>
+							</div>
+						</form>   
+					</div>
                     </span></div>
                 </div>
                 <form action="${pageContext.request.contextPath}/email/send/ckWastebasket" method="get">

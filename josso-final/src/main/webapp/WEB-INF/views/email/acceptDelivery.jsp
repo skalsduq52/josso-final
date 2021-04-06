@@ -223,8 +223,8 @@
             <div class="container-xl-fluid">
                 <div class="row">
                     <div class="col">
-                        <div class="content_top">
-                            <h1>받은메일함</h1>
+                        <div>
+                            <h3 style="padding:10px 0px 0px 10px; font-size: 20px; font-weight: bold;">받은메일함</h3>
                         </div>
                     </div>
                     

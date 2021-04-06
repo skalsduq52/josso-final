@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.josso.email.dao.EmailDao;
 import com.josso.email.vo.Email;
+import com.josso.email.vo.EmailPaging;
 import com.josso.employee.vo.Employee;
 
 @Service
@@ -17,8 +18,8 @@ public class EmailServiceImpl implements EmailService{
 	EmailDao emailDao;
 	
 	// 받은메일함 - 리스트
-	public List<Email> AcceptList(String id) throws Exception{
-		return emailDao.AcceptList(id);
+	public List<Email> AcceptList(EmailPaging page) throws Exception{
+		return emailDao.AcceptList(page);
 	}
 	
 	// 보낸메일함 - 리스트
@@ -147,6 +148,11 @@ public class EmailServiceImpl implements EmailService{
 	// 받은메일함 안읽은 메일 수
 	public int emailCount(String id) throws Exception{
 		return emailDao.emailCount(id);
+	}
+	
+	// 받은메일함 총 메일 수
+	public int acceptCount(String id) throws Exception{
+		return emailDao.acceptCount(id);
 	}
 	
 	// 휴지통 메일 개수

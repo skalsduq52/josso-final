@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.josso.email.vo.EmailPaging;
 import com.josso.email.vo.Email;
 import com.josso.employee.vo.Employee;
 
@@ -19,8 +20,8 @@ public class EmailDao {
 	}
 	
 	// 받은(메인)메일함 메일목록
-	public List<Email> AcceptList(String id) throws Exception{
-		return sqlSession.selectList("Email.AcceptList", id);
+	public List<Email> AcceptList(EmailPaging page) throws Exception{
+		return sqlSession.selectList("Email.AcceptList", page);
 	}
 	
 	// 받은메일함 - 자세히보기
@@ -146,6 +147,11 @@ public class EmailDao {
 	// 받음메일함 안읽은 메일 수
 	public int emailCount(String id) throws Exception{
 		return sqlSession.selectOne("Email.emailCount", id);
+	}
+	
+	// 받음메일함 안읽은 메일 수
+	public int acceptCount(String id) throws Exception{
+		return sqlSession.selectOne("Email.acceptCount", id);
 	}
 	
 	// 휴지통 메일 개수

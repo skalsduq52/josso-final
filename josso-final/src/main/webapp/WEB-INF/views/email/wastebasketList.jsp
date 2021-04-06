@@ -167,8 +167,8 @@
             <div class="container-xl-fluid">
                 <div class="row">
                     <div class="col">
-                        <div class="content_top">
-                            <h1>휴지통</h1>
+                        <div>
+                            <h3 style="padding:10px 0px 0px 10px; font-size: 20px; font-weight: bold;">휴지통</h3>
                         </div>
                     </div>
                     
@@ -181,18 +181,22 @@
                     <div class="col"> </div>
                     <div class="col"></div>
                     <div class="col"><span>
-                        <div class="input-group justify-content-right nav-search">
-                            <div class="form-group-append">
-                                <select class="form-control" name="f">
-                                    <option value="글제목">글제목</option>
-                                    <option value="내용">내용</option>
-                                </select>
-                            </div>
-                            <input type="text" class="form-control" placeholder="Search" name="q" value="">
-                            <div class="input-group-append">
-                                <input class="btn btn-success" type="button" value="검색"></button>
-                            </div>
-                        </div>
+                        <div style="float:right">
+			            <form>
+							<div class="input-group justify-content-right">
+								<div class="form-group-append">
+									<select class="form-control" name="title">
+										<option ${(param.title == "EMAIL_TITLE")?"Selected":""} value="EMAIL_TITLE">제목</option>
+										<option ${(param.title == "EMAIL_ACCEPT")?"Selected":""} value="EMAIL_ACCEPT">보낸사람</option>
+									</select>
+								</div>
+								<input type="text" class="form-control" placeholder="Search" name="query" value="${param.query}">
+								<div class="input-group-append">
+									<button class="btn btn-success" type="submit">Go</button>
+								</div>
+							</div>
+						</form>   
+					</div>
                     </span></div>
                 </div>
                 <form action="${pageContext.request.contextPath}/email/wastebasket/ckWastebasket" method="get">

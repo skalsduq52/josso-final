@@ -209,34 +209,33 @@
             <div class="container-xl-fluid">
                 <div class="row">
                     <div class="col">
-                        <div class="content_top">
-                            <h1>받은메일함</h1>
+                        <div>
+                            <h3 style="padding:10px 0px 0px 10px; font-size: 20px; font-weight: bold;">받은메일함</h3>
                         </div>
                     </div>
                     
                     <div class="col-6"></div>
-                    <div class="col">
-                        
-                </div>
+                    <div class="col"></div>
                   </div>
                 <div class="row">
                     <div class="col"> </div>
-                    <div class="col"></div>
                     <div class="col"><span>
-                    <form action="${pageContext.request.contextPath}/email/search" method="get">
-                        <div class="input-group justify-content-right nav-search">
-	                        <div class="form-group-append">
-                                <select class="field form-control" id="f" name="f">
-                                    <option ${(param.f == "B_TITLE")?"selected":""} value="TITLE">글제목</option>
-									<option ${(param.f == "B_WRITER")?"selected":""} value="WRITER">작성자</option>
-                                </select>
-                            </div>
-                            <input type="text" class="query form-control" placeholder="Search" name="word" value="">
-                            <div class="input-group-append">
-                                <input class="btn btn-success" type="button" value="검색"></button>
-                            </div>
-                        </div>
-                    </form>
+                    <div style="float:right">
+			            <form>
+							<div class="input-group justify-content-right">
+								<div class="form-group-append">
+									<select class="form-control" name="title">
+										<option ${(param.title == "EMAIL_TITLE")?"Selected":""} value="EMAIL_TITLE">제목</option>
+										<option ${(param.title == "EMAIL_ACCEPT")?"Selected":""} value="EMAIL_ACCEPT">보낸사람</option>
+									</select>
+								</div>
+								<input type="text" class="form-control" placeholder="Search" name="query" value="${param.query}">
+								<div class="input-group-append">
+									<button class="btn btn-success" type="submit">Go</button>
+								</div>
+							</div>
+						</form>   
+					</div>
                     </span></div>
                 </div>
                 <form action="${pageContext.request.contextPath}/email/accept/ckWastebasket" method="get">
@@ -272,8 +271,6 @@
                         
                         <!-- 받은 메일 반복문으로 출력-->
                         
-                        
-                        
                         <tbody class="table table-borderless table-hover">
                             <c:forEach var="n" items="${acceptList}">
 								<tr>
@@ -296,25 +293,25 @@
                 </div>
             </div>
             </form>
-            
-            <ul class="pagination justify-content-center">
-                
-                    <li class="page-item"><a class="page-link" href="#"><<</a></li>
-                    <li class="page-item"><a class="page-link" href="#"><</a></li>&nbsp;&nbsp;
-                    <li class="page-item ${(page==(startNum+i))?'active':''}"><a class="page-link" href="#">1</a></li>
-                    <a class="page-link" href="#">2</a></li>
-                    <a class="page-link" href="#">3</a></li>
-                    <a class="page-link" href="#">4</a></li>
-                    <a class="page-link" href="#">5</a></li>
-                    &nbsp;&nbsp;<li class="page-item"><a class="page-link" href="#">></a></li>
-
-                    <li class="page-item"><a class="page-link" href="#">>></a></li>
-
-
-            </ul>
-            
-			
-			
+            <ul class="pagination" style="padding-top: 20px; padding-left: 40%;">
+                	<c:if test="${param.page !=1 and not empty param.page}">
+						<li class="page-item"><a class="page-link" href="?page=${param.page-1}&title=${param.title}&query=${param.query}"><</a></li>&nbsp;&nbsp;
+					</c:if>
+					<c:if test="${param.page == 1 || empty param.page}">
+						<li class="page-item disabled"><a class="page-link"><</a></li>&nbsp;&nbsp;
+					</c:if>
+                    <c:forEach var="i" begin="0" end="4">
+						<c:if test="${(page.startNum+i) <= page.lastNum}">
+							<li class="page-item ${(page.page==(page.startNum+i))?'active':''}"><a class="page-link" href="?page=${page.startNum+i}&title=${param.title}&query=${param.query}">${page.startNum+i}</a></li>
+						</c:if>
+					</c:forEach>
+					<c:if test="${page.page+1 <= page.lastNum}">
+						&nbsp;&nbsp;<li class="page-item"><a class="page-link" href="?page=${page.page+1}&title=${param.title}&query=${param.query}">></a></li>
+					</c:if>
+					<c:if test="${page.page+1 > page.lastNum}">
+						&nbsp;&nbsp;<li class="page-item disabled"><a class="page-link">></a></li>
+					</c:if>
+                </ul>
         </main>
     </body>
 </html>
