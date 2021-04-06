@@ -64,6 +64,21 @@
 				color: black;
 				font-size: 1.5em;
 			}
+			#detail-day{
+			border:none;width:110px;margin-top: 5px;margin-left: 170px;margin-right: 170px;
+			}
+			#detail-user{
+			border:none;width:200px;margin-left: 150px;margin-right: 120px;margin-top: 5px;
+			}
+			.detail-purpose3{
+			margin-left: 30px;margin-right: 30px;margin-top: 10px;
+			}
+			#detail-purpose2{
+			padding-left: 160px;
+			}
+			#cancle-dialog{
+			margin-left: 380px;margin-top: 20px;
+			}
     	</style>
         <title>josso</title>
          <!-- navigaion.css 적용-->
@@ -80,6 +95,10 @@
          <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
          <!-- Latest compiled JavaScript -->
          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+         <!-- jquery ui-->
+         <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+         <script src="//code.jquery.com/jquery.min.js"></script>
+         <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
         <script>
             $(function(){
                 $('.hover_icon').click(function(){
@@ -107,15 +126,17 @@
 			    	            			if(Itemdata[i].itemNumber == jQuery($(itemNumberMain[e])).attr("class")){
     			    	            			var m = 0;
     			    	            			$(itemNumberMain[e]).children(timeIdArr[j+m]).html(		
-    			    	            					decodeURIComponent(Itemdata[i].userName)+' '
+    			    	            					'<span class="user-name">'+decodeURIComponent(Itemdata[i].userName)+' '
         			    	            				+Itemdata[i].startTime+' ~ '
-        	    			    	            		+Itemdata[i].endTime);
+        	    			    	            		+Itemdata[i].endTime+'</span>'+' ('
+        	    			    	            		+'<span class="user-purpose">'+decodeURIComponent(Itemdata[i].reservationPurpose)+'</span>'+')');
     			    	            			$(itemNumberMain[e]).children(timeIdArr[j+m]).css("background-color","#00a1b9");
     			    	            			while(Itemdata[i].endTime != jQuery($(timeIdArr[j+m])).attr("class")){
     			    	            				$(itemNumberMain[e]).children(timeIdArr[j+m]).html(		
-    			    	            						decodeURIComponent(Itemdata[i].userName)+' '
+    			    	            						'<span class="user-name">'+decodeURIComponent(Itemdata[i].userName)+' '
     	    			    	            				+Itemdata[i].startTime+' ~ '
-    	    	    			    	            		+Itemdata[i].endTime);
+    	    	    			    	            		+Itemdata[i].endTime+'</span>'+' ('
+    	    	    			    	            		+'<span class="user-purpose">'+decodeURIComponent(Itemdata[i].reservationPurpose)+'</span>'+')');
     			    	            				$(itemNumberMain[e]).children(timeIdArr[j+m]).css("background-color","#00a1b9");
     			    	            				m++;
     			    	            			}
@@ -126,7 +147,7 @@
 	    	            	}
 	    	            }
 	    				$(function(){
-		    		    	$("#itemAvante").children().each(function() {
+		    		    	$("#itemAvante").children().children('.user-name').each(function() {
 		    		            var cols = $("#itemAvante > td:contains('" + $(this).html() + "')");
 		    		            if (cols.length > 1 && ($(this).html()) != "" ) {
 		    		            	cols.eq(0).attr("colspan", cols.length);
@@ -135,7 +156,7 @@
 		    		        });
 	    	            });
 	    				$(function(){
-		    		    	$("#itemBenz").children().each(function() {
+		    		    	$("#itemBenz").children().children('.user-name').each(function() {
 		    		            var cols = $("#itemBenz > td:contains('" + $(this).html() + "')");
 		    		            if (cols.length > 1 && ($(this).html()) != "" ) {
 		    		            	cols.eq(0).attr("colspan", cols.length);
@@ -183,15 +204,17 @@
 			    			    	            			if(Itemdata[i].itemNumber == jQuery($(itemNumberMain[e])).attr("class")){
 				    			    	            			var m = 0;
 				    			    	            			$(itemNumberMain[e]).children(timeIdArr[j+m]).html(		
-				    			    	            					decodeURIComponent(Itemdata[i].userName)+' '
+				    			    	            					'<span class="user-name">'+decodeURIComponent(Itemdata[i].userName)+' '
 				        			    	            				+Itemdata[i].startTime+' ~ '
-				        	    			    	            		+Itemdata[i].endTime);
+				        	    			    	            		+Itemdata[i].endTime+'</span>'+' ('
+				        	    			    	            		+'<span class="user-purpose">'+decodeURIComponent(Itemdata[i].reservationPurpose)+'</span>'+')');
 				    			    	            			$(itemNumberMain[e]).children(timeIdArr[j+m]).css("background-color","#00a1b9");
 				    			    	            			while(Itemdata[i].endTime != jQuery($(timeIdArr[j+m])).attr("class")){
 				    			    	            				$(itemNumberMain[e]).children(timeIdArr[j+m]).html(		
-				    			    	            						decodeURIComponent(Itemdata[i].userName)+' '
+				    			    	            						'<span class="user-name">'+decodeURIComponent(Itemdata[i].userName)+' '
 				    	    			    	            				+Itemdata[i].startTime+' ~ '
-				    	    	    			    	            		+Itemdata[i].endTime);
+				    	    	    			    	            		+Itemdata[i].endTime+'</span>'+' ('
+				    	    	    			    	            		+'<span class="user-purpose">'+decodeURIComponent(Itemdata[i].reservationPurpose)+'</span>'+')');
 				    			    	            				$(itemNumberMain[e]).children(timeIdArr[j+m]).css("background-color","#00a1b9");
 				    			    	            				m++;
 				    			    	            			}
@@ -202,7 +225,7 @@
 	    			    	            	}
 	    			    	            }
 	    			    				$(function(){
-	    				    		    	$("#itemAvante").children().each(function() {
+	    				    		    	$("#itemAvante").children().children('.user-name').each(function() {
 	    				    		            var cols = $("#itemAvante > td:contains('" + $(this).html() + "')");
 	    				    		            if (cols.length > 1 && ($(this).html()) != "" ) {
 	    				    		            	cols.eq(0).attr("colspan", cols.length);
@@ -211,7 +234,7 @@
 	    				    		        });
 	    			    	            });
 	    			    				$(function(){
-	    				    		    	$("#itemBenz").children().each(function() {
+	    				    		    	$("#itemBenz").children().children('.user-name').each(function() {
 	    				    		            var cols = $("#itemBenz > td:contains('" + $(this).html() + "')");
 	    				    		            if (cols.length > 1 && ($(this).html()) != "" ) {
 	    				    		            	cols.eq(0).attr("colspan", cols.length);
@@ -268,15 +291,17 @@
 			    			    	            			if(Itemdata[i].itemNumber == jQuery($(itemNumberMain[e])).attr("class")){
 				    			    	            			var m = 0;
 				    			    	            			$(itemNumberMain[e]).children(timeIdArr[j+m]).html(		
-				    			    	            					decodeURIComponent(Itemdata[i].userName)+' '
+				    			    	            					'<span class="user-name">'+decodeURIComponent(Itemdata[i].userName)+' '
 				        			    	            				+Itemdata[i].startTime+' ~ '
-				        	    			    	            		+Itemdata[i].endTime);
+				        	    			    	            		+Itemdata[i].endTime+'</span>'+' ('
+				        	    			    	            		+'<span class="user-purpose">'+decodeURIComponent(Itemdata[i].reservationPurpose)+'</span>'+')');
 				    			    	            			$(itemNumberMain[e]).children(timeIdArr[j+m]).css("background-color","#00a1b9");
 				    			    	            			while(Itemdata[i].endTime != jQuery($(timeIdArr[j+m])).attr("class")){
 				    			    	            				$(itemNumberMain[e]).children(timeIdArr[j+m]).html(		
-				    			    	            						decodeURIComponent(Itemdata[i].userName)+' '
+				    			    	            						'<span class="user-name">'+decodeURIComponent(Itemdata[i].userName)+' '
 				    	    			    	            				+Itemdata[i].startTime+' ~ '
-				    	    	    			    	            		+Itemdata[i].endTime);
+				    	    	    			    	            		+Itemdata[i].endTime+'</span>'+' ('
+				    	    	    			    	            		+'<span class="user-purpose">'+decodeURIComponent(Itemdata[i].reservationPurpose)+'</span>'+')');
 				    			    	            				$(itemNumberMain[e]).children(timeIdArr[j+m]).css("background-color","#00a1b9");
 				    			    	            				m++;
 				    			    	            			}
@@ -287,7 +312,7 @@
 	    			    	            	}
 	    			    	            }
 	    			    				$(function(){
-	    				    		    	$("#itemAvante").children().each(function() {
+	    				    		    	$("#itemAvante").children().children('.user-name').each(function() {
 	    				    		            var cols = $("#itemAvante > td:contains('" + $(this).html() + "')");
 	    				    		            if (cols.length > 1 && ($(this).html()) != "" ) {
 	    				    		            	cols.eq(0).attr("colspan", cols.length);
@@ -296,7 +321,7 @@
 	    				    		        });
 	    			    	            });
 	    			    				$(function(){
-	    				    		    	$("#itemBenz").children().each(function() {
+	    				    		    	$("#itemBenz").children().children('.user-name').each(function() {
 	    				    		            var cols = $("#itemBenz > td:contains('" + $(this).html() + "')");
 	    				    		            if (cols.length > 1 && ($(this).html()) != "" ) {
 	    				    		            	cols.eq(0).attr("colspan", cols.length);
@@ -325,58 +350,30 @@
     			});
             });
             
-            
+            /*페이지를 옮겼을때 이벤트가 날아가버려서 서류페이지 자체에다가 이벤트를 걸어놓는곳 */
+            $(document).on('click','.table-dialog > tr > td',function(){
+            	var str = $('#date_all').text();
+            	var str1 = $(this).children('.user-name').text();
+				var str2 = $(this).children('.user-purpose').text();
+            	$('#detail-day').val(str);
+            	$('#detail-user').val(str1);
+            	$('#detail-purpose').val(str2);
+            	
+            	$('#detail-dialog').dialog({
+                    title : "예약 상세 내용",
+                    width : 500,
+            		height: 300,
+                    modal : true
+                }).prev(".ui-dialog-titlebar").css("background","#B0E0E6");
+                $('#cancle-dialog').click(function(){
+                	$('#detail-dialog').dialog("close");
+                });
+            });
         </script>
     </head>
     <body>
         <header>
-            <div class="navigation">
-                <ul>
-                    <li>
-                        <a href="#">
-                        <span class="icon"><i class="fa fa-home" aria-hidden="true"></i></span>
-                        <span class="icon">홈</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                        <span class="icon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
-                        <span class="icon">메일</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                        <span class="icon"><i class="fas fa-list-ul fa-lg" aria-hidden="true"></i></span>
-                        <span class="icon">게시판</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                        <span class="icon"><i class="fas fa-calendar-alt fa-lg" aria-hidden="true"></i></span>
-                        <span class="icon">캘린더</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/josso/reserve">
-                        <span class="icon"><i class="fas fa-clock fa-lg" aria-hidden="true"></i></span>
-                        <span class="icon">예약</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                        <span class="icon"><i class="fas fa-clipboard fa-lg" aria-hidden="true"></i></span>
-                        <span class="icon">결재</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                        <span class="icon"><i class="fas fa-user-friends fa-lg" aria-hidden="true"></i></span>
-                        <span class="icon">조직도</span>
-                        </a>
-                    </li>
-                
-                </ul>
-            </div>
+            <%@ include file="../include/header.jsp"%>
         </header>
         <aside class="border-right">
             <div>
@@ -494,7 +491,7 @@
                             <th colspan="2" scope="col" width="7.5%">18</th>
                         </tr>
                     </thead>
-                    <tbody class="main-table-body">
+                    <tbody class="main-table-body table-dialog">
                         <tr class="4" id="itemAvante">
                             <th class="room-color">아반떼</th>
                             <td class="700" id="T0700"></td>
@@ -586,8 +583,25 @@
                   </table>
             </div>
         </main>
-        <footer class="border-top">
-
-        </footer>
+        
+         <div id="detail-dialog" style="display:none">
+        	<div>
+            	<div>
+					<span>
+						<input id="detail-day" type="text" readonly>
+					</span>
+				</div>
+				<div>
+					<span><input id="detail-user" type="text" readonly></span>
+				</div>
+				<div class="detail-purpose3">
+					<span id="detail-purpose2">이용목적</span>
+					<span><textarea id="detail-purpose" style="width:400px;" readonly ></textarea></span>
+				</div>
+				<div>
+					<input type="button" value="종료" id="cancle-dialog">
+				</div>
+			</div>   
+        </div>
     </body>
 </html>

@@ -17,14 +17,14 @@
          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
          <!-- jQuery library -->
          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-         <!-- jquery ui-->
-         <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-         <script src="//code.jquery.com/jquery.min.js"></script>
-         <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
          <!-- Popper JS -->
          <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
          <!-- Latest compiled JavaScript -->
          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+         <!-- jquery ui-->
+         <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+         <script src="//code.jquery.com/jquery.min.js"></script>
+         <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
          <script>
             $(function(){
                 $('.hover_icon').click(function(){
@@ -39,8 +39,7 @@
                         width : 600,
                 		height: 300,
                         modal : true
-                   
-                    });
+                    }).prev(".ui-dialog-titlebar").css("background","#B0E0E6");
                     $('#cancle-dialog').click(function(){
                     	$('#form_dialog').dialog("close");
                     });
@@ -270,54 +269,8 @@
     </head>
     <body>
        <header>
-            <div class="navigation">
-                <ul>
-                    <li>
-                        <a href="#">
-                        <span class="icon"><i class="fa fa-home" aria-hidden="true"></i></span>
-                        <span class="icon">홈</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                        <span class="icon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
-                        <span class="icon">메일</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                        <span class="icon"><i class="fas fa-list-ul fa-lg" aria-hidden="true"></i></span>
-                        <span class="icon">게시판</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                        <span class="icon"><i class="fas fa-calendar-alt fa-lg" aria-hidden="true"></i></span>
-                        <span class="icon">캘린더</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/josso/reserve">
-                        <span class="icon"><i class="fas fa-clock fa-lg" aria-hidden="true"></i></span>
-                        <span class="icon">예약</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                        <span class="icon"><i class="fas fa-clipboard fa-lg" aria-hidden="true"></i></span>
-                        <span class="icon">결재</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                        <span class="icon"><i class="fas fa-user-friends fa-lg" aria-hidden="true"></i></span>
-                        <span class="icon">조직도</span>
-                        </a>
-                    </li>
-                
-                </ul>
-            </div>
-        </header>
+			<%@ include file="../include/header.jsp"%>
+       </header>
         <aside class="border-right">
             <div>
                 <section>
@@ -664,10 +617,6 @@
             </div>
         </main>
 
-        <footer class="border-top">
-
-        </footer>
-        
         <div id="form_dialog" style="display:none">
             <form action="reservation" method="GET">
                 <div>
