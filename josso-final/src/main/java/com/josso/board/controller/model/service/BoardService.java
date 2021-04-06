@@ -2,6 +2,7 @@ package com.josso.board.controller.model.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -11,10 +12,10 @@ public interface BoardService {
 	
 	// 공통
 	// 디테일
-	public Board boardDetail(String boardNum) throws Exception;
+	public Board boardDetail(String boardNum, HttpServletRequest request) throws Exception;
 	
 	// 수정
-	public int boardUpdate(Board board) throws Exception;
+	public int boardUpdate(Board board, HttpServletRequest request) throws Exception;
 	
 	// 삭제
 	public int boardDelete(int boardNum) throws Exception;

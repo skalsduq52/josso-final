@@ -3,6 +3,7 @@ package com.josso.board.controller.model.service;
 import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -21,16 +22,26 @@ public class BoardServiceImpl implements BoardService {
 	
 	// 공통
 	// 디테일페이지
-	public Board boardDetail(String boardNum) throws Exception {
+	public Board boardDetail(String boardNum, HttpServletRequest request) throws Exception {
 		// 조회수 올리기
 		boardDao.hitUpdate(boardNum);
 		// 디테일 보여주기
 		Board NoticeDetail = boardDao.boardDetail(boardNum);
+		// 치환
+		String content = NoticeDetail.getBoardContent();
+		content = content.replace("\n\r", "<br>");
+		content = content.replace(" ", "&nbsp;");
+		
 		return NoticeDetail;
 	}
 	
 	// 수정
-	public int boardUpdate(Board board) throws Exception {
+	public int boardUpdate(Board board, HttpServletRequest request) throws Exception {
+		// 치환
+		String content = request.getParameter("boardContent");
+		content = content.replace("\n\r", "<br>");
+		content = content.replace(" ", "&nbsp;");
+		// 결과값
 		int result = boardDao.boardUpdate(board);
 		return result;
 	}
