@@ -189,8 +189,5 @@
 
             
         </main>
-        <footer class="border-top">
-                푸터요
-        </footer>
     </body>
 </html>
