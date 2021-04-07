@@ -293,7 +293,7 @@
                 </div>
             </div>
             </form>
-            <ul class="pagination" style="padding-top: 20px; padding-left: 40%;">
+            <ul class="pagination" style="padding-top: 20px; padding-left: 45%;">
                 	<c:if test="${param.page !=1 and not empty param.page}">
 						<li class="page-item"><a class="page-link" href="?page=${param.page-1}&title=${param.title}&query=${param.query}"><</a></li>&nbsp;&nbsp;
 					</c:if>

@@ -156,30 +156,31 @@ public class EmailController{
 	// /* ------------------------------보낸 메일함------------------------------- */
 	// 보낸메일함 목록 보여주기
 	@RequestMapping(value = "email/send/list", method = RequestMethod.GET)
-	public ModelAndView sentList(ModelAndView modelAndView, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception{
-		//		System.out.println("2");
-//		String field_ = request.getParameter("f");
-//		String search = request.getParameter("q");
-//		System.out.println(request.getParameter("f"));
-//		System.out.println(request.getParameter("q"));
-//		String field = "EMAIL_TITLE";
-//		if(field_ != null && !field_.equals("")) {
-//			field = field_;
-//		}
-//		String query = "";
-//		if(search != null && !search.equals("")) {
-//			query = search;
-//		}
+	public ModelAndView sentList(ModelAndView modelAndView, EmailPaging page, HttpSession session) throws Exception{
 		Employee employee = (Employee) session.getAttribute("employee");
+		System.out.println("employee:"+employee);
 		String id = employee.getEmployeeEmail();
+		System.out.println("id :"+id);
 		int wastebasketCount = emailService.wastebasketCount(id);
+		int sendCount = emailService.sendCount(id);		// 받은메일함 - 전체메일 수
+		int emailCount = emailService.emailCount(id);		// 받은메일함 - 안읽은 메일 수
+		System.out.println(emailCount);
+		page.setEmployeeEmail(employee.getEmployeeEmail());
+
+		if(page.getTitle().equals("")) {
+			page.setTitle("EMAIL_TITLE");
+		}
+		page.setCount(sendCount);
+		page.setStartNum(page.getPage());
+		page.setLastNum(page.getCount());
+		page.setStartRange(page.getPage());
+		page.setEndRange(page.getPage());
+		List<Email> sendList = emailService.SendList(page);
 		modelAndView.addObject("wastebasketCount",wastebasketCount);
-		int emailCount = emailService.emailCount(id);
-		List<Email> sendList = emailService.SendList(id); // , String field, String query
-		
-		modelAndView.addObject("emailCount",emailCount);
+		modelAndView.addObject("emailCount",emailCount);		
+		modelAndView.addObject("sendList", sendList);
+		modelAndView.addObject("page", page);
 		modelAndView.setViewName("email/part/aside");
-		modelAndView.addObject("sendList",sendList);
 		modelAndView.setViewName("email/sendList");
 		return modelAndView;
 	}
@@ -286,7 +287,6 @@ public class EmailController{
 		modelAndView.addObject("emailCount",emailCount);
 		modelAndView.setViewName("email/part/aside");
 
-		
 		Email sendDelivery = emailService.AcceptDelivery(num);
 		modelAndView.addObject("sendDelivery",sendDelivery);
 		modelAndView.setViewName("email/sendDelivery");
@@ -329,16 +329,30 @@ public class EmailController{
 	// /* ------------------------------ 휴지통 ------------------------------- */
 	// 휴지통 목록 보여주기
 	@RequestMapping(value = "email/wastebasket/list", method = RequestMethod.GET)
-	public ModelAndView wastebasketList(ModelAndView modelAndView, HttpSession session) throws Exception{
+	public ModelAndView wastebasketList(ModelAndView modelAndView, EmailPaging page, HttpSession session) throws Exception{
 		Employee employee = (Employee) session.getAttribute("employee");
+		System.out.println("휴지통 employee:"+employee);
 		String id = employee.getEmployeeEmail();
+		System.out.println("휴지통 id :"+id);
 		int wastebasketCount = emailService.wastebasketCount(id);
+		int emailCount = emailService.emailCount(id);		// 받은메일함 - 안읽은 메일 수
+		System.out.println(emailCount);
+		page.setEmployeeEmail(employee.getEmployeeEmail());
+
+		if(page.getTitle().equals("")) {
+			page.setTitle("EMAIL_TITLE");
+		}
+		page.setCount(emailCount);
+		page.setStartNum(page.getPage());
+		page.setLastNum(page.getCount());
+		page.setStartRange(page.getPage());
+		page.setEndRange(page.getPage());
+		List<Email> wastebasketList = emailService.WastebasketList(page);
 		modelAndView.addObject("wastebasketCount",wastebasketCount);
-		int emailCount = emailService.emailCount(id);
-		modelAndView.addObject("emailCount",emailCount);
+		modelAndView.addObject("emailCount",emailCount);		
+		modelAndView.addObject("wastebasketList", wastebasketList);
+		modelAndView.addObject("page", page);
 		modelAndView.setViewName("email/part/aside");
-		List<Email> wastebasketList = emailService.WastebasketList(id);
-		modelAndView.addObject("wastebasketList",wastebasketList);
 		modelAndView.setViewName("email/wastebasketList");
 		return modelAndView;
 	}
@@ -490,19 +504,6 @@ public class EmailController{
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "email/search", method = RequestMethod.GET)
-	public ModelAndView EmailSearch(String word, ModelAndView modelAndView) throws Exception{
-		List<Email> acceptList = emailService.EmailSearch(word);
-//		Map<String, String> map = new HashMap<String, String>();
-//		map.put("word", word);
-//		map.put("id", id);
-//		System.out.println(map.get("word"));
-//		System.out.println(map.get("id"));
-		modelAndView.addObject("acceptList",acceptList);
-		modelAndView.setViewName("email/acceptList");
-		return modelAndView;
-	}
-	
 	// 작성시 메일주소 검색
 	@RequestMapping(value="email/write/searchName", method=RequestMethod.POST)
 	public void emailSearchName(Employee employee, ModelAndView modelAndView, HttpServletResponse response, HttpSession session) throws Exception {
@@ -537,10 +538,5 @@ public class EmailController{
 			 out.flush();
 			 out.close();
 	}
-	
-	
-
-	
-	
 	
 }

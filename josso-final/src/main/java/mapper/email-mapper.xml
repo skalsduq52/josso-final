@@ -37,20 +37,13 @@
 	</select>
 
 	<!-- email 보낸메일함 - 리스트 -->
-	<select id="SendList" parameterType="String" resultMap="resultEmail"><!-- resultType="Email" -->
-		<!-- SELECT * FROM  -->
-			SELECT EMAIL.*, EMPLOYEE.EMPLOYEE_NAME, EMPLOYEE.RANK_CODE, EMPLOYEE.DEPARTMENT_CODE 
-		    FROM EMAIL, EMPLOYEE 
-		    WHERE ((EMAIL.EMPLOYEE_NUMBER = EMPLOYEE.EMPLOYEE_NUMBER) 
-		    AND (EMAIL_SEND = #{id}
-		    AND (EMAIL_POSITION = 'ALL' 
-		    OR EMAIL_POSITION ='SEND'))) ORDER BY EMAIL.EMAIL_NUMBER DESC 
-		    <!-- WHERE EMAIL_TITLE LIKE '%' || #{field} ||'%' AND EMAIL_ACCEPT LIKE '%' || #{query} ||'%'; -->
+	<select id="SendList" parameterType="EmailPaging" resultMap="resultEmail"><!-- resultType="Email" -->
+		SELECT * FROM (SELECT ROWNUM NUM, EV.* FROM (SELECT EMAIL.*, EMPLOYEE.EMPLOYEE_NAME, EMPLOYEE.RANK_CODE, EMPLOYEE.DEPARTMENT_CODE FROM EMAIL, EMPLOYEE WHERE ((EMAIL.EMPLOYEE_NUMBER = EMPLOYEE.EMPLOYEE_NUMBER) AND (EMAIL_SEND = #{employeeEmail} AND (EMAIL_POSITION = 'ALL' OR EMAIL_POSITION ='SEND'))) AND ${title} LIKE '%' || #{query} || '%' ORDER BY EMAIL.EMAIL_NUMBER DESC) EV)WHERE NUM BETWEEN #{startRange} AND #{endRange}
 	</select>
 	
 	<!-- email 휴지통 - 리스트 -->
-	<select id="WastebasketList" parameterType="String" resultMap="resultEmail"><!-- resultType="Email" -->
-		SELECT EMAIL.*, EMPLOYEE.EMPLOYEE_NAME, EMPLOYEE.RANK_CODE, EMPLOYEE.DEPARTMENT_CODE FROM EMAIL, EMPLOYEE WHERE ((EMAIL.EMPLOYEE_NUMBER = EMPLOYEE.EMPLOYEE_NUMBER) AND (((EMAIL.EMAIL_ACCEPT = #{id} OR EMAIL.EMAIL_REFERENCE = #{id}) AND EMAIL.EMAIL_WASTEBASKET = 'YES') AND (EMAIL.EMAIL_POSITION = 'ALL' OR EMAIL.EMAIL_POSITION = 'ACCEPT'))) ORDER BY EMAIL.EMAIL_NUMBER DESC     
+	<select id="WastebasketList" parameterType="EmailPaging" resultMap="resultEmail"><!-- resultType="Email" -->
+		SELECT * FROM (SELECT ROWNUM NUM, EV.* FROM (SELECT EMAIL.*, EMPLOYEE.EMPLOYEE_NAME, EMPLOYEE.RANK_CODE, EMPLOYEE.DEPARTMENT_CODE FROM EMAIL, EMPLOYEE WHERE ((EMAIL.EMPLOYEE_NUMBER = EMPLOYEE.EMPLOYEE_NUMBER) AND (((EMAIL.EMAIL_ACCEPT = #{employeeEmail} OR EMAIL.EMAIL_REFERENCE = #{employeeEmail}) AND EMAIL.EMAIL_WASTEBASKET = 'YES') AND (EMAIL.EMAIL_POSITION = 'ALL' OR EMAIL.EMAIL_POSITION = 'ACCEPT'))) AND ${title} LIKE '%' || #{query} || '%' ORDER BY EMAIL.EMAIL_NUMBER DESC) EV)WHERE NUM BETWEEN #{startRange} AND #{endRange}     
 	</select>
 
 	<!-- email 자세히보기 - 답장버튼 -->

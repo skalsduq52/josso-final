@@ -23,13 +23,13 @@ public class EmailServiceImpl implements EmailService{
 	}
 	
 	// 보낸메일함 - 리스트
-	public List<Email> SendList(String id) throws Exception{ // , String field, String query
-		return emailDao.SendList(id); 
+	public List<Email> SendList(EmailPaging page) throws Exception{ // , String field, String query
+		return emailDao.SendList(page); 
 	}
 	
 	// 휴지통 - 리스트
-	public List<Email> WastebasketList(String id) throws Exception{
-		return emailDao.WastebasketList(id);
+	public List<Email> WastebasketList(EmailPaging page) throws Exception{
+		return emailDao.WastebasketList(page);
 	}
 	
 	// 답장버튼 누를시
@@ -153,6 +153,11 @@ public class EmailServiceImpl implements EmailService{
 	// 받은메일함 총 메일 수
 	public int acceptCount(String id) throws Exception{
 		return emailDao.acceptCount(id);
+	}
+	
+	// 받은메일함 총 메일 수
+	public int sendCount(String id) throws Exception{
+		return emailDao.sendCount(id);
 	}
 	
 	// 휴지통 메일 개수

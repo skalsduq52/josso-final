@@ -80,8 +80,8 @@ public class EmailDao {
 	}
 	
 	// 보낸메일함 메일목록
-	public List<Email> SendList(String id) throws Exception{ 	// , String field, String query
-		return sqlSession.selectList("Email.SendList", id);
+	public List<Email> SendList(EmailPaging page) throws Exception{ 	// , String field, String query
+		return sqlSession.selectList("Email.SendList", page);
 	}
 	
 	// 보낸메일함 - 자세히보기 - 휴지통
@@ -90,8 +90,8 @@ public class EmailDao {
 	}
 	
 	// 휴지통 메일목록
-	public List<Email> WastebasketList(String id) throws Exception{
-		return sqlSession.selectList("Email.WastebasketList", id);
+	public List<Email> WastebasketList(EmailPaging page) throws Exception{
+		return sqlSession.selectList("Email.WastebasketList", page);
 	}
 	
 	// 답장버튼 누를시
@@ -149,9 +149,14 @@ public class EmailDao {
 		return sqlSession.selectOne("Email.emailCount", id);
 	}
 	
-	// 받음메일함 안읽은 메일 수
+	// 받음메일함 메일 수
 	public int acceptCount(String id) throws Exception{
 		return sqlSession.selectOne("Email.acceptCount", id);
+	}
+	
+	// 보낸메일함 메일 수
+	public int sendCount(String id) throws Exception{
+		return sqlSession.selectOne("Email.sendCount", id);
 	}
 	
 	// 휴지통 메일 개수

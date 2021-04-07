@@ -13,10 +13,10 @@ public interface EmailService {
 	public List<com.josso.email.vo.Email> AcceptList(EmailPaging page) throws Exception;
 
 	// 보낸메일함 - 리스트
-	public List<Email> SendList(String id) throws Exception; // , String field, String query
+	public List<Email> SendList(EmailPaging page) throws Exception; // , String field, String query
 	
 	// 휴지통 - 리스트
-	public List<Email> WastebasketList(String id) throws Exception;
+	public List<Email> WastebasketList(EmailPaging page) throws Exception;
 
 	// 답장버튼 누를시(?)
 	public List<Email> EmailReply(int number) throws Exception;
@@ -87,6 +87,9 @@ public interface EmailService {
 	// 받은이메일 메일 총 갯수 카운트
 	public int acceptCount(String id) throws Exception;
 	
+	// 받은이메일 메일 총 갯수 카운트
+	public int sendCount(String id) throws Exception;
+
 	// 휴지통 메일 개수
 	public int wastebasketCount(String id) throws Exception;
 	
