@@ -22,7 +22,8 @@
 	<!-- 공통(디테일 / 수정 / 삭제 / 조회수) -->
 	<!-- 디테일 -->
 	<select id="selectDetail" resultMap="board" parameterType="String">
-		SELECT * FROM BOARD WHERE BOARD_NUM = #{boardNum}
+	    SELECT BOARD.*, EMPLOYEE.EMPLOYEE_NAME, EMPLOYEE.DEPARTMENT_CODE, EMPLOYEE.RANK_CODE FROM BOARD, EMPLOYEE 
+            WHERE BOARD.BOARD_WRITER = EMPLOYEE.EMPLOYEE_NUMBER AND BOARD_NUM = #{boardNum}
 	</select>
 	
 	<!-- 수정 -->
@@ -78,7 +79,7 @@
 	<!-- 건의사항 전체리스트(목록)-->
 	<select id="selectSuggestionAll" parameterType="Paging" resultMap="board">
 		SELECT * FROM (SELECT ROWNUM NUM, EV.* FROM 
-		       		(SELECT BOARD.*, EMPLOYEE.EMPLOYEE_NAME, EMPLOYEE.DEPARTMENT_CODE, EMPLOYEE.RANK_CODE 
+		            (SELECT BOARD.*, EMPLOYEE.EMPLOYEE_NAME, EMPLOYEE.DEPARTMENT_CODE, EMPLOYEE.RANK_CODE 
 		            FROM BOARD, EMPLOYEE 
 		            WHERE (BOARD_KIND='건의사항' 
 		            AND EMPLOYEE.EMPLOYEE_NUMBER = BOARD.BOARD_WRITER) 
@@ -96,7 +97,7 @@
 	
 	<!-- 건의사항 게시물 갯수 -->
 	<select id="suggestionBoardCount" parameterType="Paging" resultType="_int">
-		SELECT COUNT(*) FROM (SELECT * FROM BOARD WHERE BOARD_KIND = '건의사항' ORDER BY BOARD_NUM DESC) WHERE ${title} LIKE '%' || #{query} || '%'
+		SELECT COUNT(*) FROM (SELECT BOARD.*, EMPLOYEE.EMPLOYEE_NAME FROM BOARD, EMPLOYEE WHERE BOARD_KIND='건의사항' AND EMPLOYEE.EMPLOYEE_NUMBER = BOARD.BOARD_WRITER ORDER BY BOARD_NUM DESC) WHERE ${title} LIKE '%' || #{query} || '%'
 	</select>
 
 	

@@ -5,13 +5,37 @@
 <!DOCTYPE html>
 <html>
     <head>
+		<meta charset="UTF-8">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/hsm_common.css" type="text/css">
+        <title>josso</title>
         <!-- 외부 글꼴 적용 시 링크 -->
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
          <!-- Icon -->
          <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
          crossorigin="anonymous">
+         <!-- 부트스트랩 css 사용 -->
+         <!-- Latest compiled and minified CSS -->
+         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+         <!-- jQuery library -->
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+         <!-- Popper JS -->
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+         <!-- Latest compiled JavaScript -->
+         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script>
+            $(function(){
+                $('.side_title').click(function(){
+                    // $('.hover_tag').slideToggle("slow,linear,callback");
+                    var submenu = $('.hover_tag>li');
+                    if(submenu.is(":visible")){
+                        submenu.slideUp();
+                    }else{
+                        submenu.slideDown();
+                    }
+                });
+            });
+            </script>
 
         <style>
             #tdnum{
@@ -39,26 +63,7 @@
                 padding-left: 0px;
             }
         </style>
-        <title>josso</title>
-         <!-- Icon -->
-         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
-         crossorigin="anonymous">
-         <!-- 부트스트랩 css 사용 -->
-         <!-- Latest compiled and minified CSS -->
-         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-         <!-- jQuery library -->
-         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-         <!-- Popper JS -->
-         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-         <!-- Latest compiled JavaScript -->
-         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        <script>
-            $(function(){
-                $('.hover_icon').click(function(){
-                    $('.hover_tag').slideToggle("slow")
-                });
-            });
-        </script>
+
     </head>
     <body>
         <header>
