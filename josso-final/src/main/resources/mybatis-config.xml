@@ -11,6 +11,7 @@
 		<typeAlias type="com.josso.electronicApproval.vo.ElectView" alias="ElectView" />
 		<typeAlias type="com.josso.electronicApproval.vo.Paging" alias="Paging" />
 		<typeAlias type="com.josso.board.vo.Board" alias="board" />
+		<typeAlias type="com.josso.board.vo.BoardPaging" alias="boardPaging" />
 		<typeAlias type="com.josso.email.vo.Email" alias="Email" />
 		<typeAlias type="com.josso.email.vo.EmailPaging" alias="EmailPaging" />
 		<typeAlias type="com.josso.employee.vo.Employee" alias="Employee" />

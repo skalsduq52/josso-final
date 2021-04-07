@@ -173,14 +173,16 @@
                 <button class="btn btn-info"><a href="write" style="color:white">작성하기</a></button>
             </div>
             
+            <form>
             <div class="bottom_area" style="float:right; padding-top:30px">
-                <select class="search" style="height: 37px;">
-                    <option>제목</option>
-                    <option>작성자</option>
+                <select class="search" style="height: 36px;" name="title">
+                    <option ${(param.title == "BOARD_TITLE")? "selected" : ""} value="BOARD_TITLE">제목</option>
+                    <option ${(param.title == "EMPLOYEE_NAME")? "selected" : ""} value="EMPLOYEE_NAME">작성자</option>
                 </select>
-                <input type="text" name="search" class="search" style="padding-bottom: 3px; height: 38px;">
-                <button class="btn btn-success" style="height: 38px; margin-bottom: 3px;">검색</button>
+                <input type="text" name="query" placeholder="Search By" value="${param.query}" class="search" style="padding-bottom: 3px; height: 38px;">
+                <button class="btn btn-success" style="height: 38px; margin-bottom: 3px;" type="submit">검색</button>
             </div>   
+            </form>
             
             <ul class="pagination" style="padding-top: 20px; padding-left: 40%;">
                 	<c:if test="${param.page !=1 and not empty param.page}">

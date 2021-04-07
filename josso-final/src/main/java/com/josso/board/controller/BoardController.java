@@ -22,7 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.josso.board.controller.model.dao.BoardDAO;
 import com.josso.board.controller.model.service.BoardService;
 import com.josso.board.vo.Board;
-import com.josso.electronicApproval.vo.Paging;
+import com.josso.board.vo.BoardPaging;
 import com.josso.employee.vo.Employee;
 
 @Controller 
@@ -33,22 +33,30 @@ public class BoardController {
 	
 	// 공지사항 (목록)
 	@RequestMapping(value="board/notice/list", method=RequestMethod.GET)
-	public ModelAndView noticeList(ModelAndView mv, Paging page) throws Exception {
-		// 공지사항 게시물 총 갯수(사실상 필요없네..)
-		int noticeBoardCount = boardService.noticeBoardCount(page);
+	public ModelAndView noticeList(ModelAndView mv, BoardPaging page) throws Exception {
+		System.out.println("목록 컨트롤러 들어옴");
+		System.out.println("가져온 타이틀 값 : " + page.getTitle());
+		
+		
+		
+		
+		System.out.println("페이지 출력 : " + page);
 		
 		// 세팅
 		if(page.getTitle().contentEquals("")) {
-			page.setTitle("Search");
+			page.setTitle("BOARD_TITLE");
 		}
+		// 공지사항 게시물 총 갯수(사실상 필요없네..)
+		int noticeBoardCount = boardService.noticeBoardCount(page);
 		page.setCount(noticeBoardCount);
 		page.setStartNum(page.getPage());
 		page.setLastNum(page.getCount());
 		page.setStartRange(page.getPage());
 		page.setEndRange(page.getPage());
 		
+		
 		// 공지사항 리스트 불러오기
-		List<Board> noticeList =  boardService.noticeList(page);
+		List<Board> noticeList = boardService.noticeList(page);
 		
 		// 값 전송
 		mv.addObject("page", page);
@@ -138,7 +146,7 @@ public class BoardController {
 	@RequestMapping(value="board/notice/detailPage", method=RequestMethod.GET)
 	public ModelAndView noticeDetail(ModelAndView mv, @RequestParam("num") String boardNum, HttpServletRequest request) throws Exception {
 		
-		Board noticeBoard = boardService.boardDetail(boardNum, request);
+		Board noticeBoard = boardService.noticeDetail(boardNum, request);
 		String num = boardNum;
 		
 		mv.addObject("num", num);
@@ -151,7 +159,7 @@ public class BoardController {
 	@RequestMapping(value="board/notice/updateBridge", method=RequestMethod.GET)
 	public ModelAndView noticeUpdateBridge(ModelAndView mv, @RequestParam("num") String num, HttpServletRequest request) throws Exception {
 		String num1 = num;
-		Board board = boardService.boardDetail(num, request);
+		Board board = boardService.noticeDetail(num, request);
 		
 		mv.addObject("num1", num1);
 		mv.addObject("board", board);
@@ -181,13 +189,13 @@ public class BoardController {
 	
 	// 건의사항 (목록)
 	@RequestMapping(value="board/suggestion/list", method=RequestMethod.GET)
-	public ModelAndView suggestionList(ModelAndView mv, Paging page) throws Exception {
+	public ModelAndView suggestionList(ModelAndView mv, BoardPaging page) throws Exception {
 		// 공지사항 게시물 총 갯수(사실상 필요없네..)
 		int suggestionBoardCount = boardService.suggestionBoardCount(page);
 		
 		// 세팅
 		if(page.getTitle().contentEquals("")) {
-			page.setTitle("Search");
+			page.setTitle("BOARD_TITLE");
 		}
 		page.setCount(suggestionBoardCount);
 		page.setStartNum(page.getPage());
@@ -260,7 +268,7 @@ public class BoardController {
 	// 건의사항 (디테일페이지)
 	@RequestMapping(value="board/suggestion/detailPage", method=RequestMethod.GET)
 	public ModelAndView suggestionDetail(ModelAndView mv, @RequestParam("num") String boardNum, HttpServletRequest request) throws Exception {
-		Board suggestionBoard = boardService.boardDetail(boardNum, request);
+		Board suggestionBoard = boardService.suggestionDetail(boardNum, request);
 		String num = boardNum;
 		
 		System.out.println("들어오는 페이지값 : " + num);
@@ -276,7 +284,7 @@ public class BoardController {
 	@RequestMapping(value="board/suggestion/updateBridge", method=RequestMethod.GET)
 	public ModelAndView suggestionUpdateBridge(ModelAndView mv, @RequestParam("num") String num, HttpServletRequest request) throws Exception {
 		String num1 = num;
-		Board board = boardService.boardDetail(num, request);
+		Board board = boardService.suggestionDetail(num, request);
 
 		mv.addObject("num1", num1);
 		mv.addObject("board", board);
