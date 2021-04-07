@@ -3,7 +3,9 @@ package com.josso.employee.controller.model.service;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.josso.employee.vo.Employee;
@@ -26,7 +28,7 @@ public interface EmployeeService {
 		
 		public int deleteEmployee(Employee employee) throws Exception;
 		
-		public Employee login(Employee employee, HttpServletResponse response) throws Exception;
+		public Employee login(String employeePassword, String employeeNumber, HttpServletResponse response) throws Exception;
 		
 		public void logout(HttpServletResponse response) throws Exception;
 		

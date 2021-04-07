@@ -5,10 +5,12 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.josso.employee.controller.model.dao.EmployeeDao;
@@ -95,11 +97,14 @@ public class EmployeeServiceImpl implements EmployeeService{
 	
 	//로그인
 	@Override
-	public Employee login(Employee employee, HttpServletResponse response) throws Exception{
+	public Employee login(String employeePassword, String employeeNumber, HttpServletResponse response) throws Exception{
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
+		Employee employee = employeeDao.selectEmployee(employeeNumber);
+//		Employee employee = (Employee) session.getAttribute("employee");
+		System.out.println("service : "+employee);
 		//등록된 아이디가 없을경우
-		if(employeeDao.checkEmployeeNumber(employee.getEmployeeNumber())==0) {
+		if( employeeDao.checkEmployeeNumber(employeeNumber) == 0) {
 			out.println("<script>");
 			out.println("alert('등록된 사원번호가 없습니다.');");
 			out.println("history.go(-1);");
@@ -107,12 +112,10 @@ public class EmployeeServiceImpl implements EmployeeService{
 			out.close();
 			return null;
 		}else {
-			String employeePassword = employee.getEmployeePassword();
-			System.out.println("employee.getEmployeeNumber():"+employee.getEmployeeNumber());
-			employee = employeeDao.login(employee.getEmployeeNumber());
+			String loginEmployeePassword = employeePassword;
 			System.out.println(employee.getEmployeePassword());
 			// 비밀번호가 다를 경우
-			if(!employee.getEmployeePassword().equals(employeePassword)) {
+			if(!employee.getEmployeePassword().equals(loginEmployeePassword)) {
 				out.println("<script>");
 				out.println("alert('비밀번호가 다릅니다.');");
 				out.println("history.go(-1);");

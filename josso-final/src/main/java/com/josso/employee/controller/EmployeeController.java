@@ -37,13 +37,17 @@ public class EmployeeController {
 	
 	//로그인
 	@RequestMapping(value="login.do", method=RequestMethod.POST )
-	public ModelAndView login(@RequestParam("employeeNumber") String employeeNumber, ModelAndView modelAndView, HttpSession session, HttpServletResponse response) throws Exception {
+	public ModelAndView login(@RequestParam("employeeNumber") String employeeNumber, @RequestParam("employeePassword") String employeePassword, ModelAndView modelAndView, HttpSession session, HttpServletResponse response) throws Exception {
 		Employee employee = employeeService.selectEmployee(employeeNumber);
+		System.out.println(employeeNumber);
+		employeeService.login(employeePassword, employeeNumber, response);
 		modelAndView.addObject("employee",employee);
 		session.setAttribute("employee", employee);
-		modelAndView.setViewName("main");
 		
 		//로그인후 메인으로	
+		modelAndView.setViewName("main");
+		
+		
 		return modelAndView;
 	}
 	

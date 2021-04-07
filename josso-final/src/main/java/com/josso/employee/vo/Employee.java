@@ -184,6 +184,18 @@ public class Employee {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
+	@Override
+	public String toString() {
+		return "Employee [employeeNumber=" + employeeNumber + ", employeePassword=" + employeePassword
+				+ ", employeeName=" + employeeName + ", departmentCode=" + departmentCode + ", rankCode=" + rankCode
+				+ ", positionCode=" + positionCode + ", roleCode=" + roleCode + ", employeeEmail=" + employeeEmail
+				+ ", employeePhone=" + employeePhone + ", employeeAddress=" + employeeAddress + ", employeeBirth="
+				+ employeeBirth + ", employeeExtensionNumber=" + employeeExtensionNumber + ", employeePicture="
+				+ employeePicture + ", employeeHireDate=" + employeeHireDate + ", employeeRegistrationDate="
+				+ employeeRegistrationDate + ", employeeLoginDate=" + employeeLoginDate + ", employeeAnnualLeave="
+				+ employeeAnnualLeave + ", emailAuthKey=" + emailAuthKey + "]";
+	}
 	  
 	   
 }
