@@ -226,7 +226,7 @@
 								<div class="form-group-append">
 									<select class="form-control" name="title">
 										<option ${(param.title == "EMAIL_TITLE")?"Selected":""} value="EMAIL_TITLE">제목</option>
-										<option ${(param.title == "EMAIL_ACCEPT")?"Selected":""} value="EMAIL_ACCEPT">보낸사람</option>
+										<option ${(param.title == "EMAIL_CONTENT")?"Selected":""} value="EMAIL_CONTENT">내용</option>
 									</select>
 								</div>
 								<input type="text" class="form-control" placeholder="Search" name="query" value="${param.query}">

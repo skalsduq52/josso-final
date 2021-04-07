@@ -72,9 +72,6 @@ public interface EmailService {
 	// 게시물 총 갯수
 	public int listCount() throws Exception;
 	
-	// 검색기능
-	public List<Email> EmailSearch(String word) throws Exception;
-	
 	// 리스트 - 제목클릭 - 읽음 자동처리
 	public int AutoRead(int num) throws Exception;
 	

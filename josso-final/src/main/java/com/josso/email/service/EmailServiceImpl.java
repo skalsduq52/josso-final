@@ -129,11 +129,6 @@ public class EmailServiceImpl implements EmailService{
 	public int listCount() throws Exception{
 		return emailDao.listCount();
 	}
-	
-	// 검색기능
-	public List<Email> EmailSearch(String word) throws Exception{
-		return emailDao.EmailSearch(word);
-	}
 
 	// 리스트 - 제목클릭 - 자동읽음 처리
 	public int AutoRead(int num) throws Exception{

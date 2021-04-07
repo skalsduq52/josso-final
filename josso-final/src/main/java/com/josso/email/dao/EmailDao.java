@@ -129,11 +129,6 @@ public class EmailDao {
 		return sqlSession.selectOne("Email.ListCount");
 	}
 	
-	// 검색 기능
-	public List<Email> EmailSearch(String word) throws Exception{
-		return sqlSession.selectList("Email.EmailSearch", word);
-	}
-	
 	// 리스트 - 제목클릭 - 자동읽음 처리
 	public int AutoRead(int num) throws Exception{
 		return sqlSession.update("Email.autoRead", num);

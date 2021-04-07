@@ -33,7 +33,7 @@ public class EmailController{
 	// /* ------------------------------받은 메일함------------------------------- */
 	// 받은메일함 목록 보여주기(완성)
 	@RequestMapping(value = "email/accept/list", method = RequestMethod.GET)
-	public ModelAndView acceptList(ModelAndView modelAndView, EmailPaging page, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception{
+	public ModelAndView acceptList(ModelAndView modelAndView, EmailPaging page, HttpSession session) throws Exception{
 		Employee employee = (Employee) session.getAttribute("employee");
 		System.out.println("employee:"+employee);
 		String id = employee.getEmployeeEmail();
@@ -59,7 +59,6 @@ public class EmailController{
 		modelAndView.addObject("page", page);
 		modelAndView.setViewName("email/part/aside");
 		modelAndView.setViewName("email/acceptList");
-		
 		return modelAndView;
 	}
 	
@@ -111,12 +110,6 @@ public class EmailController{
 		modelAndView.addObject("acceptDelivery",acceptDelivery);
 		modelAndView.setViewName("email/acceptDelivery");
 		return modelAndView;
-	}
-	
-	// 받은메일함 - 자세히보기 - 전달보내기(불필요)
-	@RequestMapping(value = "email/accept/deliverySend", method = RequestMethod.GET)
-	public String acceptDeliverySend() throws Exception{
-		return "email/acceptList";
 	}
 	
 	// 받은메일함 - 휴지통버튼 클릭
