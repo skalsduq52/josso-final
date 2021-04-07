@@ -213,7 +213,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col nav-menu">
+                    <div class="col nav-menu" style="padding: 45px 0px 5px 15px">
                         <a href="${pageContext.request.contextPath}/email/wastebasket/restoration?num=${wastebasketDetail.emailNumber}"><input type="submit" class="btn btn-outline-info float-left" value="복구"></a>  
                         <a href="${pageContext.request.contextPath}/email/wastebasket/delete?num=${wastebasketDetail.emailNumber}"><input type="submit" class="btn btn-outline-info float-left" value="삭제"></a>
                     </div>

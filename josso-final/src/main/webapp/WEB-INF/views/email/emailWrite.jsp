@@ -245,8 +245,8 @@
                         
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col nav-menu">
+                <div class="row" >
+                    <div class="col nav-menu" style="padding: 45px 0px 5px 15px">
                         <input type="submit" class="btn btn-outline-info float-left" value="보내기">
                         <input type="reset" class="btn btn-outline-info float-left" value="다시쓰기">
                     </div>

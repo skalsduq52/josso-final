@@ -129,7 +129,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col nav-menu">
+                    <div class="col nav-menu" style="padding: 45px 0px 5px 15px">
                         	<a href="${pageContext.request.contextPath}/email/accept/reply?num=${sendDetail.emailNumber}"><input type="submit" class="btn btn-outline-info float-left" value="답장"></a>
 	                        	<c:if test="${sendDetail.emailRead eq 'NO'}">
 		                        	<a href="${pageContext.request.contextPath}/email/send/read?num=${sendDetail.emailNumber}"><input type="submit" class="btn btn-outline-info float-left" value="읽음"></a>

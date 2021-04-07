@@ -220,9 +220,9 @@
                 <div class="row">
                     <div class="col"> </div>
                     <div class="col"><span>
-                    <div style="float:right">
+                    <div style="float:right;">
 			            <form>
-							<div class="input-group justify-content-right">
+							<div class="input-group justify-content-right"style="padding: 0px 50px px 0px;">
 								<div class="form-group-append">
 									<select class="form-control" name="title">
 										<option ${(param.title == "EMAIL_TITLE")?"Selected":""} value="EMAIL_TITLE">제목</option>
