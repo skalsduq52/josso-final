@@ -24,7 +24,7 @@
          <!-- Latest compiled JavaScript -->
          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
          <!-- SmartEditor2 라이브러리(경로 맞춰줘야 함.) -->
-         <script type="text/javascript" src="../team01/smartEditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/smartEditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
         <script>
             $(function(){
                 $('.side_title').click(function(){
@@ -40,25 +40,29 @@
             
         </script>
         <script type="text/javascript">
-            var oEditors = [];
-            $(function(){
-                  nhn.husky.EZCreator.createInIFrame({
-                      oAppRef: oEditors,
-                      elPlaceHolder: "smartEditor", //textarea에서 지정한 id와 일치해야 함. 
-                      //SmartEditor2Skin.html 파일이 존재하는 경로
-                      sSkinURI: "smartEditor/SmartEditor2Skin.html",  
-                      htParams : {
-                          // 툴바 사용 여부 (true:사용/ false:사용하지 않음)
-                          bUseToolbar : true,             
-                          // 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음), 저는 크기 지정했기 땜에 사용 안 함.
-                          bUseVerticalResizer : false,     
-                          // 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음), 본에서도 쓰길래 true 해놓음,, 용도는 모르겠음
-                          bUseModeChanger : true,         
-                      }, 
-                      fCreator: "createSEditor2"
-                  });
-                
-            });
+        var oEditors = [];
+        $(function(){
+              nhn.husky.EZCreator.createInIFrame({
+                  oAppRef: oEditors,
+                  elPlaceHolder: "smartEditor", //textarea에서 지정한 id와 일치해야 함. 
+                  //SmartEditor2Skin.html 파일이 존재하는 경로
+                  sSkinURI: "${pageContext.request.contextPath}/resources/smartEditor/SmartEditor2Skin.html",  
+                  htParams : {
+                      // 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+                      bUseToolbar : true,             
+                      // 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음), 저는 크기 지정했기 땜에 사용 안 함.
+                      bUseVerticalResizer : false,     
+                      // 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음), 본에서도 쓰길래 true 해놓음,, 용도는 모르겠음
+                      bUseModeChanger : true,         
+                  }, 
+                  fCreator: "createSEditor2"
+              });
+         	 
+              // 스마트에디터 값 전송
+              $('form').click(function(){
+        	 	oEditors.getById['smartEditor'].exec("UPDATE_CONTENTS_FIELD", []);
+              });
+        });
          // 받는사람 검색 기능
             $(function(){
             	var emailAdrr = "";
@@ -252,7 +256,7 @@
         </nav>
         <main>
             
-            <table class="table table-hover">
+            <table class="table">
                 <thead class="thead-dark text-left">
                     <tr>
                         <td style="width: 120px;">보내는 사람 :</td>

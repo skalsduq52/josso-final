@@ -147,7 +147,7 @@
         </nav>
         <main>
             
-            <table class="table table-hover">
+            <table class="table">
                 <thead class="thead-dark text-left">
                     <tr>
                         <td style="width: 120px;">제목</td>

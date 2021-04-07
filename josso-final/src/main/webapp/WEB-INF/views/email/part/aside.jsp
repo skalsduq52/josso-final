@@ -32,18 +32,18 @@
                         <ul class="hover_tag">
                             <li>
                                 <div class="form-check form-check-inline">
-                                    <label class="form-check-label" for="inlineCheckbox1"><a class="abc" href="${pageContext.request.contextPath}/email/accept/list">받은 메일함</a></label><label style="color: gray; padding:8px 0px 0px 10px;">${emailCount}</label>
+                                    <label class="form-check-label" for="inlineCheckbox1"><a class="abc" href="${pageContext.request.contextPath}/email/accept/list" style="font-size: 15px; font-weight: bold;">받은 메일함</a></label><label style="color: gray; padding:8px 0px 0px 10px;">${emailCount}</label>
                                 </div>
                             </li>
                             <li>
                                 <div class="form-check form-check-inline">
-                                    <label class="form-check-label" for="inlineCheckbox1"><a class="abc" href="${pageContext.request.contextPath}/email/send/list"> 보낸 메일함</a></label>
+                                    <label class="form-check-label" for="inlineCheckbox1"><a class="abc" href="${pageContext.request.contextPath}/email/send/list" style="font-size: 15px; font-weight: bold;"> 보낸 메일함</a></label>
                                 </div>
                             </li>
                             <li>
                                 <div class="form-check form-check-inline">
                                            
-                                    <label class="form-check-label" for="inlineCheckbox1"><a class="abc" href="${pageContext.request.contextPath}/email/wastebasket/list"> 휴지통</a></label><label style="color: gray; padding:8px 0px 0px 10px;">${wastebasketCount}</label>
+                                    <label class="form-check-label" for="inlineCheckbox1"><a class="abc" href="${pageContext.request.contextPath}/email/wastebasket/list" style="font-size: 15px; font-weight: bold;"> 휴지통</a></label><label style="color: gray; padding:8px 0px 0px 10px;">${wastebasketCount}</label>
                                 </div>
                             </li>
                         </ul>
