@@ -19,9 +19,27 @@ public class ScheduleServiceImpl implements ScheduleService{
 	@Override
 	public List<Schedule> selectScheduleAll() throws Exception{
 		
-		List<Schedule> scheduleList = sd.selectScheduleAll();
+		List<Schedule> scheduleListAll = sd.selectScheduleAll();
 		
-		return scheduleList;
+		return scheduleListAll;
+	}
+	
+	// Schedule 팀 조회
+	@Override
+	public List<Schedule> selectScheduleTeam(String empDeptCode) throws Exception{
+		
+		List<Schedule> scheduleListTeam = sd.selectScheduleTeam(empDeptCode);
+		
+		return scheduleListTeam;
+	}
+	
+	// Schedule 나만 조회
+	@Override
+	public List<Schedule> selectScheduleMe(String empNum) throws Exception{
+		
+		List<Schedule> scheduleListMe = sd.selectScheduleMe(empNum);
+		
+		return scheduleListMe;
 	}
 	
 	// Schedule 등록

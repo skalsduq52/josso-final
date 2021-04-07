@@ -3,12 +3,15 @@ package com.josso.schedule.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,25 +32,10 @@ public class ScheduleController {
 	@RequestMapping(value="schedule", method=RequestMethod.GET)
 	public ModelAndView schedule() throws Exception {
 		
-//		List<Schedule> scheduleList = ss.selectScheduleAll();
-//		ArrayList<Schedule> scheduleListArr = new ArrayList<Schedule>();
-//		JSONObject jObj = new JSONObject();
-//		JSONArray jArr = new JSONArray();
 		ModelAndView mv = new ModelAndView();
-//		
-//		for(Schedule sd : scheduleList) {
-//			JSONObject jObj_ = new JSONObject();
-//			jObj_.put("title", sd.getScheduleTitle());
-//			jObj_.put("start", sd.getScheduleStartDate());
-//			jObj_.put("end", sd.getScheduleEndDate());
-//			jArr.add(jObj_);
-//			System.out.println(jObj_);
-//		}
-//		System.out.println("array : "+jArr);
-//		jObj.put("data", jArr);
-//		System.out.println("array2 : "+jObj);
-//		
-//		mv.addObject("data", jArr);
+
+		
+		
 		mv.setViewName("schedule.scheduleList");
 		return mv;
 	}
@@ -55,10 +43,13 @@ public class ScheduleController {
 	// ajax를 이용한 schedule 목록 출력
 	@ResponseBody
 	@RequestMapping(value="scheduleListAll", method=RequestMethod.POST, produces="text/plain;charset=UTF-8")
-	public String scheduleListAll() throws Exception{
+	public String scheduleListAll(HttpSession session) throws Exception{
 		
-		List<Schedule> scheduleList = ss.selectScheduleAll();
+		
 		ArrayList<Schedule> scheduleListArr = new ArrayList<Schedule>();
+		Employee emp = (Employee) session.getAttribute("employee");
+		
+		List<Schedule> scheduleList = ss.selectScheduleMe(emp.getEmployeeNumber());
 		
 		for(int i = 0; i<scheduleList.size(); i++) {
 			Schedule sd = scheduleList.get(i);
@@ -73,9 +64,84 @@ public class ScheduleController {
 			jObj.put("start", sd.getScheduleStartDate());
 			jObj.put("end", sd.getScheduleEndDate());
 			jArr.add(jObj);
-//			System.out.println(jObj);
 		}
-//		System.out.println(jArr);
+		return jArr.toJSONString();
+	}
+	
+	// ajax를 이용한 schedule 목록 출력
+	@ResponseBody
+	@RequestMapping(value="scheduleListAll2", method=RequestMethod.POST, produces="text/plain;charset=UTF-8")
+	public String scheduleListAll2(HttpSession session, @RequestBody String checkList) throws Exception{
+		
+		
+		System.out.println("선택번호 크기: "+checkList.length());
+		
+		List<Schedule> scheduleList = null;
+		
+		ArrayList<Schedule> scheduleListArr = new ArrayList<Schedule>();
+
+		JSONArray jArr = new JSONArray();
+		
+		Employee emp = (Employee) session.getAttribute("employee");
+		
+		if(checkList.length()==11 && checkList.contains("option3")) {
+			
+			scheduleList = ss.selectScheduleAll();
+			
+			for(int i = 0; i<scheduleList.size(); i++) {
+				Schedule sd = scheduleList.get(i);
+				scheduleListArr.add(sd);
+			}
+			
+			for(Schedule sd : scheduleListArr) {
+				JSONObject jObj = new JSONObject();
+				jObj.put("id", sd.getScheduleNumber());
+				jObj.put("title", sd.getScheduleTitle());
+				jObj.put("start", sd.getScheduleStartDate());
+				jObj.put("end", sd.getScheduleEndDate());
+				jArr.add(jObj);
+			}
+			
+		}else if(checkList.length()==11 && checkList.contains("option2")) {
+
+			scheduleList = ss.selectScheduleTeam(emp.getDepartmentCode());
+			
+			for(int i = 0; i<scheduleList.size(); i++) {
+				Schedule sd = scheduleList.get(i);
+				scheduleListArr.add(sd);
+			}
+			
+			for(Schedule sd : scheduleListArr) {
+				JSONObject jObj = new JSONObject();
+				jObj.put("id", sd.getScheduleNumber());
+				jObj.put("title", sd.getScheduleTitle());
+				jObj.put("start", sd.getScheduleStartDate());
+				jObj.put("end", sd.getScheduleEndDate());
+				jArr.add(jObj);
+			}
+			
+		}else if(checkList.length()==11 && checkList.contains("option1")) {
+			
+			scheduleList = ss.selectScheduleMe(emp.getEmployeeNumber());
+			
+			for(int i = 0; i<scheduleList.size(); i++) {
+				Schedule sd = scheduleList.get(i);
+				scheduleListArr.add(sd);
+			}
+			
+			for(Schedule sd : scheduleListArr) {
+				JSONObject jObj = new JSONObject();
+				jObj.put("id", sd.getScheduleNumber());
+				jObj.put("title", sd.getScheduleTitle());
+				jObj.put("start", sd.getScheduleStartDate());
+				jObj.put("end", sd.getScheduleEndDate());
+				jArr.add(jObj);
+			}
+		}else {
+			System.out.println("일정 없음");
+		}
+		
+		System.out.println(jArr);
 		return jArr.toJSONString();
 	}
 	
@@ -144,17 +210,24 @@ public class ScheduleController {
 		Schedule sc = ss.selectSchedule(scheduleNum);
 		System.out.println(sc.getAttendee());
 		
-		String[] array = sc.getAttendee().split(",");
-		
-		for(int i=0; i<array.length; i++) {
-			System.out.println(array[i]);
+		if(sc.getAttendee() != null) {
+			String[] array = sc.getAttendee().split(",");
+			
+			for(int i=0; i<array.length; i++) {
+				System.out.println(array[i]);
+			}
+			
+			int size = array.length;
+			
+			mv.addObject("size", size);
+			mv.addObject("attendee", array);
 		}
 		
-//		List<String> attendee = new ArrayList<>(); 
-		int size = array.length;
 		
-		mv.addObject("size", size);
-		mv.addObject("attendee", array);
+//		List<String> attendee = new ArrayList<>(); 
+		
+		
+		
 		mv.addObject("schedule", sc);
 		mv.setViewName("schedule.scheduleDetail");
 		return mv;

@@ -1,3 +1,5 @@
+ko.js
+
 $(function(){
 FullCalendar.globalLocales.push(function () {
 	  'use strict';
@@ -8,9 +10,9 @@ FullCalendar.globalLocales.push(function () {
 	      prev: '이전달',
 	      next: '다음달',
 	      today: '오늘',
-	      month: '월',
-	      week: '주',
-	      day: '일',
+	      month: '월간',
+	      week: '주간',
+	      day: '일간',
 	      list: '일정목록',
 	    },
 	    weekText: '주',
@@ -23,4 +25,3 @@ FullCalendar.globalLocales.push(function () {
 
 	}());
 });
-

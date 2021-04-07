@@ -22,9 +22,25 @@ public class ScheduleDao {
 	// Schedule 전체 조회
 	public List<Schedule> selectScheduleAll() throws Exception{
 		
-		List<Schedule> scheduleList = sqlSession.selectList("Schedule.selectScheduleAll");
+		List<Schedule> scheduleListAll = sqlSession.selectList("Schedule.selectScheduleAll");
 		
-		return scheduleList;
+		return scheduleListAll;
+	}
+	
+	// Schedule 팀 조회
+	public List<Schedule> selectScheduleTeam(String empDeptCode) throws Exception{
+		
+		List<Schedule> scheduleListTeam = sqlSession.selectList("Schedule.selectScheduleTeam", empDeptCode);
+		
+		return scheduleListTeam;
+	}
+	
+	// Schedule 나만 조회
+	public List<Schedule> selectScheduleMe(String empNum) throws Exception{
+		
+		List<Schedule> scheduleListMe = sqlSession.selectList("Schedule.selectScheduleMe", empNum);
+		
+		return scheduleListMe;
 	}
 	
 	// Schedule 등록

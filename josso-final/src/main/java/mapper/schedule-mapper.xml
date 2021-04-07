@@ -25,14 +25,30 @@
 		 #{scheduleStartTime}, #{scheduleEndDate}, #{scheduleEndTime},
 		 #{Attendee}, #{employeeNumber})
 	</insert>
+	
 	<!-- Schedule 전체 조회 -->
-	<select id="selectScheduleAll" resultMap="resultSchedule">
+	<select id="selectScheduleAll" parameterType="String" resultMap="resultSchedule">
 		SELECT * FROM SCHEDULE
 	</select>
+	
+	<!-- Schedule 팀 일정 -->
+	<select id="selectScheduleTeam" parameterType="String" resultMap="resultSchedule">
+		SELECT * FROM SCHEDULE 
+		JOIN EMPLOYEE
+		ON SCHEDULE.EMPLOYEE_NUMBER = EMPLOYEE.EMPLOYEE_NUMBER
+		WHERE EMPLOYEE.DEPARTMENT_CODE = #{empDeptCode}
+	</select>
+	
+	<!-- Schedule 내 일정 -->
+	<select id="selectScheduleMe" parameterType="String" resultMap="resultSchedule">
+		SELECT * FROM SCHEDULE WHERE EMPLOYEE_NUMBER = #{empNum}
+	</select>
+	
 	<!-- Schedule 하나만 조회 -->
 	<select id="selectSchedule" resultMap="resultSchedule" parameterType="String">
 		SELECT * FROM SCHEDULE WHERE SCHEDULE_NUMBER = #{scheduleNumber}
 	</select>
+	
 	<!-- Schedule 수정 -->
 	<update id="updateSchedule" parameterType="Schedule">
 		UPDATE SCHEDULE SET 
@@ -45,6 +61,7 @@
 		SCHEDULE_END_TIME = #{scheduleEndTime}
 		WHERE SCHEDULE_NUMBER = #{scheduleNumber}
 	</update>
+	
 	<!-- Schedule 삭제 -->
 	<delete id="deleteSchedule" parameterType="Schedule">
 		DELETE FROM SCHEDULE WHERE SCHEDULE_NUMBER = #{scheduleNumber}

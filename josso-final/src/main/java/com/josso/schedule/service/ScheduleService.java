@@ -12,6 +12,12 @@ public interface ScheduleService {
 	// Schedule 전체 조회
 	public List<Schedule> selectScheduleAll() throws Exception;
 	
+	// Schedule 팀 조회
+	public List<Schedule> selectScheduleTeam(String team) throws Exception;
+	
+	// Schedule 나만 조회
+	public List<Schedule> selectScheduleMe(String empNum) throws Exception;
+	
 	// Schedule 등록
 	public int insertSchedule(Schedule schedule) throws Exception;
 	
