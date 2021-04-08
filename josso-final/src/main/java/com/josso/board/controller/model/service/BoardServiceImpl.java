@@ -74,13 +74,10 @@ public class BoardServiceImpl implements BoardService {
 	public int noticeWrite(Board board, HttpSession session, HttpServletResponse response, HttpServletRequest request) throws Exception {
 		// 캐릭터인코딩
 		response.setContentType("text/html;charset=utf-8");
-		
 		// 로그인 한 회원정보 세션값으로 가져오기
 		Employee employee = (Employee)session.getAttribute("employee");
 		board.setBoardWriter(employee.getEmployeeNumber());
-		
 		int result = boardDao.noticeWrite(board);
-
 		PrintWriter out = response.getWriter();
 		out.print("<script>alert('글이 등록되었습니다.'); location.href='list'; </script>");
 		out.close();
@@ -129,16 +126,15 @@ public class BoardServiceImpl implements BoardService {
 	public int suggestionWrite(Board board, HttpSession session, HttpServletResponse response, HttpServletRequest request) throws Exception {
 		// 캐릭터인코딩
 		response.setContentType("text/html;charset=utf-8");
-		
 		// 로그인 한 회원정보 세션값으로 가져오기
 		Employee employee = (Employee)session.getAttribute("employee");
-		board.setBoardWriter(employee.getEmployeeNumber());
-		
+		board.setBoardWriter("작성자 : " +employee.getEmployeeNumber());
+		System.out.println(board.getBoardWriter());
+		int result = boardDao.suggestionWrite(board);
+		System.out.println("결과 : " + result);
 		PrintWriter out = response.getWriter();
 		out.print("<script>alert('글이 등록되었습니다.'); location.href='list'; </script>");
 		out.close();
-		
-		int result = boardDao.suggestionWrite(board);
 		return result;
 	}
 	

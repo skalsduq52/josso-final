@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.josso.businessReport.controller.model.dao.WeeklyReportDAO;
+import com.josso.businessReport.vo.ReportPaging;
 import com.josso.businessReport.vo.WeeklyReport;
 
 @Service
@@ -16,21 +17,22 @@ public class WeeklyServiceImpl implements WeeklyService {
 
 	// 전체 게시물 조회
 	@Override
-	public List<WeeklyReport> selectList() throws Exception  {
-		
-		List<WeeklyReport> weeklyList = weeklyreportDao.selectList();
-		
-		
+	public List<WeeklyReport> selectList(ReportPaging page) throws Exception  {
+		List<WeeklyReport> weeklyList = weeklyreportDao.selectList(page);
 		return weeklyList;
+	}
+	
+	@Override
+	// 게시물 갯수
+	public int weeklyReporCount(ReportPaging page) throws Exception {
+		int count = weeklyreportDao.weeklyReporCount(page);
+		return count;
 	}
 	
 	// 디테일페이지
 	@Override
 	public WeeklyReport selectDetailPage(String num) throws Exception {
-		
-		
 		WeeklyReport WeeklyReport = weeklyreportDao.selectDetailPage(num);
-		
 		return WeeklyReport;
 	}
 	

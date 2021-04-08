@@ -20,6 +20,7 @@
 		<typeAlias type="com.josso.schedule.vo.Schedule" alias="Schedule" />
 		<typeAlias type="com.josso.businessReport.vo.WeeklyReport" alias="weeklyReport" />
 		<typeAlias type="com.josso.businessReport.vo.MonthlyReport" alias="monthlyReport" />
+		<typeAlias type="com.josso.businessReport.vo.ReportPaging" alias="ReportPaging" />
 	</typeAliases>
 	
 	<!-- 사용하고자 하는 mapper를 등록한다. --> 

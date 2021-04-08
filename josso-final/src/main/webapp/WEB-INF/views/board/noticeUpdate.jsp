@@ -2,9 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
-
-    
 <!DOCTYPE html>
 <html>
     <head>
@@ -124,6 +121,15 @@
            .report_kind:hover {
                text-decoration: none;
            }
+           
+            #suggestion_title {
+				/* padding-left : 20px; */
+				/* background : #38A9BA; */
+				font-size : 2em;
+				color : #38A9BA;
+				width:280px;
+				font-weight : 700;
+			}
 
 
      
@@ -136,7 +142,7 @@
               oAppRef: oEditors,
               elPlaceHolder: "smartEditor", //textarea에서 지정한 id와 일치해야 함. 
               //SmartEditor2Skin.html 파일이 존재하는 경로
-              sSkinURI: "${pageContext.request.contextPath}/resources/smartEditor/SmartEditor2Skin.html",  
+              sSkinURI: "${pageContext.request.contextPath}/resources/smartEditor/SmartEditor2Skin.html",
               htParams : {
                   // 툴바 사용 여부 (true:사용/ false:사용하지 않음)
                   bUseToolbar : true,             
@@ -150,8 +156,6 @@
         
     });
 </script>
-
-
 
 <!--
 <script>
@@ -272,9 +276,9 @@
             </section>
         </div>
     </aside>
-    <nav class="border-bottom">
+    <nav>
         <div class="nav_title">
-            <h2 id="suggestion_title" style="font-weight: 600;">공지사항</h2>
+            <h2 id="suggestion_title" style="font-weight: 600;">》 공지사항 게시판</h2>
         </div>
         <div class="nav_content">
             <p style="margin: 12px 17px; font-style: italic; ">회사 공지사항입니다.<br>
@@ -284,30 +288,30 @@
     </nav>
 
         
-        <main>
+        <main style="width:80%;">
             <form action="update?num=${num1}" method="POST">
-        	<input type="hidden" value="${num1}" name="boardNum" />
+            <input type="hidden" value="${num1}" name="boardNum">
             <div class="border-top">
                 <table style="width: 100%;" id="board">
                     <thead>
                         <tr>
                             <th class="left_td">제목</th>
-                            <td class="right_td"><input type="text" style="width: 100%;" name="boardTitle" value="${board.boardTitle }"></td><br>
+                            <td class="right_td"><input type="text" style="width: 100%;" name="boardTitle" value="${board.boardTitle}"></td><br>
                         </tr>
-						<tr>
-						<tr>
-							<th class="left_td">파일첨부</th>
-							<td class="right_td">
-							<!-- <input type="file" name="boardFile"> -->
-							<c:if test="${not empty board.boardFile}">
-								${board.boardFile}
-								<a href="${pageContext.request.contextPath}/resources/multipartFile/${board.boardFile}">
-								<img src="${pageContext.request.contextPath}/resources/multipartFile/${board.boardFile}">
-								</a>
-								<input type="hidden" name="boardFile" value="${board.boardFile}">
-							</c:if>
-								<!-- <div id="dropZone">
-                                <span>이 곳에 파일을 드래그 하세요. 또는</span>
+                        <tr >
+                            <th class="left_td">파일첨부</th>
+                            <td class="right_td">
+								<c:if test="${not empty board.boardFile}">
+									${board.boardFile}
+									<a href="${pageContext.request.contextPath}/resources/multipartFile/${board.boardFile}">
+									<img src="${pageContext.request.contextPath}/resources/multipartFile/${board.boardFile}">
+									</a>
+									<input type="hidden" name="boardFile" value="${board.boardFile}">
+								</c:if>
+								<c:if test="${empty board.boardFile}">
+									<input type="file" name="boardFile" value="${board.boardFile}">
+								</c:if>
+                                <!-- <span>이 곳에 파일을 드래그 하세요. 또는</span>
                                     <input type="file" class="custom-file-input" id="customFile" style="display: none;" name="boardFile">
                                     <label for="customFile" id="attach_file" >파일선택</label>
                                     <table id="fileListTable" width="100%" border="0px">
@@ -315,9 +319,10 @@
     
                                          </tbody>
                                     </table>
-                                </div> --></td>
-						</tr>
-					</thead>
+                                </div> -->
+                            </td>
+                        </tr>
+                    </thead>
                     <tbody>
                         <tr id="write_content">
                             <th class="left_td">내용</th>
@@ -328,14 +333,11 @@
             </div>
 
             <div style="float:right; padding-right: 30px;">
-                <input class="btn btn-info" type="submit" href="update" value="수정하기"></tr>
+                <input class="btn btn-info" type="submit" value="제출하기">
                 <input class="btn btn-secondary" type="button" onclick="history.back();" value="취소"></tr>
             </div>  
            </form>        
         </main>
-        <footer class="border-top">
-		수정함!
-        </footer>
     </body>
 </html>
 

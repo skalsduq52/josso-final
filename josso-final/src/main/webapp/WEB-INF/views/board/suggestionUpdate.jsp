@@ -278,11 +278,11 @@
     </aside>
     <nav>
         <div class="nav_title">
-            <h2 id="suggestion_title" style="font-weight: 600;">》 건의사항 게시판</h2>
+            <h2 id="suggestion_title" style="font-weight: 600;">》 공지사항 게시판</h2>
         </div>
         <div class="nav_content">
-            <p style="margin: 12px 17px; font-style: italic; ">임직원 여러분들의 의견을 무엇이든 건의할 수 있는 게시판입니다.<br>
-               업무, 시설, 편의사항 등 자유롭게 건의해주시면 최대한 신속히 해결하겠습니다.<br>
+            <p style="margin: 12px 17px; font-style: italic; ">회사 공지사항입니다.<br>
+               수시로 필독해주시고 궁금사항은 질의, 의무사항은 신속히 처리해주시기 바랍니다.<br>
             </p>
         </div>
     </nav>
@@ -304,7 +304,6 @@
 								<c:if test="${not empty board.boardFile}">
 									${board.boardFile}
 									<a href="${pageContext.request.contextPath}/resources/multipartFile/${board.boardFile}">
-									<img src="${pageContext.request.contextPath}/resources/multipartFile/${board.boardFile}">
 									</a>
 									<input type="hidden" name="boardFile" value="${board.boardFile}">
 								</c:if>
@@ -326,7 +325,7 @@
                     <tbody>
                         <tr id="write_content">
                             <th class="left_td">내용</th>
-                            <td class="right_td"><textarea id="smartEditor" style="height: 400px; width: 100%;" name="boardContent">${board.boardContent }</textarea></td>
+                            <td class="right_td"><textarea id="smartEditor" style="height: 400px; width: 100%;" name="boardContent">${board.boardContent}</textarea></td>
                         </tr>
                     </tbody>    
                 </table>

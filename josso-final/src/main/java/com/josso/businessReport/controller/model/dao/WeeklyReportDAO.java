@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.josso.businessReport.vo.ReportPaging;
 import com.josso.businessReport.vo.WeeklyReport;
 
 @Repository
@@ -18,11 +19,17 @@ public class WeeklyReportDAO {
 	public WeeklyReportDAO() {}
 	
 	// 전체 게시물 조회
-	public List<WeeklyReport> selectList() throws Exception  {
-		List<WeeklyReport> weeklyList = sqlSession.selectList("weeklyReport.selectList");
+	public List<WeeklyReport> selectList(ReportPaging page) throws Exception  {
+		List<WeeklyReport> weeklyList = sqlSession.selectList("weeklyReport.selectList", page);
 		return weeklyList;
 	}
 	
+	// 게시물 갯수
+	public int weeklyReporCount(ReportPaging page) throws Exception {
+		int count = sqlSession.selectOne("weeklyReporCount", page);
+		return count;
+	}
+
 	// 디테일페이지
 	public WeeklyReport selectDetailPage(String num) throws Exception {
 		WeeklyReport WeeklyReport = sqlSession.selectOne("weeklyReport.selectDetailPage",num);

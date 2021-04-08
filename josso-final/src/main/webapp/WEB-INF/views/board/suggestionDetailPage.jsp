@@ -278,7 +278,7 @@
             </p>
         </div>
     </nav>
-        <main style="width:80%;">
+        <main style="width:90%;">
         <div style="width:100%">
             <div  style="padding-left:20px; width:90%">
                 <table style="width: 100%; height:500px" id="board">
@@ -289,7 +289,7 @@
                         </tr>
                         <tr class="border-bottom" style="height: 50px;">
                             <th class="left_td" style="padding-top: 20px; width:5%">파일첨부</th>
-                            <td style="padding-left:30px; width:30%; color:gray">
+                            <td style="padding-left:30px; width:35%; color:gray">
                             <c:if test="${empty suggestionBoard.boardFile}">
 	                        	첨부파일 없음.
 	                        </c:if> <c:if test="${not empty suggestionBoard.boardFile}">
@@ -298,13 +298,13 @@
 	                        	</a>
 							</c:if></td>
                             <th class="left_td" style="padding-top:20px; width:5%">작성자</th>
-                            <td id="right_td" style="padding-top:20px; width:30%; text-align:center; font-size:1.2em"><span>${suggestionBoard.employeeName}</span></td><br>
+                            <td id="right_td" style="padding-top:20px; width:35%; text-align:center; font-size:1.2em"><span>${suggestionBoard.employeeName}</span></td><br>
                         </tr>
                     </thead>
                     <tbody>
                         <tr id="write_content" class="border-bottom">
                             <th class="left_td">내용</th>
-                            <td colspan="3" class="right_td"><div id="smartEditor" style="height: 400px; width: 100%;"><span>${suggestionBoard.boardContent}</span></div></td>
+                            <td colspan="3" class="right_td"><div id="smartEditor" style="height: 400px; width: 100%;">${suggestionBoard.boardContent}</div></td>
                         </tr>
                     </tbody>    
                 </table>

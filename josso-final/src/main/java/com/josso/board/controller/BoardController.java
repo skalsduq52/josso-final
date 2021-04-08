@@ -38,7 +38,6 @@ public class BoardController {
 		if(page.getTitle().contentEquals("")) {
 			page.setTitle("BOARD_TITLE");
 		}
-		// 공지사항 게시물 총 갯수(사실상 필요없네..)
 		int noticeBoardCount = boardService.noticeBoardCount(page);
 		page.setCount(noticeBoardCount);
 		page.setStartNum(page.getPage());
@@ -69,6 +68,9 @@ public class BoardController {
 			@RequestParam("boardContent") String content,
 			@RequestParam("boardFile") MultipartFile file,
 			ModelAndView mv,  HttpSession session, HttpServletResponse response, MultipartHttpServletRequest request) throws Exception {
+		System.out.println("공지사항 제목 : " + title);
+		System.out.println("공지사항 내용 : " + content);
+		
 		// 보드 객체 생성
 		Board board = new Board();
 		// 보드vo에 requestParam값 입력
@@ -172,6 +174,8 @@ public class BoardController {
 			@RequestParam("boardContent") String content,
 			@RequestParam("boardFile") MultipartFile file,
 			ModelAndView mv, HttpSession session, HttpServletResponse response, MultipartHttpServletRequest request) throws Exception {
+		System.out.println("boardTitle : " + title);
+		System.out.println("boardContent : " + content);
 		// 보드 객체 생성
 		Board board = new Board();
 		// 보드vo에 requestParam값 입력
@@ -221,6 +225,9 @@ public class BoardController {
 	// 건의사항 (수정)
 	@RequestMapping(value="board/suggestion/update", method=RequestMethod.POST)
 	public ModelAndView suggestionUpdate(ModelAndView mv, Board board, HttpServletRequest request) throws Exception {
+		System.out.println("제목 : " + board.getBoardTitle());
+		System.out.println("내용 : " + board.getBoardContent());
+		
 		boardService.boardUpdate(board, request);
 		mv.addObject("num", board.getBoardNum());
 		mv.setViewName("redirect:detailPage");
