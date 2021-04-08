@@ -87,6 +87,31 @@
 		}
 	});
 	
+	$("#d").on('click','.rejectadd1',function() {
+		var rejecter = "<c:out value='${employee.employeeNumber}'/>";
+		console.log(rejecter);
+		var content = $(this).prev().prev().prev().val();
+		var num = "<c:out value='${param.num}'/>"
+		if(confirm("반려처리 하시겠습니까?") == true){
+			$.ajax({
+	  		  type : "post",
+	  		  url : "/josso/elecApproval/lastReject",
+	  		  data : {
+	  			  "rejecter" : rejecter,
+	  			  "rejectComment" : content,
+				  "documentNo" : num	  			  
+	  		  },
+				  success : function(result) {
+					 if(result == 1){
+						 window.location.href="/josso/elecApproval/signdetail?num="+num;
+					 }
+				  } 
+  	  		});
+		}else{
+			return;
+		}
+	});
+	
 	$("#accept2").click(function(){
 		var num1 = $('#appDate').text();
 		var emno = "<c:out value='${ev.drafter}'/>";
@@ -99,12 +124,17 @@
 	});
 	
 	$("#reject2").click(function(){
-	    /* if(confirm("반려 하시겠습니까?") == true){
-	    	window.location.href="/josso/elecApproval/lastReject?num="+num;
-	    }
-	    else{
-	        return ;
-	    } */
+		var reject = $('#d');
+	    output = '';
+	    output += '<br>';
+	    output += '<div class="border">';
+	    output += '<form>'
+	    output +='<textarea style="border: none; resize: none; width:100%" rows="3" cols="146" id="content" name="comment" placeholder="반려이유를 작성해주세요"></textarea><br>';
+	    output +='<input type="button" class="btn btn-md btn-primary rejectcancle" style="float: right;" value="취소">';
+        output +='<input type="button" class="btn btn-md btn-primary rejectadd1" style="float: right;" value="등록">';
+	    output += '</form>'
+	    output += '</div>'
+	    reject.append(output);
 	});
 	
 	getComment();
@@ -134,11 +164,6 @@
 	}
 	
  });
- 
- 
- 
-	
-		
 			
 		
 </script>
@@ -146,7 +171,7 @@
 <body>
 	<!-- navigation 삽입 -->
 	<header>
-		<%@ include file="../electronicApproval/part/navigation.jsp"%>
+		<%@ include file="../include/header.jsp"%>
 	</header>
 
 	<!-- aside 삽입  -->

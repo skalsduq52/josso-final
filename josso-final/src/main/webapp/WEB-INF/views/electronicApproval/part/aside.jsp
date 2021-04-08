@@ -3,7 +3,7 @@
 <div>
 	<section>
 		<div class="title">
-			<span class="icon"><i class="fa fa-envelope fa-lg"
+			<span class="icon"><i class="fas fa-clipboard fa-lg"
 				aria-hidden="true"></i></span> 전자결재
 		</div>
 	</section>

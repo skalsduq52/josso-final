@@ -96,8 +96,8 @@ public class electronicApprovalDAO {
 	}
 	
 	// 최종결재 반려
-	public void lastReject(String num) throws Exception {
-		sqlSession.update("ElectronicApproval.lastReject",num);
+	public void lastReject(ElectronicApproval ep) throws Exception {
+		sqlSession.update("ElectronicApproval.lastReject",ep);
 	}
 	
 	// 최종결재 하면 연차 차감

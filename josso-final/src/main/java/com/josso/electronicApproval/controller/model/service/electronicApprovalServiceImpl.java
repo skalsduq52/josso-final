@@ -105,8 +105,8 @@ public class electronicApprovalServiceImpl implements electornicApprovalService 
 
 	// 최종결재자 반려
 	@Override
-	public void lastReject(String num) throws Exception {
-		ed.lastReject(num);
+	public void lastReject(ElectronicApproval ep) throws Exception {
+		ed.lastReject(ep);
 	}
 
 	// 최종결재자 승인시 연차 업데이트

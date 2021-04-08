@@ -104,22 +104,15 @@ $(function() {
 						},
 						'drop' : function(e) {
 							if ($('#drop2 >tbody>tr').length == 1) {
-								var data = e.originalEvent.dataTransfer
-										.getData('text');
+								var data = e.originalEvent.dataTransfer.getData('text');
 								var trObj = document.createElement('tr');
-								var board = document
-										.getElementById('droppObj1');
+								var board = document.getElementById('droppObj1');
 								trObj.innerHTML = data;
-								console
-										.log(board.lastElementChild.lastElementChild);
-								board.lastElementChild.lastElementChild
-										.append(trObj);
+								board.lastElementChild.lastElementChild.append(trObj);
 								e.preventDefault();
 							} else {
-								var data = e.originalEvent.dataTransfer
-										.getData('text');
-								var parent1 = document
-										.getElementById('droppObj1');
+								var data = e.originalEvent.dataTransfer.getData('text');
+								var parent1 = document.getElementById('droppObj1');
 								var parent2 = parent1.lastElementChild.lastElementChild;
 								data1 = parent1.lastElementChild.lastElementChild.lastElementChild;
 								data1.remove();
@@ -130,6 +123,7 @@ $(function() {
 							}
 						}
 					});
+	
 	$(function() {
 		$('.hover_icon').click(function() {
 			$('.hover_tag').slideToggle("slow")

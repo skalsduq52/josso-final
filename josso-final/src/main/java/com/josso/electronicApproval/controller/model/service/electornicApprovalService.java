@@ -50,7 +50,7 @@ public interface electornicApprovalService {
 	public void lastAccept(String num) throws Exception;
 		
 	// 최종결재 반려
-	public void lastReject(String num) throws Exception;
+	public void lastReject(ElectronicApproval ep) throws Exception;
 		
 	// 최종결재 하면 연차 차감
 	public void dateUpdate(String num, String emno) throws Exception;

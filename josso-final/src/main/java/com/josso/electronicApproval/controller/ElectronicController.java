@@ -133,7 +133,6 @@ public class ElectronicController {
 			 sendJson.put("list", empArray);
 			 response.setContentType("application/json; charset=utf-8");
 			 PrintWriter out = response.getWriter();
-			 System.out.println(sendJson.toJSONString());
 			 out.println(sendJson.toJSONString());
 			 out.flush();
 			 out.close();
@@ -195,15 +194,16 @@ public class ElectronicController {
 	}
 	
 	// 최종결재자 반려
-	@RequestMapping(value="elecApproval/lastReject", method=RequestMethod.GET)
-	public ModelAndView lastReject(@RequestParam(name="num") String num, ModelAndView mv) throws Exception {
-		es.lastReject(num);
-		mv.addObject("num",num);
-		mv.setViewName("redirect:/elecApproval/signdetail");
-		return mv;
+	@RequestMapping(value="elecApproval/lastReject", method=RequestMethod.POST)
+	public void lastReject(ElectronicApproval ep, HttpServletResponse response) throws Exception {
+		es.lastReject(ep);
+		PrintWriter out = response.getWriter();
+		out.println("1");
+		out.flush();
+		out.close();
 	}
 	
-	// 최종결재자 반려
+	// 반려코멘트
 	@RequestMapping(value="elecApproval/rejectComment", method=RequestMethod.POST)
 	public void rejectComment (@RequestParam("documentNo") String no, HttpServletResponse response) throws Exception {
 		ElectView ev = es.selectElecApp(no);

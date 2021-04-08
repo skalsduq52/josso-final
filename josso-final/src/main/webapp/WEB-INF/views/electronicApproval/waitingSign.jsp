@@ -27,7 +27,7 @@
     <body>
         <!-- navigation 삽입 -->
 		<header>
-			<%@ include file="../electronicApproval/part/navigation.jsp"%>
+			<%@ include file="../include/header.jsp"%>
 		</header>
 		
         <!-- aside 삽입  -->

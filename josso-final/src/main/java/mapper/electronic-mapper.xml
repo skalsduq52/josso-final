@@ -18,6 +18,8 @@
 		<result property="lastAccept" column="LAST_ACCEPT"/>
 		<result property="attachedFile" column="ATTACHED_FILE"/>
 		<result property="holyType" column="HOLY_TYPE"/>
+		<result property="middleAcceptDate" column="MIDDLE_ACCEPT_DATE"/>
+		<result property="lastAcceptDate" column="LAST_ACCEPT_DATE"/>
 		<result property="rejecter" column="REJECTER"/>
 		<result property="rejectComment" column="REJECT_COMMENT"/>
 	</resultMap>
@@ -25,7 +27,7 @@
 	<!-- 결재 정보 등록 -->
 	<insert id="insertElecApp" parameterType="ElectronicApproval">
 		INSERT INTO ELECTRONIC_APPROVAL VALUES(APPROVAL_NUM_SEQ.NEXTVAL,#{documentForm},#{documentName},SYSDATE,#{startDate},
-		#{endDate},#{drafter},DEFAULT,#{middle},DEFAULT,#{last},DEFAULT,NULL,#{holyType},NULL,NULL)
+		#{endDate},#{drafter},DEFAULT,#{middle},DEFAULT,#{last},DEFAULT,NULL,#{holyType},NULL,NULL,NULL,NULL)
 	</insert>
 	
 	<!-- 내가 기안한 문서 최근 글 3개 가져오기 -->
@@ -50,8 +52,8 @@
 	</update>
 	
 	<!-- 최종결재자 반려 -->
-	<update id="lastReject" parameterType="String">
-		UPDATE ELECTRONIC_APPROVAL SET LAST_ACCEPT = 2, LAST_ACCEPT_DATE = SYSDATE WHERE DOCUMENT_NO = #{num}
+	<update id="lastReject" parameterType="ElectronicApproval">
+		UPDATE ELECTRONIC_APPROVAL SET LAST_ACCEPT = 2, LAST_ACCEPT_DATE = SYSDATE, REJECTER = #{rejecter}, REJECT_COMMENT = #{rejectComment} WHERE DOCUMENT_NO = #{documentNo}
 	</update>
 	
 	<!-- 최종결재자 반려 -->
@@ -71,7 +73,7 @@
 	
 	<!-- 결재 수신문서 페이징용 카운트 가져가기 -->
 	<select id="selectReceiveCount" parameterType="Paging" resultType="_int">
-		SELECT COUNT(*) FROM (SELECT * FROM ELEC_VIEW WHERE DRAFTER = #{employeeNum} OR MIDDLE = #{employeeNum} OR LAST = #{employeeNum})
+		SELECT COUNT(*) FROM (SELECT * FROM ELEC_VIEW WHERE DRAFTER = #{employeeNum} OR MIDDLE = #{employeeNum} OR (LAST = #{employeeNum} AND MIDDLE_ACCEPT = 1)) WHERE ${title} LIKE '%' || #{query} || '%'
 	</select>
 	
 </mapper>
