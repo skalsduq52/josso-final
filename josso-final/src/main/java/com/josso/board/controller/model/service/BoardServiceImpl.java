@@ -24,11 +24,11 @@ public class BoardServiceImpl implements BoardService {
 	// 공통
 	// 수정
 	@Override
-	public int boardUpdate(Board board, HttpServletRequest request) throws Exception {
+	public int boardUpdate(Board board) throws Exception {
 		// 치환
-		String content = request.getParameter("boardContent");
-		content = content.replace("\n\r", "<br>");
-		content = content.replace(" ", "&nbsp;");
+		//String content = request.getParameter("boardContent");
+		//content = content.replace("\n\r", "<br>");
+		//content = content.replace(" ", "&nbsp;");
 		// 결과값
 		int result = boardDao.boardUpdate(board);
 		return result;
@@ -128,7 +128,7 @@ public class BoardServiceImpl implements BoardService {
 		response.setContentType("text/html;charset=utf-8");
 		// 로그인 한 회원정보 세션값으로 가져오기
 		Employee employee = (Employee)session.getAttribute("employee");
-		board.setBoardWriter("작성자 : " +employee.getEmployeeNumber());
+		board.setBoardWriter(employee.getEmployeeNumber());
 		System.out.println(board.getBoardWriter());
 		int result = boardDao.suggestionWrite(board);
 		System.out.println("결과 : " + result);

@@ -90,7 +90,6 @@ public class BoardController {
 		// boardVO에 파일 저장
 		board.setBoardFile(rename);
 		boardService.noticeWrite(board, session, response, request);
-		mv.setViewName("redirect:list");
 		return mv;
 	}
 	
@@ -119,8 +118,8 @@ public class BoardController {
 	
 	// 공지사항 (수정)
 	@RequestMapping(value="board/notice/update", method=RequestMethod.POST)
-	public ModelAndView noticeUpdate(ModelAndView mv, Board board, HttpServletRequest request) throws Exception {
-		boardService.boardUpdate(board, request);
+	public ModelAndView noticeUpdate(ModelAndView mv, Board board) throws Exception {
+		boardService.boardUpdate(board);
 		mv.addObject("num", board.getBoardNum());
 		mv.setViewName("redirect:detailPage");
 		return mv;
@@ -178,24 +177,32 @@ public class BoardController {
 		System.out.println("boardContent : " + content);
 		// 보드 객체 생성
 		Board board = new Board();
+		
 		// 보드vo에 requestParam값 입력
 		board.setBoardTitle(title);
 		board.setBoardContent(content);
-		// 첨부파일 originalName을 변수에 저장
-		String originalName = file.getOriginalFilename();
-		// uuid로 새로운 파일명으로 변환
-		UUID uid = UUID.randomUUID();
-		String rename = uid.toString() + "_" + originalName;
-		// 내가 가진 깃 리포지토리 저장경로(절대경로임)(홍수명)
-		String path = "C:/Git/josso-final/josso-final/src/main/webapp/resources/multipartFile/"+rename;
-		// 깃으로 돌릴 때는 이 주소값 쓰세요(※주의※ 'workspace 경로에 한글이 들어가면 안됨')
-		//String path = request.getSession().getServletContext().getRealPath("resources/multipartFile"); 
-		// 파일저장
-		file.transferTo(new File(path));
-		// boardVO에 파일 저장
-		board.setBoardFile(rename);
+		System.out.println(file);
+		if(file != null) {
+			// 첨부파일 originalName을 변수에 저장
+			String originalName = file.getOriginalFilename();
+			// uuid로 새로운 파일명으로 변환
+			UUID uid = UUID.randomUUID();
+			String rename = uid.toString() + "_" + originalName;
+			// 내가 가진 깃 리포지토리 저장경로(절대경로임)(홍수명)
+			String path = "C:/Git/josso-final/josso-final/src/main/webapp/resources/multipartFile/"+rename;
+			// 깃으로 돌릴 때는 이 주소값 쓰세요(※주의※ 'workspace 경로에 한글이 들어가면 안됨')
+			//String path = request.getSession().getServletContext().getRealPath("resources/multipartFile"); 
+			// 파일저장
+			file.transferTo(new File(path));
+			// boardVO에 파일 저장
+			board.setBoardFile(rename);
+			} else {
+				file = null;
+			}
+		
+		
+		System.out.println("board : "+board);
 		boardService.suggestionWrite(board, session, response, request);
-		mv.setViewName("redirect:list");
 		return mv;
 	}
 	
@@ -224,11 +231,11 @@ public class BoardController {
 
 	// 건의사항 (수정)
 	@RequestMapping(value="board/suggestion/update", method=RequestMethod.POST)
-	public ModelAndView suggestionUpdate(ModelAndView mv, Board board, HttpServletRequest request) throws Exception {
+	public ModelAndView suggestionUpdate(ModelAndView mv, Board board) throws Exception {
 		System.out.println("제목 : " + board.getBoardTitle());
 		System.out.println("내용 : " + board.getBoardContent());
 		
-		boardService.boardUpdate(board, request);
+		boardService.boardUpdate(board);
 		mv.addObject("num", board.getBoardNum());
 		mv.setViewName("redirect:detailPage");
 		return mv;

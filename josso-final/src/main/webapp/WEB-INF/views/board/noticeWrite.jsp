@@ -331,7 +331,7 @@
             </div>
 
             <div style="float:right; padding-right: 30px;">
-                <input class="btn btn-primary" type="submit" value="제출하기"></tr>
+                <input class="btn btn-primary" type="submit" value="제출하기">
             </div>  
            </form>        
         </main>

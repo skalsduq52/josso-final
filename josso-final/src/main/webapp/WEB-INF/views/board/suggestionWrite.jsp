@@ -153,12 +153,15 @@
               }, 
               fCreator: "createSEditor2"
           });
+     	  
+          
+          // 스마트에디터 값 전송
+          $('form').click(function(){
+    	 	oEditors.getById['smartEditor'].exec("UPDATE_CONTENTS_FIELD", []);
+          });
+          
+         
         
-    });
-    
-    // 스마트에디터 값 전송
-    $('form').click(function(){
-	 	oEditors.getById['smartEditor'].exec("UPDATE_CONTENTS_FIELD", []);
     });
 </script>
 
@@ -329,7 +332,7 @@
             </div>
 
             <div style="float:right; padding-right: 30px;">
-                <input class="btn btn-primary" type="submit" value="제출하기"></tr>
+                <input class="btn btn-primary" type="submit" value="제출하기">
             </div>  
            </form>        
         </main>

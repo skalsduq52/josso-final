@@ -274,6 +274,7 @@
                 <button class="btn btn-info"><a href="write" style="color:white">작성하기</a></button>
             </div>
             
+            <form>
             <div class="bottom_area" style="float:right;">
                 <select class="search" style="height: 37px;" name="title">
                     <option ${(param.title == "REPORT_TITLE")? "selected" : ""} value="REPORT_TITLE">제목</option>
@@ -282,7 +283,7 @@
                 <input type="text" name="query" class="search" placeholder="Search By" value="${param.query}" style="padding-bottom: 3px; height: 38px;">
                 <button class="btn btn-success" style="height: 38px; margin-bottom: 3px;">검색</button>
             </div>       
-
+			</form>
         </main>
         <footer class="border-top">
 
