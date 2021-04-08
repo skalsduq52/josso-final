@@ -76,7 +76,7 @@ public class EmailController{
 		modelAndView.addObject("es",es);
 		modelAndView.addObject("emailCount",emailCount);
 		modelAndView.setViewName("email/part/aside");
-		
+		//
 		Email acceptReply = emailService.AcceptReply(num);
 		modelAndView.addObject("acceptReply",acceptReply);
 		modelAndView.setViewName("email/acceptReply");
