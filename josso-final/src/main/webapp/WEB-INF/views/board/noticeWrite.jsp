@@ -123,7 +123,14 @@
                text-decoration: none;
            }
 
-
+          #suggestion_title {
+				/* padding-left : 20px; */
+				/* background : #38A9BA; */
+				font-size : 2em;
+				color : #38A9BA;
+				width:280px;
+				font-weight : 700;
+			}
      
         </style>
 
@@ -277,7 +284,7 @@
     </aside>
     <nav class="border-bottom">
         <div class="nav_title">
-            <h2 id="suggestion_title" style="font-weight: 600;">공지사항</h2>
+            <h2 id="suggestion_title" style="font-weight: 600;">》 공지사항 게시판</h2>
         </div>
         <div class="nav_content">
             <p style="margin: 12px 17px; font-style: italic; ">회사 공지사항입니다.<br>
@@ -328,9 +335,6 @@
             </div>  
            </form>        
         </main>
-        <footer class="border-top">
-		수정함!
-        </footer>
     </body>
 </html>
 

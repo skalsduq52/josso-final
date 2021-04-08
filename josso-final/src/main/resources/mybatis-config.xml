@@ -11,6 +11,7 @@
 		<typeAlias type="com.josso.electronicApproval.vo.ElectView" alias="ElectView" />
 		<typeAlias type="com.josso.electronicApproval.vo.Paging" alias="Paging" />
 		<typeAlias type="com.josso.board.vo.Board" alias="board" />
+		<typeAlias type="com.josso.board.vo.BoardPaging" alias="boardPaging" />
 		<typeAlias type="com.josso.email.vo.Email" alias="Email" />
 		<typeAlias type="com.josso.email.vo.EmailPaging" alias="EmailPaging" />
 		<typeAlias type="com.josso.employee.vo.Employee" alias="Employee" />
@@ -19,6 +20,7 @@
 		<typeAlias type="com.josso.schedule.vo.Schedule" alias="Schedule" />
 		<typeAlias type="com.josso.businessReport.vo.WeeklyReport" alias="weeklyReport" />
 		<typeAlias type="com.josso.businessReport.vo.MonthlyReport" alias="monthlyReport" />
+		<typeAlias type="com.josso.businessReport.vo.ReportPaging" alias="ReportPaging" />
 	</typeAliases>
 	
 	<!-- 사용하고자 하는 mapper를 등록한다. --> 

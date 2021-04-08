@@ -121,6 +121,15 @@
            .report_kind:hover {
                text-decoration: none;
            }
+           
+           	#suggestion_title {
+				/* padding-left : 20px; */
+				/* background : #38A9BA; */
+				font-size : 2em;
+				color : #38A9BA;
+				width:280px;
+				font-weight : 700;
+			}
 
 
      
@@ -272,9 +281,9 @@
             </section>
         </div>
     </aside>
-    <nav class="border-bottom">
+    <nav>
         <div class="nav_title">
-            <h2 id="suggestion_title" style="font-weight: 600;">건의사항 게시판</h2>
+            <h2 id="suggestion_title" style="font-weight: 600;">》 건의사항 게시판</h2>
         </div>
         <div class="nav_content">
             <p style="margin: 12px 17px; font-style: italic; ">임직원 여러분들의 의견을 무엇이든 건의할 수 있는 게시판입니다.<br>
@@ -284,7 +293,7 @@
     </nav>
 
         
-        <main>
+        <main style="width:80%;">
             <form action="register" method="POST" enctype="multipart/form-data">
             <div class="border-top">
                 <table style="width: 100%;" id="board">
@@ -324,9 +333,6 @@
             </div>  
            </form>        
         </main>
-        <footer class="border-top">
-		수정함!
-        </footer>
     </body>
 </html>
 

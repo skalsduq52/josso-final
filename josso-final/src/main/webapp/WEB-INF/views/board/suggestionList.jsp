@@ -110,7 +110,15 @@
                 font-size: 1em;
                 padding-right: 7px;
             }
-
+			
+			#suggestion_title {
+				/* padding-left : 20px; */
+				/* background : #38A9BA; */
+				font-size : 2em;
+				color : #38A9BA;
+				width:280px;
+				font-weight : 700;
+			}
             
 
         </style>
@@ -215,9 +223,9 @@
                 </section>
             </div>
         </aside>
-        <nav class="border-bottom">
+        <nav>
             <div class="nav_title">
-                <h2 id="suggestion_title" style="font-weight: 600;">건의사항 게시판</h2>
+                <h2 id="suggestion_title">》 건의사항 게시판</h2>
             </div>
             <div class="nav_content">
                 <p style="margin: 12px 17px; font-style: italic; ">임직원 여러분들의 의견을 무엇이든 건의할 수 있는 게시판입니다.<br>
@@ -227,13 +235,13 @@
         </nav>
 
         
-        <main>
+        <main style="width:80%;">
             <div class="border-top border-bottom">
                 <table style="width: 100%;" id="board">
                     <thead>
                         <tr class="border-bottom" style="height: 40px;">
                             <th id="tdnum" style="width: 10%;">번호</th>
-                            <th id="theme" style="width: 50%">제목</th>
+                            <th id="theme" style="width: 30%">제목</th>
                             <th style="width: 15%">작성자</th>
                             <th style="width: 15%">작성일</th>
                             <th style="width: 10%">조회</th>
@@ -254,40 +262,39 @@
             </div>
             <div>     
             <!-- param. 이 무슨 뜻이지? -->
-            <ul class="pagination" style="padding-top: 20px; padding-left: 40%;">
+			<ul class="pagination" style="padding-top: 20px; padding-left: 40%;">
                 	<c:if test="${param.page !=1 and not empty param.page}">
 						<li class="page-item"><a class="page-link" href="?page=${param.page-1}&title=${param.title}&query=${param.query}"><</a></li>&nbsp;&nbsp;
 					</c:if>
-					<c:if test="${param.page == 1 || empty param.page}">
-						<li class="page-item disabled"><a class="page-link"><</a></li>&nbsp;&nbsp;
+				<c:if test="${param.page == 1 || empty param.page}">
+					<li class="page-item disabled"><a class="page-link"><</a></li>&nbsp;&nbsp;
 					</c:if>
-                    <c:forEach var="i" begin="0" end="4">
-						<c:if test="${(page.startNum+i) <= page.lastNum}">
-							<li class="page-item ${(page.page==(page.startNum+i))?'active':''}"><a class="page-link" href="?page=${page.startNum+i}&title=${param.title}&query=${param.query}">${page.startNum+i}</a></li>
-						</c:if>
-					</c:forEach>
-					<c:if test="${page.page+1 <= page.lastNum}">
-						&nbsp;&nbsp;<li class="page-item"><a class="page-link" href="?page=${page.page+1}&title=${param.title}&query=${param.query}">></a></li>
+				<c:forEach var="i" begin="0" end="4">
+					<c:if test="${(page.startNum+i) <= page.lastNum}">
+						<li class="page-item ${(page.page==(page.startNum+i))?'active':''}"><a class="page-link" href="?page=${page.startNum+i}&title=${param.title}&query=${param.query}">${page.startNum+i}</a></li>
 					</c:if>
-					<c:if test="${page.page+1 > page.lastNum}">
-						&nbsp;&nbsp;<li class="page-item disabled"><a class="page-link">></a></li>
-					</c:if>
-                </ul>       
-            </div>
-            
+				</c:forEach>
+				<c:if test="${page.page+1 <= page.lastNum}">&nbsp;&nbsp;
+				<li class="page-item"><a class="page-link" href="?page=${page.page+1}&title=${param.title}&query=${param.query}">></a></li>
+				</c:if>
+				<c:if test="${page.page+1 > page.lastNum}"> &nbsp;&nbsp;<li class="page-item disabled"><a class="page-link">></a></li>
+				</c:if>
+			</ul>
+
             <div class="bottom_area" style="float:left; padding-left: 20px;">
                 <button class="btn btn-info"><a href="write" style="color:white">작성하기</a></button>
             </div>
             
+            <form>
             <div class="bottom_area" style="float:right;">
-                <select class="search" style="height: 37px;">
-                    <option>제목</option>
-                    <option>작성자</option>
+                <select class="search" style="height: 37px;" name="title">
+                    <option ${(param.title == "BOARD_TITLE")? "selected" : ""} value="BOARD_TITLE">제목</option>
+                    <option ${(param.title == "EMPLOYEE_NAME")? "selected" : ""} value="EMPLOYEE_NAME">작성자</option>
                 </select>
-                <input type="text" name="search" class="search" style="height: 38px;">
+                <input type="text" name="query" placeholder="Search By" value="${param.query}" class="search" style="height: 38px;">
                 <button class="btn btn-success" style="height: 38px; margin-bottom: 5px;">검색</button>
             </div>        
-            
+            </form>
             
         
             

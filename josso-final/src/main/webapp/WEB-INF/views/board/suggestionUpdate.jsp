@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -22,7 +24,7 @@
          <!-- Latest compiled JavaScript -->
          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
          <!-- SmartEditor2 라이브러리(경로 맞춰줘야 함.) -->
-         <script type="text/javascript" src="../final_project/smartEditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/smartEditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
          <script>
             $(function(){
                 $('.side_title').click(function(){
@@ -119,6 +121,15 @@
            .report_kind:hover {
                text-decoration: none;
            }
+           
+            #suggestion_title {
+				/* padding-left : 20px; */
+				/* background : #38A9BA; */
+				font-size : 2em;
+				color : #38A9BA;
+				width:280px;
+				font-weight : 700;
+			}
 
 
      
@@ -131,7 +142,7 @@
               oAppRef: oEditors,
               elPlaceHolder: "smartEditor", //textarea에서 지정한 id와 일치해야 함. 
               //SmartEditor2Skin.html 파일이 존재하는 경로
-              sSkinURI: "smartEditor/SmartEditor2Skin.html",  
+              sSkinURI: "${pageContext.request.contextPath}/resources/smartEditor/SmartEditor2Skin.html",
               htParams : {
                   // 툴바 사용 여부 (true:사용/ false:사용하지 않음)
                   bUseToolbar : true,             
@@ -265,19 +276,19 @@
             </section>
         </div>
     </aside>
-    <nav class="border-bottom">
+    <nav>
         <div class="nav_title">
-            <h2 id="suggestion_title" style="font-weight: 600;">건의사항 게시판</h2>
+            <h2 id="suggestion_title" style="font-weight: 600;">》 공지사항 게시판</h2>
         </div>
         <div class="nav_content">
-            <p style="margin: 12px 17px; font-style: italic; ">임직원 여러분들의 의견을 무엇이든 건의할 수 있는 게시판입니다.<br>
-               업무, 시설, 편의사항 등 자유롭게 건의해주시면 최대한 신속히 해결하겠습니다.<br>
+            <p style="margin: 12px 17px; font-style: italic; ">회사 공지사항입니다.<br>
+               수시로 필독해주시고 궁금사항은 질의, 의무사항은 신속히 처리해주시기 바랍니다.<br>
             </p>
         </div>
     </nav>
 
         
-        <main>
+        <main style="width:80%;">
             <form action="update?num=${num1}" method="POST">
             <input type="hidden" value="${num1}" name="boardNum">
             <div class="border-top">
@@ -285,28 +296,36 @@
                     <thead>
                         <tr>
                             <th class="left_td">제목</th>
-                            <td class="right_td"><input type="text" style="width: 100%;" name="boardTitle" value="${board.boardTitle }"></td><br>
+                            <td class="right_td"><input type="text" style="width: 100%;" name="boardTitle" value="${board.boardTitle}"></td><br>
                         </tr>
                         <tr >
                             <th class="left_td">파일첨부</th>
                             <td class="right_td">
-                                <div id="multipart">
-                                <span>이 곳에 파일을 드래그 하세요. 또는</span>
-                                    <input type="file" class="custom-file-input" id="customFile" style="display: none;"  name="boardFile" value="${board.boardFile }">
+								<c:if test="${not empty board.boardFile}">
+									${board.boardFile}
+									<a href="${pageContext.request.contextPath}/resources/multipartFile/${board.boardFile}">
+									</a>
+									<input type="hidden" name="boardFile" value="${board.boardFile}">
+								</c:if>
+								<c:if test="${empty board.boardFile}">
+									<input type="file" name="boardFile" value="${board.boardFile}">
+								</c:if>
+                                <!-- <span>이 곳에 파일을 드래그 하세요. 또는</span>
+                                    <input type="file" class="custom-file-input" id="customFile" style="display: none;" name="boardFile">
                                     <label for="customFile" id="attach_file" >파일선택</label>
                                     <table id="fileListTable" width="100%" border="0px">
                                          <tbody id="fileTableTbody">
     
                                          </tbody>
                                     </table>
-                                </div>
+                                </div> -->
                             </td>
                         </tr>
                     </thead>
                     <tbody>
                         <tr id="write_content">
                             <th class="left_td">내용</th>
-                            <td class="right_td"><textarea id="smartEditor" style="height: 400px; width: 100%;" name="boardContent">${board.boardContent }</textarea></td>
+                            <td class="right_td"><textarea id="smartEditor" style="height: 400px; width: 100%;" name="boardContent">${board.boardContent}</textarea></td>
                         </tr>
                     </tbody>    
                 </table>
@@ -318,9 +337,6 @@
             </div>  
            </form>        
         </main>
-        <footer class="border-top">
-		수정함!
-        </footer>
     </body>
 </html>
 
