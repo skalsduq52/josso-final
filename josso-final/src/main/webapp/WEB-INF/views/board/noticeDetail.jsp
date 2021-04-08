@@ -298,7 +298,7 @@
 	                        	</a>
 							</c:if></td>
                             <th class="left_td" style="padding-top:20px; width:5%">작성자</th>
-                            <td id="right_td" style="padding-top:20px; width:35%; text-align:center; font-size:1.2em"><span>${employee.employeeName}</span></td><br>
+                            <td id="right_td" style="padding-top:20px; width:35%; text-align:center; font-size:1.2em"><span>${noticeBoard.employeeName}</span></td><br>
                         </tr>
                     </thead>
                     <tbody>
@@ -315,8 +315,10 @@
                 	<button class="btn btn-info"><a href="list" style="color:white">목록</a></button>
             	</div>
             	<div class="container col-sm-6" style="text-align:right; padding-right:11%">
+            	<c:if test="${employee.roleCode == 1}">
 	                <button class="btn btn-info"><a href="updateBridge?num=${num}" style="color:white">수정하기</a></button>
     	            <button class="btn btn-secondary" onclick="confirm('정말 삭제하시겠습니까?')"><a href="delete?num=${num}" style="color:white">삭제</a></button>
+            	</c:if>
             	</div>
             </div>
            </div>

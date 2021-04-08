@@ -298,6 +298,11 @@
         
         <main style="width:80%;">
             <form action="register" method="POST" enctype="multipart/form-data">
+            <!-- 답글 쓰기인 경우 -->
+            <input type="hidden" name="fk_Seq" value="${fk_Seq}">
+            <input type="hidden" name="groupNo" value="${groupNo}">
+            <input type="hidden" name="depthNo" value="${depthNo}">
+            
             <div class="border-top">
                 <table style="width: 100%;" id="board">
                     <thead>

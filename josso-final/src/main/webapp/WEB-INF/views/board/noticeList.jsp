@@ -244,7 +244,7 @@
                             <th id="theme" style="width: 30%">제목</th>
                             <th style="width: 15%">작성자</th>
                             <th style="width: 15%">작성일</th>
-                            <th style="width: 10%">조회</th>
+                            <th style="width: 10%; text-align:center;">조회</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -254,7 +254,7 @@
                             <td id="theme"><a href="detailPage?num=${noticeList.boardNum}">${noticeList.boardTitle}</a></td>
                             <td>${noticeList.employeeName}</td>
                             <td><fmt:formatDate value="${noticeList.boardRegDate}" pattern="yy년 MM월 dd일 / HH시 mm분"/></td>
-                            <td id="selectnum">${noticeList.boardHit}</td>
+                            <td style="text-align:center">${noticeList.boardHit}</td>
                         </tr>
 						</c:forEach>
                     </tbody>    
@@ -282,7 +282,9 @@
 			</ul>
 
             <div class="bottom_area" style="float:left; padding-left: 20px;">
+            	<c:if test="${employee.roleCode == 1}">
                 <button class="btn btn-info"><a href="write" style="color:white">작성하기</a></button>
+                </c:if>
             </div>
             
             <form>
@@ -296,10 +298,6 @@
             </div>        
             </form>
             
-        
-            
-            
-                 
         </main>
     </body>
 </html>

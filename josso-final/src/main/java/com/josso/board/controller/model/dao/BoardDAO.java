@@ -18,7 +18,7 @@ public class BoardDAO {
 	SqlSession sqlSession;
 	
 	
-	// 공통(디테일 / 수정 / 삭제 / 조회수)
+	// 공통(수정 / 삭제 / 조회수)
 	// 수정
 	public int boardUpdate(Board board) throws Exception {
 		System.out.println("서비스impl의 boardNum값 : " + board.getBoardNum());
@@ -95,6 +95,12 @@ public class BoardDAO {
 		System.out.println("DAO에 들어온 페이지 카운트 값 : " + page.getCount());
 		int count = sqlSession.selectOne("board.suggestionBoardCount", page);
 		return count;
+	}
+	
+	// Board 테이블에서 groupNo의 최대값 구하기
+	public int getGroupnoMax() {
+		int max = sqlSession.selectOne("board.getGroupnoMax");
+		return max;
 	}
 	
 	
