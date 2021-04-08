@@ -275,7 +275,7 @@
                             <c:forEach var="n" items="${acceptList}">
 								<tr>
 	                                <td><input type="checkbox" class="check" name="check" value="${n.emailNumber}"></td>
-	                                <td>${n.employeeName}/${n.rankCode}/${n.departmentCode}</td>
+	                                <td>${n.employeeName} / ${n.rankCode} / ${n.departmentCode}</td>
 	                            <c:set var="read" value="${n.emailRead}"/>
 								
 								<c:if test="${read eq 'YES'}">	                                
