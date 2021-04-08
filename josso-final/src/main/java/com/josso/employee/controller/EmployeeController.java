@@ -104,8 +104,8 @@ public class EmployeeController {
 	
 	//사원 등록
 	@RequestMapping(value="employeeInsert.do", method = RequestMethod.POST)
-	public ModelAndView employeeInsert(Employee employee, ModelAndView modelAndView) throws Exception {
-		int cnt = employeeService.insertEmployee(employee);
+	public ModelAndView employeeInsert(Employee employee, ModelAndView modelAndView,HttpServletResponse response) throws Exception {
+		int cnt = employeeService.insertEmployee(employee, response);
 		modelAndView.addObject("cnt",cnt);
 		modelAndView.setViewName("employee/employeeInsertComplete");
 		System.out.println(cnt);

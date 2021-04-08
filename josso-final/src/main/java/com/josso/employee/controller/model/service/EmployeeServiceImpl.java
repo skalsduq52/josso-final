@@ -57,27 +57,27 @@ public class EmployeeServiceImpl implements EmployeeService{
 	}
 	
 	@Override
-	public int insertEmployee(Employee employee) throws Exception{
-//		PrintWriter out = response.getWriter();
-//		
-//		if(employeeDao.checkEmployeeNumber(employee.getEmployeeNumber())==1) {
-//			out.println("<script>");
-//			out.println("alert('동일한 사원번호가 존재합니다.');");
-//			out.println("history.go(-1);");
-//			out.println("</script>");
-//			out.close();
-//			return 0;
-//		}else if(employeeDao.checkEmployeeEmail(employee.getEmployeeEmail())==1) {
-//			out.println("<script>");
-//			out.println("alert('동일한 이메일이 존재합니다.');");
-//			out.println("history.go(-1);");
-//			out.println("</script>");
-//			out.close();
-//			return 0;
-//		}else {
+	public int insertEmployee(Employee employee, HttpServletResponse response) throws Exception{
+		PrintWriter out = response.getWriter();
+		
+		if(employeeDao.checkEmployeeNumber(employee.getEmployeeNumber())==1) {
+			out.println("<script>");
+			out.println("alert('동일한 사원번호가 존재합니다.');");
+			out.println("history.go(-1);");
+			out.println("</script>");
+			out.close();
+			return 0;
+		}else if(employeeDao.checkEmployeeEmail(employee.getEmployeeEmail())==1) {
+			out.println("<script>");
+			out.println("alert('동일한 이메일이 존재합니다.');");
+			out.println("history.go(-1);");
+			out.println("</script>");
+			out.close();
+			return 0;
+		}else {
 		int cnt = employeeDao.insertEmployee(employee);
 		return cnt;
-//		}
+		}
 		
 	}
 	

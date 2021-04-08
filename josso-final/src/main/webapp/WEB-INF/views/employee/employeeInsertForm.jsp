@@ -1,41 +1,77 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<!-- jstl 사용하기 위한 선언부 -->
+<%@ taglib prefix = "c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
-    <head>
-        <link rel="stylesheet" href="../finalproject/common.css" type="text/css">
+<head>
+	<link rel="stylesheet" type="text/css"  href="${pageContext.request.contextPath}/resources/css/common.css"></link>
         <title>josso</title>
         <!-- 외부 글꼴 적용 시 링크 -->
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
-         <!-- Icon -->
-         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
-         crossorigin="anonymous">
-         <!-- 부트스트랩 css 사용 -->
-         <!-- Latest compiled and minified CSS -->
-         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-         <!-- jQuery library -->
-         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-         <!-- Popper JS -->
-         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-         <!-- Latest compiled JavaScript -->
-         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        <script>
-            $(function(){
-                $('.side_title').click(function(){
-                    // $('.hover_tag').slideToggle("slow,linear,callback");
-                    var submenu = $('.hover_tag>li');
-                    if(submenu.is(":visible")){
-                        submenu.slideUp();
-                    }else{
-                        submenu.slideDown();
-                    }
-                });
-            });
-        </script>
-
+        <!-- Icon -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
+        crossorigin="anonymous">
+        <!-- 부트스트랩 css 사용 -->
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <!-- Popper JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <!-- fullcalendar css -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/main.min.css">
+        <!-- fullcalendar js -->
+        <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/main.min.js"></script>
+        <script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
+	<title>Employee List</title>
+	        <!--공통 CSS-->
         <style>
-            #title{
+            nav {
+                height: 130px;
+            }
+            .nav_title{
+                float: left;
+                display: block;
+                width: 1000px;
+                height: 80px;
+                padding: 50px 30px;
+                text-align: left;
+            }
+
+            .nav_content {
+                float: left;
+                display:block;
+                margin-left: 20px;
+                width: 800px;
+                height: 70px;
+                margin-top: 7px;
+                border-radius: 20px;
+                text-align: left;
+                background: cornsilk;
+            }
+
+            .report_kind {
+               color: gray;
+           }
+
+           .report_kind:hover {
+               text-decoration: none;
+           }
+
+           .hover_tag {
+               padding-left: 45px;
+           }
+           .loginInfo{
+           		float:right;
+           		display:block;
+           		margin:20px;
+           }
+           
+                #title{
                 padding: 15px 20px;
                 font-size: 20px;
             }
@@ -46,62 +82,11 @@
                 width:65px;
             }
         </style>
-    </head>
-    
-    <body class="body">
-        <header>
-            <div class="navigation">
-                <ul>
-                    <li>
-                        <a href="#">
-                        <span class="icon"><i class="fa fa-home" aria-hidden="true"></i></span>
-                        <span class="icon">홈</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                        <span class="icon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
-                        <span class="icon">메일</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                        <span class="icon"><i class="fas fa-list-ul fa-lg" aria-hidden="true"></i></span>
-                        <span class="icon">게시판</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                        <span class="icon"><i class="fas fa-calendar-alt fa-lg" aria-hidden="true"></i></span>
-                        <span class="icon">캘린더</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                        <span class="icon"><i class="fas fa-clock fa-lg" aria-hidden="true"></i></span>
-                        <span class="icon">예약</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                        <span class="icon"><i class="fas fa-clipboard fa-lg" aria-hidden="true"></i></span>
-                        <span class="icon">결재</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                        <span class="icon"><i class="fas fa-user-friends fa-lg" aria-hidden="true"></i></span>
-                        <span class="icon">조직도</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                        <span class="icon"><i class="fa fa-paste" aria-hidden="true"></i></span>
-                        <span class="icon">보고</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
+
+</head>
+<body class="body">
+  		<header>
+            <%@ include file="../include/header.jsp"%>
         </header>
         <aside class="border-right">
             <div>
@@ -152,11 +137,15 @@
                 </section>
             </div>
         </aside>
-        <nav class="border-bottom">
-            <!-- Navbar content -->
-            <div id="title"><p><b>사원 등록</b></p></div>
+        <nav class="border-bottom" style="padding-bottom: 100px;">
+                <div class="nav_title">
+                    <h2 id="suggestion_title" style="font-weight: 600;">전체 주소록</h2>
+                </div>
+                <div class="loginInfo">${employee.employeeName}님 안녕하세요.</div>
+                <br>
+                <div>
+                </div>
         </nav>
-         
         <main>
             <div id="main">
             <form action="/josso/employeeInsert.do" method="post">
@@ -204,8 +193,6 @@
             </form>
         </div>
         </main>
-        <footer class="border-top">
+</body>
 
-        </footer>
-    </body>
 </html>

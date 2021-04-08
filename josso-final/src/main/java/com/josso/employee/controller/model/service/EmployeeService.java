@@ -22,7 +22,7 @@ public interface EmployeeService {
 		
 		public void checkEmployeeEmail(String employeeEmail, HttpServletResponse response) throws Exception;
 		
-		public int insertEmployee(Employee employee) throws Exception;
+		public int insertEmployee(Employee employee, HttpServletResponse response) throws Exception;
 		
 		public int updateEmployee(Employee employee) throws Exception;
 		
