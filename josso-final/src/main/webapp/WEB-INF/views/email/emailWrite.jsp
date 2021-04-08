@@ -84,7 +84,7 @@
             					area += "검색하신 결과가 없습니다."
             					}else{
             						for(var i in data.list){
-            							area += "<li class='selectEmp'><span  onclick='fnEmpSet1(\""+data.list[i].email+"\")'>"
+            							area += "<li class='selectEmp'><span  onclick='fnEmpSet1(\""+data.list[i].name+" / " +data.list[i].rCode+" / "+data.list[i].dCode+" / "+data.list[i].email+"\")'>"
             								+data.list[i].name+" / "
             								+data.list[i].rCode+" / "
             								+data.list[i].dCode+" / "
@@ -103,6 +103,8 @@
             // 검색목록에서 이메일 추출
             function fnEmpSet1(empEmail){
 				$('#emailAccept').val(empEmail);
+				var Array1 = empEmail.split(' / ');
+				$('#emailAccept-h').val(Array1[3]);
 				$('#textarea1').attr("style","display:none");
 			}
             // 참조자 검색 기능
@@ -125,9 +127,9 @@
             				var area = $('#textarea2').html();
             				if(data.list.length == 0){
             					area += "검색하신 결과가 없습니다."
-            					}else{
+            					}else{						/* " / " +data.list[i].rCode+" / "+data.list[i].dCode+" / "+data.list[i].email+ */
             						for(var i in data.list){
-            							area += "<li class='selectEmp'><span  onclick='fnEmpSet2(\""+data.list[i].email+"\")'>"
+            							area += "<li class='selectEmp'><span  onclick='fnEmpSet2(\""+data.list[i].name+" / " +data.list[i].rCode+" / "+data.list[i].dCode+" / "+data.list[i].email+"\")'>"
             								+data.list[i].name+" / "
             								+data.list[i].rCode+" / "
             								+data.list[i].dCode+" / "
@@ -146,6 +148,8 @@
          	// 검색목록에서 이메일 추출
             function fnEmpSet2(empEmail){
 				$('#emailReference').val(empEmail);
+				var Array = empEmail.split(' / ');
+				$('#emailReference-h').val(Array[3]);
 				$('#textarea2').attr("style","display:none");
 			}
          
@@ -267,17 +271,20 @@
                         <td style="width: 120px;">보내는 사람 </td>
                         <td colspan="2">
                         <input type="hidden" name="employeeNumber"  value="${employee.employeeNumber}">
-                        <input type="email"  readonly autocomplete="off" autofocus value="${employee.employeeEmail}" required name="emailSend" class="form-control form-control-sm">
+                        <input type="email"  readonly autocomplete="off" autofocus value="${employee.employeeName} / ${employee.rankCode} / ${employee.departmentCode} / ${employee.employeeEmail}" required class="form-control form-control-sm">
+                        <input type="hidden" name="emailSend" value="${employee.employeeEmail}">
                         </td>
                     </tr>
                     <tr >
                         <td>받는 사람  </td>
-                        <td colspan="2"><input autocomplete="off" placeholder="이름을 입력해주세요" autofocus id="emailAccept"  type="email" required name="emailAccept" class="inputEmail1 form-control form-control-sm">
+                        <td colspan="2"><input autocomplete="off" placeholder="이름을 입력해주세요" autofocus id="emailAccept"  type="text" required class="inputEmail1 form-control form-control-sm">
+                        <input type="hidden" id="emailAccept-h" name="emailAccept" value="">
                         <div id="textarea1" class="listEmail1" style="display:none;"></div></td>
                     </tr>
                     <tr >
                         <td>참조  </td>
-                        <td colspan="2"><input autocomplete="off"  placeholder="이름을 입력해주세요"  id="emailReference" autofocus type="email" name="emailReference" class="inputEmail2 form-control form-control-sm">
+                        <td colspan="2"><input autocomplete="off"  placeholder="이름을 입력해주세요" autofocus id="emailReference"  type="text" class="inputEmail2 form-control form-control-sm">
+                        <input type="hidden" id="emailReference-h" name="emailReference" value="">
                         <div id="textarea2" class="listEmail2" style="display:none;"></div></td>
                         
                     </tr>
