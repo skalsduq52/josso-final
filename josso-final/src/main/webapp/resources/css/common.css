@@ -152,3 +152,8 @@ footer{
     padding: 0px 2px 2px 2px;
     cursor: pointer;
 }
+   .loginInfo{
+           		float:right;
+           		display:block;
+           		margin:20px;
+           }

@@ -68,11 +68,7 @@
            .hover_tag {
                padding-left: 45px;
            }
-            .loginInfo{
-           		float:right;
-           		display:block;
-           		margin:20px;
-           }
+        
         </style>
 
         <!--공통 아닌 것들-->
@@ -209,10 +205,9 @@
                 <div class="nav_title">
                     <h2 id="suggestion_title" style="font-weight: 600;">전체 주소록</h2>
                 </div>
-                <div class="loginInfo">${employee.employeeName}님 안녕하세요.</div>
-                <br>
-                <div>
-                </div>
+                <%@ include file="../include/logout.jsp"%>
+                
+                
         </nav>
         <main>
             <div class="border-top border-bottom">
