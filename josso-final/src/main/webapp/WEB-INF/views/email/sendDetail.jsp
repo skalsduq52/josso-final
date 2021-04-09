@@ -23,7 +23,7 @@
          <!-- Latest compiled JavaScript -->
          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
          <!-- SmartEditor2 라이브러리(경로 맞춰줘야 함.) -->
-         <script type="text/javascript" src="../team01/smartEditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+         <!-- <script type="text/javascript" src="../team01/smartEditor/js/service/HuskyEZCreator.js" charset="utf-8"></script> -->
         <script>
             $(function(){
                 $('.side_title').click(function(){
@@ -39,7 +39,7 @@
             
         </script>
         <script type="text/javascript">
-            var oEditors = [];
+            /* var oEditors = [];
             $(function(){
                   nhn.husky.EZCreator.createInIFrame({
                       oAppRef: oEditors,
@@ -57,7 +57,7 @@
                       fCreator: "createSEditor2"
                   });
                 
-            });
+            }); */
             $("#re").click(function(){
                 if(confirm("정말 등록하시겠습니까 ?") == true){
                     alert("등록되었습니다");

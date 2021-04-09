@@ -23,7 +23,7 @@
          <!-- Latest compiled JavaScript -->
          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
          <!-- SmartEditor2 라이브러리(경로 맞춰줘야 함.) -->
-         <script type="text/javascript" src="../team01/smartEditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+         <!-- <script type="text/javascript" src="../team01/smartEditor/js/service/HuskyEZCreator.js" charset="utf-8"></script> -->
         <script>
             $(function(){
                 $('.side_title').click(function(){
@@ -39,7 +39,7 @@
             
         </script>
         <script type="text/javascript">
-            var oEditors = [];
+            /* var oEditors = [];
             $(function(){
                   nhn.husky.EZCreator.createInIFrame({
                       oAppRef: oEditors,
@@ -57,7 +57,7 @@
                       fCreator: "createSEditor2"
                   });
                 
-            });
+            }); */
             $("#re").click(function(){
                 if(confirm("정말 등록하시겠습니까 ?") == true){
                     alert("등록되었습니다");
@@ -157,16 +157,16 @@
                     </tr>
                     <tr>
                         <td>보낸 사람  </td>
-                        <td colspan="2"><input type="email" readonly value="${es.employeeName} / ${es.departmentCode} / ${es.rankCode}" class="form-control form-control-sm "></td>
+                        <td colspan="2"><input type="email" readonly value="${es.employeeName} / ${es.rankCode} / ${es.departmentCode}" class="form-control form-control-sm "></td>
                     </tr>
                     <tr>
                         <td>받는 사람</td>
-                        <td colspan="2"><input type="email" readonly value="${ea.employeeName} / ${ea.departmentCode} / ${ea.rankCode}" class="form-control form-control-sm ">
+                        <td colspan="2"><input type="email" readonly value="${ea.employeeName} / ${ea.rankCode} / ${ea.departmentCode}" class="form-control form-control-sm ">
                         <table id="textarea1" rows="4" cols="100" style="overflow: auto; height: 50px; display:none;"></table></td>
                     </tr>
                     <tr>
                         <td>참조</td>
-                        <td colspan="2"><input type="text" readonly value="${er.employeeName} / ${er.departmentCode} / ${er.rankCode}"class="form-control form-control-sm ">
+                        <td colspan="2"><input type="text" readonly value="${er.employeeName} / ${er.rankCode} / ${er.departmentCode}"class="form-control form-control-sm ">
                         <table id="textarea2" rows="4" cols="100" style="overflow: auto; height: 50px; display:none;"></table></td>
                     </tr>
                     <tr>
