@@ -54,32 +54,15 @@ public class StaffController {
 	@ResponseBody
 	@RequestMapping(value="staff/address/detail", method=RequestMethod.POST, produces = "text/plain; charset=UTF-8")
 	public String addressDetail(@RequestParam("employeeNumber") String employeeNumber, HttpServletResponse response) throws Exception {
-		
-		// AJAX정상실행 테스트
-		System.out.println("아작스들어옴");
-		
-		// Input 데이터 확인
-		System.out.println("employeeNumber : " + employeeNumber);
-		
 		// response 인코딩 설정
 		response.setCharacterEncoding("UTF-8");
-
 		// employee에 select한 데이터 담아주기
 		Employee result = employeeService.selectEmployee(employeeNumber);
-		
 		// JSON전송객체 생성
 		JSONObject job = new JSONObject();
-		
-		System.out.println(result.getEmployeeName());
-
 		// 고용일자(Date를 String으로 변환)
 		SimpleDateFormat format = new SimpleDateFormat("yy / MM / dd");
 		String hiredate = format.format(result.getEmployeeHireDate());
-		
-		// 첨부파일(사진)
-		// MultipartFile picture = result.getEmployeePicture();
-		// picture.transferTo(new File("사진이 저장되어있는 경로" + picture.getOriginalFilename()));
-		
 		// 데이터타입 바꿔주고 나면 value값 picture로 바꿔주기
 		job.put("picture", result.getEmployeePicture());
 		job.put("name", result.getEmployeeName());
@@ -90,8 +73,6 @@ public class StaffController {
 		job.put("tel", result.getEmployeeExtensionNumber());
 		job.put("phone", result.getEmployeePhone());
 		job.put("hiredate", hiredate);
-		
-		
 		
 		return job.toJSONString();
 	}

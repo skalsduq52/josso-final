@@ -312,11 +312,16 @@
 
            <div class="row">        
             	<div class="container col-sm-6" style="text-align:left; padding-left:40px">
-                	<button class="btn btn-info"><a href="list" style="color:white">목록</a></button>
+                	<c:if test="${employee.roleCode == 1}"></c:if>
+                	<button class="btn btn-info">
+                		<a href="reply?fk_Seq=${num}&groupNo=${suggestionBoard.groupNo}&depthNo=${suggestionBoard.depthNo}"; style="color:white">답글 작성</a></button>
+                	<button class="btn btn-secondary"><a href="list" style="color:white">목록</a></button>
             	</div>
             	<div class="container col-sm-6" style="text-align:right; padding-right:11%">
+            	<c:if test="${suggestionBoard.employeeName == employee.employeeName }">
 	                <button class="btn btn-info"><a href="updateBridge?num=${num}" style="color:white">수정하기</a></button>
     	            <button class="btn btn-secondary" onclick="confirm('정말 삭제하시겠습니까?')"><a href="delete?num=${num}" style="color:white">삭제</a></button>
+            	</c:if>
             	</div>
             </div>
            </div>

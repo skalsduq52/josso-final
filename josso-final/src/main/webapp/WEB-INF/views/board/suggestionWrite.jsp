@@ -153,12 +153,15 @@
               }, 
               fCreator: "createSEditor2"
           });
+     	  
+          
+          // 스마트에디터 값 전송
+          $('form').click(function(){
+    	 	oEditors.getById['smartEditor'].exec("UPDATE_CONTENTS_FIELD", []);
+          });
+          
+         
         
-    });
-    
-    // 스마트에디터 값 전송
-    $('form').click(function(){
-	 	oEditors.getById['smartEditor'].exec("UPDATE_CONTENTS_FIELD", []);
     });
 </script>
 
@@ -295,6 +298,11 @@
         
         <main style="width:80%;">
             <form action="register" method="POST" enctype="multipart/form-data">
+            <!-- 답글 쓰기인 경우 -->
+            <input type="hidden" name="fk_Seq" value="${fk_Seq}">
+            <input type="hidden" name="groupNo" value="${groupNo}">
+            <input type="hidden" name="depthNo" value="${depthNo}">
+            
             <div class="border-top">
                 <table style="width: 100%;" id="board">
                     <thead>
@@ -329,7 +337,7 @@
             </div>
 
             <div style="float:right; padding-right: 30px;">
-                <input class="btn btn-primary" type="submit" value="제출하기"></tr>
+                <input class="btn btn-primary" type="submit" value="제출하기">
             </div>  
            </form>        
         </main>

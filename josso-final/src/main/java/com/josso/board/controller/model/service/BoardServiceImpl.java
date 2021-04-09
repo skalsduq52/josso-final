@@ -24,11 +24,11 @@ public class BoardServiceImpl implements BoardService {
 	// 공통
 	// 수정
 	@Override
-	public int boardUpdate(Board board, HttpServletRequest request) throws Exception {
+	public int boardUpdate(Board board) throws Exception {
 		// 치환
-		String content = request.getParameter("boardContent");
-		content = content.replace("\n\r", "<br>");
-		content = content.replace(" ", "&nbsp;");
+		//String content = request.getParameter("boardContent");
+		//content = content.replace("\n\r", "<br>");
+		//content = content.replace(" ", "&nbsp;");
 		// 결과값
 		int result = boardDao.boardUpdate(board);
 		return result;
@@ -52,11 +52,11 @@ public class BoardServiceImpl implements BoardService {
 		// 디테일 보여주기
 		Board NoticeDetail = boardDao.noticeDetail(boardNum);
 		// 치환
-		String title = NoticeDetail.getBoardTitle();
-		title = title.replace(" ", "&nbsp;");
-		String content = NoticeDetail.getBoardContent();
-		content = content.replace("\n\r", "<br>");
-		content = content.replace(" ", "&nbsp;");
+		/*
+		 * String title = NoticeDetail.getBoardTitle(); title = title.replace(" ",
+		 * "&nbsp;"); String content = NoticeDetail.getBoardContent(); content =
+		 * content.replace("\n\r", "<br>"); content = content.replace(" ", "&nbsp;");
+		 */
 		// 깃 받아라
 		return NoticeDetail;
 	}
@@ -126,10 +126,18 @@ public class BoardServiceImpl implements BoardService {
 	public int suggestionWrite(Board board, HttpSession session, HttpServletResponse response, HttpServletRequest request) throws Exception {
 		// 캐릭터인코딩
 		response.setContentType("text/html;charset=utf-8");
+		System.out.println("널인지 아닌지 : " + board.getFk_Seq());
+		
+		// 원글인지 답글인지 구분하기
+		if(board.getFk_Seq() == null || board.getFk_Seq().trim().isEmpty()) {
+			int groupNo = boardDao.getGroupnoMax()+1;
+			board.setGroupNo(String.valueOf(groupNo));
+		}
+		
 		// 로그인 한 회원정보 세션값으로 가져오기
 		Employee employee = (Employee)session.getAttribute("employee");
-		board.setBoardWriter("작성자 : " +employee.getEmployeeNumber());
-		System.out.println(board.getBoardWriter());
+		board.setBoardWriter(employee.getEmployeeNumber());
+		System.out.println("여기서부터 오류");
 		int result = boardDao.suggestionWrite(board);
 		System.out.println("결과 : " + result);
 		PrintWriter out = response.getWriter();

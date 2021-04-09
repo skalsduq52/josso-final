@@ -13,7 +13,7 @@ public class Board {
 	private String boardTitle;
 	private String boardContent;
 	private String boardFile;
-	//private MultipartFile boardFile;
+	//private MultipartFile boardFile;(사용 안 됨.. 왜지...)
 	private String boardWriter;
 	private Date boardRegDate; 
 	private int boardHit;
@@ -21,7 +21,16 @@ public class Board {
 	private String employeeName;
 	private String departmentCode;
 	private String rankCode;
+	// 답변 게시판에 쓸 것
+	private String groupNo;
+	private String fk_Seq;
+	private String depthNo;
 	
+
+
+
+
+
 
 	// 기본 생성자
 	public Board() {}
@@ -115,15 +124,40 @@ public class Board {
 	public void setRankCode(String rankCode) {
 		this.rankCode = rankCode;
 	}
-
-
-	@Override
-	public String toString() {
-		return String.format(
-				"Board [boardNum=%s, boardKind=%s, boardTitle=%s, boardContent=%s, boardFile=%s, boardWriter=%s, boardRegDate=%s, boardHit=%s, employeeName=%s, departmentCode=%s, rankCode=%s]",
-				boardNum, boardKind, boardTitle, boardContent, boardFile, boardWriter, boardRegDate, boardHit,
-				employeeName, departmentCode, rankCode);
+	
+	public String getGroupNo() {
+		return groupNo;
 	}
+
+
+	public void setGroupNo(String groupNo) {
+		this.groupNo = groupNo;
+	}
+	
+	public String getFk_Seq() {
+		return fk_Seq;
+	}
+
+
+	public void setFk_Seq(String fk_Seq) {
+		this.fk_Seq = fk_Seq;
+	}
+	
+	public String getDepthNo() {
+		return depthNo;
+	}
+
+
+	public void setDepthNo(String depthNo) {
+		this.depthNo = depthNo;
+	}
+
+
+
+
+
+
+
 	
 	
 	

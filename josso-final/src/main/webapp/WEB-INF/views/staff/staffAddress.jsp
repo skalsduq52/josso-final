@@ -166,6 +166,9 @@
                     var employeeNumber = $(this).parent().parent().children('.employeeNumber').text();
                     console.log(employeeNumber);
                     
+                   	/* var imgPath = '<img src="${pageContext.request.contextPath}/resources/images/test_banana.PNG" id="picture">'; */
+                   	var imgPath = '<img src="${pageContext.request.contextPath}/resources/multipartFile/';
+                   	var imgPathEnd = '" id="picture">'; 
                     
                     $.ajax({
     					type : "POST",
@@ -177,13 +180,9 @@
     					success : function(data) {
 						$('#addressDetail').modal();
     						
-						// 콘솔
-						console.log('데이터 들어옴');
-    					console.log('이름 : ' + JSON.stringify(data));
-    					
+                    	
 						$('.modal-title').html(data.name);
-						
-						// $('#picture').html(data.picture);
+						$('#picture').html(imgPath+data.picture+imgPathEnd);
 						$('#number').html(data.number);
 						$('#rank').html(data.rank);
 						$('#position').html(data.position);
@@ -378,7 +377,7 @@
 	      			<tr>
 			        	<td colspan="2">
 			        		<div id="picture">
-			        		 <img src="${pageContext.request.contextPath}/resources/images/test_banana.PNG" id="picture">
+			        		<%--  <img src="${pageContext.request.contextPath}/resources/images/test_banana.PNG" id="picture"> --%>
 			        		</div><br>
 			        	</td>
 	      			</tr>
@@ -437,9 +436,5 @@
 	    </div>
 	  </div>
 	</div>
-        </main>
-        <footer class="border-top">
-	수정했읍니다.!
-        </footer>
     </body>
 </html>

@@ -13,7 +13,7 @@ public interface BoardService {
 	
 	// 공통
 	// 수정
-	public int boardUpdate(Board board, HttpServletRequest request) throws Exception;
+	public int boardUpdate(Board board) throws Exception;
 	
 	// 삭제
 	public int boardDelete(int boardNum) throws Exception;

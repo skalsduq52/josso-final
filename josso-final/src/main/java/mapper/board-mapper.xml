@@ -16,6 +16,10 @@
 		<result property="employeeName" column="EMPLOYEE_NAME"></result>
 		<result property="departmentCode" column="DEPARTMENT_CODE"></result>
 		<result property="rankCode" column="RANK_CODE"></result>
+		<!-- 건의사항 답글 VO 생성 -->
+		<result property="groupNo" column="GROUP_NO"></result>
+		<result property="fk_Seq" column="FK_SEQ"></result>
+		<result property="depthNo" column="GROUP_NO"></result>
 	</resultMap>
 	
 	
@@ -50,7 +54,8 @@
 	<!-- 공지사항 -->
 	<!-- 공지사항 전체리스트(목록)-->
 	<select id="selectNoticeAll" parameterType="Paging" resultMap="board">
-		SELECT * FROM (SELECT ROWNUM NUM, EV.* FROM 
+		SELECT * FROM (SELECT ROWNUM NUM, EV.* 
+					FROM 
 		            (SELECT BOARD.*, EMPLOYEE.EMPLOYEE_NAME, EMPLOYEE.DEPARTMENT_CODE, EMPLOYEE.RANK_CODE 
 		            FROM BOARD, EMPLOYEE 
 		            WHERE (BOARD_KIND='공지사항' 
@@ -58,8 +63,15 @@
 		            AND ${title} LIKE '%' || #{query} || '%' 
 		            ORDER BY BOARD_NUM DESC) EV) 
 		            WHERE NUM BETWEEN #{startRange} AND #{endRange}
-		<!-- SELECT BOARD.*, EMPLOYEE.EMPLOYEE_NAME, EMPLOYEE.DEPARTMENT_CODE, EMPLOYEE.RANK_CODE FROM BOARD, EMPLOYEE WHERE BOARD_KIND='공지사항' AND EMPLOYEE.EMPLOYEE_NUMBER = BOARD.BOARD_WRITER ORDER BY BOARD_NUM DESC WHERE NUM BETWEEN #{startRange} AND #{endRange} -->    
-		<!-- SELECT BOARD.*, EMPLOYEE.EMPLOYEE_NAME, EMPLOYEE.DEPARTMENT_CODE, EMPLOYEE.RANK_CODE FROM BOARD, EMPLOYEE WHERE BOARD_KIND='공지사항' AND EMPLOYEE.EMPLOYEE_NUMBER = BOARD.BOARD_WRITER ORDER BY BOARD_NUM DESC -->
+		            
+<!-- 		SELECT * FROM (SELECT ROWNUM NUM, EV.* FROM 
+		            (SELECT BOARD.*, EMPLOYEE.EMPLOYEE_NAME, EMPLOYEE.DEPARTMENT_CODE, EMPLOYEE.RANK_CODE 
+		            FROM BOARD, EMPLOYEE 
+		            WHERE (BOARD_KIND='공지사항' 
+		            AND EMPLOYEE.EMPLOYEE_NUMBER = BOARD.BOARD_WRITER) 
+		            AND ${title} LIKE '%' || #{query} || '%' 
+		            ORDER BY BOARD_NUM DESC) EV) 
+		            WHERE NUM BETWEEN #{startRange} AND #{endRange}		 -->            
 	</select>
 	
 	<!-- 공지사항 작성 -->
@@ -70,7 +82,8 @@
 	
 	<!-- 공지사항 개시물 갯수 -->
 	<select id="noticeBoardCount" parameterType="Paging" resultType="_int">
-		SELECT COUNT(*) FROM (SELECT BOARD.*, EMPLOYEE.EMPLOYEE_NAME FROM BOARD, EMPLOYEE WHERE BOARD_KIND='공지사항' AND EMPLOYEE.EMPLOYEE_NUMBER = BOARD.BOARD_WRITER ORDER BY BOARD_NUM DESC) WHERE ${title} LIKE '%' || #{query} || '%'
+		SELECT COUNT(*) FROM (SELECT BOARD.*, EMPLOYEE.EMPLOYEE_NAME FROM BOARD, EMPLOYEE WHERE BOARD_KIND='공지사항' 
+		AND EMPLOYEE.EMPLOYEE_NUMBER = BOARD.BOARD_WRITER ORDER BY BOARD_NUM DESC) WHERE ${title} LIKE '%' || #{query} || '%'
 	</select>
 	
 	
@@ -86,19 +99,51 @@
 		            AND ${title} LIKE '%' || #{query} || '%' 
 		            ORDER BY BOARD_NUM DESC) EV) 
 		            WHERE NUM BETWEEN #{startRange} AND #{endRange}
+		            
+<!-- 		        SIBLINGS 해결해야함    
+					SELECT * FROM (SELECT ROWNUM NUM, EV.* FROM 
+		            (SELECT BOARD.*, EMPLOYEE.EMPLOYEE_NAME, EMPLOYEE.DEPARTMENT_CODE, EMPLOYEE.RANK_CODE 
+		            FROM BOARD, EMPLOYEE 
+		            WHERE (BOARD_KIND='건의사항' 
+		            AND EMPLOYEE.EMPLOYEE_NUMBER = BOARD.BOARD_WRITER) 
+		            AND ${title} LIKE '%' || #{query} || '%' 
+		            ORDER SIBLINGS BY GROUP_NO DESC, BOARD_NUM ASC) EV) 
+		            WHERE NUM BETWEEN #{startRange} AND #{endRange} -->
+		            
+		            
+		            
 		<!-- SELECT BOARD.*, EMPLOYEE.EMPLOYEE_NAME, EMPLOYEE.DEPARTMENT_CODE, EMPLOYEE.RANK_CODE FROM BOARD, EMPLOYEE WHERE BOARD_KIND='건의사항' AND EMPLOYEE.EMPLOYEE_NUMBER = BOARD.BOARD_WRITER ORDER BY BOARD_NUM DESC -->
 	</select>
 	
 	<!-- 건의사항 작성 -->
 	<insert id="suggestionWrite" parameterType="board">
-		INSERT INTO BOARD(BOARD_KIND, BOARD_TITLE, BOARD_CONTENT, BOARD_FILE, BOARD_WRITER, BOARD_REGDATE, BOARD_HIT) 
-					VALUES('건의사항', #{boardTitle}, #{boardContent}, #{boardFile}, #{boardWriter}, SYSDATE, 0)
+		<if test="fk_Seq == null">
+		INSERT INTO BOARD(BOARD_KIND, BOARD_TITLE, BOARD_CONTENT, BOARD_FILE, BOARD_WRITER, BOARD_REGDATE, BOARD_HIT, GROUP_NO, FK_SEQ, DEPTH_NO) 
+					VALUES('건의사항', #{boardTitle}, #{boardContent}, #{boardFile}, #{boardWriter}, SYSDATE, 0, #{groupNo}, DEFAULT, DEFAULT)
+		</if>
+		<if test="fk_Seq != null">
+		INSERT INTO BOARD(BOARD_KIND, BOARD_TITLE, BOARD_CONTENT, BOARD_FILE, BOARD_WRITER, BOARD_REGDATE, BOARD_HIT, GROUP_NO, FK_SEQ, DEPTH_NO) 
+					VALUES('건의사항', #{boardTitle}, #{boardContent}, #{boardFile}, #{boardWriter}, SYSDATE, 0, #{groupNo}, #{fk_Seq}, #{depthNo})
+		</if>
 	</insert>
 	
 	<!-- 건의사항 게시물 갯수 -->
 	<select id="suggestionBoardCount" parameterType="Paging" resultType="_int">
 		SELECT COUNT(*) FROM (SELECT BOARD.*, EMPLOYEE.EMPLOYEE_NAME FROM BOARD, EMPLOYEE WHERE BOARD_KIND='건의사항' AND EMPLOYEE.EMPLOYEE_NUMBER = BOARD.BOARD_WRITER ORDER BY BOARD_NUM DESC) WHERE ${title} LIKE '%' || #{query} || '%'
 	</select>
+	
+	<!-- BOARD테이블에서 groupNo의 최대값 구하기 -->
+	<select id="getGroupnoMax" resultType="_int">
+		SELECT NVL(MAX(GROUP_NO), 0) FROM BOARD
+	</select>
+
+
+
+
+
+
+
+
 
 	
 </mapper>

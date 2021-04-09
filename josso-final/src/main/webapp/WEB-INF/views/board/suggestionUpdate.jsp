@@ -153,6 +153,11 @@
               }, 
               fCreator: "createSEditor2"
           });
+          // 스마트에디터 값 전송
+          $('form').click(function(){
+    	 	oEditors.getById['smartEditor'].exec("UPDATE_CONTENTS_FIELD", []);
+          });
+          
         
     });
 </script>

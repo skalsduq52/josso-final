@@ -244,18 +244,33 @@
                             <th id="theme" style="width: 30%">제목</th>
                             <th style="width: 15%">작성자</th>
                             <th style="width: 15%">작성일</th>
-                            <th style="width: 10%">조회</th>
+                            <th style="width: 10%; text-align:center">조회</th>
                         </tr>
                     </thead>
                     <tbody>
                     	<c:forEach var="suggestionList" items="${suggestionList}">
-                        <tr>
-                            <td id="tdnum">${suggestionList.boardNum}</td>
-                            <td id="theme"><a href="detailPage?num=${suggestionList.boardNum}">${suggestionList.boardTitle}</a></td>
-                            <td>${suggestionList.employeeName}</td>
-                            <td><fmt:formatDate value="${suggestionList.boardRegDate}" pattern="yy년 MM월 dd일 / HH시 mm분"/></td>
-                            <td id="selectnum">${suggestionList.boardHit}</td>
-                        </tr>
+							<!-- 답변글이 아닌 원글인 경우 -->
+							<c:if test="${suggestionList.depthNo == 0}">
+		                        <tr>
+		                            <td id="tdnum">${suggestionList.boardNum}</td>
+	    	                        <td id="theme"><a href="detailPage?num=${suggestionList.boardNum}">${suggestionList.boardTitle}</a></td>
+	        	                    <td>${suggestionList.employeeName}</td>
+	            	                <td><fmt:formatDate value="${suggestionList.boardRegDate}" pattern="yy년 MM월 dd일 / HH시 mm분"/></td>
+	                	            <td style="text-align:center">${suggestionList.boardHit}</td>
+		                        </tr>
+							</c:if>
+							
+							<!-- 답변글인 경우 -->
+							<c:if test="${suggestionList.depthNo > 0}">
+		                        <tr>
+		                            <td id="tdnum">${suggestionList.boardNum}</td>
+		                            <td id="theme"><a href="detailPage?num=${suggestionList.boardNum}"><span>└ RE : </span> ${suggestionList.boardTitle}</a></td>
+		                            <td>${suggestionList.employeeName}</td>
+		                            <td><fmt:formatDate value="${suggestionList.boardRegDate}" pattern="yy년 MM월 dd일 / HH시 mm분"/></td>
+		                            <td style="text-align:center">${suggestionList.boardHit}</td>
+		                        </tr>
+							</c:if>
+
 						</c:forEach>
                     </tbody>    
                 </table>
