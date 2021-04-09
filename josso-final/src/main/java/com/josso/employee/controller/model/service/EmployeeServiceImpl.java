@@ -58,7 +58,9 @@ public class EmployeeServiceImpl implements EmployeeService{
 	
 	@Override
 	public int insertEmployee(Employee employee, HttpServletResponse response) throws Exception{
+		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
+		
 		
 		if(employeeDao.checkEmployeeNumber(employee.getEmployeeNumber())==1) {
 			out.println("<script>");
@@ -75,11 +77,27 @@ public class EmployeeServiceImpl implements EmployeeService{
 			out.close();
 			return 0;
 		}else {
-		int cnt = employeeDao.insertEmployee(employee);
-		return cnt;
+			int cnt = employeeDao.insertEmployee(employee);
+			System.out.println("Service"+cnt);
+				if(cnt == 1) {
+					out.println("<script>");
+					out.println("alert('("+employee.getEmployeeName()+")가 등록되었습니다.'); location.href='/josso/employee/employeeList'; ");
+					out.println("</script>");
+					out.close();
+			}else {
+				out.println("<script>");
+				out.println("alert('사원 등록에 실패 했습니다.');");
+				out.println("history.go(-1);");
+				out.println("</script>");
+				out.close();
+			
+				}
+			return cnt;
+			}
+		
 		}
 		
-	}
+	
 	
 	// 사원정보 수정
 	@Override
@@ -90,8 +108,25 @@ public class EmployeeServiceImpl implements EmployeeService{
 	
 	// 사원삭제
 	@Override
-	public int deleteEmployee(Employee employee) throws Exception{
+	public int deleteEmployee(Employee employee, HttpServletResponse response) throws Exception{
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		
 		int cnt = employeeDao.deleteEmployee(employee);
+		if(cnt == 1) {
+			out.println("<script>");
+			out.println("alert('("+employee.getEmployeeName()+")사원의 정보가 삭제되었습니다.'); location.href='/josso/employee/employeeList'; ");
+			out.println("</script>");
+			out.close();
+	}else {
+		out.println("<script>");
+		out.println("alert('삭제에 실패했습니다. 다시 시도해 주세요');");
+		out.println("history.go(-1);");
+		out.println("</script>");
+		out.close();
+	
+		}
+	
 		return cnt;
 	}
 	

@@ -138,13 +138,10 @@
             </div>
         </aside>
         <nav class="border-bottom" style="padding-bottom: 100px;">
-                <div class="nav_title">
-                    <h2 id="suggestion_title" style="font-weight: 600;">전체 주소록</h2>
-                </div>
-                <div class="loginInfo">${employee.employeeName}님 안녕하세요.</div>
-                <br>
-                <div>
-                </div>
+               <div class="nav_title">
+                   <h2 id="suggestion_title" style="font-weight: 600;">전체 주소록</h2>
+               </div>
+              <%@ include file="../include/logout.jsp"%>
         </nav>
         <main>
             <div id="main">

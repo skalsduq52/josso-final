@@ -96,8 +96,8 @@ public class EmployeeController {
 	// 사원 삭제
 	@RequestMapping(value="employeeDelete.do", method = RequestMethod.GET)	
 	//@GetMapping //@PostMapping 도 사용가능
-	public ModelAndView deleteEmployee(Employee employee, ModelAndView modelAndView) throws Exception {
-		 int cnt = employeeService.deleteEmployee(employee);
+	public ModelAndView deleteEmployee(Employee employee, ModelAndView modelAndView, HttpServletResponse response) throws Exception {
+		 int cnt = employeeService.deleteEmployee(employee, response);
 		 
 		 modelAndView.addObject("cnt", cnt);
 //		 System.out.println(cnt);
