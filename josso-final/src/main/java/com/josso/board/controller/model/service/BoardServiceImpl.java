@@ -121,31 +121,46 @@ public class BoardServiceImpl implements BoardService {
 		return SuggestionList;
 	}
 	
-	// 건의사항 작성
+	// 건의사항(글작성)
 	@Override
 	public int suggestionWrite(Board board, HttpSession session, HttpServletResponse response, HttpServletRequest request) throws Exception {
 		// 캐릭터인코딩
 		response.setContentType("text/html;charset=utf-8");
-		System.out.println("널인지 아닌지 : " + board.getFk_Seq());
-		
 		// 원글인지 답글인지 구분하기
 		if(board.getFk_Seq() == null || board.getFk_Seq().trim().isEmpty()) {
 			int groupNo = boardDao.getGroupnoMax()+1;
 			board.setGroupNo(String.valueOf(groupNo));
 		}
-		
 		// 로그인 한 회원정보 세션값으로 가져오기
 		Employee employee = (Employee)session.getAttribute("employee");
 		board.setBoardWriter(employee.getEmployeeNumber());
-		System.out.println("여기서부터 오류");
 		int result = boardDao.suggestionWrite(board);
-		System.out.println("결과 : " + result);
 		PrintWriter out = response.getWriter();
 		out.print("<script>alert('글이 등록되었습니다.'); location.href='list'; </script>");
 		out.close();
 		return result;
 	}
 	
+	// 건의사항 (답글)
+	@Override
+	public int suggestionReply(Board board, HttpSession session, HttpServletResponse response, HttpServletRequest request) throws Exception {
+		// 캐릭터인코딩
+		response.setContentType("text/html;charset=utf-8");
+		// 원글인지 답글인지 구분하기
+		/*
+		 * if(board.getFk_Seq() == null || board.getFk_Seq().trim().isEmpty()) { int
+		 * groupNo = boardDao.getGroupnoMax()+1;
+		 * board.setGroupNo(String.valueOf(groupNo)); }
+		 */
+		// 로그인 한 회원정보 세션값으로 가져오기
+		Employee employee = (Employee)session.getAttribute("employee");
+		board.setBoardWriter(employee.getEmployeeNumber());
+		int result = boardDao.suggestionReply(board);
+		PrintWriter out = response.getWriter();
+		out.print("<script>alert('글이 등록되었습니다.'); location.href='list'; </script>");
+		out.close();
+		return result;
+	}
 	
 	// 건의사항 갯수
 	@Override

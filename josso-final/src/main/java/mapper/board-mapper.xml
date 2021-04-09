@@ -19,7 +19,7 @@
 		<!-- 건의사항 답글 VO 생성 -->
 		<result property="groupNo" column="GROUP_NO"></result>
 		<result property="fk_Seq" column="FK_SEQ"></result>
-		<result property="depthNo" column="GROUP_NO"></result>
+		<result property="depthNo" column="DEPTH_NO"></result>
 	</resultMap>
 	
 	
@@ -97,7 +97,9 @@
 		            WHERE (BOARD_KIND='건의사항' 
 		            AND EMPLOYEE.EMPLOYEE_NUMBER = BOARD.BOARD_WRITER) 
 		            AND ${title} LIKE '%' || #{query} || '%' 
-		            ORDER BY BOARD_NUM DESC) EV) 
+		            START WITH FK_SEQ = 0
+            		CONNECT BY PRIOR BOARD_NUM = FK_SEQ
+		            ORDER SIBLINGS BY GROUP_NO DESC, BOARD_NUM ASC) EV) 
 		            WHERE NUM BETWEEN #{startRange} AND #{endRange}
 		            
 <!-- 		        SIBLINGS 해결해야함    
@@ -115,17 +117,27 @@
 		<!-- SELECT BOARD.*, EMPLOYEE.EMPLOYEE_NAME, EMPLOYEE.DEPARTMENT_CODE, EMPLOYEE.RANK_CODE FROM BOARD, EMPLOYEE WHERE BOARD_KIND='건의사항' AND EMPLOYEE.EMPLOYEE_NUMBER = BOARD.BOARD_WRITER ORDER BY BOARD_NUM DESC -->
 	</select>
 	
-	<!-- 건의사항 작성 -->
+	<!-- 건의사항 작성(Null일때) -->
 	<insert id="suggestionWrite" parameterType="board">
-		<if test="fk_Seq == null">
+		INSERT INTO BOARD(BOARD_KIND, BOARD_TITLE, BOARD_CONTENT, BOARD_FILE, BOARD_WRITER, BOARD_REGDATE, BOARD_HIT, GROUP_NO, FK_SEQ, DEPTH_NO) 
+					VALUES('건의사항', #{boardTitle}, #{boardContent}, #{boardFile}, #{boardWriter}, SYSDATE, 0, #{groupNo}, DEFAULT, DEFAULT)
+		</insert>
+	
+	<!-- 건의사항 답글 -->
+	<insert id="suggestionReply" parameterType="board">
+		INSERT INTO BOARD(BOARD_KIND, BOARD_TITLE, BOARD_CONTENT, BOARD_FILE, BOARD_WRITER, BOARD_REGDATE, BOARD_HIT, GROUP_NO, FK_SEQ, DEPTH_NO) 
+					VALUES('건의사항', #{boardTitle}, #{boardContent}, #{boardFile}, #{boardWriter}, SYSDATE, 0, #{groupNo}, #{fk_Seq}, #{depthNo})
+		</insert>
+<!-- 	<insert id="suggestionWrite" parameterType="board">
+		<if test='fk_Seq == "null"'>
 		INSERT INTO BOARD(BOARD_KIND, BOARD_TITLE, BOARD_CONTENT, BOARD_FILE, BOARD_WRITER, BOARD_REGDATE, BOARD_HIT, GROUP_NO, FK_SEQ, DEPTH_NO) 
 					VALUES('건의사항', #{boardTitle}, #{boardContent}, #{boardFile}, #{boardWriter}, SYSDATE, 0, #{groupNo}, DEFAULT, DEFAULT)
 		</if>
-		<if test="fk_Seq != null">
+		<if test='fk_Seq != "null"'>
 		INSERT INTO BOARD(BOARD_KIND, BOARD_TITLE, BOARD_CONTENT, BOARD_FILE, BOARD_WRITER, BOARD_REGDATE, BOARD_HIT, GROUP_NO, FK_SEQ, DEPTH_NO) 
 					VALUES('건의사항', #{boardTitle}, #{boardContent}, #{boardFile}, #{boardWriter}, SYSDATE, 0, #{groupNo}, #{fk_Seq}, #{depthNo})
 		</if>
-	</insert>
+	</insert> -->
 	
 	<!-- 건의사항 게시물 갯수 -->
 	<select id="suggestionBoardCount" parameterType="Paging" resultType="_int">

@@ -74,7 +74,9 @@ public class BoardDAO {
 	// 건의사항
 	// 건의사항 디테일
 	public Board suggestionDetail(String boardNum) throws Exception {
+		System.out.println("23"+boardNum);
 		Board board = sqlSession.selectOne("board.selectDetail", boardNum);
+		System.out.println("12"+board);
 		return board;
 	}
 	
@@ -84,10 +86,18 @@ public class BoardDAO {
 		return boardList;
 	}
 	
-	// 건의사항 작성
+	// 건의사항(글작성)
 	public int suggestionWrite(Board board) throws Exception {
 			int result = sqlSession.insert("board.suggestionWrite", board);
 			return result;
+	}
+	
+	// 건의사항(답글)
+	public int suggestionReply(Board board) throws Exception {
+		System.out.println("답글DAO들어옴 - fk_seq값:" + board.getFk_Seq());
+		System.out.println("답글DAO들어옴 - getDepthNo 값 : " + board.getDepthNo());
+		int result = sqlSession.insert("board.suggestionReply", board);
+		return result;
 	}
 	
 	// 건의사항 게시물 갯수

@@ -173,12 +173,11 @@ public class BoardController {
 		System.out.println("답글 브릿지 : " + groupNo);
 		System.out.println("답글 브릿지 : " + depthNo);
 		
-		
 		mv.addObject("fk_Seq", fk_Seq);
 		mv.addObject("groupNo", groupNo);
 		mv.addObject("depthNo", depthNo);
 		
-		mv.setViewName("board/suggestionWrite");
+		mv.setViewName("board/suggestionReply");
 		return mv;
 	}
 	
@@ -188,16 +187,47 @@ public class BoardController {
 				@RequestParam("boardTitle") String title,
 				@RequestParam("boardContent") String content,
 				@RequestParam("boardFile") MultipartFile file,
-				// 답글이 아닐 때는 필수조건이 아님
-				@RequestParam(value="fk_Seq", required=false) String seq,
-				@RequestParam(value="groupNo", required=false) String gNo,
-				@RequestParam(value="depthNo", required=false) String dNo,
+				ModelAndView mv, HttpSession session, HttpServletResponse response, MultipartHttpServletRequest request) throws Exception {
+			// 보드 객체 생성
+			Board board = new Board();
+			// 보드vo에 requestParam값 입력
+			board.setBoardTitle(title);
+			board.setBoardContent(content);
+			if(file != null) {
+				// 첨부파일 originalName을 변수에 저장
+				String originalName = file.getOriginalFilename();
+				// uuid로 새로운 파일명으로 변환
+				UUID uid = UUID.randomUUID();
+				String rename = uid.toString() + "_" + originalName;
+				// 내가 가진 깃 리포지토리 저장경로(절대경로임)(홍수명)
+				String path = "C:/Git/josso-final/josso-final/src/main/webapp/resources/multipartFile/"+rename;
+				// 깃으로 돌릴 때는 이 주소값 쓰세요(※주의※ 'workspace 경로에 한글이 들어가면 안됨')
+				//String path = request.getSession().getServletContext().getRealPath("resources/multipartFile"); 
+				// 파일저장
+				file.transferTo(new File(path));
+				// boardVO에 파일 저장
+				board.setBoardFile(rename);
+				} else {
+					file = null;
+				}
+			boardService.suggestionWrite(board, session, response, request);
+			return mv;
+		}
+
+
+		// 건의사항(답글)
+		@RequestMapping(value="board/suggestion/writeReply", method=RequestMethod.POST)
+		public ModelAndView suggestionWrite(
+				@RequestParam("boardTitle") String title,
+				@RequestParam("boardContent") String content,
+				@RequestParam("boardFile") MultipartFile file,
+				@RequestParam(value="fk_Seq") String seq,
+				@RequestParam(value="groupNo") String gNo,
+				@RequestParam(value="depthNo") String dNo,
 				ModelAndView mv, HttpSession session, HttpServletResponse response, MultipartHttpServletRequest request) throws Exception {
 			System.out.println("seq : " + seq);
 			System.out.println("gNo : " + gNo);
 			System.out.println("dNo : " + dNo);
-			
-			
 			// 보드 객체 생성
 			Board board = new Board();
 			// 보드에 답글관련 데이터 세팅
@@ -224,7 +254,7 @@ public class BoardController {
 				} else {
 					file = null;
 				}
-			boardService.suggestionWrite(board, session, response, request);
+			boardService.suggestionReply(board, session, response, request);
 			return mv;
 		}
 		
@@ -233,7 +263,9 @@ public class BoardController {
 	// 건의사항 (디테일페이지)
 	@RequestMapping(value="board/suggestion/detailPage", method=RequestMethod.GET)
 	public ModelAndView suggestionDetail(ModelAndView mv, @RequestParam("num") String boardNum, HttpServletRequest request) throws Exception {
+		
 		Board suggestionBoard = boardService.suggestionDetail(boardNum, request);
+		System.out.println("리스트에서 디테일 눌렀을 때 해당 게시물의 depth값 : " + suggestionBoard.getDepthNo());
 		String num = boardNum;
 		mv.addObject("num", num);
 		mv.addObject("suggestionBoard", suggestionBoard);

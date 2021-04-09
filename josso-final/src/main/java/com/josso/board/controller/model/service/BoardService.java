@@ -46,8 +46,11 @@ public interface BoardService {
 	// 건의사항 리스트 조회
 	public List<Board> suggestionList(BoardPaging page) throws Exception;
 	
-	// 건의사항 작성
+	// 건의사항 작성(글쓰기)
 	public int suggestionWrite(Board board, HttpSession session, HttpServletResponse response, HttpServletRequest request) throws Exception;
+	
+	// 건의사항 작성(답글달기)
+	public int suggestionReply(Board board, HttpSession session, HttpServletResponse response, HttpServletRequest request) throws Exception;
 	
 	// 건의사항 갯수
 	public int suggestionBoardCount(BoardPaging page) throws Exception;

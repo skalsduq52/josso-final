@@ -153,6 +153,16 @@ public class Board {
 	}
 
 
+	@Override
+	public String toString() {
+		return "Board [boardNum=" + boardNum + ", boardKind=" + boardKind + ", boardTitle=" + boardTitle
+				+ ", boardContent=" + boardContent + ", boardFile=" + boardFile + ", boardWriter=" + boardWriter
+				+ ", boardRegDate=" + boardRegDate + ", boardHit=" + boardHit + ", employeeName=" + employeeName
+				+ ", departmentCode=" + departmentCode + ", rankCode=" + rankCode + ", groupNo=" + groupNo + ", fk_Seq="
+				+ fk_Seq + ", depthNo=" + depthNo + "]";
+	}
+
+
 
 
 

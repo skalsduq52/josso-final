@@ -158,7 +158,7 @@
                     <tbody>
                     	<c:forEach var="suggestionList" items="${suggestionList}">
 							<!-- 답변글이 아닌 원글인 경우 -->
-							<c:if test="${suggestionList.depthNo == 0}">
+							<c:if test="${suggestionList.fk_Seq == 0}">
 		                        <tr>
 		                            <td id="tdnum">${suggestionList.boardNum}</td>
 	    	                        <td id="theme"><a href="detailPage?num=${suggestionList.boardNum}">${suggestionList.boardTitle}</a></td>
@@ -169,7 +169,7 @@
 							</c:if>
 							
 							<!-- 답변글인 경우 -->
-							<c:if test="${suggestionList.depthNo > 0}">
+							<c:if test="${suggestionList.fk_Seq > 0}">
 		                        <tr>
 		                            <td id="tdnum">${suggestionList.boardNum}</td>
 		                            <td id="theme"><a href="detailPage?num=${suggestionList.boardNum}"><span>└ RE : </span> ${suggestionList.boardTitle}</a></td>

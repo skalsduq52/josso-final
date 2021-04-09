@@ -3,9 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
-<html>   
-    <head>    
-		<meta charset="UTF-8"> 
+<html>
+    <head>
+    	<meta charset="UTF-8">
         <title>josso</title>
          <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/hsm_common.css" type="text/css">
         <!-- 외부 글꼴 적용 시 링크 -->
@@ -24,6 +24,7 @@
          <!-- Latest compiled JavaScript -->
          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
          <!-- SmartEditor2 라이브러리(경로 맞춰줘야 함.) -->
+         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/smartEditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
          <script>
             $(function(){
                 $('.side_title').click(function(){
@@ -37,6 +38,7 @@
                 });
             });
         </script>
+	<meta charset="UTF-8">
         
         <style>
            
@@ -76,26 +78,15 @@
 
             .left_td {
                 padding-bottom: 20px;
-                text-align:center;
+                padding-left: 40px;
                 width: 10%;
-                min-width: 200px;
-                background:#DCDCDC;
-                color:black; 
-                font-size: 1.2em;
+                min-width: 100px;
             }
 
+
             .right_td {
-                padding-left: 30px;
                 padding-bottom: 20px;
-                font-weight:700;
-                font-size:1.2em;
-                min-width:300px;
-            }
-            
-            #right_td{
-                padding-bottom: 20px;
-                font-weight:700;
-                font-size:1.2em;
+                padding-right: 30px;
             }
 
             #multipart {
@@ -107,7 +98,7 @@
             }
             
             #write_content{
-                height: 500px;
+                height: 400px;
             }
 
 
@@ -131,10 +122,6 @@
                text-decoration: none;
            }
            
-           .row {
-           		padding-top:30px;
-           }
-           
            	#suggestion_title {
 				/* padding-left : 20px; */
 				/* background : #38A9BA; */
@@ -143,11 +130,40 @@
 				width:280px;
 				font-weight : 700;
 			}
-			
-			td {
-				border : 1px solid lightgray;
-			}
+
+
+     
         </style>
+
+<script type="text/javascript">
+    var oEditors = [];
+    $(function(){
+          nhn.husky.EZCreator.createInIFrame({
+              oAppRef: oEditors,
+              elPlaceHolder: "smartEditor", //textarea에서 지정한 id와 일치해야 함. 
+              //SmartEditor2Skin.html 파일이 존재하는 경로
+              sSkinURI: "${pageContext.request.contextPath}/resources/smartEditor/SmartEditor2Skin.html",  
+              htParams : {
+                  // 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+                  bUseToolbar : true,             
+                  // 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음), 저는 크기 지정했기 땜에 사용 안 함.
+                  bUseVerticalResizer : false,     
+                  // 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음), 본에서도 쓰길래 true 해놓음,, 용도는 모르겠음
+                  bUseModeChanger : true,         
+              }, 
+              fCreator: "createSEditor2"
+          });
+     	  
+          
+          // 스마트에디터 값 전송
+          $('form').click(function(){
+    	 	oEditors.getById['smartEditor'].exec("UPDATE_CONTENTS_FIELD", []);
+          });
+          
+         
+        
+    });
+</script>
 
 <!--
 <script>
@@ -186,53 +202,52 @@
             </p>
         </div>
     </nav>
-        <main style="width:90%;">
-        <div style="width:100%">
-            <div  style="padding-left:20px; width:90%">
-                <table style="width: 100%; height:500px" id="board">
+
+        
+        <main style="width:80%;">
+            <form action="writeReply" method="POST" enctype="multipart/form-data">
+            <!-- 답글 쓰기인 경우 -->
+            <input type="hidden" name="fk_Seq" value="${fk_Seq}">
+            <input type="hidden" name="groupNo" value="${groupNo}">
+            <input type="hidden" name="depthNo" value="${depthNo}">
+            
+            <div class="border-top">
+                <table style="width: 100%;" id="board">
                     <thead>
-                        <tr class="left_tr border-bottom"> 
-                            <th class="left_td" style="padding-top:20px;">제목</th>
-                            <td colspan="3" class="right_td" style="padding-top:20px"><span>${suggestionBoard.boardTitle}</span></td><br>
+                        <tr>
+                            <th class="left_td">제목</th>
+                            <td class="right_td"><input type="text" style="width: 100%;" name="boardTitle"></td><br>
                         </tr>
-                        <tr class="border-bottom" style="height: 50px;">
-                            <th class="left_td" style="padding-top: 20px; width:5%">파일첨부</th>
-                            <td style="padding-left:30px; width:35%; color:gray">
-                            <c:if test="${empty suggestionBoard.boardFile}">
-	                        	첨부파일 없음.
-	                        </c:if> <c:if test="${not empty suggestionBoard.boardFile}">
-	                        	<a href="${pageContext.request.contextPath}/resources/multipartFile/${suggestionBoard.boardFile}"download>
-	                        		${suggestionBoard.boardFile}
-	                        	</a>
-							</c:if></td>
-                            <th class="left_td" style="padding-top:20px; width:5%">작성자</th>
-                            <td id="right_td" style="padding-top:20px; width:35%; text-align:center; font-size:1.2em"><span>${suggestionBoard.employeeName}</span></td><br>
+                        <tr >
+                            <th class="left_td">파일첨부</th>
+                            <td class="right_td">
+                                <input type="file" name="boardFile">
+                                <!-- <span>이 곳에 파일을 드래그 하세요. 또는</span>
+                                    <input type="file" class="custom-file-input" id="customFile" style="display: none;" name="boardFile">
+                                    <label for="customFile" id="attach_file" >파일선택</label>
+                                    <table id="fileListTable" width="100%" border="0px">
+                                         <tbody id="fileTableTbody">
+    
+                                         </tbody>
+                                    </table>
+                                </div> -->
+                            </td>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr id="write_content" class="border-bottom">
+                        <tr id="write_content">
                             <th class="left_td">내용</th>
-                            <td colspan="3" class="right_td"><div id="smartEditor" style="height: 400px; width: 100%;">${suggestionBoard.boardContent}</div></td>
+                            <td class="right_td">
+                            <textarea id="smartEditor" style="height: 400px; width: 100%;" name="boardContent"></textarea></td>
                         </tr>
                     </tbody>    
                 </table>
             </div>
 
-           <div class="row">        
-            	<div class="container col-sm-6" style="text-align:left; padding-left:40px">
-                	<c:if test="${employee.roleCode == 1}"></c:if>
-                	<button class="btn btn-info">
-                		<a href="reply?fk_Seq=${num}&groupNo=${suggestionBoard.groupNo}&depthNo=${suggestionBoard.depthNo}" style="color:white">답글 작성</a></button>
-                	<button class="btn btn-secondary"><a href="list" style="color:white">목록</a></button>
-            	</div>
-            	<div class="container col-sm-6" style="text-align:right; padding-right:11%">
-            	<c:if test="${suggestionBoard.employeeName == employee.employeeName }">
-	                <button class="btn btn-info"><a href="updateBridge?num=${num}" style="color:white">수정하기</a></button>
-    	            <button class="btn btn-secondary" onclick="confirm('정말 삭제하시겠습니까?')"><a href="delete?num=${num}" style="color:white">삭제</a></button>
-            	</c:if>
-            	</div>
-            </div>
-           </div>
+            <div style="float:right; padding-right: 30px;">
+                <input class="btn btn-primary" type="submit" value="제출하기">
+            </div>  
+           </form>        
         </main>
     </body>
 </html>
