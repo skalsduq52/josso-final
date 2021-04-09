@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <!-- jstl 사용하기 위한 선언부 -->
 <%@ taglib prefix = "c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,7 +29,9 @@
         <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/main.min.js"></script>
         <script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 	<title>Employee List</title>
-	        <!--공통 CSS-->
+	    
+   
+        <!--공통 CSS-->
         <style>
             nav {
                 height: 130px;
@@ -46,7 +49,7 @@
                 float: left;
                 display:block;
                 margin-left: 20px;
-                width: 800px;
+                width: 1100px;
                 height: 70px;
                 margin-top: 7px;
                 border-radius: 20px;
@@ -65,11 +68,87 @@
            .hover_tag {
                padding-left: 45px;
            }
-           .loginInfo{
+            .loginInfo{
            		float:right;
            		display:block;
            		margin:20px;
            }
+        </style>
+
+        <!--공통 아닌 것들-->
+        <style>
+            #tdnum{
+            	padding-left : 60px
+            }
+
+            #selectnum {
+                text-align: center;
+                padding-right: 125px;
+            }
+            .search {
+                height: 33px;
+            }
+
+            #board tbody tr td {
+                height: 40px;
+            }
+            
+            table {
+                min-width: 1000px;
+            }
+
+            #theme {
+                padding-left: 50px;
+            }
+
+            .bottom_area {
+                display: inline-block;
+                padding-top: 10px;
+                padding-bottom: 10px;
+                padding-right: 50px;
+            }
+            
+            #employeeName:hover {
+            	cursor:pointer;
+            	color:blue;
+            	font-weight:bold;
+            }
+            
+            #employeeName {
+            	color:slateblue;
+            }
+            
+            #picture {
+            	border:solid 1px lightgray;
+            	width : 250px;
+            	border-radius:50%
+            	
+            }
+            
+            .modal-title {
+            	padding-left:10px;
+            	font-size:2em;
+            	font-weight:bold;
+            }
+            
+            #modal-body {
+            	padding-top:10px;
+            	padding-left:8px;
+            }
+            
+                        
+            .modaltd {
+            	width:8%;
+            	text-align:right;
+            }
+            
+            .modaltd2 {
+            	padding-left:2%
+            }
+            
+           
+            
+
         </style>
 
 </head>
@@ -81,13 +160,13 @@
             <div>
                 <section>
                     <div class="title">
-                        <span class="icon"><i class="fas fa-calendar-alt icon_" aria-hidden="true"></i>캘린더</span>
+                        <span class="icon"><i class="fas fa-user-friends fa-lg icon_" aria-hidden="true"></i>주소록</span>
                             
                     </div>
                 </section>
                 <section>
                     <div class="title_button">
-                        <button type="button" class="btn btn-info btn-sm btn-block">일정등록</button>
+                        <button type="button" onclick="location.href='/josso/employee/employeeInsert'" class="btn btn-info btn-sm btn-block">사원등록</button>
                     </div>
                 </section>
                 <section>
@@ -136,58 +215,69 @@
                 </div>
         </nav>
         <main>
-            <div id="main">
-                <table>
+            <div class="border-top border-bottom">
+                <table style="width: 100%;" id="board">
 	
-                    <tr height = "40" style="border-top: 1px solid #ddd;">
-                        <th>사번</th>
-                        <th>이름</th>
-                        <th>생년월일</th>
-                        <th>휴대폰</th>
-                        <th>주소</th>
-                        <th>이메일</th>
-                        <th>입사일</th>
-                        <th>부서코드</th>
-                        <th>직위</th>
-                        <th>직책</th>
-                        <th>내선번호</th>
-                        <th>가입일</th>
-                        <th>로그인날짜</th>
-                        <th>권한</th>
-                        
-                    </tr>
-                    
-                <c:forEach var="employee" items="${employeeList }">
-                    <!-- employee 변수를 선언해서 컨트롤러에서 넘겨준 Employee 데이터를 저장 -->
-                    
-                    <tr height = "40" style="border-top: 1px solid #ddd;">
-                        <td><a href="/josso/employee/employeeView?employeeNumber=${employee.employeeNumber}">${employee.employeeNumber}</a></td>
-                        <td>${employee.employeeName}</td>
-                        <td>${employee.employeeBirth}</td>
-                        <td>${employee.employeePhone}</td>
-                        <td>${employee.employeeAddress}</td>
-                        <td>${employee.employeeEmail}</td>
-                        <td>${employee.employeeHireDate}</td>
-                        <td>${employee.departmentCode}</td>
-                        <td>${employee.rankCode}</td>
-                        <td>${employee.positionCode}</td>
-                        <td>${employee.employeeExtensionNumber}</td>
-                        <td>${employee.employeeRegistrationDate}</td>
-                        <td>${employee.employeeLoginDate}</td>
-                        <td>${employee.roleCode}</td>
-                                
-                        
-                        <td><a href="/josso/employeeDelete.do?employeeNumber=${employee.employeeNumber}">삭제</a></td>
-                        
-                    </tr>
-                    
-                </c:forEach>
-                
-                    <tr>
-                        <td><a href="employeeInsert">등록</a></td>
-                    </tr>
+                    <thead>
+                        <tr class="border-bottom" style="height: 40px;">
+                            <th id="tdnum" style="width: 6%;">부서</th>
+                            <th id="theme" style="width: 8%; ">이름</th>
+                            <th style="width: 6%">직급</th>
+                            <th style="width: 8%">직책</th>
+                            <th style="width: 8%">사원번호</th>
+                            <th style="width: 8%">입사일자</th>
+                            <th style="width: 8%">Tel</th>
+                            <th style="width: 8%">Phone</th>
+                            <th style="width: 12%">E-mail</th>
+                            <th style="width: 5%">수정</th>
+                            <th style="width: 5%">삭제</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach var="employee" items="${employeeList}">
+                        <tr>
+                            <td id="tdnum">${employee.departmentCode }</td>
+                            <td id="theme"><span class="employeeName" id="employeeName">${employee.employeeName }</span></td>
+                            <td>${employee.rankCode }</td>
+                            <td>${employee.positionCode }</td>
+                            <td class="employeeNumber">${employee.employeeNumber }</td>
+                            <td><fmt:formatDate value="${employee.employeeHireDate }" pattern="yy / MM / dd"></fmt:formatDate></td>
+                            <td>${employee.employeeExtensionNumber }</td>
+                            <td>${employee.employeePhone }</td>
+                            <td>${employee.employeeEmail }</td>
+                            <td><a href="/josso/employeeUpdate.do?employeeNumber=${employee.employeeNumber}" ><i class="fas fa-pencil-alt " style="color:lightred"></i></a></td>
+                            <td><a href="/josso/employeeDelete.do?employeeNumber=${employee.employeeNumber}" onclick="return confirm('정말로 삭제하시겠습니까?')"><i class="far fa-trash-alt " style="color:gray"></i></a></td>
+                        </tr>
+                    </c:forEach> 
+	                     
+                    </tbody>  
+                    	    
                 </table>
-        </div>
+            </div>
+            <div>     
+                <ul class="pagination" style="padding-top: 20px; padding-left: 40%;">
+                    <li class="page-item "><a class="page-link" href="#">＜</a></li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">4</a></li>
+                    <li class="page-item"><a class="page-link" href="#">5</a></li>
+                    <li class="page-item"><a class="page-link" href="#">＞</a></li>
+                </ul>
+            </div>
+            
+            
+            <div class="bottom_area" style="float:right;">
+                <select class="search" style="height: 38px;">
+                    <option>이름</option>
+                    <option>부서</option>
+                </select>
+                <input type="text" name="search" class="search" style="padding-bottom: 2px; height: 38px;">
+                <button class="btn btn-success" style="height: 38px; margin-bottom: 5px;">검색</button>
+            </div>                       
+                        
+                       
+          
         </main>
 </body>
 

@@ -1,5 +1,6 @@
 package com.josso.employee.controller;
 
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -60,14 +61,25 @@ public class EmployeeController {
 	
 	// 사원리스트보기
 	@RequestMapping(value="employee/employeeList", method = RequestMethod.GET)
-	public ModelAndView employeeListService(ModelAndView modelAndView)throws Exception{
-		
+	public ModelAndView employeeListService(ModelAndView modelAndView, HttpSession session, HttpServletResponse response)throws Exception{
+		Employee employee = (Employee) session.getAttribute("employee");
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		if(employee == null) {
+			out.println("<script>");
+			out.println("alert('로그인이 필요한 서비스 입니다.'); location.href='login/index';");
+			out.println("</script>");
+			out.close();
+			// modelAndView.setViewName("employee/login/index"); 왜 안먹는거야...
+			return null;
+		}else {
 		List<Employee> employeeList = employeeService.selectEmployeeAll();
 		
 		modelAndView.addObject("employeeList",  employeeList); 
 		modelAndView.setViewName("employee/employeeList"); 
 		
 		return modelAndView;	//modelAndView 객체에 데이터를 저장해서 리턴
+		}
 		
 	}
 	
@@ -112,8 +124,8 @@ public class EmployeeController {
 		return modelAndView;
 	}
 	
-	// 사원정보 수정 폼이동
-	@RequestMapping(value="employee/employeeUpdate", method=RequestMethod.GET)
+	// 사원정보 수정 폼 이동
+	@RequestMapping(value="employeeUpdate.do", method=RequestMethod.GET)
 	public ModelAndView employeeUpdate(@RequestParam("employeeNumber") String employeeNumber,ModelAndView modelAndView) throws Exception{
 		Employee employee = employeeService.selectEmployee(employeeNumber);
 		modelAndView.addObject("employee", employee);
