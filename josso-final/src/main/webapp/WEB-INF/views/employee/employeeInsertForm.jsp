@@ -157,7 +157,7 @@
                 <input type="text" name="employeeName" id="employeeName"/><br>
                 <label for="employeePassword">비밀번호</label>
                 <input type="password" name="employeePassword" id="employeePassword"/><br>
-                <label for="employeeBirth">생년월일</label>
+                <label for="employeeBirth">주민번호</label>
                 <input type="text" name="employeeBirth" id="employeeBirth"/><br>
                 <label for="employeePhone">휴대폰</label>
                 <input type="text" name="employeePhone" id="employeePhone"/><br>
