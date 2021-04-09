@@ -228,7 +228,7 @@
                             <th style="width: 8%">입사일자</th>
                             <th style="width: 8%">Tel</th>
                             <th style="width: 8%">Phone</th>
-                            <th style="width: 12%">E-mail</th>
+                            <th style="width: 10%">E-mail</th>
                             <th style="width: 5%">수정</th>
                             <th style="width: 5%">삭제</th>
                         </tr>
@@ -244,7 +244,8 @@
                             <td><fmt:formatDate value="${employee.employeeHireDate }" pattern="yy / MM / dd"></fmt:formatDate></td>
                             <td>${employee.employeeExtensionNumber }</td>
                             <td>${employee.employeePhone }</td>
-                            <td>${employee.employeeEmail }</td>
+                            <td><a href="${pageContext.request.contextPath}/email/write/directSend?emailAccept=${employee.employeeEmail}">${employee.employeeEmail}</a></td>
+                       
                             <td><a href="/josso/employeeUpdate.do?employeeNumber=${employee.employeeNumber}" ><i class="fas fa-pencil-alt " style="color:lightred"></i></a></td>
                             <td><a href="/josso/employeeDelete.do?employeeNumber=${employee.employeeNumber}" onclick="return confirm('정말로 삭제하시겠습니까?')"><i class="far fa-trash-alt " style="color:gray"></i></a></td>
                         </tr>
