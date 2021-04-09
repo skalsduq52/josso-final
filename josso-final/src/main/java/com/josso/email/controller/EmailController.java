@@ -360,6 +360,21 @@ public class EmailController{
 		return modelAndView;
 	}
 	
+	// 주소록에서 보내지는 메일 보내기
+	@RequestMapping(value = "email/write/directSend", method = RequestMethod.GET)
+	public ModelAndView directSend(ModelAndView modelAndView, HttpSession session, @RequestParam("emailAccept") String emailAccept) throws Exception{
+		Employee employee = (Employee) session.getAttribute("employee");
+		String id = employee.getEmployeeEmail();
+		int emailCount = emailService.emailCount(id);
+		int wastebasketCount = emailService.wastebasketCount(id);
+		modelAndView.addObject("emailAccept", emailAccept);
+		modelAndView.addObject("wastebasketCount",wastebasketCount);
+		modelAndView.addObject("emailCount",emailCount);
+		modelAndView.setViewName("email/part/aside");
+		modelAndView.setViewName("email/emailWrite_Staff");
+		return modelAndView;
+	}
+	
 	// 새 메일쓰기 - 보내기 버튼
 	@RequestMapping(value = "email/write/send", method = RequestMethod.GET)
 	public ModelAndView writeSend(Email email, ModelAndView modelAndView, HttpSession session) throws Exception{
