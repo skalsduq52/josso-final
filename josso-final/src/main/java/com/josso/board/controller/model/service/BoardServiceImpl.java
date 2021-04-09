@@ -25,11 +25,10 @@ public class BoardServiceImpl implements BoardService {
 	// 수정
 	@Override
 	public int boardUpdate(Board board) throws Exception {
-		// 치환
+		// 치환(스마트에디터에서는 필요없음)
 		//String content = request.getParameter("boardContent");
 		//content = content.replace("\n\r", "<br>");
 		//content = content.replace(" ", "&nbsp;");
-		// 결과값
 		int result = boardDao.boardUpdate(board);
 		return result;
 	}
@@ -40,7 +39,6 @@ public class BoardServiceImpl implements BoardService {
 		int result = boardDao.boardDelete(boardNum);
 		return result;
 	}
-	
 	
 	/* ------------------------------------------------------------- */
 	
@@ -81,7 +79,6 @@ public class BoardServiceImpl implements BoardService {
 		PrintWriter out = response.getWriter();
 		out.print("<script>alert('글이 등록되었습니다.'); location.href='list'; </script>");
 		out.close();
-		
 		return result;
 	}
 
@@ -92,8 +89,6 @@ public class BoardServiceImpl implements BoardService {
 		return count;
 	}
 
-	
-	
 	/* ------------------------------------------------------------- */
 	
 	// 건의사항
@@ -146,12 +141,6 @@ public class BoardServiceImpl implements BoardService {
 	public int suggestionReply(Board board, HttpSession session, HttpServletResponse response, HttpServletRequest request) throws Exception {
 		// 캐릭터인코딩
 		response.setContentType("text/html;charset=utf-8");
-		// 원글인지 답글인지 구분하기
-		/*
-		 * if(board.getFk_Seq() == null || board.getFk_Seq().trim().isEmpty()) { int
-		 * groupNo = boardDao.getGroupnoMax()+1;
-		 * board.setGroupNo(String.valueOf(groupNo)); }
-		 */
 		// 로그인 한 회원정보 세션값으로 가져오기
 		Employee employee = (Employee)session.getAttribute("employee");
 		board.setBoardWriter(employee.getEmployeeNumber());

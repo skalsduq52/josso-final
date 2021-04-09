@@ -79,13 +79,14 @@
         <!--공통 아닌 것들-->
         <style>
             #tdnum{
-            	padding-left : 60px
+            	padding-left : 35px
             }
 
             #selectnum {
                 text-align: center;
                 padding-right: 125px;
             }
+            
             .search {
                 height: 33px;
             }
@@ -179,7 +180,6 @@
     					},
     					success : function(data) {
 						$('#addressDetail').modal();
-    						
                     	
 						$('.modal-title').html(data.name);
 						$('#picture').html(imgPath+data.picture+imgPathEnd);
@@ -251,18 +251,6 @@
                     </tbody>    
                 </table>
             </div>
-            <div>     
-                <ul class="pagination" style="padding-top: 20px; padding-left: 40%;">
-                    <li class="page-item "><a class="page-link" href="#">＜</a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">4</a></li>
-                    <li class="page-item"><a class="page-link" href="#">5</a></li>
-                    <li class="page-item"><a class="page-link" href="#">＞</a></li>
-                </ul>
-            </div>
-            
             
             <div class="bottom_area" style="float:right;">
                 <select class="search" style="height: 38px;">

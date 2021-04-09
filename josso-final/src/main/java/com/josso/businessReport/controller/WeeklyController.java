@@ -77,9 +77,8 @@ public class WeeklyController {
 				mv.addObject("sendTitle", sendTitle);
 			}
 		} catch (NumberFormatException e) {
-			System.out.println("NumberFormatException 예외발생");
+			e.printStackTrace();
 		} catch (Exception e) {
-			System.out.println("예외 발생 : " );
 			e.printStackTrace();
 		}
 		mv.addObject("page", page);
@@ -88,7 +87,6 @@ public class WeeklyController {
 		mv.setViewName("businessReport/weeklyList");
 		return mv;
 	}
-	
 	
 	// 주간업무보고(작성 페이지) '브릿지' - 완료
 	@RequestMapping(value="report/weekly/write", method=RequestMethod.GET)
@@ -100,7 +98,6 @@ public class WeeklyController {
 	// 주간업무보고(글등록) - 완료
 	@RequestMapping(value="report/weekly/register", method=RequestMethod.POST)
 	public ModelAndView weeklyRegister(@RequestParam("thisStart") String thisStart, WeeklyReport wr, ModelAndView mv,  HttpSession session) throws Exception {
-		System.out.println("주간업무보고 등록 들어옴");
 		/* 제목값 구하기*/
 		// thisStart로 변환하여 제목으로 활용
 		Calendar calendar = Calendar.getInstance();
@@ -118,7 +115,6 @@ public class WeeklyController {
 		// title변수에 제목값 저장
 		String title = yearth + "년 " + monthth + "월 " + weekth + "번째 주 업무보고";
 		// title값 출력 찍어봄
-		System.out.println("날짜값 : " + title);
 		// Employee 세션 가져오기
 		Employee employee = (Employee)session.getAttribute("employee");
 		// 제목에 날짜로 계산해 온 제목값 세팅해줌
@@ -129,7 +125,6 @@ public class WeeklyController {
 		mv.setViewName("redirect:list");
 		return mv;
 	}
-	
 	
 	// 주간업무보고(디테일페이지) - 완료
 	@RequestMapping(value="report/weekly/DetailPage", method=RequestMethod.GET)
@@ -145,7 +140,6 @@ public class WeeklyController {
 	// 주간업무보고(update 브릿지) - 완료
 	@RequestMapping(value="report/weekly/updateBridge", method=RequestMethod.GET)
 	public ModelAndView updateBridge(ModelAndView mv, @RequestParam("num") String num) throws Exception {
-		System.out.println(num);
 		String num1=num;
 		WeeklyReport wr = ws.selectDetailPage(num);
 		mv.addObject("num", num1);

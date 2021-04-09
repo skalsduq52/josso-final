@@ -168,15 +168,9 @@ public class BoardController {
 		String fk_Seq = board.getFk_Seq();
 		String groupNo = board.getGroupNo();
 		String depthNo = board.getDepthNo();
-		
-		System.out.println("답글 브릿지 : " + fk_Seq);
-		System.out.println("답글 브릿지 : " + groupNo);
-		System.out.println("답글 브릿지 : " + depthNo);
-		
 		mv.addObject("fk_Seq", fk_Seq);
 		mv.addObject("groupNo", groupNo);
 		mv.addObject("depthNo", depthNo);
-		
 		mv.setViewName("board/suggestionReply");
 		return mv;
 	}
@@ -225,9 +219,6 @@ public class BoardController {
 				@RequestParam(value="groupNo") String gNo,
 				@RequestParam(value="depthNo") String dNo,
 				ModelAndView mv, HttpSession session, HttpServletResponse response, MultipartHttpServletRequest request) throws Exception {
-			System.out.println("seq : " + seq);
-			System.out.println("gNo : " + gNo);
-			System.out.println("dNo : " + dNo);
 			// 보드 객체 생성
 			Board board = new Board();
 			// 보드에 답글관련 데이터 세팅
@@ -265,7 +256,6 @@ public class BoardController {
 	public ModelAndView suggestionDetail(ModelAndView mv, @RequestParam("num") String boardNum, HttpServletRequest request) throws Exception {
 		
 		Board suggestionBoard = boardService.suggestionDetail(boardNum, request);
-		System.out.println("리스트에서 디테일 눌렀을 때 해당 게시물의 depth값 : " + suggestionBoard.getDepthNo());
 		String num = boardNum;
 		mv.addObject("num", num);
 		mv.addObject("suggestionBoard", suggestionBoard);
