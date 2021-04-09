@@ -78,7 +78,7 @@
         <!--공통 아닌 것들-->
         <style>
             #tdnum{
-            	padding-left : 60px
+            	padding-left : 30px
             }
 
             #selectnum {
@@ -216,7 +216,7 @@
         </nav>
         <main>
             <div class="border-top border-bottom">
-                <table style="width: 100%;" id="board">
+                <table style="width: 100%;" id="board" class="table table-hover">
 	
                     <thead>
                         <tr class="border-bottom" style="height: 40px;">

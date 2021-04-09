@@ -200,7 +200,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 		                .append("사원번호 "+ employeeNumber+ "님의 임시 비밀번호는")
 		                .append(key)
 		                .append("입니다")
-				.append("<p><a href='http://localhost:8181/josso/employee/login/index'>로그인하러 가기</a></p>")
+		                .append("<p><a href='http://localhost:8181/josso/employee/login/index'>로그인하러 가기</a></p>")
 		                .toString());
 		        
 		        sendMail.setFrom("wanaciel@naver.com", "josoo 메일 인증");

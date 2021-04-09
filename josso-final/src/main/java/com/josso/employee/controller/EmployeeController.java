@@ -70,7 +70,7 @@ public class EmployeeController {
 			out.println("alert('로그인이 필요한 서비스 입니다.'); location.href='login/index';");
 			out.println("</script>");
 			out.close();
-			// modelAndView.setViewName("employee/login/index"); 왜 안먹는거야...
+		 // modelAndView.setViewName("employee/login/index"); 왜 안먹는거야...
 			return null;
 		}else {
 		List<Employee> employeeList = employeeService.selectEmployeeAll();

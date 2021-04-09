@@ -220,7 +220,7 @@
         <main>
 		
 		<div class="border-top border-bottom">
-                <table style="width: 100%;" id="board">
+                <table style="width: 100%;" id="board" class="table table-hover">
                     <thead>
                         <tr class="border-bottom" style="height: 40px;">
                             <th id="tdnum" style="width: 8%;">부서</th>
