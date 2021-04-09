@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 
         <div>
             <section>
                 <div class="title">
-                    <span class="icon"><i class="fas fa-list-ul fa-lg icon-" aria-hidden="true"></i>∞‘Ω√∆«</span>
+                    <span class="icon"><i class="fas fa-list-ul fa-lg icon-" aria-hidden="true"></i>Í≤åÏãúÌåê</span>
                         
                 </div>
             </section>
@@ -15,20 +15,20 @@
                     <span class="hover_icon">
                         <i class="fas fa-sort-down fa-rotate-270" style="color:gray"></i>
                     </span>
-                    <span class="hover_title">∞‘Ω√∆« ∏Ò∑œ</span>
+                    <span class="hover_title">Í≤åÏãúÌåê Î™©Î°ù</span>
                 </div>
                 <div>
                     <ul class="hover_tag">
                         <li>
                             <div class="form-check form-check-inline">
                                 <label class="form-check-label" for="inlineCheckbox1">
-                                    <a href="${pageContext.request.contextPath}/board/notice/list" class="report_kind">∞¯¡ˆªÁ«◊</a></label>
+                                    <a href="${pageContext.request.contextPath}/board/notice/list" class="report_kind">Í≥µÏßÄÏÇ¨Ìï≠</a></label>
                             </div>
                         </li>
                         <li>
                             <div class="form-check form-check-inline">
                                 <label class="form-check-label" for="inlineCheckbox2">
-                                    <a href="${pageContext.request.contextPath}/board/suggestion/list" class="report_kind">∞«¿«ªÁ«◊</a>
+                                    <a href="${pageContext.request.contextPath}/board/suggestion/list" class="report_kind">Í±¥ÏùòÏÇ¨Ìï≠</a>
                                 </label>
                             </div>
                         </li>
