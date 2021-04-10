@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -21,12 +22,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.josso.employee.vo.Employee;
 import com.josso.reserve.service.ReserveService;
 import com.josso.reserve.vo.Reserve;
-
-
 
 @Controller
 public class ReserveController {
@@ -50,7 +50,6 @@ public class ReserveController {
 		List<Reserve> myUser = reserveService.selectReserveMyUser(employeeNumber);
 		model.addAttribute("myUser", myUser);
 		return "/reserve/reserveMain";
-
 	}
 
 	// reserve 하루용 현재일부터 6개월 데이터 넘겨주기
@@ -313,31 +312,29 @@ public class ReserveController {
 
 	// reservation-insert
 	@RequestMapping(value = "reserve/room/reservation", method = RequestMethod.GET)
-	public ModelAndView reservation(ModelAndView modelAndView, Reserve reserve, HttpSession session) throws Exception {
+	public String reservation(Model model, Reserve reserve, HttpSession session, @RequestParam("itemNumber") int itemNumber) throws Exception {
 		Employee employee = (Employee) session.getAttribute("employee");
 		String employeeNumber = employee.getEmployeeNumber();
 		reserve.setEmployeeNumber(employeeNumber);
-		int success = 2;
+		String message = "오류";
 		if (reserve.getReservationStartDate() == null || reserve.getReservationStartDate() == ""
 				|| reserve.getReservationPurpose() == null || reserve.getReservationPurpose() == "") {
-			success = -1;
+			message = "입력 안하신 목록이 있습니다.";
 		} else if (reserve.getStartTime().equals(reserve.getEndTime())) {
-			success = -2;
+			message = "같은 시간 때를 입력하셨습니다.";
 		} else if (Integer.parseInt(reserve.getStartTime()) >= Integer.parseInt(reserve.getEndTime())) {
-			success = -3;
+			message = "예약시작 시간과 예약종료 시간을 잘못 입력하셨습니다.";
 		} else {
-			success = reserveService.insertReserve(reserve);
+			int success = reserveService.insertReserve(reserve);
+			message = "예약완료 되었습니다.";
 			if(success == 0) {
-				success = -4;
+				message = "이미 예약된 시간입니다.";
 			}
 		}
-		int itemNumber = reserve.getItemNumber();
 		
-		modelAndView.addObject("success", success);
-		modelAndView.addObject("itemNumber", itemNumber);
-		
-		modelAndView.setViewName("redirect:/reserve/room/first");
-		return modelAndView;
+		model.addAttribute("message", message);
+		model.addAttribute("itemNumber", itemNumber);
+		return "/reserve/reserveInsert";
 	}
 
 	@RequestMapping(value = "reserve/room/second", method = RequestMethod.GET)
@@ -416,18 +413,29 @@ public class ReserveController {
 
 	// 2회의실 예약 insert
 	@RequestMapping(value = "reserve/room/reservation2", method = RequestMethod.GET)
-	public ModelAndView reservation2(ModelAndView modelAndView, Reserve reserve, HttpSession session) throws Exception {
+	public String reservation2(Model model, Reserve reserve, HttpSession session, @RequestParam("itemNumber") int itemNumber) throws Exception {
 		Employee employee = (Employee) session.getAttribute("employee");
 		String employeeNumber = employee.getEmployeeNumber();
 		reserve.setEmployeeNumber(employeeNumber);
-		int success = reserveService.insertReserve(reserve);
-		int itemNumber = reserve.getItemNumber();
-
-		modelAndView.addObject("success", success);
-		modelAndView.addObject("itemNumber", itemNumber);
-		modelAndView.setViewName("redirect:/reserve/room/second");
-
-		return modelAndView;
+		String message = "오류";
+		if (reserve.getReservationStartDate() == null || reserve.getReservationStartDate() == ""
+				|| reserve.getReservationPurpose() == null || reserve.getReservationPurpose() == "") {
+			message = "입력 안하신 목록이 있습니다.";
+		} else if (reserve.getStartTime().equals(reserve.getEndTime())) {
+			message = "같은 시간 때를 입력하셨습니다.";
+		} else if (Integer.parseInt(reserve.getStartTime()) >= Integer.parseInt(reserve.getEndTime())) {
+			message = "예약시작 시간과 예약종료 시간을 잘못 입력하셨습니다.";
+		} else {
+			int success = reserveService.insertReserve(reserve);
+			message = "예약완료 되었습니다.";
+			if(success == 0) {
+				message = "이미 예약된 시간입니다.";
+			}
+		}
+		
+		model.addAttribute("message", message);
+		model.addAttribute("itemNumber", itemNumber);
+		return "/reserve/reserveInsert";
 	}
 
 	@RequestMapping(value = "reserve/room/third", method = RequestMethod.GET)
@@ -506,18 +514,29 @@ public class ReserveController {
 
 	// 3회의실 예약 insert
 	@RequestMapping(value = "reserve/room/reservation3", method = RequestMethod.GET)
-	public ModelAndView reservation3(ModelAndView modelAndView, Reserve reserve, HttpSession session) throws Exception {
+	public String reservation3(Model model, Reserve reserve, HttpSession session, @RequestParam("itemNumber") int itemNumber) throws Exception {
 		Employee employee = (Employee) session.getAttribute("employee");
 		String employeeNumber = employee.getEmployeeNumber();
 		reserve.setEmployeeNumber(employeeNumber);
-		int success = reserveService.insertReserve(reserve);
-		int itemNumber = reserve.getItemNumber();
-
-		modelAndView.addObject("success", success);
-		modelAndView.addObject("itemNumber", itemNumber);
-		modelAndView.setViewName("redirect:/reserve/room/third");
-
-		return modelAndView;
+		String message = "오류";
+		if (reserve.getReservationStartDate() == null || reserve.getReservationStartDate() == ""
+				|| reserve.getReservationPurpose() == null || reserve.getReservationPurpose() == "") {
+			message = "입력 안하신 목록이 있습니다.";
+		} else if (reserve.getStartTime().equals(reserve.getEndTime())) {
+			message = "같은 시간 때를 입력하셨습니다.";
+		} else if (Integer.parseInt(reserve.getStartTime()) >= Integer.parseInt(reserve.getEndTime())) {
+			message = "예약시작 시간과 예약종료 시간을 잘못 입력하셨습니다.";
+		} else {
+			int success = reserveService.insertReserve(reserve);
+			message = "예약완료 되었습니다.";
+			if(success == 0) {
+				message = "이미 예약된 시간입니다.";
+			}
+		}
+		
+		model.addAttribute("message", message);
+		model.addAttribute("itemNumber", itemNumber);
+		return "/reserve/reserveInsert";
 	}
 
 	@RequestMapping(value = "reserve/car/avante", method = RequestMethod.GET)
@@ -596,18 +615,29 @@ public class ReserveController {
 
 	// Avante 예약 insert
 	@RequestMapping(value = "reserve/car/reservation4", method = RequestMethod.GET)
-	public ModelAndView reservation4(ModelAndView modelAndView, Reserve reserve, HttpSession session) throws Exception {
+	public String reservation4(Model model, Reserve reserve, HttpSession session, @RequestParam("itemNumber") int itemNumber) throws Exception {
 		Employee employee = (Employee) session.getAttribute("employee");
 		String employeeNumber = employee.getEmployeeNumber();
 		reserve.setEmployeeNumber(employeeNumber);
-		int success = reserveService.insertReserve(reserve);
-		int itemNumber = reserve.getItemNumber();
-
-		modelAndView.addObject("success", success);
-		modelAndView.addObject("itemNumber", itemNumber);
-		modelAndView.setViewName("redirect:/reserve/car/avante");
-
-		return modelAndView;
+		String message = "오류";
+		if (reserve.getReservationStartDate() == null || reserve.getReservationStartDate() == ""
+				|| reserve.getReservationPurpose() == null || reserve.getReservationPurpose() == "") {
+			message = "입력 안하신 목록이 있습니다.";
+		} else if (reserve.getStartTime().equals(reserve.getEndTime())) {
+			message = "같은 시간 때를 입력하셨습니다.";
+		} else if (Integer.parseInt(reserve.getStartTime()) >= Integer.parseInt(reserve.getEndTime())) {
+			message = "예약시작 시간과 예약종료 시간을 잘못 입력하셨습니다.";
+		} else {
+			int success = reserveService.insertReserve(reserve);
+			message = "예약완료 되었습니다.";
+			if(success == 0) {
+				message = "이미 예약된 시간입니다.";
+			}
+		}
+		
+		model.addAttribute("message", message);
+		model.addAttribute("itemNumber", itemNumber);
+		return "/reserve/reserveInsert";
 	}
 
 	@RequestMapping(value = "reserve/car/benz", method = RequestMethod.GET)
@@ -686,17 +716,28 @@ public class ReserveController {
 
 	// Benz 예약 insert
 	@RequestMapping(value = "reserve/car/reservation5", method = RequestMethod.GET)
-	public ModelAndView reservation5(ModelAndView modelAndView, Reserve reserve, HttpSession session) throws Exception {
+	public String reservation5(Model model, Reserve reserve, HttpSession session, @RequestParam("itemNumber") int itemNumber) throws Exception {
 		Employee employee = (Employee) session.getAttribute("employee");
 		String employeeNumber = employee.getEmployeeNumber();
 		reserve.setEmployeeNumber(employeeNumber);
-		int success = reserveService.insertReserve(reserve);
-		int itemNumber = reserve.getItemNumber();
-
-		modelAndView.addObject("success", success);
-		modelAndView.addObject("itemNumber", itemNumber);
-		modelAndView.setViewName("redirect:/reserve/car/benz");
-
-		return modelAndView;
+		String message = "오류";
+		if (reserve.getReservationStartDate() == null || reserve.getReservationStartDate() == ""
+				|| reserve.getReservationPurpose() == null || reserve.getReservationPurpose() == "") {
+			message = "입력 안하신 목록이 있습니다.";
+		} else if (reserve.getStartTime().equals(reserve.getEndTime())) {
+			message = "같은 시간 때를 입력하셨습니다.";
+		} else if (Integer.parseInt(reserve.getStartTime()) >= Integer.parseInt(reserve.getEndTime())) {
+			message = "예약시작 시간과 예약종료 시간을 잘못 입력하셨습니다.";
+		} else {
+			int success = reserveService.insertReserve(reserve);
+			message = "예약완료 되었습니다.";
+			if(success == 0) {
+				message = "이미 예약된 시간입니다.";
+			}
+		}
+		
+		model.addAttribute("message", message);
+		model.addAttribute("itemNumber", itemNumber);
+		return "/reserve/reserveInsert";
 	}
 }

@@ -18,7 +18,7 @@
 				font-weight: bold;
 			}
 			#day_day{
-				margin-left: 350px;
+				margin-left: 0px;
 			}
 			#button_right{
 				background: #00a1b9;
@@ -66,7 +66,7 @@
 			border:none;width:110px;margin-top: 5px;margin-left: 170px;margin-right: 170px;
 			}
 			#detail-user{
-			border:none;width:200px;margin-left: 150px;margin-right: 120px;margin-top: 5px;
+			border:none;width:180px;margin-left: 150px;margin-right: 120px;margin-top: 5px;
 			}
 			.detail-purpose3{
 			margin-left: 30px;margin-right: 30px;margin-top: 10px;
@@ -106,7 +106,8 @@
             
             var tablePrint;
             $(function(){
-            	var timeIdArr = ['#T0700','#T0730','#T0800','#T0830','#T0900','#T0930','#T1000','#T1030','#T1100','#T1130','#T1200','#T1230','#T1300','#T1330',
+            	var timeIdArr = ['#T0700','#T0730','#T0800','#T0830','#T0900','#T0930','#T1000'
+            					,'#T1030','#T1100','#T1130','#T1200','#T1230','#T1300','#T1330',
             					'#T1400','#T1430','#T1500','#T1530','#T1600','#T1630','#T1700','#T1730','#T1800','#T1830'];
             	var dayOfWeek2 = '${dayOfWeek2 }';
             	var itemNumberMain = ['#itemRoom1','#itemRoom2','#itemRoom3','#itemAvante','#itemBenz'];
@@ -432,22 +433,24 @@
             
             /*페이지를 옮겼을때 이벤트가 날아가버려서 서류페이지 자체에다가 이벤트를 걸어놓는곳 */
             $(document).on('click','.table-dialog > tr > td',function(){
-            	var str = $('#date_all').text();
-            	var str1 = $(this).children('.user-name').text();
-				var str2 = $(this).children('.user-purpose').text();
-            	$('#detail-day').val(str);
-            	$('#detail-user').val(str1);
-            	$('#detail-purpose').val(str2);
-
-            	$('#detail-dialog').dialog({
-                    title : "예약 상세 내용",
-                    width : 500,
-            		height: 300,
-                    modal : true
-                }).prev(".ui-dialog-titlebar").css("background","#B0E0E6");
-                $('#cancle-dialog').click(function(){
-                	$('#detail-dialog').dialog("close");
-                });
+            	if($(this).children('.user-name').text() != ""){
+	            	var str = $('#date_all').text();
+	            	var str1 = $(this).children('.user-name').text();
+					var str2 = $(this).children('.user-purpose').text();
+	            	$('#detail-day').val(str);
+	            	$('#detail-user').val(str1);
+	            	$('#detail-purpose').val(str2);
+	
+	            	$('#detail-dialog').dialog({
+	                    title : "예약 상세 내용",
+	                    width : 500,
+	            		height: 300,
+	                    modal : true
+	                }).prev(".ui-dialog-titlebar").css("background","#B0E0E6");
+	                $('#cancle-dialog').click(function(){
+	                	$('#detail-dialog').dialog("close");
+	                });
+            	}
             });
             
             $(function(){
@@ -462,83 +465,19 @@
             <%@ include file="../include/header.jsp"%>
         </header>
         <aside class="border-right">
-            <div>
-                <section>
-                    <div class="title">
-                        <span class="icon"><i class="fas fa-clock fa-lg" aria-hidden="true"></i>예약</span>
-                    </div>
-                </section>
-                <section>
-                    <div class="title_button">
-                        <span>전자자산</span>
-                    </div>
-                </section>
-                <section>
-                    <div class="side_title">
-                        <ul>
-                            <li>
-                                <span class="hover_icon"><i class="fas fa-sort-down fa-rotate-270" style="color:gray"></i>
-                                    	<a href="/josso/reserve/room">
-                                    		회의실(사옥)
-                                    	</a>
-                                </span>
-                            </li>
-                            <li class="hover_tag">
-                                <a href="/josso/reserve/room/first?itemNumber=1">
-                                    1회의실
-                                </a>
-                            </li>
-                            <li class="hover_tag">
-                                <a href="/josso/reserve/room/second?itemNumber=2">
-                                    2회의실
-                                </a>
-                            </li>
-                            <li class="hover_tag">
-                                <a href="/josso/reserve/room/third?itemNumber=3">
-                                    3회의실
-                                </a>
-                            </li>
-                        </ul>
-                        <ul>
-                            <li>
-                                <span class="hover_icon"><i class="fas fa-sort-down fa-rotate-270" style="color:gray"></i>
-                                    	<a href="/josso/reserve/car">
-                                    		공용차량
-                                    	</a>
-                                </span>
-                            </li>
-                            <li class="hover_tag">
-                                <a href="/josso/reserve/car/avante?itemNumber=4">
-                                    	아반떼
-                                </a>
-                            </li>
-                            <li class="hover_tag">
-                                <a href="/josso/reserve/car/benz?itemNumber=5">
-                                    	벤츠
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </section>
-            </div>
+            <%@ include file="../reserve/part/aside.jsp"%>
         </aside>
-        <!--  <nav class="border-bottom">
-            
-        </nav>
-        -->
-        
-        <main>
-        	<div class="d-flex">
+        <nav class="border-bottom">
+            <div class="d-flex">
 	            <div class="mr-auto p-2">
 	               	자산 예약 현황
 	            </div>
-	            <div class="p-2">
-	                <span><i class="far fa-question-circle fa-lg" id="help_icon"></i></span>
-	                <span><i class="far fa-bell fa-lg" id="bell_icon"></i></span>
-	                <span><i class="fas fa-user-circle fa-lg" id="mypage_icon"></i></span>
-	            </div>
 	        </div>
-            <div class="d-flex">
+	        <%@ include file="../include/logout.jsp"%>
+        </nav>
+        
+        <main>
+        	<div class="d-flex">
             	<span class="mr-auto p-2" id="day_day">
 	            	<span><i class="fas fa-chevron-left"  id="left-icon"></i></span>
 	                <span id="date_all">${dayOfWeek2}</span>
@@ -560,7 +499,7 @@
             </div>
             <div class="table_location">
                 <!-- java에서 for문으로 바꾸기 -->
-                <table class="table table-bordered">
+                <table class="table table-bordered table-print">
                     <thead>
                         <tr class="table-info" style="text-align: center" >
                             <th scope="col"  width="10%"></th>

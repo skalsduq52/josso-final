@@ -5,6 +5,37 @@
 <!DOCTYPE html>
 <html>
     <head>
+    <style>
+    	#detail-day {
+			border: none;
+			width: 110px;
+			margin-top: 5px;
+			margin-left: 170px;
+			margin-right: 170px;
+		}
+		#detail-user {
+			border: none;
+			width: 180px;
+			margin-left: 150px;
+			margin-right: 120px;
+			margin-top: 5px;
+		}
+
+		.detail-purpose3 {
+			margin-left: 30px;
+			margin-right: 30px;
+			margin-top: 30px;
+		}
+
+		#detail-purpose2 {
+			padding-left: 160px;
+		}
+
+		#cancle-dialog2 {
+			margin-left: 380px;
+			margin-top: 20px;
+		}
+    	</style>
         <title>josso</title>
          <!-- josso css -->
          <link rel="stylesheet" href="../../resources/css/common.css" type="text/css">
@@ -32,19 +63,99 @@
                 });
             });
 		
-            $(function(){
-                $('#table_dialog').click(function(){
-                    $('#form_dialog').dialog({
+            /*페이지를 옮겼을때 이벤트가 날아가버려서 서류페이지 자체에다가 이벤트를 걸어놓는곳 */
+            $(document).on('click','.table_dialog > tr > td',function(){
+            	if($(this).children('.user-name').text() != ""){
+	            	var str1 = $(this).children('.user-name').text();
+					var str2 = $(this).children('.user-purpose').text();
+		            $('#detail-user').val(str1);
+		            $('#detail-purpose').val(str2);
+		            	
+		            $('#detail-dialog').dialog({
+		                title : "예약 상세 내용",
+		                width : 500,
+		            	height: 300,
+		                modal : true
+		            }).prev(".ui-dialog-titlebar").css("background","#B0E0E6");
+		            $('#cancle-dialog2').click(function(){
+		            	$('#detail-dialog').dialog("close");
+		            });
+            	}else if($(this).children('.user-name').text() == ""){
+            		$('#form_dialog').dialog({
                         title : "예약 창",
                         width : 600,
                 		height: 300,
                         modal : true
                     }).prev(".ui-dialog-titlebar").css("background","#B0E0E6");
+            		var Stime = $(this).parents('tr').attr('class');
+            		$(".start-time-select").val(Stime).prop("selected", true);
+            		$(".end-time-select").val(Stime).prop("selected", true);
                     $('#cancle-dialog').click(function(){
                     	$('#form_dialog').dialog("close");
                     });
-                })
+            	}
             });
+       
+            var tablePrint;
+            $(function(){
+            	var weekId = ['${dayOfWeek2[0]}','${dayOfWeek2[1]}','${dayOfWeek2[2]}','${dayOfWeek2[3]}'
+            					,'${dayOfWeek2[4]}','${dayOfWeek2[5]}','${dayOfWeek2[6]}'];
+            	var timeIdArr = ['#T0700','#T0730','#T0800','#T0830','#T0900','#T0930','#T1000'
+            					,'#T1030','#T1100','#T1130','#T1200','#T1230','#T1300','#T1330',
+            					'#T1400','#T1430','#T1500','#T1530','#T1600','#T1630','#T1700','#T1730','#T1800','#T1830'];
+            	var weekClassArr = ['.${dayOfWeek2[0]}','.${dayOfWeek2[1]}','.${dayOfWeek2[2]}','.${dayOfWeek2[3]}',
+            						'.${dayOfWeek2[4]}','.${dayOfWeek2[5]}','.${dayOfWeek2[6]}'];
+            	tablePrint = $('.table-content-color').html();
+            	$.ajax({
+    				url : 'itemJSON2',
+    				dataType : 'json',
+    				type : 'get',
+    				success : function(Itemdata){
+    					for(var k = 0; k < 7; k++){
+	    					for(var i = 0; i < Itemdata.length; i++){
+	    	            		if(weekId[k] == Itemdata[i].reservationStartDate ){
+	    	            			for(var j = 0; j<timeIdArr.length; j++){
+	    	            				if(Itemdata[i].startTime == jQuery($(timeIdArr[j])).attr("class")){
+	    	            					var m = 0;
+	    	            					$(timeIdArr[j+m]).children(weekClassArr[k]).html(
+	    	            						'<span class="user-name">'+decodeURIComponent(Itemdata[i].userName)+' '
+    			    	            			+Itemdata[i].startTime+' ~ '
+    	    			    	            	+Itemdata[i].endTime+'</span>'+' ('
+    	    			    	            	+'<span class="user-purpose">'+decodeURIComponent(Itemdata[i].reservationPurpose)+'</span>'+')');
+	    	            					$(timeIdArr[j+m]).children(weekClassArr[k]).css("background-color","silver");
+	    	            					while(Itemdata[i].endTime != jQuery($(timeIdArr[j+m])).attr("class")){
+	    	            						$(timeIdArr[j+m]).children(weekClassArr[k]).html(
+	    	            							'<span class="user-name">'+decodeURIComponent(Itemdata[i].userName)+' '
+	    			    	            			+Itemdata[i].startTime+' ~ '
+	    	    			    	            	+Itemdata[i].endTime+'</span>'+' ('
+	    	    			    	            	+'<span class="user-purpose">'+decodeURIComponent(Itemdata[i].reservationPurpose)+'</span>'+')');
+	    	            						$(timeIdArr[j+m]).children(weekClassArr[k]).css("background-color","silver");
+	    	            						m++;
+	    	            					}
+	    	            				}
+	    	            			}
+	    	            		}
+	    	            	}
+    					}
+    					$(function(){
+		    		    	$(".table-content-color").children().children().children('.user-name').each(function() {
+		    		            var rows = $(".table-content-color > tr > td:contains('" + $(this).html() + "')");
+		    		            console.log(rows);
+		    		            if ((rows.length > 1) && ($(this).html() != "") && ($(this).html().length > 2)) {
+		    		            	rows.eq(0).attr("rowspan", rows.length);
+		    		            	rows.not(":eq(0)").remove();
+		    		            }
+		    		        });
+	    	            });
+    				},
+					error : function(request, satus, errorData){
+						alert("error code : " + request.status + "\n"
+								+ "message : " + request.responseText
+								+"\n" + "error : " + errorData);
+					}
+    			});
+            });
+
        
             $(function(){
             	var weekIdArr = ['#sunday','#monday','#tuesday','#wednesday','#thursday','#friday','#saturday'];
@@ -61,7 +172,6 @@
 	    				type : 'get',
 	    				success : function(data){
 	    					if(data[count+i+7] != null){
-	    						
 	    		            	for(i = 0; i<7; i++){
 	    			            	if(i == 0){
 	    			            		$(weekIdArr[i]).html(data[count+i+7]);
@@ -75,6 +185,7 @@
 	    		            	}
 	    		            	$(".table-content-color *").css("background-color","white");
 	    		            	$(".table-content-color").children("tr").children("td").empty();
+	    		            	$('.table-content-color').html(tablePrint);
 	    		            	$.ajax({
 	    		    				url : 'itemJSON2',
 	    		    				dataType : 'json',
@@ -87,12 +198,17 @@
 	    			    	            				if(Itemdata[i].startTime == jQuery($(timeIdArr[j])).attr("class")){
 	    			    	            					var m = 0;
 	    			    	            					$(timeIdArr[j+m]).children(weekClassArr[k]).html(
-	    			    	            							Itemdata[i].startTime+' ~ '
-	    				    	            						+Itemdata[i].endTime+' '
-	    				    	            						+decodeURIComponent(Itemdata[i].userName)+' '
-	    				    	            						+decodeURIComponent(Itemdata[i].reservationPurpose));
+	    			    	            						'<span class="user-name">'+decodeURIComponent(Itemdata[i].userName)+' '
+	    			    			    	            		+Itemdata[i].startTime+' ~ '
+	    			    	    			    	            +Itemdata[i].endTime+'</span>'+' ('
+	    			    	    			    	            +'<span class="user-purpose">'+decodeURIComponent(Itemdata[i].reservationPurpose)+'</span>'+')');
 	    			    	            					$(timeIdArr[j+m]).children(weekClassArr[k]).css("background-color","silver");
 	    			    	            					while(Itemdata[i].endTime != jQuery($(timeIdArr[j+m])).attr("class") || Itemdata[i].startTime != jQuery($(timeIdArr[j])).attr("class")){
+	    			    	            						$(timeIdArr[j+m]).children(weekClassArr[k]).html(
+	    			    	            							'<span class="user-name">'+decodeURIComponent(Itemdata[i].userName)+' '
+	    			        			    	            		+Itemdata[i].startTime+' ~ '
+	    			        	    			    	            +Itemdata[i].endTime+'</span>'+' ('
+	    			        	    			    	            +'<span class="user-purpose">'+decodeURIComponent(Itemdata[i].reservationPurpose)+'</span>'+')');
 	    			    	            						$(timeIdArr[j+m]).children(weekClassArr[k]).css("background-color","silver");
 	    			    	            						m++;
 	    			    	            					}
@@ -101,6 +217,16 @@
 	    			    	            		}
 	    			    	            	}
 	    		    					}
+	    		    					$(function(){
+	    				    		    	$(".table-content-color").children().children().children('.user-name').each(function() {
+	    				    		            var rows = $(".table-content-color > tr > td:contains('" + $(this).html() + "')");
+	    				    		            console.log(rows);
+	    				    		            if ((rows.length > 1) && ($(this).html() != "") && ($(this).html().length > 2)) {
+	    				    		            	rows.eq(0).attr("rowspan", rows.length);
+	    				    		            	rows.not(":eq(0)").remove();
+	    				    		            }
+	    				    		        });
+	    			    	            });
 	    		    				},
 	    							error : function(request, satus, errorData){
 	    								alert("error code : " + request.status + "\n"
@@ -143,6 +269,7 @@
 	    		            	}
 	    		            	$(".table-content-color *").css("background-color","white");
 	    		            	$(".table-content-color").children("tr").children("td").empty();
+	    		            	$('.table-content-color').html(tablePrint);
 	    		            	$.ajax({
 	    		    				url : 'itemJSON2',
 	    		    				dataType : 'json',
@@ -155,12 +282,17 @@
 	    			    	            				if(Itemdata[i].startTime == jQuery($(timeIdArr[j])).attr("class")){
 	    			    	            					var m = 0;
 	    			    	            					$(timeIdArr[j+m]).children(weekClassArr[k]).html(
-	    			    	            							Itemdata[i].startTime+' ~ '
-	    				    	            						+Itemdata[i].endTime+' '
-	    				    	            						+decodeURIComponent(Itemdata[i].userName)+' '
-	    				    	            						+decodeURIComponent(Itemdata[i].reservationPurpose));
+	    			    	            						'<span class="user-name">'+decodeURIComponent(Itemdata[i].userName)+' '
+	    			    			    	            		+Itemdata[i].startTime+' ~ '
+	    			    	    			    	            +Itemdata[i].endTime+'</span>'+' ('
+	    			    	    			    	            +'<span class="user-purpose">'+decodeURIComponent(Itemdata[i].reservationPurpose)+'</span>'+')');
 	    			    	            					$(timeIdArr[j+m]).children(weekClassArr[k]).css("background-color","silver");
 	    			    	            					while(Itemdata[i].endTime != jQuery($(timeIdArr[j+m])).attr("class")){
+	    			    	            						$(timeIdArr[j+m]).children(weekClassArr[k]).html(
+	    			    	            							'<span class="user-name">'+decodeURIComponent(Itemdata[i].userName)+' '
+	    			        			    	            		+Itemdata[i].startTime+' ~ '
+	    			        	    			    	            +Itemdata[i].endTime+'</span>'+' ('
+	    			        	    			    	            +'<span class="user-purpose">'+decodeURIComponent(Itemdata[i].reservationPurpose)+'</span>'+')');
 	    			    	            						$(timeIdArr[j+m]).children(weekClassArr[k]).css("background-color","silver");
 	    			    	            						m++;
 	    			    	            					}
@@ -169,6 +301,16 @@
 	    			    	            		}
 	    			    	            	}
 	    		    					}
+	    		    					$(function(){
+	    				    		    	$(".table-content-color").children().children().children('.user-name').each(function() {
+	    				    		            var rows = $(".table-content-color > tr > td:contains('" + $(this).html() + "')");
+	    				    		            console.log(rows);
+	    				    		            if ((rows.length > 1) && ($(this).html() != "") && ($(this).html().length > 2)) {
+	    				    		            	rows.eq(0).attr("rowspan", rows.length);
+	    				    		            	rows.not(":eq(0)").remove();
+	    				    		            }
+	    				    		        });
+	    			    	            });
 	    		    				},
 	    							error : function(request, satus, errorData){
 	    								alert("error code : " + request.status + "\n"
@@ -188,63 +330,6 @@
 						}
 	    			});
     			});
-            });
-            
-            $(function(){
-            	var weekId = ['${dayOfWeek2[0]}','${dayOfWeek2[1]}','${dayOfWeek2[2]}','${dayOfWeek2[3]}','${dayOfWeek2[4]}','${dayOfWeek2[5]}','${dayOfWeek2[6]}'];
-            	var timeIdArr = ['#T0700','#T0730','#T0800','#T0830','#T0900','#T0930','#T1000','#T1030','#T1100','#T1130','#T1200','#T1230','#T1300','#T1330',
-            					'#T1400','#T1430','#T1500','#T1530','#T1600','#T1630','#T1700','#T1730','#T1800','#T1830'];
-            	var weekClassArr = ['.${dayOfWeek2[0]}','.${dayOfWeek2[1]}','.${dayOfWeek2[2]}','.${dayOfWeek2[3]}','.${dayOfWeek2[4]}','.${dayOfWeek2[5]}','.${dayOfWeek2[6]}'];
-            	$.ajax({
-    				url : 'itemJSON2',
-    				dataType : 'json',
-    				type : 'get',
-    				success : function(Itemdata){
-    					for(var k = 0; k < 7; k++){
-	    					for(var i = 0; i < Itemdata.length; i++){
-	    	            		if(weekId[k] == Itemdata[i].reservationStartDate ){
-	    	            			for(var j = 0; j<timeIdArr.length; j++){
-	    	            				if(Itemdata[i].startTime == jQuery($(timeIdArr[j])).attr("class")){
-	    	            					var m = 0;
-	    	            					$(timeIdArr[j+m]).children(weekClassArr[k]).html(
-	    	            							Itemdata[i].startTime+' ~ '
-		    	            						+Itemdata[i].endTime+' '
-		    	            						+decodeURIComponent(Itemdata[i].userName)+' '
-		    	            						+decodeURIComponent(Itemdata[i].reservationPurpose));
-	    	            					$(timeIdArr[j+m]).children(weekClassArr[k]).css("background-color","silver");
-	    	            					while(Itemdata[i].endTime != jQuery($(timeIdArr[j+m])).attr("class")){
-	    	            						$(timeIdArr[j+m]).children(weekClassArr[k]).css("background-color","silver");
-	    	            						m++;
-	    	            					}
-	    	            				}
-	    	            			}
-	    	            		}
-	    	            	}
-    					}
-    				},
-					error : function(request, satus, errorData){
-						alert("error code : " + request.status + "\n"
-								+ "message : " + request.responseText
-								+"\n" + "error : " + errorData);
-					}
-    			});
-            });
-            
-            $(function(){
-            	$('#submit-dialog').click(function(){
-            		var success = ('#submit-success').val();
-            		console.log(success);
-            		if(success == 1){
-            			alert("예약 완료했습니다.");
-            		}else if(success == -1){
-            			alert("값을 입력하지 않으셨습니다.");
-            		}else if(success == -2){
-            			alert("같은 시간을 선택하셨습니다.");
-            		}else if(success == 0){
-            			alert("이미 예약된 시간입니다.")
-            		}
-            	});
-            	
             });
             
             $(function(){
@@ -272,77 +357,15 @@
 			<%@ include file="../include/header.jsp"%>
         </header>
         <aside class="border-right">
-            <div>
-                <section>
-                    <div class="title">
-                        <span class="icon"><i class="fas fa-clock fa-lg" aria-hidden="true"></i>예약</span>
-                    </div>
-                </section>
-                <section>
-                    <div class="title_button">
-                        <span>전자자산</span>
-                    </div>
-                </section>
-                <section>
-                    <div class="side_title">
-                        <ul>
-                            <li>
-                                <span class="hover_icon"><i class="fas fa-sort-down fa-rotate-270" style="color:gray"></i>
-                                    	<a href="/josso/reserve/room">
-                                    		회의실(사옥)
-                                    	</a>
-                                </span>
-                            </li>
-                            <li class="hover_tag">
-                                <a href="/josso/reserve/room/first?itemNumber=1">
-                                    1회의실
-                                </a>
-                            </li>
-                            <li class="hover_tag">
-                                <a href="/josso/reserve/room/second?itemNumber=2">
-                                    2회의실
-                                </a>
-                            </li>
-                            <li class="hover_tag">
-                                <a href="/josso/reserve/room/third?itemNumber=3">
-                                    3회의실
-                                </a>
-                            </li>
-                        </ul>
-                        <ul>
-                            <li>
-                                <span class="hover_icon"><i class="fas fa-sort-down fa-rotate-270" style="color:gray"></i>
-                                    	<a href="/josso/reserve/car">
-                                    		공용차량
-                                    	</a>
-                                </span>
-                            </li>
-                            <li class="hover_tag">
-                                <a href="/josso/reserve/car/avante?itemNumber=4">
-                                    	아반떼
-                                </a>
-                            </li>
-                            <li class="hover_tag">
-                                <a href="/josso/reserve/car/benz?itemNumber=5">
-                                    	벤츠
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </section>
-            </div>
+            <%@ include file="../reserve/part/aside.jsp"%>
         </aside>
      	<nav class="border-bottom">
      		<div class="d-flex">
 	            <div class="mr-auto p-2">
 	               	2회의실_1층_8명
 	            </div>
-	            <div class="p-2">
-	                <span><i class="far fa-question-circle fa-lg" id="help_icon"></i></span>
-	                <span><i class="far fa-bell fa-lg" id="bell_icon"></i></span>
-	                <span><i class="fas fa-user-circle fa-lg" id="mypage_icon"></i></span>
-	            </div>
 	        </div>
+	        <%@ include file="../include/logout.jsp"%>
      	</nav>
         <main>
             <div class="d-flex justify-content-center">
@@ -358,7 +381,7 @@
             </div>
             <div class="table_location">
                 <!-- java에서 for문으로 바꾸기 -->
-                <table class="table table-bordered" id="table_dialog">
+                <table class="table table-bordered">
                     <thead>
                         <tr class="table table-borderless table-info" style="text-align: center;">
                             <th scope="col" width="5.5%"></th>
@@ -371,7 +394,7 @@
                             <th scope="col" width="13.5%"><label id="saturday">${dayOfWeek2[6] }</label>(토)</th>
                         </tr>
                     </thead>
-                    <tbody class="table-content-color">
+                    <tbody class="table-content-color table_dialog">
                         <tr class="700" id="T0700">
                             <th class="hour-color">07</th>
                             <td class="${dayOfWeek2[0] }"></td>
@@ -695,7 +718,7 @@
                     	<span><input type="text" name="reservationPurpose"></span>
                 	</div>
                 	<div class="item-form-dialog">
-                		<input type="text" name="itemNumber" value="1" readonly style="display:none">
+                		<input type="text" name="itemNumber" value="2" readonly style="display:none">
                 	</div>
                 	<div class="button-form-dialog">
                 		<input type="submit" value="제출" id="submit-dialog">
@@ -704,6 +727,21 @@
                 	
                 </div>   
             </form>
+        </div>
+        
+        <div id="detail-dialog" style="display:none">
+        	<div>
+				<div>
+					<span><input id="detail-user" type="text" readonly></span>
+				</div>
+				<div class="detail-purpose3">
+					<span id="detail-purpose2">이용목적</span>
+					<span><textarea id="detail-purpose" style="width:400px;" readonly ></textarea></span>
+				</div>
+				<div>
+					<input type="button" value="종료" id="cancle-dialog2">
+				</div>
+			</div>   
         </div>
     </body>
 </html>
